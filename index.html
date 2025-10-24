@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة الخدمات الذكية المتنقلة - Smart Services Hub</title>
-    <meta name="description" content="أول منصة عربية تدمج الذكاء الاصطناعي مع الخدمات المتنقلة اليومية">
-    
+    <title>منصة الخدمات الذكية المتنقلة</title>
     <style>
-        /* ===== RESET & BASE ===== */
+        /* ===== RESET & VARIABLES ===== */
         * {
             margin: 0;
             padding: 0;
@@ -20,6 +18,7 @@
             --accent-color: #ff6b6b;
             --text-color: #333;
             --light-bg: #f8f9fa;
+            --border-radius: 12px;
         }
 
         body {
@@ -33,18 +32,19 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
-        /* ===== HEADER ===== */
+        /* ===== IMPROVED HEADER ===== */
         .header {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            backdrop-filter: blur(10px);
         }
 
         .nav-container {
@@ -54,50 +54,71 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: var(--primary-color);
         }
 
-        /* ===== HERO SECTION ===== */
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* ===== IMPROVED HERO SECTION ===== */
         .hero {
-            padding: 120px 0 80px;
+            padding: 140px 0 60px;
             text-align: center;
             color: white;
         }
 
         .hero h1 {
-            font-size: 3rem;
+            font-size: 2.2rem;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.3;
         }
 
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             margin-bottom: 2rem;
             opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* ===== BUTTONS ===== */
+        /* ===== IMPROVED BUTTONS ===== */
         .btn {
             background: var(--accent-color);
             color: white;
-            padding: 12px 30px;
+            padding: 14px 32px;
             border: none;
-            border-radius: 25px;
+            border-radius: var(--border-radius);
             font-size: 1.1rem;
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
             transition: all 0.3s ease;
+            font-weight: 600;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
         }
 
-        /* ===== SERVICES SECTION ===== */
+        /* ===== IMPROVED SERVICES SECTION ===== */
         .services-section {
             background: white;
             padding: 80px 0;
@@ -105,66 +126,110 @@
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             margin-bottom: 3rem;
             color: var(--text-color);
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
             margin-top: 40px;
         }
 
         .service-card {
             background: white;
-            border-radius: 10px;
-            padding: 30px 20px;
+            border-radius: var(--border-radius);
+            padding: 30px 25px;
             text-align: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
 
         .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.2rem;
         }
 
         .service-card h3 {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 1rem;
             color: var(--primary-color);
         }
 
-        /* ===== FEATURES SECTION ===== */
-        .features {
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* ===== NEW: COMING SOON SECTION ===== */
+        .coming-soon-section {
             background: var(--light-bg);
             padding: 80px 0;
         }
 
-        .features-grid {
+        .coming-soon-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
         }
 
-        .feature {
+        .coming-soon-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 25px 20px;
             text-align: center;
-            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            opacity: 0.8;
+            border: 2px dashed #ddd;
         }
 
-        .feature-icon {
+        .coming-soon-card .service-icon {
             font-size: 2.5rem;
-            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+
+        .badge {
+            background: #ffd700;
+            color: #333;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        /* ===== NEW: CONTACT SECTION ===== */
+        .contact-section {
+            background: white;
+            padding: 80px 0;
+        }
+
+        .contact-info {
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            margin: 1.5rem 0;
+            font-size: 1.1rem;
+        }
+
+        .contact-item strong {
             color: var(--primary-color);
         }
 
-        /* ===== FOOTER ===== */
+        /* ===== IMPROVED FOOTER ===== */
         .footer {
             background: var(--text-color);
             color: white;
@@ -172,14 +237,63 @@
             text-align: center;
         }
 
-        /* ===== RESPONSIVE ===== */
+        /* ===== MOBILE RESPONSIVE IMPROVEMENTS ===== */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
+            .container {
+                padding: 0 20px;
             }
-            
+
+            .hero {
+                padding: 120px 0 50px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
             .services-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            .service-card {
+                padding: 25px 20px;
+            }
+
+            .btn {
+                padding: 12px 28px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .service-icon {
+                font-size: 3rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
             }
         }
     </style>
@@ -189,10 +303,10 @@
     <header class="header">
         <div class="container nav-container">
             <div class="logo">🚀 SmartServices</div>
-            <nav>
-                <a href="#services" style="margin-right: 20px; text-decoration: none; color: var(--text-color);">الخدمات</a>
-                <a href="#features" style="margin-right: 20px; text-decoration: none; color: var(--text-color);">المميزات</a>
-                <a href="#contact" style="text-decoration: none; color: var(--text-color);">اتصل بنا</a>
+            <nav class="nav-links">
+                <a href="#services">الخدمات</a>
+                <a href="#coming-soon">القادم قريباً</a>
+                <a href="#contact">اتصل بنا</a>
             </nav>
         </div>
     </header>
@@ -201,59 +315,73 @@
     <section class="hero">
         <div class="container">
             <h1>🚀 منصة الخدمات الذكية المتنقلة</h1>
-            <p>أول منصة عربية تدمج الذكاء الاصطناعي مع الخدمات اليومية</p>
-            <a href="#services" class="btn">اكتشف الخدمات</a>
+            <p>أول منصة عربية تدمج الذكاء الاصطناعي مع الخدمات اليومية - جودة، سرعة، وموثوقية</p>
+            <a href="#services" class="btn">اكتشف خدماتنا</a>
         </div>
     </section>
 
     <!-- Services Section -->
     <section id="services" class="services-section">
         <div class="container">
-            <h2 class="section-title">خدماتنا المتكاملة</h2>
+            <h2 class="section-title">خدماتنا المتوفرة الآن</h2>
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">🔧</div>
                     <h3>الصيانة المنزلية</h3>
-                    <p>كهرباء، سباكة، تكييف، وكل ما يلزم منزلك</p>
+                    <p>كهرباء، سباكة، تكييف، وكل ما يلزم منزلك مع فنيين معتمدين</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">🚗</div>
                     <h3>غسيل السيارات</h3>
-                    <p>غسيل متنقل وتفصيلي لسيارتك عند باب منزلك</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">☕</div>
-                    <h3>باريستا متنقل</h3>
-                    <p>أفضل أنواع القهوة في فعالياتك ومناسباتك</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">👔</div>
-                    <h3>خياط متنقل</h3>
-                    <p>تعديل وتفصيل الملابس بخبرة وحرفية عالية</p>
+                    <p>غسيل متنقل وتفصيلي لسيارتك عند باب منزلك بمنتجات ممتازة</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="features">
+    <!-- Coming Soon Section -->
+    <section id="coming-soon" class="coming-soon-section">
         <div class="container">
-            <h2 class="section-title">لماذا تختارنا؟</h2>
-            <div class="features-grid">
-                <div class="feature">
-                    <div class="feature-icon">⚡</div>
-                    <h3>توصيل سريع</h3>
-                    <p>خلال دقائق معدودة في خدمتك</p>
+            <h2 class="section-title">خدمات قيد التطوير</h2>
+            <div class="coming-soon-grid">
+                <div class="coming-soon-card">
+                    <div class="service-icon">☕</div>
+                    <h3>باريستا متنقل</h3>
+                    <p>قهوة احترافية في فعالياتك ومناسباتك</p>
+                    <div class="badge">قريباً</div>
                 </div>
-                <div class="feature">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>فنيون معتمدون</h3>
-                    <p>فريق محترف ومدرب بأعلى المعايير</p>
+                <div class="coming-soon-card">
+                    <div class="service-icon">👔</div>
+                    <h3>خياط متنقل</h3>
+                    <p>تعديل وتفصيل الملابس بخبرة عالية</p>
+                    <div class="badge">قريباً</div>
                 </div>
-                <div class="feature">
-                    <div class="feature-icon">💳</div>
-                    <h3>دفع آمن</h3>
-                    <p>أنظمة دفع إلكتروني آمنة ومتطورة</p>
+                <div class="coming-soon-card">
+                    <div class="service-icon">📱</div>
+                    <h3>صيانة الهواتف</h3>
+                    <p>إصلاح شاشات وبطاريات بأفضل الأسعار</p>
+                    <div class="badge">قريباً</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">اتصل بنا</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <strong>📧 البريد الإلكتروني:</strong><br>
+                    info@smartservices.com
+                </div>
+                <div class="contact-item">
+                    <strong>📞 الهاتف:</strong><br>
+                    +966 55 123 4567
+                </div>
+                <div class="contact-item">
+                    <strong>🕒 أوقات العمل:</strong><br>
+                    الأحد - الخميس: 8 صباحاً - 10 مساءً
                 </div>
             </div>
         </div>
@@ -272,16 +400,20 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
 
         // Header background on scroll
         window.addEventListener('scroll', function() {
             const header = document.querySelector('.header');
-            if (window.scrollY > 100) {
+            if (window.scrollY > 50) {
                 header.style.background = 'rgba(255, 255, 255, 0.98)';
             } else {
                 header.style.background = 'rgba(255, 255, 255, 0.95)';
@@ -289,4 +421,4 @@
         });
     </script>
 </body>
-  </html>
+</html>
