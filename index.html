@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartLife Hub - المنصة الذكية للحياة المتكاملة</title>
+    <title>راحة - المنصة الذكية للخدمات المتكاملة</title>
     <style>
         :root {
-            --primary: #2E86AB;
-            --secondary: #A23B72;
-            --accent: #F18F01;
-            --success: #2ECC71;
-            --dark: #2C3E50;
-            --light: #F8F9FA;
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --dark: #1f2937;
+            --light: #f8fafc;
         }
         
         * {
@@ -25,6 +25,7 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #333;
             line-height: 1.6;
+            min-height: 100vh;
         }
 
         .container {
@@ -35,7 +36,7 @@
 
         /* ===== IMPROVED HEADER ===== */
         .main-header {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
             padding: 1rem 0;
             position: fixed;
@@ -43,6 +44,7 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            border-bottom: 3px solid var(--accent);
         }
 
         .nav-container {
@@ -52,7 +54,7 @@
         }
 
         .logo {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-weight: bold;
             color: var(--primary);
             display: flex;
@@ -61,35 +63,94 @@
         }
 
         .logo-icon {
-            font-size: 1.8rem;
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            transition: color 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+            background: rgba(37, 99, 235, 0.1);
         }
 
         /* ===== ENHANCED HERO ===== */
         .hero-section {
-            padding: 140px 0 80px;
+            padding: 160px 0 100px;
             color: white;
             text-align: center;
-            background: linear-gradient(135deg, rgba(46, 134, 171, 0.9), rgba(162, 59, 114, 0.9));
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
         }
 
         .hero-title {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            position: relative;
         }
 
         .hero-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            position: relative;
+            line-height: 1.8;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--accent), #eab308);
+            color: white;
+            padding: 16px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+            position: relative;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(245, 158, 11, 0.6);
         }
 
         /* ===== SECTIONS STYLING ===== */
         .section {
-            padding: 80px 0;
+            padding: 100px 0;
         }
 
         .section-light {
@@ -97,54 +158,140 @@
         }
 
         .section-gray {
-            background: #f8f9fa;
+            background: #f8fafc;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             margin-bottom: 3rem;
             color: var(--dark);
+            position: relative;
         }
 
-        /* ===== ENHANCED SERVICES GRID ===== */
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        /* ===== URGENT SERVICES ===== */
+        .urgent-services {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .urgent-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .urgent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .urgent-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 30px 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .urgent-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .urgent-card .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .urgent-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .urgent-btn {
+            background: white;
+            color: #ff6b6b;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .urgent-btn:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+
+        /* ===== SERVICES GRID ===== */
         .services-mega-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
         }
 
         .service-category {
             background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            padding: 35px 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            border-left: 5px solid var(--primary);
+            border-top: 5px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
         }
 
         .service-category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
         }
 
         .category-header {
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .category-icon {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            flex-shrink: 0;
         }
 
         .category-title {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: var(--dark);
             margin: 0;
         }
@@ -154,24 +301,38 @@
         }
 
         .service-item {
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
+            padding: 12px 0;
+            border-bottom: 1px solid #e5e7eb;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            transition: color 0.3s ease;
         }
 
         .service-item:last-child {
             border-bottom: none;
         }
 
+        .service-item:hover {
+            color: var(--primary);
+        }
+
         .service-badge {
             background: var(--accent);
             color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-right: auto;
+        }
+
+        .service-badge.new {
+            background: var(--success);
+        }
+
+        .service-badge.soon {
+            background: var(--secondary);
         }
 
         /* ===== ROADMAP SECTION ===== */
@@ -179,63 +340,242 @@
             display: flex;
             flex-direction: column;
             gap: 30px;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .roadmap-phase {
             background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
             border-right: 5px solid var(--success);
+            transition: transform 0.3s ease;
+        }
+
+        .roadmap-phase:hover {
+            transform: translateX(-10px);
         }
 
         .phase-header {
             display: flex;
-            justify-content: between;
+            justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
         .phase-title {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: var(--dark);
+            font-weight: 700;
         }
 
         .phase-duration {
             background: var(--primary);
             color: white;
-            padding: 4px 12px;
+            padding: 6px 16px;
             border-radius: 20px;
             font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .phase-services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .phase-service {
+            background: #f1f5f9;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: var(--dark);
         }
 
         /* ===== AI FEATURES ===== */
         .ai-features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
         }
 
         .ai-card {
             background: white;
-            padding: 25px;
-            border-radius: 12px;
+            padding: 40px 30px;
+            border-radius: 20px;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .ai-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            border-color: var(--primary);
         }
 
         .ai-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .ai-card h3 {
+            font-size: 1.4rem;
             margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .ai-card p {
+            color: #6b7280;
+            line-height: 1.7;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact-section {
+            background: white;
+            padding: 100px 0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            text-align: center;
+        }
+
+        .contact-item {
+            margin: 2rem 0;
+            font-size: 1.1rem;
+        }
+
+        .contact-item strong {
+            color: var(--primary);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            background: var(--secondary);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
         }
 
         /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 768px) {
             .hero-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
             }
             
             .services-mega-grid {
@@ -243,7 +583,40 @@
             }
             
             .section-title {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .phase-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
                 font-size: 1.8rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .service-category {
+                padding: 25px 20px;
             }
         }
     </style>
@@ -254,13 +627,13 @@
         <div class="container nav-container">
             <div class="logo">
                 <span class="logo-icon">🌐</span>
-                SmartLife Hub
+                راحة - SmartLife Hub
             </div>
             <nav class="nav-links">
-                <a href="#vision">الرؤية</a>
-                <a href="#services">الخدمات</a>
+                <a href="#urgent">خدمات عاجلة</a>
+                <a href="#services">جميع الخدمات</a>
                 <a href="#roadmap">خارطة الطريق</a>
-                <a href="#ai">الذكاء الاصطناعي</a>
+                <a href="#ai">التقنية</a>
                 <a href="#contact">اتصل بنا</a>
             </nav>
         </div>
@@ -269,44 +642,41 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
-            <h1 class="hero-title">🌐 SmartLife Hub</h1>
-            <p class="hero-subtitle">"كل ما تحتاجه.. بخدمة ذكية واحدة" - المنصة الذكية الشاملة للحياة المتكاملة</p>
-            <a href="#services" class="btn">اكتشف عالم الخدمات</a>
+            <h1 class="hero-title">🌐 راحة - المنصة الذكية</h1>
+            <p class="hero-subtitle">"من طلب الخدمة.. لحد ما هي توصلك - إحنا موجودين"<br>أول منصة عربية تدمج الذكاء الاصطناعي مع الخدمات اليومية</p>
+            <a href="#urgent" class="btn">اطلب خدمة عاجلة</a>
         </div>
     </section>
 
-    <!-- Vision Section -->
-    <section id="vision" class="section section-light">
+    <!-- Urgent Services Section -->
+    <section id="urgent" class="urgent-services">
         <div class="container">
-            <h2 class="section-title">رؤيتنا: إعادة تعريف مفهوم الخدمات اليومية</h2>
-            <div class="vision-content">
-                <p style="text-align: center; font-size: 1.2rem; max-width: 800px; margin: 0 auto 2rem;">
-                    "راحة العميل تبدأ من دقيقة في وقته.. وتنتهي بحياة متوازنة مع أسرته وعمله"
-                </p>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center;">
-                    <div class="value-card">
-                        <div style="font-size: 2.5rem;">🚀</div>
-                        <h3>الذكاء</h3>
-                    </div>
-                    <div class="value-card">
-                        <div style="font-size: 2.5rem;">⚡</div>
-                        <h3>السرعة</h3>
-                    </div>
-                    <div class="value-card">
-                        <div style="font-size: 2.5rem;">🎯</div>
-                        <h3>الدقة</h3>
-                    </div>
-                    <div class="value-card">
-                        <div style="font-size: 2.5rem;">🛡️</div>
-                        <h3>الأمان</h3>
-                    </div>
+            <h2 class="urgent-title">🚨 خدماتنا العاجلة - توصيل خلال ساعة</h2>
+            <div class="urgent-grid">
+                <div class="urgent-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>صيانة طارئة</h3>
+                    <p>كهرباء - سباكة - تكييف</p>
+                    <a href="tel:00962790782004" class="urgent-btn">اتصل الآن</a>
+                </div>
+                <div class="urgent-card">
+                    <div class="service-icon">🚗</div>
+                    <h3>غسيل سيارات</h3>
+                    <p>عند باب منزلك</p>
+                    <a href="https://wa.me/962790782004" class="urgent-btn">واصل واتساب</a>
+                </div>
+                <div class="urgent-card">
+                    <div class="service-icon">🚚</div>
+                    <h3>نقل عاجل</h3>
+                    <p>داخل المدينة</p>
+                    <a href="tel:00962790782004" class="urgent-btn">اطلب نقل</a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Mega Services Section -->
-    <section id="services" class="section section-gray">
+    <section id="services" class="section section-light">
         <div class="container">
             <h2 class="section-title">🏗️ منظومتنا الشاملة: 10 أقسام رئيسية</h2>
             <div class="services-mega-grid">
@@ -322,7 +692,10 @@
                         <li class="service-item">🧹 التنظيف الاحترافي</li>
                         <li class="service-item">☕ باريستا متنقل</li>
                         <li class="service-item">👔 خياطة متنقلة</li>
-                        <li class="service-item"><span class="service-badge">جديد</span> 🏡 التحكم الذكي في المنزل</li>
+                        <li class="service-item">
+                            🏡 التحكم الذكي في المنزل
+                            <span class="service-badge new">جديد</span>
+                        </li>
                     </ul>
                 </div>
 
@@ -337,7 +710,10 @@
                         <li class="service-item">🏢 نقل الأثاث والمعدات</li>
                         <li class="service-item">🚗 تأجير سيارات ذكي</li>
                         <li class="service-item">🛡️ سيارة بديلة مؤمنة</li>
-                        <li class="service-item"><span class="service-badge">قريباً</span> 🌍 النقل الدولي</li>
+                        <li class="service-item">
+                            🌍 النقل الدولي
+                            <span class="service-badge soon">قريباً</span>
+                        </li>
                     </ul>
                 </div>
 
@@ -351,91 +727,159 @@
                         <li class="service-item">📱 صيانة الأجهزة الذكية</li>
                         <li class="service-item">💻 تطوير التطبيقات</li>
                         <li class="service-item">🧠 مساعد ذكي شخصي</li>
-                        <li class="service-item"><span class="service-badge">متقدم</span> 📊 تحليلات البيانات</li>
+                        <li class="service-item">
+                            📊 تحليلات البيانات
+                            <span class="service-badge new">متقدم</span>
+                        </li>
                     </ul>
                 </div>
 
-                <!-- Add more categories similarly -->
+                <!-- Add more categories as needed -->
             </div>
         </div>
     </section>
 
     <!-- Roadmap Section -->
-    <section id="roadmap" class="section section-light">
+    <section id="roadmap" class="section section-gray">
         <div class="container">
             <h2 class="section-title">🗺️ خارطة الطريق الاستراتيجية</h2>
             <div class="roadmap-container">
                 <div class="roadmap-phase">
                     <div class="phase-header">
-                        <h3 class="phase-title">المرحلة 1: الإطلاق المحلي التجريبي</h3>
-                        <span class="phase-duration">6 أشهر</span>
+                        <h3 class="phase-title">المرحلة 1: الإطلاق المحلي التجريبي (أول 3 شهور)</h3>
+                        <span class="phase-duration">3 أشهر</span>
                     </div>
-                    <p>إطلاق 10 خدمات أساسية مع نظام التقييم الذكي</p>
+                    <p>تركيز على الخدمات الأساسية والعاجلة لبناء قاعدة عملاء مخلصين</p>
+                    <div class="phase-services">
+                        <span class="phase-service">صيانة منزلية</span>
+                        <span class="phase-service">غسيل سيارات</span>
+                        <span class="phase-service">نقل محلي</span>
+                        <span class="phase-service">تنظيف منازل</span>
+                    </div>
                 </div>
                 
                 <div class="roadmap-phase">
                     <div class="phase-header">
-                        <h3 class="phase-title">المرحلة 2: التوسع الإقليمي</h3>
-                        <span class="phase-duration">12 شهر</span>
+                        <h3 class="phase-title">المرحلة 2: التوسع الإقليمي (3-6 شهور)</h3>
+                        <span class="phase-duration">3 أشهر</span>
                     </div>
-                    <p>30 خدمة متكاملة + تحسين تجربة العميل</p>
+                    <p>إضافة خدمات جديدة والتوسع في المدن المجاورة</p>
+                    <div class="phase-services">
+                        <span class="phase-service">خدمات تقنية</span>
+                        <span class="phase-service">باريستا متنقل</span>
+                        <span class="phase-service">خدمات عقارية</span>
+                        <span class="phase-service">نظام التقييم</span>
+                    </div>
                 </div>
 
                 <div class="roadmap-phase">
                     <div class="phase-header">
-                        <h3 class="phase-title">المرحلة 3: التكامل التقني المتقدم</h3>
-                        <span class="phase-duration">18 شهر</span>
+                        <h3 class="phase-title">المرحلة 3: التكامل التقني المتقدم (6-12 شهر)</h3>
+                        <span class="phase-duration">6 أشهر</span>
                     </div>
-                    <p>60 خدمة + نظام الذكاء الاصطناعي الشامل</p>
+                    <p>إطلاق نظام الذكاء الاصطناعي والتطبيقات الذكية</p>
+                    <div class="phase-services">
+                        <span class="phase-service">مساعد ذكي</span>
+                        <span class="phase-service">تطبيق جوال</span>
+                        <span class="phase-service">نظام مطابقة</span>
+                        <span class="phase-service">تحليلات متقدمة</span>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- AI Features Section -->
-    <section id="ai" class="section section-gray">
+    <section id="ai" class="section section-light">
         <div class="container">
             <h2 class="section-title">🧠 القوة الذكية خلف المنصة</h2>
             <div class="ai-features">
                 <div class="ai-card">
                     <div class="ai-icon">🎯</div>
                     <h3>مطابقة ذكية</h3>
-                    <p>ربط العميل بأفضل مزود خدمة خلال ثوانٍ</p>
+                    <p>ربط العميل بأفضل مزود خدمة خلال ثوانٍ بناءً على الموقع والتقييمات والخبرة</p>
                 </div>
                 <div class="ai-card">
                     <div class="ai-icon">🔮</div>
                     <h3>تنبؤ استباقي</h3>
-                    <p>توقع احتياجاتك قبل أن تطلبها</p>
+                    <p>توقع احتياجاتك قبل أن تطلبها بناءً على سلوكك وتاريخ طلباتك</p>
                 </div>
                 <div class="ai-card">
                     <div class="ai-icon">📈</div>
                     <h3>تحليل ذكي</h3>
-                    <p>مراقبة الجودة والرضا بشكل لحظي</p>
+                    <p>مراقبة جودة الخدمة والرضا بشكل لحظي مع تنبيهات فورية للمشاكل</p>
                 </div>
                 <div class="ai-card">
                     <div class="ai-icon">🤖</div>
                     <h3>مساعد شخصي</h3>
-                    <p>مرافقة ذكية في رحلة الخدمة</p>
+                    <p>مرافقة ذكية في رحلة الخدمة من الطلب حتى التقييم النهائي</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="section section-light">
+    <!-- CTA Section -->
+    <section class="cta-section">
         <div class="container">
-            <h2 class="section-title">📞 انطلق معنا في هذه الرحلة</h2>
-            <div style="text-align: center; max-width: 600px; margin: 0 auto;">
-                <div style="margin: 2rem 0;">
-                    <p><strong>📧 البريد الإلكتروني:</strong> Uday.altiti@gmail.com</p>
-                    <p><strong>📞 الهاتف:</strong> 00962790782004</p>
-                </div>
-                <p style="font-size: 1.1rem; color: var(--dark);">
-                    "نحن لا نقدم خدمات.. نصنع نظامًا حيويًا يحسن جودة الحياة"
-                </p>
+            <h2 class="cta-title">🚀 مستعد لتبدأ رحلتك معنا؟</h2>
+            <p class="cta-subtitle">انضم إلى أول 100 عميل واحصل على خدمة مجانية + خصم 20% على طلباتك القادمة</p>
+            <div class="cta-buttons">
+                <a href="tel:00962790782004" class="btn">اتصل بنا الآن</a>
+                <a href="https://wa.me/962790782004" class="btn btn-secondary">تواصل عبر واتساب</a>
             </div>
         </div>
     </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">📞 انطلق معنا في هذه الرحلة</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <strong>📧 البريد الإلكتروني</strong>
+                        Uday.altiti@gmail.com
+                    </div>
+                    <div class="contact-item">
+                        <strong>📞 الهاتف الرئيسي</strong>
+                        00962790782004
+                    </div>
+                    <div class="contact-item">
+                        <strong>🕒 أوقات العمل</strong>
+                        الأحد - الخميس: 8 صباحاً - 10 مساءً<br>
+                        الجمعة - السبت: 9 صباحاً - 8 مساءً
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📱</a>
+                        <a href="#" class="social-link">💬</a>
+                        <a href="#" class="social-link">🐦</a>
+                        <a href="#" class="social-link">📸</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="logo" style="color: white; justify-content: center; margin-bottom: 2rem;">
+                <span class="logo-icon">🌐</span>
+                راحة - SmartLife Hub
+            </div>
+            <div class="footer-links">
+                <a href="#urgent">خدمات عاجلة</a>
+                <a href="#services">جميع الخدمات</a>
+                <a href="#roadmap">خارطة الطريق</a>
+                <a href="#ai">التقنية</a>
+                <a href="#contact">اتصل بنا</a>
+            </div>
+            <div class="copyright">
+                © 2024 راحة - المنصة الذكية للخدمات المتكاملة. جميع الحقوق محفوظة.<br>
+                "عيش حياتك.. وخلينا علينا الباقي"
+            </div>
+        </div>
+    </footer>
 
     <script>
         // Smooth scrolling
@@ -452,8 +896,36 @@
         // Header background on scroll
         window.addEventListener('scroll', function() {
             const header = document.querySelector('.main-header');
-            header.style.background = window.scrollY > 50 ? 
-                'rgba(255, 255, 255, 0.98)' : 'rgba(255, 255, 255, 0.95)';
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Add animation to cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards for animation
+        document.querySelectorAll('.service-category, .ai-card, .roadmap-phase').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
         });
     </script>
 </body>
