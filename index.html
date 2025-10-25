@@ -10,6 +10,8 @@
             --secondary: #7c3aed;
             --accent: #f59e0b;
             --success: #10b981;
+            --warning: #f59e0b;
+            --future: #6b7280;
             --dark: #1f2937;
             --light: #f8fafc;
         }
@@ -34,7 +36,7 @@
             padding: 0 20px;
         }
 
-        /* ===== IMPROVED HEADER - SCROLLABLE ===== */
+        /* ===== HEADER ===== */
         .main-header {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
@@ -44,12 +46,6 @@
             z-index: 1000;
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
             border-bottom: 3px solid var(--accent);
-            transition: all 0.3s ease;
-        }
-
-        .header-scrolled {
-            padding: 0.7rem 0;
-            background: rgba(255, 255, 255, 0.98);
         }
 
         .nav-container {
@@ -74,7 +70,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* ===== HAMBURGER MENU ===== */
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -93,256 +88,48 @@
             transition: all 0.3s ease;
         }
 
-        /* ===== DESKTOP MEGA MENU ===== */
-        .desktop-nav {
-            display: flex;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        .nav-category {
-            position: relative;
-        }
-
-        .nav-category-btn {
-            background: none;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            color: var(--dark);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.95rem;
-        }
-
-        .nav-category-btn:hover {
-            background: rgba(37, 99, 235, 0.1);
-            color: var(--primary);
-        }
-
-        .mega-menu {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            padding: 25px;
-            min-width: 300px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .nav-category:hover .mega-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .mega-menu h4 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-            border-bottom: 2px solid var(--accent);
-            padding-bottom: 8px;
-        }
-
-        .mega-menu ul {
-            list-style: none;
-        }
-
-        .mega-menu li {
-            padding: 8px 0;
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .mega-menu li:last-child {
-            border-bottom: none;
-        }
-
-        .mega-menu a {
-            text-decoration: none;
-            color: var(--dark);
-            transition: color 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .mega-menu a:hover {
-            color: var(--primary);
-        }
-
-        /* ===== MOBILE MENU ===== */
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 300px;
-            height: 100vh;
-            background: white;
-            box-shadow: -5px 0 30px rgba(0,0,0,0.1);
-            transition: right 0.3s ease;
-            z-index: 2000;
-            padding: 80px 20px 20px;
-            overflow-y: auto;
-        }
-
-        .mobile-nav.active {
-            right: 0;
-        }
-
-        .mobile-category {
-            margin-bottom: 15px;
-            border: 1px solid #e5e7eb;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .mobile-category-btn {
-            width: 100%;
-            background: none;
-            border: none;
-            padding: 15px;
-            text-align: right;
-            font-weight: 600;
-            color: var(--dark);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1rem;
-        }
-
-        .mobile-category-btn:hover {
-            background: #f8fafc;
-        }
-
-        .mobile-submenu {
-            background: #f8fafc;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-
-        .mobile-submenu.active {
-            max-height: 500px;
-        }
-
-        .mobile-submenu ul {
-            list-style: none;
-            padding: 15px;
-        }
-
-        .mobile-submenu li {
-            padding: 10px 0;
-            border-bottom: 1px solid #e5e7eb;
-        }
-
-        .mobile-submenu li:last-child {
-            border-bottom: none;
-        }
-
-        .mobile-submenu a {
-            text-decoration: none;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1500;
-        }
-
-        .overlay.active {
-            display: block;
-        }
-
-        /* ===== ENHANCED HERO ===== */
+        /* ===== HERO SECTION ===== */
         .hero-section {
             padding: 120px 0 80px;
             color: white;
             text-align: center;
             background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,0 1000,1000"/></svg>');
-            background-size: cover;
         }
 
         .hero-title {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-            position: relative;
         }
 
         .hero-subtitle {
             font-size: 1.3rem;
             margin-bottom: 1.5rem;
             opacity: 0.95;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-            line-height: 1.8;
-            font-weight: 500;
         }
 
         .hero-mission {
             font-size: 1.1rem;
             margin-bottom: 2.5rem;
             opacity: 0.9;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-            line-height: 1.7;
             background: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 15px;
             backdrop-filter: blur(10px);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
         }
 
         .btn {
             background: linear-gradient(135deg, var(--accent), #eab308);
             color: white;
             padding: 15px 35px;
-            border: none;
             border-radius: 50px;
             font-size: 1.1rem;
             font-weight: 700;
-            cursor: pointer;
             text-decoration: none;
             display: inline-block;
             transition: all 0.3s ease;
             box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
-            position: relative;
         }
 
         .btn:hover {
@@ -350,7 +137,7 @@
             box-shadow: 0 12px 35px rgba(245, 158, 11, 0.6);
         }
 
-        /* ===== SECTIONS STYLING ===== */
+        /* ===== SECTIONS ===== */
         .section {
             padding: 80px 0;
         }
@@ -359,46 +146,149 @@
             background: white;
         }
 
-        .section-gray {
-            background: #f8fafc;
-        }
-
         .section-title {
             text-align: center;
             font-size: 2.3rem;
             margin-bottom: 3rem;
             color: var(--dark);
-            position: relative;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 2px;
+        /* ===== COLLAPSIBLE SECTIONS ===== */
+        .sections-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
         }
 
-        /* ===== RESPONSIVE DESIGN ===== */
-        @media (max-width: 1024px) {
-            .desktop-nav {
-                display: none;
-            }
+        .section-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            overflow: hidden;
+        }
 
+        .section-card.ready {
+            border-color: var(--success);
+        }
+
+        .section-card.development {
+            border-color: var(--warning);
+        }
+
+        .section-card.future {
+            border-color: var(--future);
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .section-header {
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .section-title-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-icon {
+            font-size: 2.2rem;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+
+        .ready .section-icon { background: rgba(16, 185, 129, 0.1); }
+        .development .section-icon { background: rgba(245, 158, 11, 0.1); }
+        .future .section-icon { background: rgba(107, 114, 128, 0.1); }
+
+        .section-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .section-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .ready .section-badge { background: var(--success); }
+        .development .section-badge { background: var(--warning); }
+        .future .section-badge { background: var(--future); }
+
+        .section-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .section-card.active .section-arrow {
+            transform: rotate(180deg);
+        }
+
+        .services-list {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: white;
+        }
+
+        .section-card.active .services-list {
+            max-height: 500px;
+        }
+
+        .service-item {
+            padding: 15px 25px;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: background 0.3s ease;
+        }
+
+        .service-item:last-child {
+            border-bottom: none;
+        }
+
+        .service-item:hover {
+            background: #f8fafc;
+        }
+
+        .service-icon {
+            font-size: 1.2rem;
+            width: 30px;
+            text-align: center;
+        }
+
+        .service-name {
+            flex: 1;
+            color: var(--dark);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
             .menu-toggle {
                 display: flex;
             }
 
-            .mobile-nav {
-                display: block;
-            }
-        }
-
-        @media (max-width: 768px) {
             .hero-title {
                 font-size: 2rem;
             }
@@ -407,13 +297,20 @@
                 font-size: 1.1rem;
             }
             
-            .hero-mission {
-                font-size: 1rem;
-                padding: 15px;
+            .sections-container {
+                grid-template-columns: 1fr;
             }
             
             .section-title {
                 font-size: 1.8rem;
+            }
+
+            .section-header {
+                padding: 20px;
+            }
+
+            .section-name {
+                font-size: 1.1rem;
             }
         }
 
@@ -424,10 +321,6 @@
             
             .section {
                 padding: 60px 0;
-            }
-
-            .mobile-nav {
-                width: 280px;
             }
         }
     </style>
@@ -440,166 +333,13 @@
                 <span class="logo-icon">🌐</span>
                 راحة - SmartLife Hub
             </div>
-
-            <!-- Desktop Navigation -->
-            <nav class="desktop-nav">
-                <div class="nav-category">
-                    <button class="nav-category-btn">
-                        📊 قيمنا
-                    </button>
-                </div>
-
-                <div class="nav-category">
-                    <button class="nav-category-btn">
-                        🚨 خدمات عاجلة
-                    </button>
-                    <div class="mega-menu">
-                        <h4>🚨 خدمات عاجلة</h4>
-                        <ul>
-                            <li><a href="tel:00962790782004">🔧 صيانة طارئة - اتصل الآن</a></li>
-                            <li><a href="https://wa.me/962790782004">🚗 غسيل سيارات - واتساب</a></li>
-                            <li><a href="tel:00962790782004">🚚 نقل عاجل - اطلب نقل</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="nav-category">
-                    <button class="nav-category-btn">
-                        🏗️ جميع الخدمات
-                    </button>
-                    <div class="mega-menu">
-                        <h4>🏗️ منظومتنا الشاملة</h4>
-                        <ul>
-                            <li><a href="#services">🏠 الخدمات المنزلية الذكية</a></li>
-                            <li><a href="#services">🚚 الخدمات اللوجستية</a></li>
-                            <li><a href="#services">🤖 التقنية والذكاء الاصطناعي</a></li>
-                            <li><a href="#services">🛠️ الخدمات المهنية</a></li>
-                            <li><a href="#services">🌱 الخدمات البيئية</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="nav-category">
-                    <button class="nav-category-btn">
-                        🗺️ خارطة الطريق
-                    </button>
-                </div>
-
-                <div class="nav-category">
-                    <button class="nav-category-btn">
-                        🧠 التقنية
-                    </button>
-                    <div class="mega-menu">
-                        <h4>🧠 القوة الذكية</h4>
-                        <ul>
-                            <li><a href="#ai">🎯 مطابقة ذكية</a></li>
-                            <li><a href="#ai">🔮 تنبؤ استباقي</a></li>
-                            <li><a href="#ai">📈 تحليل ذكي</a></li>
-                            <li><a href="#ai">🤖 مساعد شخصي</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="nav-category">
-                    <button class="nav-category-btn">
-                        📞 اتصل بنا
-                    </button>
-                    <div class="mega-menu">
-                        <h4>📞 تواصل معنا</h4>
-                        <ul>
-                            <li><a href="tel:00962790782004">📞 الهاتف: 00962790782004</a></li>
-                            <li><a href="https://wa.me/962790782004">💬 واتساب</a></li>
-                            <li><a href="mailto:Uday.altiti@gmail.com">📧 الإيميل</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
-            <!-- Mobile Menu Toggle -->
-            <button class="menu-toggle" id="menuToggle">
+            <button class="menu-toggle">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
         </div>
     </header>
-
-    <!-- Mobile Navigation -->
-    <div class="overlay" id="overlay"></div>
-    <nav class="mobile-nav" id="mobileNav">
-        <div class="mobile-category">
-            <button class="mobile-category-btn" onclick="toggleMobileSubmenu('values')">
-                📊 قيمنا
-                <span>▼</span>
-            </button>
-        </div>
-
-        <div class="mobile-category">
-            <button class="mobile-category-btn" onclick="toggleMobileSubmenu('urgent')">
-                🚨 خدمات عاجلة
-                <span>▼</span>
-            </button>
-            <div class="mobile-submenu" id="urgentSubmenu">
-                <ul>
-                    <li><a href="tel:00962790782004">🔧 صيانة طارئة - اتصل الآن</a></li>
-                    <li><a href="https://wa.me/962790782004">🚗 غسيل سيارات - واتساب</a></li>
-                    <li><a href="tel:00962790782004">🚚 نقل عاجل - اطلب نقل</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="mobile-category">
-            <button class="mobile-category-btn" onclick="toggleMobileSubmenu('services')">
-                🏗️ جميع الخدمات
-                <span>▼</span>
-            </button>
-            <div class="mobile-submenu" id="servicesSubmenu">
-                <ul>
-                    <li><a href="#services">🏠 الخدمات المنزلية الذكية</a></li>
-                    <li><a href="#services">🚚 الخدمات اللوجستية</a></li>
-                    <li><a href="#services">🤖 التقنية والذكاء الاصطناعي</a></li>
-                    <li><a href="#services">🛠️ الخدمات المهنية</a></li>
-                    <li><a href="#services">🌱 الخدمات البيئية</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="mobile-category">
-            <button class="mobile-category-btn" onclick="toggleMobileSubmenu('roadmap')">
-                🗺️ خارطة الطريق
-                <span>▼</span>
-            </button>
-        </div>
-
-        <div class="mobile-category">
-            <button class="mobile-category-btn" onclick="toggleMobileSubmenu('ai')">
-                🧠 التقنية
-                <span>▼</span>
-            </button>
-            <div class="mobile-submenu" id="aiSubmenu">
-                <ul>
-                    <li><a href="#ai">🎯 مطابقة ذكية</a></li>
-                    <li><a href="#ai">🔮 تنبؤ استباقي</a></li>
-                    <li><a href="#ai">📈 تحليل ذكي</a></li>
-                    <li><a href="#ai">🤖 مساعد شخصي</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="mobile-category">
-            <button class="mobile-category-btn" onclick="toggleMobileSubmenu('contact')">
-                📞 اتصل بنا
-                <span>▼</span>
-            </button>
-            <div class="mobile-submenu" id="contactSubmenu">
-                <ul>
-                    <li><a href="tel:00962790782004">📞 الهاتف: 00962790782004</a></li>
-                    <li><a href="https://wa.me/962790782004">💬 واتساب</a></li>
-                    <li><a href="mailto:Uday.altiti@gmail.com">📧 الإيميل</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 
     <!-- Hero Section -->
     <section class="hero-section">
@@ -609,85 +349,326 @@
             <div class="hero-mission">
                 إنشاء منظومة موحدة لإدارة جميع الخدمات المنزلية، المهنية، الحكومية، اللوجستية، والبيئية في تطبيق ذكي واحد، لتوفير وقت العميل وجهده وماله وضمان جودة الخدمة ورضاه.
             </div>
-            <a href="#urgent" class="btn">اطلب خدمة عاجلة</a>
+            <a href="#services" class="btn">اكتشف خدماتنا</a>
         </div>
     </section>
 
-    <!-- Add some content to make scrolling possible -->
-    <section class="section section-light">
+    <!-- Services Sections -->
+    <section id="services" class="section section-light">
         <div class="container">
-            <h2 class="section-title">عن منصتنا</h2>
-            <p style="text-align: center; font-size: 1.2rem; max-width: 800px; margin: 0 auto;">
-                منصة راحة تهدف إلى إعادة تعريف مفهوم الخدمات اليومية من خلال دمج الذكاء الاصطناعي مع الخدمات التقليدية لتقديم تجربة فريدة ومتميزة.
-            </p>
-        </div>
-    </section>
+            <h2 class="section-title">🏗️ منظومتنا الشاملة: 10 أقسام رئيسية</h2>
+            
+            <div class="sections-container">
+                <!-- القسم 1 - جاهز -->
+                <div class="section-card ready" onclick="toggleSection(this)">
+                    <div class="section-header">
+                        <div class="section-title-content">
+                            <div class="section-icon">🏠</div>
+                            <div class="section-name">الخدمات المنزلية الذكية</div>
+                        </div>
+                        <div class="section-right">
+                            <span class="section-badge">جاهز</span>
+                            <span class="section-arrow">▼</span>
+                        </div>
+                    </div>
+                    <div class="services-list">
+                        <div class="service-item">
+                            <span class="service-icon">🔧</span>
+                            <span class="service-name">الصيانة المنزلية الشاملة</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">🚗</span>
+                            <span class="service-name">غسيل السيارات المتنقل</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">🧹</span>
+                            <span class="service-name">التنظيف الاحترافي</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">☕</span>
+                            <span class="service-name">باريستا متنقل</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">👔</span>
+                            <span class="service-name">خياطة متنقلة</span>
+                        </div>
+                    </div>
+                </div>
 
-    <section class="section section-gray">
-        <div class="container">
-            <h2 class="section-title">رؤيتنا</h2>
-            <p style="text-align: center; font-size: 1.2rem; max-width: 800px; margin: 0 auto;">
-                "راحة العميل تبدأ من دقيقة في وقته.. وتنتهي بحياة متوازنة مع أسرته وعمله"
-            </p>
+                <!-- القسم 2 - جاهز -->
+                <div class="section-card ready" onclick="toggleSection(this)">
+                    <div class="section-header">
+                        <div class="section-title-content">
+                            <div class="section-icon">🚚</div>
+                            <div class="section-name">الخدمات اللوجستية والنقل</div>
+                        </div>
+                        <div class="section-right">
+                            <span class="section-badge">جاهز</span>
+                            <span class="section-arrow">▼</span>
+                        </div>
+                    </div>
+                    <div class="services-list">
+                        <div class="service-item">
+                            <span class="service-icon">📦</span>
+                            <span class="service-name">النقل الذكي داخل المدن</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">🏢</span>
+                            <span class="service-name">نقل الأثاث والمعدات</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">🚗</span>
+                            <span class="service-name">تأجير سيارات ذكي</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">🛡️</span>
+                            <span class="service-name">سيارة بديلة مؤمنة</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- القسم 3 - جاهز -->
+                <div class="section-card ready" onclick="toggleSection(this)">
+                    <div class="section-header">
+                        <div class="section-title-content">
+                            <div class="section-icon">🤖</div>
+                            <div class="section-name">التقنية والذكاء الاصطناعي</div>
+                        </div>
+                        <div class="section-right">
+                            <span class="section-badge">جاهز</span>
+                            <span class="section-arrow">▼</span>
+                        </div>
+                    </div>
+                    <div class="services-list">
+                        <div class="service-item">
+                            <span class="service-icon">📱</span>
+                            <span class="service-name">صيانة الأجهزة الذكية</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">💻</span>
+                            <span class="service-name">تطوير التطبيقات</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">🧠</span>
+                            <span class="service-name">مساعد ذكي شخصي</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">📊</span>
+                            <span class="service-name">تحليلات البيانات</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- القسم 4 - جاهز -->
+                <div class="section-card ready" onclick="toggleSection(this)">
+                    <div class="section-header">
+                        <div class="section-title-content">
+                            <div class="section-icon">🛠️</div>
+                            <div class="section-name">الخدمات المهنية والإصلاح</div>
+                        </div>
+                        <div class="section-right">
+                            <span class="section-badge">جاهز</span>
+                            <span class="section-arrow">▼</span>
+                        </div>
+                    </div>
+                    <div class="services-list">
+                        <div class="service-item">
+                            <span class="service-icon">🔌</span>
+                            <span class="service-name">إصلاح الأجهزة الكهربائية</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">❄️</span>
+                            <span class="service-name">صيانة المكيفات والثلاجات</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">🎨</span>
+                            <span class="service-name">الدهان والديكور الداخلي</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">☀️</span>
+                            <span class="service-name">تركيب الأنظمة الشمسية</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- القسم 5 - تحت التطوير -->
+                <div class="section-card development" onclick="toggleSection(this)">
+                    <div class="section-header">
+                        <div class="section-title-content">
+                            <div class="section-icon">🌱</div>
+                            <div class="section-name">الخدمات البيئية</div>
+                        </div>
+                        <div class="section-right">
+                            <span class="section-badge">تحت التطوير</span>
+                            <span class="section-arrow">▼</span>
+                        </div>
+                    </div>
+                    <div class="services-list">
+                        <div class="service-item">
+                            <span class="service-icon">🗑️</span>
+                            <span class="service-name">جمع وفرز النفايات</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">♻️</span>
+                            <span class="service-name">إعادة التدوير</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">🌿</span>
+                            <span class="service-name">تنسيق الحدائق</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- القسم 6 - تحت التطوير -->
+                <div class="section-card development" onclick="toggleSection(this)">
+                    <div class="section-header">
+                        <div class="section-title-content">
+                            <div class="section-icon">📋</div>
+                            <div class="section-name">الخدمات الإدارية</div>
+                        </div>
+                        <div class="section-right">
+                            <span class="section-badge">تحت التطوير</span>
+                            <span class="section-arrow">▼</span>
+                        </div>
+                    </div>
+                    <div class="services-list">
+                        <div class="service-item">
+                            <span class="service-icon">📄</span>
+                            <span class="service-name">المعاملات الحكومية</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">⚖️</span>
+                            <span class="service-name">خدمات قانونية</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">📊</span>
+                            <span class="service-name">محاسبة وضرائب</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- القسم 7 - تحت التطوير -->
+                <div class="section-card development" onclick="toggleSection(this)">
+                    <div class="section-header">
+                        <div class="section-title-content">
+                            <div class="section-icon">🏢</div>
+                            <div class="section-name">الخدمات التجارية</div>
+                        </div>
+                        <div class="section-right">
+                            <span class="section-badge">تحت التطوير</span>
+                            <span class="section-arrow">▼</span>
+                        </div>
+                    </div>
+                    <div class="services-list">
+                        <div class="service-item">
+                            <span class="service-icon">🏘️</span>
+                            <span class="service-name">إدارة العقارات</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">📈</span>
+                            <span class="service-name">تسويق عقاري</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">💼</span>
+                            <span class="service-name">استشارات مالية</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- القسم 8 - مستقبلي -->
+                <div class="section-card future" onclick="toggleSection(this)">
+                    <div class="section-header">
+                        <div class="section-title-content">
+                            <div class="section-icon">🎓</div>
+                            <div class="section-name">الخدمات التعليمية</div>
+                        </div>
+                        <div class="section-right">
+                            <span class="section-badge">مستقبلي</span>
+                            <span class="section-arrow">▼</span>
+                        </div>
+                    </div>
+                    <div class="services-list">
+                        <div class="service-item">
+                            <span class="service-icon">👨‍🏫</span>
+                            <span class="service-name">دروس خصوصية أونلاين</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">🔧</span>
+                            <span class="service-name">تدريب مهني</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- القسم 9 - مستقبلي -->
+                <div class="section-card future" onclick="toggleSection(this)">
+                    <div class="section-header">
+                        <div class="section-title-content">
+                            <div class="section-icon">⚕️</div>
+                            <div class="section-name">الخدمات الصحية</div>
+                        </div>
+                        <div class="section-right">
+                            <span class="section-badge">مستقبلي</span>
+                            <span class="section-arrow">▼</span>
+                        </div>
+                    </div>
+                    <div class="services-list">
+                        <div class="service-item">
+                            <span class="service-icon">🏠</span>
+                            <span class="service-name">رعاية منزلية</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">💊</span>
+                            <span class="service-name">استشارات طبية</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- القسم 10 - مستقبلي -->
+                <div class="section-card future" onclick="toggleSection(this)">
+                    <div class="section-header">
+                        <div class="section-title-content">
+                            <div class="section-icon">🎉</div>
+                            <div class="section-name">الخدمات الترفيهية</div>
+                        </div>
+                        <div class="section-right">
+                            <span class="section-badge">مستقبلي</span>
+                            <span class="section-arrow">▼</span>
+                        </div>
+                    </div>
+                    <div class="services-list">
+                        <div class="service-item">
+                            <span class="service-icon">🎪</span>
+                            <span class="service-name">تنظيم المناسبات</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">✈️</span>
+                            <span class="service-name">خدمات سياحية</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <script>
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('.main-header');
-            if (window.scrollY > 50) {
-                header.classList.add('header-scrolled');
-            } else {
-                header.classList.remove('header-scrolled');
-            }
-        });
+        let activeSection = null;
 
-        // Mobile menu functionality
-        const menuToggle = document.getElementById('menuToggle');
-        const mobileNav = document.getElementById('mobileNav');
-        const overlay = document.getElementById('overlay');
-
-        function toggleMobileMenu() {
-            mobileNav.classList.toggle('active');
-            overlay.classList.toggle('active');
-            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
-        }
-
-        function closeMobileMenu() {
-            mobileNav.classList.remove('active');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        menuToggle.addEventListener('click', toggleMobileMenu);
-        overlay.addEventListener('click', closeMobileMenu);
-
-        // Mobile submenu functionality
-        let activeSubmenu = null;
-
-        function toggleMobileSubmenu(menuId) {
-            const submenu = document.getElementById(menuId + 'Submenu');
-            
-            if (activeSubmenu && activeSubmenu !== submenu) {
-                activeSubmenu.classList.remove('active');
+        function toggleSection(section) {
+            if (activeSection && activeSection !== section) {
+                activeSection.classList.remove('active');
             }
             
-            if (submenu) {
-                submenu.classList.toggle('active');
-                activeSubmenu = submenu.classList.contains('active') ? submenu : null;
-            }
+            section.classList.toggle('active');
+            activeSection = section.classList.contains('active') ? section : null;
         }
 
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.mobile-submenu a').forEach(link => {
-            link.addEventListener('click', closeMobileMenu);
-        });
-
-        // Close mobile menu when clicking outside
+        // Close section when clicking outside
         document.addEventListener('click', function(event) {
-            if (!event.target.closest('.mobile-nav') && !event.target.closest('.menu-toggle')) {
-                closeMobileMenu();
+            if (!event.target.closest('.section-card')) {
+                if (activeSection) {
+                    activeSection.classList.remove('active');
+                    activeSection = null;
+                }
             }
         });
     </script>
