@@ -34,7 +34,7 @@
             padding: 0 20px;
         }
 
-        /* ===== IMPROVED HEADER ===== */
+        /* ===== IMPROVED HEADER - FIXED ===== */
         .main-header {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
@@ -51,19 +51,21 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .logo {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: bold;
             color: var(--primary);
             display: flex;
             align-items: center;
             gap: 10px;
+            margin-bottom: 0;
         }
 
         .logo-icon {
-            font-size: 2rem;
+            font-size: 1.8rem;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -71,7 +73,8 @@
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
@@ -79,8 +82,9 @@
             color: var(--dark);
             font-weight: 600;
             transition: color 0.3s ease;
-            padding: 8px 16px;
+            padding: 8px 12px;
             border-radius: 8px;
+            font-size: 0.95rem;
         }
 
         .nav-links a:hover {
@@ -90,7 +94,7 @@
 
         /* ===== ENHANCED HERO ===== */
         .hero-section {
-            padding: 160px 0 100px;
+            padding: 140px 0 80px;
             color: white;
             text-align: center;
             background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
@@ -110,7 +114,7 @@
         }
 
         .hero-title {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
             position: relative;
@@ -118,22 +122,38 @@
 
         .hero-subtitle {
             font-size: 1.3rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 1.5rem;
             opacity: 0.95;
-            max-width: 600px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
             position: relative;
             line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .hero-mission {
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            line-height: 1.7;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
         }
 
         .btn {
             background: linear-gradient(135deg, var(--accent), #eab308);
             color: white;
-            padding: 16px 40px;
+            padding: 15px 35px;
             border: none;
             border-radius: 50px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             cursor: pointer;
             text-decoration: none;
@@ -150,7 +170,7 @@
 
         /* ===== SECTIONS STYLING ===== */
         .section {
-            padding: 100px 0;
+            padding: 80px 0;
         }
 
         .section-light {
@@ -163,7 +183,7 @@
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             margin-bottom: 3rem;
             color: var(--dark);
             position: relative;
@@ -179,6 +199,49 @@
             height: 4px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 2px;
+        }
+
+        /* ===== VALUES SECTION ===== */
+        .values-section {
+            background: white;
+            padding: 60px 0;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .value-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+            border: 2px solid #f1f5f9;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+
+        .value-icon {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .value-card h3 {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
         }
 
         /* ===== URGENT SERVICES ===== */
@@ -396,22 +459,26 @@
             color: var(--dark);
         }
 
-        /* ===== AI FEATURES ===== */
+        /* ===== FIXED AI FEATURES - BETTER LAYOUT ===== */
         .ai-features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            gap: 25px;
             margin-top: 50px;
         }
 
         .ai-card {
             background: white;
-            padding: 40px 30px;
+            padding: 35px 25px;
             border-radius: 20px;
             text-align: center;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             border: 1px solid #e5e7eb;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            min-height: 280px;
         }
 
         .ai-card:hover {
@@ -421,34 +488,38 @@
         }
 
         .ai-icon {
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             margin-bottom: 20px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            flex-shrink: 0;
         }
 
         .ai-card h3 {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             margin-bottom: 15px;
             color: var(--dark);
+            line-height: 1.3;
         }
 
         .ai-card p {
             color: #6b7280;
-            line-height: 1.7;
+            line-height: 1.6;
+            flex-grow: 1;
+            margin: 0;
         }
 
         /* ===== CTA SECTION ===== */
         .cta-section {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 100px 0;
+            padding: 80px 0;
             text-align: center;
         }
 
         .cta-title {
-            font-size: 2.5rem;
+            font-size: 2.3rem;
             margin-bottom: 1.5rem;
         }
 
@@ -482,7 +553,7 @@
         /* ===== CONTACT SECTION ===== */
         .contact-section {
             background: white;
-            padding: 100px 0;
+            padding: 80px 0;
         }
 
         .contact-grid {
@@ -566,16 +637,43 @@
             padding-top: 2rem;
             border-top: 1px solid #374151;
             color: #9ca3af;
+            line-height: 1.6;
         }
 
-        /* ===== RESPONSIVE DESIGN ===== */
+        .footer-quote {
+            font-style: italic;
+            margin-top: 1rem;
+            color: #d1d5db;
+        }
+
+        /* ===== RESPONSIVE DESIGN - IMPROVED ===== */
         @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .logo {
+                margin-bottom: 0;
+            }
+
+            .nav-links {
+                justify-content: center;
+                gap: 1rem;
+            }
+
             .hero-title {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
             
             .hero-subtitle {
                 font-size: 1.1rem;
+            }
+            
+            .hero-mission {
+                font-size: 1rem;
+                padding: 15px;
             }
             
             .services-mega-grid {
@@ -583,16 +681,17 @@
             }
             
             .section-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
-            .nav-links {
-                gap: 1rem;
+            .ai-features {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
             
-            .nav-container {
-                flex-direction: column;
-                gap: 1rem;
+            .ai-card {
+                min-height: 250px;
+                padding: 25px 20px;
             }
             
             .cta-buttons {
@@ -604,11 +703,16 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
         }
 
         @media (max-width: 480px) {
             .hero-title {
-                font-size: 1.8rem;
+                font-size: 1.7rem;
             }
             
             .section {
@@ -617,6 +721,34 @@
             
             .service-category {
                 padding: 25px 20px;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .nav-links a {
+                text-align: center;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .hero-title {
+                font-size: 1.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
             }
         }
     </style>
@@ -630,6 +762,7 @@
                 راحة - SmartLife Hub
             </div>
             <nav class="nav-links">
+                <a href="#values">قيمنا</a>
                 <a href="#urgent">خدمات عاجلة</a>
                 <a href="#services">جميع الخدمات</a>
                 <a href="#roadmap">خارطة الطريق</a>
@@ -643,8 +776,44 @@
     <section class="hero-section">
         <div class="container">
             <h1 class="hero-title">🌐 راحة - المنصة الذكية</h1>
-            <p class="hero-subtitle">"من طلب الخدمة.. لحد ما هي توصلك - إحنا موجودين"<br>أول منصة عربية تدمج الذكاء الاصطناعي مع الخدمات اليومية</p>
+            <p class="hero-subtitle">"كل ما تحتاجه... بخدمة ذكية واحدة"</p>
+            <div class="hero-mission">
+                إنشاء منظومة موحدة لإدارة جميع الخدمات المنزلية، المهنية، الحكومية، اللوجستية، والبيئية في تطبيق ذكي واحد، لتوفير وقت العميل وجهده وماله وضمان جودة الخدمة ورضاه.
+            </div>
             <a href="#urgent" class="btn">اطلب خدمة عاجلة</a>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section id="values" class="values-section">
+        <div class="container">
+            <h2 class="section-title">قيم المنصة الأساسية</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">🧠</div>
+                    <h3>الذكاء</h3>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">⚡</div>
+                    <h3>السرعة</h3>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🎯</div>
+                    <h3>الدقة</h3>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🛡️</div>
+                    <h3>الأمان</h3>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🔗</div>
+                    <h3>التكامل</h3>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🌱</div>
+                    <h3>الاستدامة</h3>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -733,8 +902,6 @@
                         </li>
                     </ul>
                 </div>
-
-                <!-- Add more categories as needed -->
             </div>
         </div>
     </section>
@@ -868,6 +1035,7 @@
                 راحة - SmartLife Hub
             </div>
             <div class="footer-links">
+                <a href="#values">قيمنا</a>
                 <a href="#urgent">خدمات عاجلة</a>
                 <a href="#services">جميع الخدمات</a>
                 <a href="#roadmap">خارطة الطريق</a>
@@ -876,7 +1044,9 @@
             </div>
             <div class="copyright">
                 © 2024 راحة - المنصة الذكية للخدمات المتكاملة. جميع الحقوق محفوظة.<br>
-                "عيش حياتك.. وخلينا علينا الباقي"
+                <div class="footer-quote">
+                    "راحة العميل تبدأ من دقيقة في وقته.. وتنتهي بحياة متوازنة مع أسرته وعمله"
+                </div>
             </div>
         </div>
     </footer>
@@ -921,7 +1091,7 @@
         }, observerOptions);
 
         // Observe all cards for animation
-        document.querySelectorAll('.service-category, .ai-card, .roadmap-phase').forEach(card => {
+        document.querySelectorAll('.service-category, .ai-card, .roadmap-phase, .value-card').forEach(card => {
             card.style.opacity = '0';
             card.style.transform = 'translateY(20px)';
             card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
