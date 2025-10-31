@@ -923,31 +923,119 @@
                 </div>
             </div>
 
+<!-- قسم الخدمات المنزلية - معدل -->
+<div class="section-card ready" id="home-services" onclick="toggleSection(this)">
+    <div class="section-header">
+        <div class="section-title-content">
+            <div class="section-icon">🏠</div>
+            <div class="section-name">الخدمات المنزلية الذكية</div>
         </div>
-
-        <!-- زر عرض المزيد -->
-        <div style="text-align: center; margin-top: 40px;">
-            <button style="background: #3498db; color: white; border: none; padding: 12px 30px; border-radius: 8px; cursor: pointer; font-size: 1em;">
-                عرض جميع الخدمات (17 خدمة)
-            </button>
+        <div class="section-right">
+            <span class="section-badge">17 خدمة</span>
+            <span class="section-arrow">▼</span>
         </div>
-
     </div>
-</section>
+    <div class="services-list">
+        <!-- الخدمات المفعلة -->
+        <div class="service-item">
+            <span class="service-icon">🔧</span>
+            <span class="service-name">صيانة كهرباء منزلية (تركيب - إصلاح - صيانة)</span>
+            <span class="service-status status-available">متوفر</span>
+            <div class="service-actions">
+                <a href="https://wa.me/962790782004?text=🔧 أريد حجز خدمة صيانة كهرباء منزلية" 
+                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
+                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
+            </div>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🚰</span>
+            <span class="service-name">خدمات سباكة شاملة (تسريبات - تركيب - إصلاح)</span>
+            <span class="service-status status-available">متوفر</span>
+            <div class="service-actions">
+                <a href="https://wa.me/962790782004?text=🚰 أريد حجز خدمة سباكة منزلية" 
+                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
+                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
+            </div>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">❄️</span>
+            <span class="service-name">صيانة تكييف وتبريد (تنظيف - إصلاح - تركيب)</span>
+            <span class="service-status status-available">متوفر</span>
+            <div class="service-actions">
+                <a href="https://wa.me/962790782004?text=❄️ أريد حجز خدمة صيانة تكييف" 
+                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
+                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
+            </div>
+        </div>
 
-<!-- إضافة تأثير الهوفر -->
-<style>
-.service-card:hover {
-    border-color: #28a745 !important;
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(40, 167, 69, 0.2) !important;
-}
-
-.service-card button:hover {
-    background: #218838 !important;
-}
-</style>
-<!-- === نهاية قسم الخدمات المنزلية === -->
+        <!-- الخدمات تحت التطوير -->
+        <div class="service-item">
+            <span class="service-icon">🏠</span>
+            <span class="service-name">صيانة أجهزة منزلية (ثلاجات - غسالات - أفران)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🔨</span>
+            <span class="service-name">صيانة نجارة الألمنيوم (بواب - نوافذ - مطابخ - أثاث)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🧹</span>
+            <span class="service-name">تعقيم منازل احترافي (شامل - عميق - دوري)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🧽</span>
+            <span class="service-name">تنظيف مفروشات وسجاد (غسيل - تعقيم - تجفيف)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">💧</span>
+            <span class="service-name">تنظيف خزانات مياه (تعقيم - صيانة - تنظيف)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🐜</span>
+            <span class="service-name">مكافحة حشرات وقوارض (رش - تعقيم - وقاية)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🏊</span>
+            <span class="service-name">تنظيف مسابح وصيانتها (تعقيم - صيانة - فلاتر)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🏡</span>
+            <span class="service-name">تركيب أنظمة ذكية (منزل ذكي - كاميرات - إنذار)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">☀️</span>
+            <span class="service-name">تركيب أنظمة طاقة شمسية (توفير - صيانة - تركيب)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🎨</span>
+            <span class="service-name">تنسيق وديكور داخلي (ديكور - ترتيب - تنسيق)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🪟</span>
+            <span class="service-name">تركيب ستائر ومظلات (قياس - تركيب - صيانة)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">📦</span>
+            <span class="service-name">خدمة نقل وتغليف أثاث (نقل - تركيب - تخزين)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">📋</span>
+            <span class="service-name">باقات الصيانة الدورية (اشتراكات شهرية/سنوية)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+    </div>
+</div>
 
                 <!-- القسم 2 - خدمات السيارات -->
                 <div class="section-card ready" id="car-services" onclick="toggleSection(this)">
