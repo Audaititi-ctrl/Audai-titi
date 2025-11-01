@@ -959,33 +959,133 @@
     </div>
 </div>
 
-                <!-- القسم 2 - خدمات السيارات -->
-                <div class="section-card ready" id="car-services" onclick="toggleSection(this)">
-                    <div class="section-header">
-                        <div class="section-title-content">
-                            <div class="section-icon">🚗</div>
-                            <div class="section-name">خدمات السيارات</div>
+<!-- قسم خدمات السيارات - مع الباقات -->
+<div class="section-card ready" id="car-services" onclick="toggleSection(this)">
+    <div class="section-header">
+        <div class="section-title-content">
+            <div class="section-icon">🚗</div>
+            <div class="section-name">خدمات السيارات</div>
+        </div>
+        <div class="section-right">
+            <span class="section-badge">14 خدمة</span>
+            <span class="section-arrow">▼</span>
+        </div>
+    </div>
+    <div class="services-list">
+        <!-- الخدمة الأساسية - غسيل السيارات -->
+        <div class="service-item">
+            <span class="service-icon">🧼</span>
+            <div style="flex: 1;">
+                <div class="service-name">غسيل وتلميع السيارات</div>
+                <div style="display: flex; gap: 15px; margin-top: 10px; flex-wrap: wrap;">
+                    <!-- الباقة الأساسية -->
+                    <div style="background: #e8f5e8; padding: 12px; border-radius: 10px; border: 2px solid #28a745; min-width: 200px;">
+                        <div style="font-weight: bold; color: #28a745;">🟢 أساسي - 7 دنانير</div>
+                        <div style="font-size: 0.9em; color: #555; margin-top: 5px;">
+                            غسيل داخلي + خارجي + تجفيف
                         </div>
-                        <div class="section-right">
-                            <span class="section-badge">14 خدمة</span>
-                            <span class="section-arrow">▼</span>
-                        </div>
+                        <button onclick="window.open('https://wa.me/962790782004?text=🧼 أريد حجز باقة غسيل أساسي - 7 دنانير', '_blank')" 
+                                style="background: #28a745; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 0.9em; margin-top: 8px; width: 100%;">
+                            احجز الباقة
+                        </button>
                     </div>
-                    <div class="services-list">
-                        <div class="service-item">
-                            <span class="service-icon">🧼</span>
-                            <span class="service-name">غسيل وتلميع السيارات (داخلي - خارجي - ديتيلينغ)</span>
-                            <span class="service-status status-available">متوفر</span>
-                            <div class="service-actions">
-                                <a href="https://wa.me/962790782004?text=🧼 أريد حجز خدمة غسيل السيارات" 
-                                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
-                                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
-                            </div>
+                    
+                    <!-- الباقة بريميوم -->
+                    <div style="background: #e8f0ff; padding: 12px; border-radius: 10px; border: 2px solid #007bff; min-width: 200px;">
+                        <div style="font-weight: bold; color: #007bff;">🔵 بريميوم - 12 دينار</div>
+                        <div style="font-size: 0.9em; color: #555; margin-top: 5px;">
+                            + تلميع + تعطير + تنظيف عجلات
                         </div>
-                        <!-- باقي خدمات السيارات -->
+                        <button onclick="window.open('https://wa.me/962790782004?text=🧼 أريد حجز باقة غسيل بريميوم - 12 دينار', '_blank')" 
+                                style="background: #007bff; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 0.9em; margin-top: 8px; width: 100%;">
+                            احجز الباقة
+                        </button>
+                    </div>
+                    
+                    <!-- الباقة جولد -->
+                    <div style="background: #fff9e8; padding: 12px; border-radius: 10px; border: 2px solid #ffc107; min-width: 200px;">
+                        <div style="font-weight: bold; color: #e6a700;">🟡 جولد - 17 دينار</div>
+                        <div style="font-size: 0.9em; color: #555; margin-top: 5px;">
+                            + تنظيف محرك + تلميع فرش + توصيل
+                        </div>
+                        <button onclick="window.open('https://wa.me/962790782004?text=🧼 أريد حجز باقة غسيل جولد - 17 دينار', '_blank')" 
+                                style="background: #ffc107; color: black; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 0.9em; margin-top: 8px; width: 100%; font-weight: bold;">
+                            احجز الباقة
+                        </button>
                     </div>
                 </div>
+            </div>
+            <span class="service-status status-available">متوفر</span>
+        </div>
 
+        <!-- باقي خدمات السيارات تحت التطوير -->
+        <div class="service-item">
+            <span class="service-icon">🔧</span>
+            <span class="service-name">صيانة محركات وميكانيكا (فحص - إصلاح - صيانة دورية)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">⚡</span>
+            <span class="service-name">صيانة كهرباء السيارات (بطاريات - أنظمة كهربائية)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🎨</span>
+            <span class="service-name">خدمة دهان السيارات (تصليح خدوش - دهان كامل)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🛢️</span>
+            <span class="service-name">تغيير زيت وفلتر (زيت محرك - فلتر هواء - فلتر زيت)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🛋️</span>
+            <span class="service-name">تلميع فرش وديكور داخلي (تنظيف - تعطير - صيانة)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🚛</span>
+            <span class="service-name">خدمة سحب السيارات (طوارئ - نقل - إنقاذ)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🚗</span>
+            <span class="service-name">خدمة إطارات (تغيير - تصليح - توازن)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">⛽</span>
+            <span class="service-name">خدمة وقود متنقلة (توصيل وقود - طوارئ)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🔄</span>
+            <span class="service-name">سيارة بديلة مؤمنة (أثناء الصيانة - مؤقتة)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🛣️</span>
+            <span class="service-name">طوارئ طريق سريعة (24/7 - خدمة فورية)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🔩</span>
+            <span class="service-name">توصيل قطع غيار (سريع - جميع الماركات)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🛡️</span>
+            <span class="service-name">تركيب أنظمة حماية (إنذار - كاميرات - تتبع)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🔍</span>
+            <span class="service-name">فحص فني شامل (ما قبل الشراء - دوري)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+    </div>
+</div>
                 <!-- القسم 3 - الخدمات اللوجستية -->
                 <div class="section-card ready" id="logistics" onclick="toggleSection(this)">
                     <div class="section-header">
