@@ -787,6 +787,26 @@
         </div>
     </section>
 
+    <!-- شريط البحث الذكي -->
+<section style="background: white; padding: 40px 20px; direction: rtl; border-bottom: 1px solid #e0e0e0;">
+    <div style="max-width: 800px; margin: 0 auto;">
+        <div style="text-align: center; margin-bottom: 25px;">
+            <h3 style="color: #2c3e50; margin-bottom: 10px; font-size: 1.8em;">🔍 ابحث عن الخدمة التي تحتاجها</h3>
+            <p style="color: #7f8c8d; font-size: 1.1em;">ابحث بين 103 خدمة متوفرة في منصتنا</p>
+        </div>
+        <div style="position: relative;">
+            <input type="text" id="serviceSearch" 
+                   placeholder="اكتب اسم الخدمة... (مثال: كهرباء، سباكة، غسيل سيارات)" 
+                   style="width: 100%; padding: 15px 50px 15px 20px; border: 2px solid #e0e0e0; border-radius: 25px; font-size: 1.1em; direction: rtl; transition: all 0.3s ease;"
+                   onkeyup="searchServices()"
+                   onfocus="this.style.borderColor='#2563eb'; this.style.boxShadow='0 0 0 3px rgba(37, 99, 235, 0.1)';"
+                   onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none';">
+            <span style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #7f8c8d; font-size: 1.2em;">🔍</span>
+        </div>
+        <div id="searchResults" style="display: none; margin-top: 10px; background: white; border: 1px solid #e0e0e0; border-radius: 15px; max-height: 300px; overflow-y: auto; box-shadow: 0 5px 20px rgba(0,0,0,0.1); z-index: 1000; position: relative;"></div>
+    </div>
+</section>
+    
     <!-- Main Services Sections -->
     <section class="main-sections">
         <div class="container">
@@ -1268,7 +1288,151 @@
             </div>
         </div>
     </footer>
+    
+// ===== نظام البحث الذكي =====
+function searchServices() {
+    const input = document.getElementById('serviceSearch');
+    const filter = input.value.trim().toLowerCase();
+    const resultsContainer = document.getElementById('searchResults');
+    
+    // إخفاء النتائج إذا البحث أقل من حرفين
+    if (filter.length < 2) {
+        resultsContainer.style.display = 'none';
+        return;
+    }
 
+    // قائمة جميع الخدمات المتوفرة
+    const allServices = [
+        // الخدمات المنزلية
+        {name: 'صيانة كهرباء منزلية', category: 'الخدمات المنزلية', icon: '🔧'},
+        {name: 'خدمات سباكة شاملة', category: 'الخدمات المنزلية', icon: '🚰'},
+        {name: 'صيانة تكييف وتبريد', category: 'الخدمات المنزلية', icon: '❄️'},
+        {name: 'تعقيم منازل احترافي', category: 'الخدمات المنزلية', icon: '🧹'},
+        {name: 'صيانة أجهزة منزلية', category: 'الخدمات المنزلية', icon: '🏠'},
+        {name: 'صيانة نجارة الألمنيوم', category: 'الخدمات المنزلية', icon: '🔨'},
+        {name: 'تنظيف مفروشات وسجاد', category: 'الخدمات المنزلية', icon: '🧽'},
+        {name: 'تنظيف خزانات مياه', category: 'الخدمات المنزلية', icon: '💧'},
+        {name: 'مكافحة حشرات وقوارض', category: 'الخدمات المنزلية', icon: '🐜'},
+        {name: 'تنظيف مسابح وصيانتها', category: 'الخدمات المنزلية', icon: '🏊'},
+        {name: 'تركيب أنظمة ذكية', category: 'الخدمات المنزلية', icon: '🏡'},
+        {name: 'تركيب أنظمة طاقة شمسية', category: 'الخدمات المنزلية', icon: '☀️'},
+        {name: 'تنسيق وديكور داخلي', category: 'الخدمات المنزلية', icon: '🎨'},
+        {name: 'تركيب ستائر ومظلات', category: 'الخدمات المنزلية', icon: '🪟'},
+        {name: 'خدمة نقل وتغليف أثاث', category: 'الخدمات المنزلية', icon: '📦'},
+        {name: 'باقات الصيانة الدورية', category: 'الخدمات المنزلية', icon: '📋'},
+
+        // خدمات السيارات
+        {name: 'غسيل وتلميع السيارات', category: 'خدمات السيارات', icon: '🧼'},
+        {name: 'صيانة محركات وميكانيكا', category: 'خدمات السيارات', icon: '🔧'},
+        {name: 'صيانة كهرباء السيارات', category: 'خدمات السيارات', icon: '⚡'},
+        {name: 'خدمة دهان السيارات', category: 'خدمات السيارات', icon: '🎨'},
+        {name: 'تغيير زيت وفلتر', category: 'خدمات السيارات', icon: '🛢️'},
+        {name: 'تلميع فرش وديكور داخلي', category: 'خدمات السيارات', icon: '🛋️'},
+        {name: 'خدمة سحب السيارات', category: 'خدمات السيارات', icon: '🚛'},
+        {name: 'خدمة إطارات', category: 'خدمات السيارات', icon: '🚗'},
+        {name: 'خدمة وقود متنقلة', category: 'خدمات السيارات', icon: '⛽'},
+        {name: 'سيارة بديلة مؤمنة', category: 'خدمات السيارات', icon: '🔄'},
+        {name: 'طوارئ طريق سريعة', category: 'خدمات السيارات', icon: '🛣️'},
+        {name: 'توصيل قطع غيار', category: 'خدمات السيارات', icon: '🔩'},
+        {name: 'تركيب أنظمة حماية', category: 'خدمات السيارات', icon: '🛡️'},
+        {name: 'فحص فني شامل', category: 'خدمات السيارات', icon: '🔍'},
+
+        // الخدمات اللوجستية
+        {name: 'نقل أثاث منزلي', category: 'الخدمات اللوجستية', icon: '📦'},
+        {name: 'نقل مكاتب وشركات', category: 'الخدمات اللوجستية', icon: '🏢'},
+        {name: 'توصيل طلبات سريعة', category: 'الخدمات اللوجستية', icon: '🚚'},
+        {name: 'نقل بضائع وتجارة', category: 'الخدمات اللوجستية', icon: '📦'},
+        {name: 'خدمة نقل مبردة', category: 'الخدمات اللوجستية', icon: '❄️'},
+        {name: 'تأجير شاحنات وسيارات', category: 'الخدمات اللوجستية', icon: '🚗'},
+        {name: 'خدمات تخزين ومستودعات', category: 'الخدمات اللوجستية', icon: '🏪'},
+        {name: 'نقل معدات ثقيلة', category: 'الخدمات اللوجستية', icon: '🏗️'},
+        {name: 'خدمات نقل دولية', category: 'الخدمات اللوجستية', icon: '🌍'},
+        {name: 'تتبع شحنات مباشر', category: 'الخدمات اللوجستية', icon: '📍'},
+        {name: 'خدمة تأمين على البضائع', category: 'الخدمات اللوجستية', icon: '🛡️'},
+        {name: 'استشارات لوجستية', category: 'الخدمات اللوجستية', icon: '📊'}
+    ];
+
+    // تصفية الخدمات حسب البحث
+    const filteredServices = allServices.filter(service => 
+        service.name.toLowerCase().includes(filter) || 
+        service.category.toLowerCase().includes(filter)
+    );
+
+    // عرض النتائج
+    if (filteredServices.length > 0) {
+        resultsContainer.innerHTML = filteredServices.map(service => 
+            `<div style="padding: 15px 20px; border-bottom: 1px solid #f8f9fa; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px;" 
+                  onclick="selectService('${service.name}')"
+                  onmouseover="this.style.background='#f8fafc'" 
+                  onmouseout="this.style.background='white'">
+                <span style="font-size: 1.3em;">${service.icon}</span>
+                <div style="flex: 1;">
+                    <div style="font-weight: 600; color: #2c3e50;">${service.name}</div>
+                    <div style="font-size: 0.85em; color: #7f8c8d; margin-top: 3px;">${service.category}</div>
+                </div>
+                <span style="color: #2563eb; font-size: 0.9em;">↵</span>
+            </div>`
+        ).join('');
+        resultsContainer.style.display = 'block';
+    } else {
+        resultsContainer.innerHTML = `
+            <div style="padding: 30px 20px; text-align: center; color: #7f8c8d;">
+                <div style="font-size: 2em; margin-bottom: 10px;">🔍</div>
+                <div>لم نعثر على خدمات تطابق بحثك</div>
+                <div style="font-size: 0.9em; margin-top: 8px;">جرب استخدام كلمات أخرى</div>
+            </div>`;
+        resultsContainer.style.display = 'block';
+    }
+}
+
+// تحديد خدمة من نتائج البحث
+function selectService(serviceName) {
+    document.getElementById('serviceSearch').value = serviceName;
+    document.getElementById('searchResults').style.display = 'none';
+    
+    // البحث عن القسم المناسب وفتحه
+    const sections = document.querySelectorAll('.section-card, .emergency-card');
+    let found = false;
+    
+    sections.forEach(section => {
+        if (section.textContent.includes(serviceName) && !found) {
+            // فتح القسم إذا كان مغلق
+            if (!section.classList.contains('active')) {
+                section.click();
+            }
+            // التمرير للقسم
+            section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // إضافة تأثير تمييز مؤقت
+            section.style.boxShadow = '0 0 0 3px rgba(37, 99, 235, 0.3)';
+            setTimeout(() => {
+                section.style.boxShadow = '';
+            }, 2000);
+            
+            found = true;
+        }
+    });
+}
+
+// إغلاق نتائج البحث عند النقر خارجها
+document.addEventListener('click', function(event) {
+    const searchContainer = document.getElementById('searchResults');
+    const searchInput = document.getElementById('serviceSearch');
+    
+    if (!searchContainer.contains(event.target) && event.target !== searchInput) {
+        searchContainer.style.display = 'none';
+    }
+});
+
+// البحث عند الضغط على Enter
+document.getElementById('serviceSearch').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        const firstResult = document.querySelector('#searchResults div');
+        if (firstResult) {
+            firstResult.click();
+        }
+    }
+});
     <script>
         // إدارة القائمة الجانبية
         const menuToggle = document.getElementById('menuToggle');
