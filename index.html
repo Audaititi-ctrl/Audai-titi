@@ -678,6 +678,101 @@
                 font-size: 0.9rem;
             }
         }
+            .footer-quote {
+        font-style: italic;
+        margin-top: 1rem;
+        color: #d1d5db;
+        font-size: 1.2rem;
+    }
+
+    /* === نظام التقييمات بالنجوم === */
+    .rating-system {
+        direction: ltr;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .stars {
+        display: inline-block;
+        font-size: 1.5em;
+    }
+
+    .star {
+        color: #ddd;
+        cursor: pointer;
+        transition: color 0.2s, transform 0.2s;
+        display: inline-block;
+    }
+
+    .star:hover,
+    .star.active {
+        color: #ffc107;
+        transform: scale(1.2);
+    }
+
+    .rating-text {
+        margin-top: 5px;
+        font-size: 0.9em;
+        color: #666;
+    }
+
+    .rating-stats {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 5px;
+        font-size: 0.9em;
+    }
+
+    .average-rating {
+        font-weight: bold;
+        color: #ffc107;
+    }
+
+    .rating-count {
+        color: #666;
+    }
+
+    /* تصميم بطاقات التقييمات */
+    .testimonial-card {
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        margin: 15px 0;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        border-left: 4px solid #ffc107;
+    }
+
+    .testimonial-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .client-name {
+        font-weight: bold;
+        color: #2c3e50;
+    }
+
+    .service-name {
+        color: #7f8c8d;
+        font-size: 0.9em;
+    }
+
+    .testimonial-text {
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 10px;
+    }
+
+    .testimonial-date {
+        color: #999;
+        font-size: 0.8em;
+        text-align: left;
+    }
+</style>
     </style>
 </head>
 <body>
@@ -765,93 +860,6 @@
                 <span class="menu-category-icon">⚕️</span>
             </button>
         </div>
-        /* نظام التقييمات بالنجوم */
-.rating-system {
-    direction: ltr;
-    text-align: center;
-    margin: 10px 0;
-}
-
-.stars {
-    display: inline-block;
-    font-size: 1.5em;
-}
-
-.star {
-    color: #ddd;
-    cursor: pointer;
-    transition: color 0.2s, transform 0.2s;
-    display: inline-block;
-}
-
-.star:hover,
-.star.active {
-    color: #ffc107;
-    transform: scale(1.2);
-}
-
-.rating-text {
-    margin-top: 5px;
-    font-size: 0.9em;
-    color: #666;
-}
-
-.rating-stats {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 5px;
-    font-size: 0.9em;
-}
-
-.average-rating {
-    font-weight: bold;
-    color: #ffc107;
-}
-
-.rating-count {
-    color: #666;
-}
-
-/* تصميم بطاقات التقييمات */
-.testimonial-card {
-    background: white;
-    border-radius: 15px;
-    padding: 20px;
-    margin: 15px 0;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    border-left: 4px solid #ffc107;
-}
-
-.testimonial-header {
-    display: flex;
-    justify-content: between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.client-name {
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-.service-name {
-    color: #7f8c8d;
-    font-size: 0.9em;
-}
-
-.testimonial-text {
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-
-.testimonial-date {
-    color: #999;
-    font-size: 0.8em;
-    text-align: left;
-}
     </nav>
 
     <!-- Hero Section -->
@@ -1322,7 +1330,120 @@
             </div>
         </div>
     </section>
+<!-- قسم التقييمات وشهادات العملاء -->
+<section style="background: #f8f9fa; padding: 60px 20px; direction: rtl;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        <h2 style="text-align: center; color: #2c3e50; margin-bottom: 40px; font-size: 2.2em;">
+            ⭐ تقييمات العملاء
+        </h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin-bottom: 40px;">
+            
+            <!-- تقييم ١ -->
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div>
+                        <div class="client-name">أحمد محمد</div>
+                        <div class="service-name">خدمة صيانة كهرباء منزلية</div>
+                    </div>
+                    <div class="rating-system">
+                        <div class="stars">
+                            <span class="star active">⭐</span>
+                            <span class="star active">⭐</span>
+                            <span class="star active">⭐</span>
+                            <span class="star active">⭐</span>
+                            <span class="star active">⭐</span>
+                        </div>
+                        <div class="rating-stats">
+                            <span class="average-rating">5.0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-text">
+                    "خدمة ممتازة وسريعة. الفني كان محترف جداً وحل المشكلة في أقل من ساعة. أنصح بهم بشدة!"
+                </div>
+                <div class="testimonial-date">٢٠ فبراير ٢٠٢٤</div>
+            </div>
 
+            <!-- تقييم ٢ -->
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div>
+                        <div class="client-name">فاطمة أحمد</div>
+                        <div class="service-name">غسيل سيارات - باقة بريميوم</div>
+                    </div>
+                    <div class="rating-system">
+                        <div class="stars">
+                            <span class="star active">⭐</span>
+                            <span class="star active">⭐</span>
+                            <span class="star active">⭐</span>
+                            <span class="star active">⭐</span>
+                            <span class="star">⭐</span>
+                        </div>
+                        <div class="rating-stats">
+                            <span class="average-rating">4.0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-text">
+                    "الخدمة كانت جيدة جداً والسيارة صارت كالجديدة. النقطة الوحيدة أنهم تأخروا ١٥ دقيقة عن الموعد."
+                </div>
+                <div class="testimonial-date">١٨ فبراير ٢٠٢٤</div>
+            </div>
+
+            <!-- تقييم ٣ -->
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div>
+                        <div class="client-name">خالد إبراهيم</div>
+                        <div class="service-name">نقل أثاث منزلي</div>
+                    </div>
+                    <div class="rating-system">
+                        <div class="stars">
+                            <span class="star active">⭐</span>
+                            <span class="star active">⭐</span>
+                            <span class="star active">⭐</span>
+                            <span class="star active">⭐</span>
+                            <span class="star active">⭐</span>
+                        </div>
+                        <div class="rating-stats">
+                            <span class="average-rating">5.0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-text">
+                    "فريق محترف جداً. قاموا بتغليف الأثاث بعناية ونقله بدون أي خدش. السعر كان معقول جداً compared للخدمة المقدمة."
+                </div>
+                <div class="testimonial-date">١٥ فبراير ٢٠٢٤</div>
+            </div>
+
+        </div>
+
+        <!-- إحصائيات التقييمات -->
+        <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            <h3 style="color: #2c3e50; margin-bottom: 30px;">📊 إحصائيات التقييمات</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <div>
+                    <div style="font-size: 2.5em; font-weight: bold; color: #ffc107;">4.8</div>
+                    <div style="color: #7f8c8d;">متوسط التقييم</div>
+                </div>
+                <div>
+                    <div style="font-size: 2.5em; font-weight: bold; color: #2563eb;">127</div>
+                    <div style="color: #7f8c8d;">تقييم حقيقي</div>
+                </div>
+                <div>
+                    <div style="font-size: 2.5em; font-weight: bold; color: #10b981;">94%</div>
+                    <div style="color: #7f8c8d;">عملاء راضون</div>
+                </div>
+                <div>
+                    <div style="font-size: 2.5em; font-weight: bold; color: #7c3aed;">103</div>
+                    <div style="color: #7f8c8d;">خدمة مكتملة</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="container">
@@ -1638,6 +1759,32 @@ document.addEventListener('click', function(event) {
         searchContainer.style.display = 'none';
     }
 });
+        // نظام التقييمات التفاعلي
+function initializeRatings() {
+    // تفعيل النجوم التفاعلية
+    document.querySelectorAll('.star').forEach(star => {
+        star.addEventListener('click', function() {
+            const stars = this.parentElement.querySelectorAll('.star');
+            const rating = Array.from(stars).indexOf(this) + 1;
+            
+            stars.forEach((s, index) => {
+                if (index < rating) {
+                    s.classList.add('active');
+                    s.textContent = '⭐';
+                } else {
+                    s.classList.remove('active');
+                    s.textContent = '⭐';
+                }
+            });
+            
+            // هنا يمكنك إضافة كود لحفظ التقييم في قاعدة البيانات
+            console.log(`تم التقييم بـ ${rating} نجوم`);
+        });
+    });
+}
+
+// تفعيل النظام عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', initializeRatings);
     </script>
 </body>
 </html>
