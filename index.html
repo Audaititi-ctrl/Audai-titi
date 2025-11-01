@@ -1086,32 +1086,107 @@
         </div>
     </div>
 </div>
-                <!-- القسم 3 - الخدمات اللوجستية -->
-                <div class="section-card ready" id="logistics" onclick="toggleSection(this)">
-                    <div class="section-header">
-                        <div class="section-title-content">
-                            <div class="section-icon">🚚</div>
-                            <div class="section-name">الخدمات اللوجستية</div>
+<!-- قسم الخدمات اللوجستية - مع الباقة المرنة -->
+<div class="section-card ready" id="logistics" onclick="toggleSection(this)">
+    <div class="section-header">
+        <div class="section-title-content">
+            <div class="section-icon">🚚</div>
+            <div class="section-name">الخدمات اللوجستية</div>
+        </div>
+        <div class="section-right">
+            <span class="section-badge">12 خدمة</span>
+            <span class="section-arrow">▼</span>
+        </div>
+    </div>
+    <div class="services-list">
+        <!-- الخدمة المفعلة - نقل الأثاث -->
+        <div class="service-item">
+            <span class="service-icon">📦</span>
+            <div style="flex: 1;">
+                <div class="service-name">نقل أثاث منزلي</div>
+                <div style="display: flex; gap: 15px; margin-top: 10px; flex-wrap: wrap;">
+                    <!-- الباقة الموحدة -->
+                    <div style="background: #e8f5e8; padding: 15px; border-radius: 12px; border: 2px solid #28a745; min-width: 280px; flex: 1;">
+                        <div style="font-weight: bold; color: #28a745; font-size: 1.1em;">📦 باقة نقل الأثاث الشاملة</div>
+                        <div style="font-size: 0.95em; color: #555; margin-top: 8px; line-height: 1.5;">
+                            <div>✅ تغليف احترافي لكل القطع</div>
+                            <div>✅ نقل آمن بسيارات مجهزة</div>
+                            <div>✅ تركيب في المكان الجديد</div>
+                            <div>✅ فك وتغليف مجاني</div>
+                            <div>✅ تأمين على المحتويات</div>
                         </div>
-                        <div class="section-right">
-                            <span class="section-badge">12 خدمة</span>
-                            <span class="section-arrow">▼</span>
+                        <div style="margin-top: 10px; padding: 8px; background: #f8f9fa; border-radius: 8px; text-align: center;">
+                            <strong style="color: #e6a700;">السعر: 120 - 200 دينار</strong>
+                            <div style="font-size: 0.85em; color: #666;">(حسب حجم الشقة والمسافة)</div>
                         </div>
-                    </div>
-                    <div class="services-list">
-                        <div class="service-item">
-                            <span class="service-icon">📦</span>
-                            <span class="service-name">نقل أثاث منزلي (تغليف - نقل - تركيب)</span>
-                            <span class="service-status status-available">متوفر</span>
-                            <div class="service-actions">
-                                <a href="https://wa.me/962790782004?text=📦 أريد حجز خدمة نقل الأثاث" 
-                                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
-                                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
-                            </div>
-                        </div>
-                        <!-- باقي الخدمات اللوجستية -->
+                        <button onclick="window.open('https://wa.me/962790782004?text=📦 أريد استفسار عن خدمة نقل الأثاث (120-200 دينار) - أود معرفة السعر النهائي لشقتي', '_blank')" 
+                                style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.95em; margin-top: 12px; width: 100%; font-weight: bold;">
+                            📞 احصل على سعر دقيق
+                        </button>
                     </div>
                 </div>
+            </div>
+            <span class="service-status status-available">متوفر</span>
+        </div>
+
+        <!-- باقي خدمات اللوجستيات تحت التطوير -->
+        <div class="service-item">
+            <span class="service-icon">🏢</span>
+            <span class="service-name">نقل مكاتب وشركات (معدات - أجهزة - أثاث)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🚚</span>
+            <span class="service-name">توصيل طلبات سريعة (طعام - مستندات - طرود)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">📦</span>
+            <span class="service-name">نقل بضائع وتجارة (تخزين - توزيع - توصيل)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">❄️</span>
+            <span class="service-name">خدمة نقل مبردة (أغذية - أدوية - مواد طازجة)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🚗</span>
+            <span class="service-name">تأجير شاحنات وسيارات (يومي - شهري - سنوي)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🏪</span>
+            <span class="service-name">خدمات تخزين ومستودعات (قصير الأجل - طويل الأجل)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🏗️</span>
+            <span class="service-name">نقل معدات ثقيلة (آلات - معدات صناعية)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🌍</span>
+            <span class="service-name">خدمات نقل دولية (برية - جوية - بحرية)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">📍</span>
+            <span class="service-name">تتبع شحنات مباشر (GPS - تحديثات لحظية)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">🛡️</span>
+            <span class="service-name">خدمة تأمين على البضائع (كامل - جزئي)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+        <div class="service-item">
+            <span class="service-icon">📊</span>
+            <span class="service-name">استشارات لوجستية (تحسين مسارات - توفير تكاليف)</span>
+            <span class="service-status status-development">قيد التطوير</span>
+        </div>
+    </div>
+</div>
 
                 <!-- الأقسام تحت التطوير -->
                 <div class="section-card development" id="tech-services" onclick="toggleSection(this)">
