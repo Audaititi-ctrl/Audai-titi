@@ -684,94 +684,306 @@
         color: #d1d5db;
         font-size: 1.2rem;
     }
+/* === نظام التقييمات المتطور === */
+.testimonials-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 80px 20px;
+    direction: rtl;
+}
 
-    /* === نظام التقييمات بالنجوم === */
-    .rating-system {
-        direction: ltr;
-        text-align: center;
-        margin: 10px 0;
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto 50px;
+}
+
+.testimonial-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    border-color: #667eea;
+}
+
+.testimonial-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    gap: 15px;
+}
+
+.client-info {
+    flex: 1;
+}
+
+.client-name {
+    font-weight: 700;
+    color: #2d3748;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.service-name {
+    color: #718096;
+    font-size: 0.9em;
+}
+
+.rating-display {
+    direction: ltr;
+    text-align: left;
+}
+
+.stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 5px;
+}
+
+.star {
+    color: #ffd700;
+    font-size: 1.2em;
+}
+
+.rating-value {
+    font-weight: 600;
+    color: #2d3748;
+    font-size: 0.9em;
+}
+
+.testimonial-text {
+    color: #4a5568;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-size: 1em;
+}
+
+.testimonial-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.like-btn, .comment-btn {
+    background: none;
+    border: none;
+    color: #718096;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9em;
+}
+
+.like-btn:hover, .comment-btn:hover {
+    background: #f7fafc;
+    color: #4a5568;
+}
+
+.like-btn.liked {
+    color: #e53e3e;
+}
+
+.like-btn.liked:hover {
+    background: #fed7d7;
+}
+
+.testimonial-date {
+    color: #a0aec0;
+    font-size: 0.8em;
+}
+
+/* إحصائيات التقييمات */
+.rating-stats {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.stat-item {
+    padding: 20px;
+}
+
+.stat-number {
+    font-size: 3em;
+    font-weight: 800;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stat-label {
+    color: #718096;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+/* تفاعلات التعليقات */
+.comments-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.comment {
+    padding: 15px;
+    background: #f7fafc;
+    border-radius: 12px;
+    margin-bottom: 10px;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.comment-author {
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.comment-text {
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+.add-comment {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.comment-input {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    resize: vertical;
+    min-height: 60px;
+    font-family: inherit;
+}
+
+.submit-comment {
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.submit-comment:hover {
+    background: #5a6fd8;
+}
+
+/* تحسينات للجوال */
+@media (max-width: 768px) {
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
-
-    .stars {
-        display: inline-block;
-        font-size: 1.5em;
-    }
-
-    .star {
-        color: #ddd;
-        cursor: pointer;
-        transition: color 0.2s, transform 0.2s;
-        display: inline-block;
-    }
-
-    .star:hover,
-    .star.active {
-        color: #ffc107;
-        transform: scale(1.2);
-    }
-
-    .rating-text {
-        margin-top: 5px;
-        font-size: 0.9em;
-        color: #666;
-    }
-
-    .rating-stats {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 5px;
-        font-size: 0.9em;
-    }
-
-    .average-rating {
-        font-weight: bold;
-        color: #ffc107;
-    }
-
-    .rating-count {
-        color: #666;
-    }
-
-    /* تصميم بطاقات التقييمات */
+    
     .testimonial-card {
-        background: white;
-        border-radius: 15px;
         padding: 20px;
-        margin: 15px 0;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        border-left: 4px solid #ffc107;
+        margin: 0 10px;
     }
-
+    
     .testimonial-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
+        flex-direction: column;
+        align-items: flex-start;
     }
+    
+    .rating-display {
+        align-self: flex-start;
+    }
+    
+    .testimonial-actions {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .action-buttons {
+        width: 100%;
+        justify-content: space-around;
+    }
+    
+    .rating-stats {
+        padding: 30px 20px;
+        margin: 0 10px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .stat-number {
+        font-size: 2.5em;
+    }
+}
 
-    .client-name {
-        font-weight: bold;
-        color: #2c3e50;
+@media (max-width: 480px) {
+    .testimonials-section {
+        padding: 60px 15px;
     }
-
-    .service-name {
-        color: #7f8c8d;
-        font-size: 0.9em;
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
     }
-
-    .testimonial-text {
-        color: #555;
-        line-height: 1.6;
-        margin-bottom: 10px;
+    
+    .testimonial-card {
+        padding: 15px;
     }
-
-    .testimonial-date {
-        color: #999;
-        font-size: 0.8em;
-        text-align: left;
+    
+    .add-comment {
+        flex-direction: column;
     }
+}
 </style>
     </style>
 </head>
@@ -1330,114 +1542,160 @@
             </div>
         </div>
     </section>
-<!-- قسم التقييمات وشهادات العملاء -->
-<section style="background: #f8f9fa; padding: 60px 20px; direction: rtl;">
+<!-- قسم التقييمات المتطور -->
+<section class="testimonials-section">
     <div style="max-width: 1200px; margin: 0 auto;">
-        <h2 style="text-align: center; color: #2c3e50; margin-bottom: 40px; font-size: 2.2em;">
-            ⭐ تقييمات العملاء
+        <h2 style="text-align: center; color: #2d3748; margin-bottom: 20px; font-size: 2.5em;">
+            ⭐ ماذا يقول عملاؤنا؟
         </h2>
+        <p style="text-align: center; color: #718096; font-size: 1.2em; margin-bottom: 60px; max-width: 600px; margin-right: auto; margin-left: auto;">
+            انضم إلى <strong style="color: #667eea;">+127</strong> عميلاً راضياً عن خدماتنا المميزة
+        </p>
         
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; margin-bottom: 40px;">
+        <div class="testimonials-grid">
             
-            <!-- تقييم ١ -->
+            <!-- التقييم ١ -->
             <div class="testimonial-card">
                 <div class="testimonial-header">
-                    <div>
-                        <div class="client-name">أحمد محمد</div>
-                        <div class="service-name">خدمة صيانة كهرباء منزلية</div>
+                    <div class="client-info">
+                        <div class="client-name">جميل محمد</div>
+                        <div class="service-name">صيانة كهرباء منزلية</div>
                     </div>
-                    <div class="rating-system">
+                    <div class="rating-display">
                         <div class="stars">
-                            <span class="star active">⭐</span>
-                            <span class="star active">⭐</span>
-                            <span class="star active">⭐</span>
-                            <span class="star active">⭐</span>
-                            <span class="star active">⭐</span>
-                        </div>
-                        <div class="rating-stats">
-                            <span class="average-rating">5.0</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-text">
-                    "خدمة ممتازة وسريعة. الفني كان محترف جداً وحل المشكلة في أقل من ساعة. أنصح بهم بشدة!"
-                </div>
-                <div class="testimonial-date">٢٠ فبراير ٢٠٢٤</div>
-            </div>
-
-            <!-- تقييم ٢ -->
-            <div class="testimonial-card">
-                <div class="testimonial-header">
-                    <div>
-                        <div class="client-name">فاطمة أحمد</div>
-                        <div class="service-name">غسيل سيارات - باقة بريميوم</div>
-                    </div>
-                    <div class="rating-system">
-                        <div class="stars">
-                            <span class="star active">⭐</span>
-                            <span class="star active">⭐</span>
-                            <span class="star active">⭐</span>
-                            <span class="star active">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
                             <span class="star">⭐</span>
                         </div>
-                        <div class="rating-stats">
-                            <span class="average-rating">4.0</span>
-                        </div>
+                        <div class="rating-value">5.0</div>
                     </div>
                 </div>
                 <div class="testimonial-text">
-                    "الخدمة كانت جيدة جداً والسيارة صارت كالجديدة. النقطة الوحيدة أنهم تأخروا ١٥ دقيقة عن الموعد."
+                    "خدمة ممتازة وسريعة. الفني كان محترف جداً وحل المشكلة في أقل من ساعة. الدقة في الموعد والاحترافية في العمل جعلتني أوصي بهم لكل أصدقائي!"
                 </div>
-                <div class="testimonial-date">١٨ فبراير ٢٠٢٤</div>
+                <div class="testimonial-actions">
+                    <div class="action-buttons">
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <span>❤️</span>
+                            <span class="like-count">12</span>
+                        </button>
+                        <button class="comment-btn" onclick="toggleComments(this)">
+                            <span>💬</span>
+                            <span>تعليق</span>
+                        </button>
+                    </div>
+                    <div class="testimonial-date">منذ ٣ أيام</div>
+                </div>
+                
+                <!-- قسم التعليقات -->
+                <div class="comments-section" style="display: none;">
+                    <div class="comment">
+                        <div class="comment-header">
+                            <span class="comment-author">فاطمة</span>
+                        </div>
+                        <div class="comment-text">أحتاج نفس الخدمة، ممكن رقم الفني؟</div>
+                    </div>
+                    <div class="add-comment">
+                        <textarea class="comment-input" placeholder="اكتب تعليقك..."></textarea>
+                        <button class="submit-comment" onclick="addComment(this)">إرسال</button>
+                    </div>
+                </div>
             </div>
 
-            <!-- تقييم ٣ -->
+            <!-- التقييم ٢ -->
             <div class="testimonial-card">
                 <div class="testimonial-header">
-                    <div>
+                    <div class="client-info">
+                        <div class="client-name">فاطمة عيسى</div>
+                        <div class="service-name">غسيل سيارات - باقة بريميوم</div>
+                    </div>
+                    <div class="rating-display">
+                        <div class="stars">
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span style="color: #e2e8f0;">⭐</span>
+                        </div>
+                        <div class="rating-value">4.0</div>
+                    </div>
+                </div>
+                <div class="testimonial-text">
+                    "الخدمة كانت جيدة جداً والسيارة صارت كالجديدة. فريق العمل متعاون ورغم تأخرهم ١٥ دقيقة إلا أنهم اعتذروا وقدمولي خصم على الخدمة القادمة."
+                </div>
+                <div class="testimonial-actions">
+                    <div class="action-buttons">
+                        <button class="like-btn" onclick="toggleLike(this)">
+                            <span>❤️</span>
+                            <span class="like-count">8</span>
+                        </button>
+                        <button class="comment-btn" onclick="toggleComments(this)">
+                            <span>💬</span>
+                            <span>تعليق</span>
+                        </button>
+                    </div>
+                    <div class="testimonial-date">منذ أسبوع</div>
+                </div>
+            </div>
+
+            <!-- التقييم ٣ -->
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="client-info">
                         <div class="client-name">خالد إبراهيم</div>
                         <div class="service-name">نقل أثاث منزلي</div>
                     </div>
-                    <div class="rating-system">
+                    <div class="rating-display">
                         <div class="stars">
-                            <span class="star active">⭐</span>
-                            <span class="star active">⭐</span>
-                            <span class="star active">⭐</span>
-                            <span class="star active">⭐</span>
-                            <span class="star active">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
                         </div>
-                        <div class="rating-stats">
-                            <span class="average-rating">5.0</span>
-                        </div>
+                        <div class="rating-value">5.0</div>
                     </div>
                 </div>
                 <div class="testimonial-text">
-                    "فريق محترف جداً. قاموا بتغليف الأثاث بعناية ونقله بدون أي خدش. السعر كان معقول جداً compared للخدمة المقدمة."
+                    "ما شاء الله فريق محترف جداً. قاموا بتغليف الأثاث بعناية فائقة ونقله بدون أي خدش. السعر كان معقول جداً مقارنة بالجودة العالية. أنصح بهم وبقوة!"
                 </div>
-                <div class="testimonial-date">١٥ فبراير ٢٠٢٤</div>
+                <div class="testimonial-actions">
+                    <div class="action-buttons">
+                        <button class="like-btn liked" onclick="toggleLike(this)">
+                            <span>❤️</span>
+                            <span class="like-count">23</span>
+                        </button>
+                        <button class="comment-btn" onclick="toggleComments(this)">
+                            <span>💬</span>
+                            <span>تعليق</span>
+                        </button>
+                    </div>
+                    <div class="testimonial-date">منذ ٥ أيام</div>
+                </div>
             </div>
 
         </div>
 
-        <!-- إحصائيات التقييمات -->
-        <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-            <h3 style="color: #2c3e50; margin-bottom: 30px;">📊 إحصائيات التقييمات</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                <div>
-                    <div style="font-size: 2.5em; font-weight: bold; color: #ffc107;">4.8</div>
-                    <div style="color: #7f8c8d;">متوسط التقييم</div>
+        <!-- إحصائيات مذهلة -->
+        <div class="rating-stats">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">4.8</div>
+                    <div class="stat-label">متوسط التقييم</div>
                 </div>
-                <div>
-                    <div style="font-size: 2.5em; font-weight: bold; color: #2563eb;">127</div>
-                    <div style="color: #7f8c8d;">تقييم حقيقي</div>
+                <div class="stat-item">
+                    <div class="stat-number">127</div>
+                    <div class="stat-label">تقييم حقيقي</div>
                 </div>
-                <div>
-                    <div style="font-size: 2.5em; font-weight: bold; color: #10b981;">94%</div>
-                    <div style="color: #7f8c8d;">عملاء راضون</div>
+                <div class="stat-item">
+                    <div class="stat-number">94%</div>
+                    <div class="stat-label">عملاء راضون</div>
                 </div>
-                <div>
-                    <div style="font-size: 2.5em; font-weight: bold; color: #7c3aed;">103</div>
-                    <div style="color: #7f8c8d;">خدمة مكتملة</div>
+                <div class="stat-item">
+                    <div class="stat-number">5m</div>
+                    <div class="stat-label">دقيقة توفير</div>
                 </div>
             </div>
         </div>
@@ -1759,32 +2017,93 @@ document.addEventListener('click', function(event) {
         searchContainer.style.display = 'none';
     }
 });
-        // نظام التقييمات التفاعلي
-function initializeRatings() {
-    // تفعيل النجوم التفاعلية
-    document.querySelectorAll('.star').forEach(star => {
-        star.addEventListener('click', function() {
-            const stars = this.parentElement.querySelectorAll('.star');
-            const rating = Array.from(stars).indexOf(this) + 1;
-            
-            stars.forEach((s, index) => {
-                if (index < rating) {
-                    s.classList.add('active');
-                    s.textContent = '⭐';
-                } else {
-                    s.classList.remove('active');
-                    s.textContent = '⭐';
-                }
-            });
-            
-            // هنا يمكنك إضافة كود لحفظ التقييم في قاعدة البيانات
-            console.log(`تم التقييم بـ ${rating} نجوم`);
-        });
-    });
+// ===== نظام التقييمات التفاعلي المتكامل =====
+function toggleLike(button) {
+    const likeCount = button.querySelector('.like-count');
+    let count = parseInt(likeCount.textContent);
+    
+    if (button.classList.contains('liked')) {
+        button.classList.remove('liked');
+        count--;
+    } else {
+        button.classList.add('liked');
+        count++;
+    }
+    
+    likeCount.textContent = count;
 }
 
-// تفعيل النظام عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', initializeRatings);
+function toggleComments(button) {
+    const card = button.closest('.testimonial-card');
+    const commentsSection = card.querySelector('.comments-section');
+    
+    if (commentsSection.style.display === 'none' || !commentsSection.style.display) {
+        commentsSection.style.display = 'block';
+        button.innerHTML = '<span>💬</span><span>إخفاء</span>';
+    } else {
+        commentsSection.style.display = 'none';
+        button.innerHTML = '<span>💬</span><span>تعليق</span>';
+    }
+}
+
+function addComment(button) {
+    const commentSection = button.closest('.comments-section');
+    const commentInput = commentSection.querySelector('.comment-input');
+    const commentText = commentInput.value.trim();
+    
+    if (commentText) {
+        const commentsContainer = commentSection.querySelector('.comments-section');
+        const newComment = document.createElement('div');
+        newComment.className = 'comment';
+        newComment.innerHTML = `
+            <div class="comment-header">
+                <span class="comment-author">أنت</span>
+            </div>
+            <div class="comment-text">${commentText}</div>
+        `;
+        
+        // إضافة التعليق في الأعلى
+        commentsContainer.insertBefore(newComment, commentsContainer.firstChild);
+        
+        // مسح حقل الإدخال
+        commentInput.value = '';
+        
+        // إظهار رسالة نجاح
+        alert('تم إضافة تعليقك بنجاح!');
+    }
+}
+
+// تفعيل التفاعلات عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('نظام التقييمات جاهز! 🚀');
+});
+                document.getElementById('serviceSearch').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const firstResult = document.querySelector('#searchResults div');
+                if (firstResult) {
+                    firstResult.click();
+                }
+            }
+        });
+
+        // ===== نظام التقييمات التفاعلي المتكامل =====
+        function toggleLike(button) {
+            const likeCount = button.querySelector('.like-count');
+            let count = parseInt(likeCount.textContent);
+            
+            if (button.classList.contains('liked')) {
+                button.classList.remove('liked');
+                count--;
+            } else {
+                button.classList.add('liked');
+                count++;
+            }
+            
+            likeCount.textContent = count;
+        }
+
+        // ... ضع كل كود JavaScript الجديد هنا ...
+        
     </script>
 </body>
 </html>
