@@ -3,20 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>راحة - المنصة الذكية للخدمات المتكاملة</title>
+    <title>راحة - المنصة الذكية للخدمات المتكاملة | SmartLife Hub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #2563eb;
+            --primary-dark: #1d4ed8;
             --secondary: #7c3aed;
+            --secondary-dark: #6d28d9;
             --accent: #f59e0b;
+            --accent-dark: #d97706;
             --emergency: #dc2626;
+            --emergency-dark: #b91c1c;
             --success: #10b981;
+            --success-dark: #059669;
             --warning: #f59e0b;
+            --warning-dark: #d97706;
             --future: #6b7280;
             --dark: #1f2937;
+            --darker: #111827;
             --light: #f8fafc;
+            --lighter: #ffffff;
+            --gray: #9ca3af;
+            --border: #e5e7eb;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-dark: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
         }
-        
+
         * {
             margin: 0;
             padding: 0;
@@ -25,10 +40,11 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
+            background: var(--light);
+            color: var(--dark);
             line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .container {
@@ -37,7 +53,7 @@
             padding: 0 20px;
         }
 
-        /* ===== HEADER ===== */
+        /* ===== HEADER & NAVIGATION ===== */
         .main-header {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
@@ -45,8 +61,9 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
             border-bottom: 3px solid var(--accent);
+            transition: all 0.3s ease;
         }
 
         .nav-container {
@@ -56,19 +73,33 @@
         }
 
         .logo {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             font-weight: bold;
             color: var(--primary);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            text-decoration: none;
         }
 
         .logo-icon {
-            font-size: 1.8rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            font-size: 2rem;
+            background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: pulse 2s infinite;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .logo-subtitle {
+            font-size: 0.7rem;
+            color: var(--gray);
+            font-weight: normal;
         }
 
         .menu-toggle {
@@ -76,9 +107,15 @@
             flex-direction: column;
             gap: 4px;
             cursor: pointer;
-            padding: 8px;
+            padding: 10px;
             background: none;
             border: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            background: var(--light);
         }
 
         .menu-toggle span {
@@ -89,18 +126,30 @@
             transition: all 0.3s ease;
         }
 
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
         /* ===== SIDEBAR MENU ===== */
         .sidebar-menu {
             position: fixed;
             top: 0;
             right: -400px;
-            width: 350px;
+            width: 380px;
             height: 100vh;
-            background: white;
+            background: var(--lighter);
             box-shadow: -5px 0 30px rgba(0,0,0,0.15);
-            transition: right 0.3s ease;
+            transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 2000;
-            padding: 80px 30px 30px;
+            padding: 100px 30px 30px;
             overflow-y: auto;
         }
 
@@ -117,6 +166,7 @@
             height: 100%;
             background: rgba(0,0,0,0.5);
             z-index: 1500;
+            backdrop-filter: blur(5px);
         }
 
         .menu-overlay.active {
@@ -125,16 +175,22 @@
 
         .menu-category {
             margin-bottom: 15px;
-            border: 2px solid #f1f5f9;
-            border-radius: 12px;
+            border: 2px solid var(--border);
+            border-radius: 15px;
             overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-category:hover {
+            border-color: var(--primary);
+            transform: translateX(-5px);
         }
 
         .menu-category-btn {
             width: 100%;
-            background: #f8fafc;
+            background: var(--light);
             border: none;
-            padding: 18px 20px;
+            padding: 20px;
             text-align: right;
             font-weight: 600;
             color: var(--dark);
@@ -158,36 +214,53 @@
 
         /* ===== HERO SECTION ===== */
         .hero-section {
-            padding: 120px 0 80px;
+            padding: 140px 0 100px;
             color: white;
             text-align: center;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
+            background: var(--gradient);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.1"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
         }
 
         .hero-title {
-            font-size: 2.8rem;
+            font-size: 3.2rem;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            position: relative;
         }
 
         .hero-subtitle {
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin-bottom: 2rem;
             opacity: 0.95;
             font-weight: 600;
+            position: relative;
         }
 
         .hero-mission {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 2rem;
             opacity: 0.9;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 25px;
-            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 20px;
             backdrop-filter: blur(10px);
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto 2rem;
             line-height: 1.8;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .hero-values {
@@ -196,32 +269,326 @@
             gap: 20px;
             flex-wrap: wrap;
             margin-top: 2rem;
+            position: relative;
         }
 
         .value-tag {
             background: rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 25px;
             font-weight: 600;
             backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .value-tag:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* ===== AI ASSISTANT ===== */
+        .ai-assistant {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 1000;
+        }
+
+        .ai-toggle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ai-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .ai-panel {
+            position: absolute;
+            bottom: 80px;
+            left: 0;
+            width: 350px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            padding: 20px;
+            display: none;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .ai-panel.active {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .ai-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .ai-title {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .ai-status {
+            font-size: 0.8rem;
+            color: var(--success);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .ai-status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+        }
+
+        .ai-message {
+            background: var(--light);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .ai-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .ai-action {
+            padding: 10px;
+            background: var(--light);
+            border: none;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .ai-action:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* ===== SMART SEARCH ===== */
+        .smart-search-section {
+            background: white;
+            padding: 50px 20px;
+            direction: rtl;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .search-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .search-title {
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .search-subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 18px 60px 18px 20px;
+            border: 2px solid var(--border);
+            border-radius: 30px;
+            font-size: 1.1rem;
+            direction: rtl;
+            transition: all 0.3s ease;
+            background: var(--light);
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            background: white;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            font-size: 1.3rem;
+        }
+
+        .search-results {
+            display: none;
+            margin-top: 10px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            position: relative;
+        }
+
+        .search-results.active {
+            display: block;
+        }
+
+        .results-header {
+            padding: 15px 20px;
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .result-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .result-item:hover {
+            background: var(--light);
+            transform: translateX(-5px);
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .result-content {
+            flex: 1;
+        }
+
+        .result-name {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .result-category {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .result-badge {
+            color: var(--primary);
+            font-size: 0.8rem;
+            background: #f0f4ff;
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .no-results {
+            padding: 40px 20px;
+            text-align: center;
+            color: var(--gray);
+        }
+
+        .no-results-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            opacity: 0.5;
         }
 
         /* ===== MAIN SECTIONS ===== */
         .main-sections {
             padding: 80px 0;
-            background: white;
+            background: var(--light);
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 3rem;
             color: var(--dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
         }
 
         .sections-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
             gap: 30px;
         }
 
@@ -229,10 +596,16 @@
         .emergency-card {
             background: white;
             border: 3px solid var(--emergency);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-radius: 25px;
+            box-shadow: var(--shadow);
             overflow: hidden;
             grid-column: 1 / -1;
+            transition: all 0.3s ease;
+        }
+
+        .emergency-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
         .emergency-header {
@@ -243,6 +616,11 @@
             align-items: center;
             background: #fef2f2;
             border-bottom: 2px solid #fecaca;
+            transition: all 0.3s ease;
+        }
+
+        .emergency-header:hover {
+            background: #fee2e2;
         }
 
         .emergency-title-content {
@@ -252,24 +630,31 @@
         }
 
         .emergency-icon {
-            font-size: 2.2rem;
-            width: 60px;
-            height: 60px;
+            font-size: 2.5rem;
+            width: 70px;
+            height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 15px;
+            border-radius: 20px;
             background: rgba(220, 38, 38, 0.15);
+            animation: pulse 2s infinite;
         }
 
         .emergency-name {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--emergency);
         }
 
+        .emergency-subtitle {
+            font-size: 1rem;
+            color: var(--emergency-dark);
+            margin-top: 5px;
+        }
+
         .emergency-arrow {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             transition: transform 0.3s ease;
             color: var(--emergency);
         }
@@ -302,15 +687,15 @@
         }
 
         .emergency-service-icon {
-            font-size: 1.6rem;
-            width: 40px;
+            font-size: 1.8rem;
+            width: 50px;
             text-align: center;
         }
 
         .emergency-service-name {
             flex: 1;
             color: var(--dark);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
         }
 
@@ -322,8 +707,8 @@
         /* ===== REGULAR CARDS ===== */
         .section-card {
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-radius: 25px;
+            box-shadow: var(--shadow);
             transition: all 0.3s ease;
             border: 3px solid transparent;
             overflow: hidden;
@@ -335,7 +720,7 @@
 
         .section-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            box-shadow: var(--shadow-lg);
         }
 
         .section-header {
@@ -344,8 +729,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: #f8fafc;
-            border-bottom: 2px solid #e5e7eb;
+            background: var(--light);
+            border-bottom: 2px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .section-header:hover {
+            background: #f0f4ff;
         }
 
         .section-title-content {
@@ -355,13 +745,13 @@
         }
 
         .section-icon {
-            font-size: 2.2rem;
-            width: 60px;
-            height: 60px;
+            font-size: 2.5rem;
+            width: 70px;
+            height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 15px;
+            border-radius: 20px;
         }
 
         .ready .section-icon { background: rgba(16, 185, 129, 0.15); }
@@ -369,15 +759,21 @@
         .future .section-icon { background: rgba(107, 114, 128, 0.15); }
 
         .section-name {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             font-weight: 700;
             color: var(--dark);
         }
 
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+
         .section-badge {
-            padding: 8px 16px;
+            padding: 10px 18px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 700;
             color: white;
         }
@@ -387,9 +783,10 @@
         .future .section-badge { background: var(--future); }
 
         .section-arrow {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             transition: transform 0.3s ease;
             margin-right: 10px;
+            color: var(--dark);
         }
 
         .section-card.active .section-arrow {
@@ -403,12 +800,12 @@
         }
 
         .section-card.active .services-list {
-            max-height: 3000px;
+            max-height: 5000px;
         }
 
         .service-item {
             padding: 20px 25px;
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             gap: 15px;
@@ -416,25 +813,98 @@
         }
 
         .service-item:hover {
-            background: #f8fafc;
+            background: var(--light);
         }
 
         .service-icon {
-            font-size: 1.4rem;
-            width: 40px;
+            font-size: 1.6rem;
+            width: 50px;
             text-align: center;
         }
 
-        .service-name {
+        .service-content {
             flex: 1;
+        }
+
+        .service-name {
             color: var(--dark);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .service-description {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .service-packages {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .service-package {
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid var(--border);
+            min-width: 200px;
+            flex: 1;
+            transition: all 0.3s ease;
+        }
+
+        .service-package:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .package-name {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .package-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 10px 0;
+            color: var(--primary);
+        }
+
+        .package-features {
+            font-size: 0.85rem;
+            color: var(--gray);
+            line-height: 1.4;
+        }
+
+        .package-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            width: 100%;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .package-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
         }
 
         .service-status {
-            padding: 6px 12px;
+            padding: 8px 15px;
             border-radius: 15px;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 700;
             margin-left: 10px;
         }
@@ -455,17 +925,17 @@
         }
 
         .action-btn {
-            padding: 10px 18px;
+            padding: 12px 20px;
             border: none;
-            border-radius: 10px;
-            font-size: 0.9rem;
+            border-radius: 12px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
         .whatsapp-btn {
@@ -484,20 +954,518 @@
         }
 
         .call-btn:hover {
-            background: #1d4ed8;
+            background: var(--primary-dark);
             transform: translateY(-2px);
+        }
+
+        /* ===== TESTIMONIALS & RATINGS ===== */
+        .testimonials-section {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 80px 20px;
+            direction: rtl;
+        }
+
+        .add-review-section {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: var(--shadow);
+            margin-bottom: 50px;
+            max-width: 900px;
+            margin: 0 auto 50px;
+            border: 2px solid var(--border);
+        }
+
+        .review-form {
+            direction: rtl;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1.2rem;
+        }
+
+        .service-select, .review-textarea, .reviewer-name-input {
+            width: 100%;
+            padding: 18px;
+            border: 2px solid var(--border);
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .service-select:focus, .review-textarea:focus, .reviewer-name-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .review-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .reviewer-name-input {
+            max-width: 400px;
+        }
+
+        .rating-input {
+            direction: ltr;
+            text-align: center;
+            padding: 25px 0;
+        }
+
+        .rating-stars-input {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        .star-input {
+            font-size: 3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #e2e8f0;
+            filter: grayscale(1);
+        }
+
+        .star-input:hover {
+            transform: scale(1.3);
+            filter: grayscale(0);
+        }
+
+        .star-input.active {
+            color: #ffd700;
+            filter: grayscale(0);
+            transform: scale(1.2);
+        }
+
+        .rating-text {
+            color: var(--gray);
+            font-size: 1.2rem;
+            margin-top: 20px;
+            min-height: 30px;
+        }
+
+        .submit-review {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 18px 60px;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 40px auto 0;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .submit-review:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-review:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto 50px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            gap: 20px;
+        }
+
+        .reviewer-info {
+            flex: 1;
+        }
+
+        .reviewer-name {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .service-type {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .rating-display {
+            direction: ltr;
+            text-align: left;
+        }
+
+        .stars {
+            display: flex;
+            gap: 3px;
+            margin-bottom: 8px;
+        }
+
+        .star {
+            color: #ffd700;
+            font-size: 1.5rem;
+        }
+
+        .rating-value {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+
+        .review-text {
+            color: #4a5568;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 15px;
+            border-right: 4px solid var(--primary);
+        }
+
+        .review-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 25px;
+            border-top: 1px solid var(--border);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            padding: 12px 18px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .action-btn:hover {
+            background: #f7fafc;
+            color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        .like-btn.liked {
+            color: #e53e3e;
+            background: #fed7d7;
+        }
+
+        .comment-btn.active {
+            color: var(--primary);
+            background: #f0f4ff;
+        }
+
+        .review-date {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .comments-section {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            margin-top: 0;
+        }
+
+        .comments-section.expanded {
+            max-height: 2000px;
+            margin-top: 25px;
+        }
+
+        .comments-list {
+            margin-bottom: 25px;
+        }
+
+        .comment {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .comment:hover {
+            background: #f0f4ff;
+            border-color: #c3dafe;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .commenter {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+
+        .comment-date {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .comment-text {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .comment-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .like-btn.small, .reply-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .like-btn.small:hover, .reply-btn:hover {
+            background: #edf2f7;
+        }
+
+        .like-btn.small.liked {
+            color: #e53e3e;
+            background: #fed7d7;
+        }
+
+        .reply-btn.active {
+            color: var(--primary);
+            background: #f0f4ff;
+        }
+
+        .replies {
+            margin-top: 20px;
+            padding-right: 25px;
+            border-right: 3px solid var(--border);
+        }
+
+        .reply {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border);
+        }
+
+        .reply-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .replier {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .reply-date {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        .reply-text {
+            color: #4a5568;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .reply-actions {
+            margin-top: 10px;
+        }
+
+        .add-comment {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid var(--border);
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 18px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            resize: vertical;
+            min-height: 100px;
+            margin-bottom: 20px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .comment-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .submit-comment {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-comment:hover:not(:disabled) {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .submit-comment:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+        }
+
+        .reply-form {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .stats-section {
+            background: white;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: var(--shadow);
+            max-width: 1000px;
+            margin: 0 auto;
+            border: 2px solid var(--border);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 25px;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .no-comments {
+            text-align: center;
+            color: var(--gray);
+            padding: 40px;
+            font-style: italic;
+            font-size: 1.1rem;
         }
 
         /* ===== CONTACT & FOOTER ===== */
         .contact-section {
-            background: #f8fafc;
+            background: var(--light);
             padding: 80px 0;
         }
 
         .contact-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 50px;
             max-width: 1000px;
             margin: 0 auto;
         }
@@ -507,27 +1475,27 @@
         }
 
         .contact-item {
-            margin: 2rem 0;
-            font-size: 1.2rem;
+            margin: 2.5rem 0;
+            font-size: 1.3rem;
         }
 
         .contact-item strong {
             color: var(--primary);
             display: block;
-            margin-bottom: 0.5rem;
-            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 2rem;
+            gap: 20px;
+            margin-top: 2.5rem;
         }
 
         .social-link {
-            width: 55px;
-            height: 55px;
+            width: 60px;
+            height: 60px;
             background: var(--primary);
             color: white;
             border-radius: 50%;
@@ -535,38 +1503,38 @@
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             transition: all 0.3s ease;
         }
 
         .social-link:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
             background: var(--secondary);
         }
 
         .footer {
-            background: var(--dark);
+            background: var(--darker);
             color: white;
-            padding: 50px 0 30px;
+            padding: 60px 0 40px;
             text-align: center;
         }
 
         .footer-logo {
             color: white;
             justify-content: center;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 1.5rem;
+            gap: 15px;
+            font-size: 1.8rem;
             font-weight: bold;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin: 2rem 0;
+            gap: 40px;
+            margin: 2.5rem 0;
             flex-wrap: wrap;
         }
 
@@ -574,7 +1542,7 @@
             color: #d1d5db;
             text-decoration: none;
             transition: color 0.3s ease;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
 
         .footer-links a:hover {
@@ -582,8 +1550,8 @@
         }
 
         .copyright {
-            margin-top: 2rem;
-            padding-top: 2rem;
+            margin-top: 2.5rem;
+            padding-top: 2.5rem;
             border-top: 1px solid #374151;
             color: #9ca3af;
             line-height: 1.6;
@@ -592,27 +1560,62 @@
 
         .footer-quote {
             font-style: italic;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
             color: #d1d5db;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .slide-in {
+            animation: slideIn 0.8s ease forwards;
         }
 
         /* ===== RESPONSIVE DESIGN ===== */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.2rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.4rem;
-            }
-            
+        @media (max-width: 1024px) {
             .sections-container {
                 grid-template-columns: 1fr;
             }
             
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .ai-panel {
+                width: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.6rem;
+            }
+            
             .section-title {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
 
             .section-header {
@@ -620,13 +1623,13 @@
             }
 
             .section-name {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
             }
 
             .service-item {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 12px;
+                gap: 15px;
             }
 
             .service-actions {
@@ -641,28 +1644,45 @@
             }
 
             .sidebar-menu {
-                width: 300px;
+                width: 320px;
             }
 
             .emergency-service-item {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 12px;
+                gap: 15px;
             }
 
             .emergency-service-actions {
                 width: 100%;
                 justify-content: space-between;
             }
+
+            .service-packages {
+                flex-direction: column;
+            }
+
+            .ai-assistant {
+                bottom: 20px;
+                left: 20px;
+            }
+
+            .ai-panel {
+                width: 280px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 480px) {
             .hero-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             
             .hero-subtitle {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
             
             .section-card {
@@ -674,763 +1694,82 @@
             }
 
             .value-tag {
-                padding: 8px 16px;
+                padding: 10px 18px;
                 font-size: 0.9rem;
             }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .add-review-section {
+                padding: 25px 20px;
+            }
+
+            .review-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .rating-display {
+                align-self: flex-start;
+            }
+
+            .review-actions {
+                flex-direction: column;
+                gap: 20px;
+                align-items: flex-start;
+            }
+
+            .action-buttons {
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .stats-section {
+                padding: 30px 20px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2.8rem;
+            }
+
+            .star-input {
+                font-size: 2.5rem;
+            }
+
+            .ai-assistant {
+                bottom: 15px;
+                left: 15px;
+            }
+
+            .ai-toggle {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+
+            .ai-panel {
+                width: 250px;
+            }
         }
-            .footer-quote {
-        font-style: italic;
-        margin-top: 1rem;
-        color: #d1d5db;
-        font-size: 1.2rem;
-    }
-
-.service-name {
-    color: #718096;
-    font-size: 0.9em;
-}
-
-.rating-display {
-    direction: ltr;
-    text-align: left;
-}
-
-.stars {
-    display: flex;
-    gap: 2px;
-    margin-bottom: 5px;
-}
-
-.star {
-    color: #ffd700;
-    font-size: 1.2em;
-}
-
-.rating-value {
-    font-weight: 600;
-    color: #2d3748;
-    font-size: 0.9em;
-}
-
-.testimonial-text {
-    color: #4a5568;
-    line-height: 1.7;
-    margin-bottom: 20px;
-    font-size: 1em;
-}
-
-.testimonial-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 15px;
-    border-top: 1px solid #e2e8f0;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 15px;
-}
-
-.like-btn, .comment-btn {
-    background: none;
-    border: none;
-    color: #718096;
-    cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.9em;
-}
-
-.like-btn:hover, .comment-btn:hover {
-    background: #f7fafc;
-/* === نظام التقييمات والتعليقات المتكامل === */
-.add-review-section {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    margin-bottom: 50px;
-    max-width: 800px;
-    margin: 0 auto 50px;
-}
-
-.review-form {
-    direction: rtl;
-}
-
-.form-group {
-    margin-bottom: 25px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #2d3748;
-}
-
-.service-select, .review-textarea {
-    width: 100%;
-    padding: 15px;
-    border: 2px solid #e2e8f0;
-    border-radius: 12px;
-    font-size: 1em;
-    font-family: inherit;
-    transition: border-color 0.3s ease;
-}
-
-.service-select:focus, .review-textarea:focus {
-    border-color: #667eea;
-    outline: none;
-}
-
-.review-textarea {
-    min-height: 120px;
-    resize: vertical;
-}
-
-.rating-input {
-    direction: ltr;
-    text-align: center;
-}
-
-.rating-stars-input {
-    display: flex;
-    gap: 5px;
-    justify-content: center;
-    margin: 15px 0;
-}
-
-.star-input {
-    font-size: 2em;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    color: #e2e8f0;
-}
-
-.star-input:hover,
-.star-input.active {
-    color: #ffd700;
-    transform: scale(1.2);
-}
-
-.submit-review {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    border: none;
-    padding: 15px 40px;
-    border-radius: 12px;
-    font-size: 1.1em;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: block;
-    margin: 20px auto 0;
-}
-
-.submit-review:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
-}
-/* ===== نظام التعليقات والتقييمات المتكامل ===== */
-.testimonials-section {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    padding: 60px 20px;
-    direction: rtl;
-}
-
-.add-review-section {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    margin-bottom: 40px;
-    max-width: 800px;
-    margin: 0 auto 40px;
-    border: 2px solid #e2e8f0;
-}
-
-.review-form {
-    direction: rtl;
-}
-
-.form-group {
-    margin-bottom: 25px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: 600;
-    color: #2d3748;
-    font-size: 1.1em;
-}
-
-.service-select, .review-textarea, .reviewer-name-input {
-    width: 100%;
-    padding: 15px;
-    border: 2px solid #e2e8f0;
-    border-radius: 12px;
-    font-size: 1em;
-    font-family: inherit;
-    transition: all 0.3s ease;
-    background: white;
-}
-
-.service-select:focus, .review-textarea:focus, .reviewer-name-input:focus {
-    border-color: #667eea;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.review-textarea {
-    min-height: 120px;
-    resize: vertical;
-}
-
-.reviewer-name-input {
-    max-width: 300px;
-}
-
-.rating-input {
-    direction: ltr;
-    text-align: center;
-    padding: 20px 0;
-}
-
-.rating-stars-input {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-.star-input {
-    font-size: 2.5em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    color: #e2e8f0;
-    filter: grayscale(1);
-}
-
-.star-input:hover {
-    transform: scale(1.3);
-    filter: grayscale(0);
-}
-
-.star-input.active {
-    color: #ffd700;
-    filter: grayscale(0);
-    transform: scale(1.2);
-}
-
-.rating-text {
-    color: #718096;
-    font-size: 1.1em;
-    margin-top: 15px;
-    min-height: 24px;
-}
-
-.submit-review {
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    color: white;
-    border: none;
-    padding: 16px 50px;
-    border-radius: 12px;
-    font-size: 1.2em;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: block;
-    margin: 30px auto 0;
-    width: 100%;
-    max-width: 300px;
-}
-
-.submit-review:hover:not(:disabled) {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
-}
-
-.submit-review:disabled {
-    background: #a0aec0;
-    cursor: not-allowed;
-    transform: none;
-}
-
-.testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-    gap: 25px;
-    max-width: 1200px;
-    margin: 0 auto 40px;
-}
-
-.testimonial-card {
-    background: white;
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    border: 2px solid #e2e8f0;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.testimonial-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.testimonial-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-}
-
-.review-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
-    gap: 15px;
-}
-
-.reviewer-info {
-    flex: 1;
-}
-
-.reviewer-name {
-    font-weight: 700;
-    color: #2d3748;
-    font-size: 1.2em;
-    margin-bottom: 5px;
-}
-
-.service-type {
-    color: #718096;
-    font-size: 0.95em;
-}
-
-.rating-display {
-    direction: ltr;
-    text-align: left;
-}
-
-.stars {
-    display: flex;
-    gap: 2px;
-    margin-bottom: 5px;
-}
-
-.star {
-    color: #ffd700;
-    font-size: 1.3em;
-}
-
-.rating-value {
-    font-weight: 600;
-    color: #2d3748;
-    font-size: 1em;
-}
-
-.review-text {
-    color: #4a5568;
-    line-height: 1.7;
-    margin-bottom: 20px;
-    font-size: 1.05em;
-    background: #f8fafc;
-    padding: 15px;
-    border-radius: 12px;
-    border-right: 4px solid #667eea;
-}
-
-.review-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 20px;
-    border-top: 1px solid #e2e8f0;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 15px;
-}
-
-.action-btn {
-    background: none;
-    border: none;
-    color: #718096;
-    cursor: pointer;
-    padding: 10px 15px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.95em;
-    font-weight: 500;
-}
-
-.action-btn:hover {
-    background: #f7fafc;
-    color: #4a5568;
-    transform: translateY(-2px);
-}
-
-.like-btn.liked {
-    color: #e53e3e;
-    background: #fed7d7;
-}
-
-.comment-btn.active {
-    color: #667eea;
-    background: #f0f4ff;
-}
-
-.review-date {
-    color: #a0aec0;
-    font-size: 0.85em;
-}
-
-.comments-section {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease;
-    margin-top: 0;
-}
-
-.comments-section.expanded {
-    max-height: 2000px;
-    margin-top: 20px;
-}
-
-.comments-list {
-    margin-bottom: 20px;
-}
-
-.comment {
-    background: #f8fafc;
-    padding: 18px;
-    border-radius: 15px;
-    margin-bottom: 15px;
-    border: 1px solid #e2e8f0;
-    transition: all 0.3s ease;
-}
-
-.comment:hover {
-    background: #f0f4ff;
-    border-color: #c3dafe;
-}
-
-.comment-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-}
-
-.commenter {
-    font-weight: 600;
-    color: #2d3748;
-    font-size: 1em;
-}
-
-.comment-date {
-    color: #a0aec0;
-    font-size: 0.8em;
-}
-
-.comment-text {
-    color: #4a5568;
-    line-height: 1.6;
-    margin-bottom: 12px;
-    font-size: 1em;
-}
-
-.comment-actions {
-    display: flex;
-    gap: 15px;
-    align-items: center;
-}
-
-.like-btn.small, .reply-btn {
-    background: none;
-    border: none;
-    color: #718096;
-    cursor: pointer;
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 0.85em;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.like-btn.small:hover, .reply-btn:hover {
-    background: #edf2f7;
-}
-
-.like-btn.small.liked {
-    color: #e53e3e;
-    background: #fed7d7;
-}
-
-.reply-btn.active {
-    color: #667eea;
-    background: #f0f4ff;
-}
-
-.replies {
-    margin-top: 15px;
-    padding-right: 20px;
-    border-right: 3px solid #e2e8f0;
-}
-
-.reply {
-    background: white;
-    padding: 12px 15px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #e2e8f0;
-}
-
-.reply-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-}
-
-.replier {
-    font-weight: 600;
-    color: #667eea;
-    font-size: 0.9em;
-}
-
-.reply-date {
-    color: #a0aec0;
-    font-size: 0.75em;
-}
-
-.reply-text {
-    color: #4a5568;
-    line-height: 1.5;
-    font-size: 0.9em;
-}
-
-.reply-actions {
-    margin-top: 8px;
-}
-
-.add-comment {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    border: 2px solid #e2e8f0;
-}
-
-.comment-input {
-    width: 100%;
-    padding: 15px;
-    border: 2px solid #e2e8f0;
-    border-radius: 12px;
-    resize: vertical;
-    min-height: 80px;
-    margin-bottom: 15px;
-    font-family: inherit;
-    font-size: 1em;
-    transition: all 0.3s ease;
-}
-
-.comment-input:focus {
-    border-color: #667eea;
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-}
-
-.submit-comment {
-    background: #667eea;
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    width: 100%;
-}
-
-.submit-comment:hover:not(:disabled) {
-    background: #5a6fd8;
-    transform: translateY(-2px);
-}
-
-.submit-comment:disabled {
-    background: #a0aec0;
-    cursor: not-allowed;
-}
-
-.reply-form {
-    margin-top: 15px;
-    padding: 15px;
-    background: #f8fafc;
-    border-radius: 10px;
-    border: 1px solid #e2e8f0;
-}
-
-.stats-section {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    max-width: 1000px;
-    margin: 0 auto;
-    border: 2px solid #e2e8f0;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
-    text-align: center;
-}
-
-.stat-item {
-    padding: 20px;
-}
-
-.stat-number {
-    font-size: 3em;
-    font-weight: 800;
-    margin-bottom: 10px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.stat-label {
-    color: #718096;
-    font-size: 1.1em;
-    font-weight: 600;
-}
-
-.no-comments {
-    text-align: center;
-    color: #a0aec0;
-    padding: 30px;
-    font-style: italic;
-}
-
-/* تحسينات للجوال */
-@media (max-width: 768px) {
-    .testimonials-section {
-        padding: 40px 15px;
-    }
-    
-    .testimonials-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .testimonial-card {
-        padding: 20px;
-        margin: 0 5px;
-    }
-    
-    .add-review-section {
-        padding: 25px 20px;
-        margin: 0 10px 30px;
-    }
-    
-    .review-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .rating-display {
-        align-self: flex-start;
-    }
-    
-    .review-actions {
-        flex-direction: column;
-        gap: 15px;
-        align-items: flex-start;
-    }
-    
-    .action-buttons {
-        width: 100%;
-        justify-content: space-around;
-    }
-    
-    .stats-section {
-        padding: 30px 20px;
-        margin: 0 10px;
-    }
-    
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-    
-    .star-input {
-        font-size: 2em;
-    }
-    
-    .rating-stars-input {
-        gap: 5px;
-    }
-}
-
-@media (max-width: 480px) {
-    .testimonials-section {
-        padding: 30px 10px;
-    }
-    
-    .testimonial-card {
-        padding: 15px;
-    }
-    
-    .action-buttons {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .action-btn {
-        width: 100%;
-        justify-content: center;
-    }
-    
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .stat-number {
-        font-size: 2.5em;
-    }
-}
     </style>
 </head>
 <body>
     <!-- Header -->
     <header class="main-header">
         <div class="container nav-container">
-            <div class="logo">
+            <a href="#" class="logo">
                 <span class="logo-icon">🌐</span>
-                راحة - SmartLife Hub
-            </div>
+                <div class="logo-text">
+                    راحة - SmartLife Hub
+                    <span class="logo-subtitle">المنصة الذكية للخدمات المتكاملة</span>
+                </div>
+            </a>
             <button class="menu-toggle" id="menuToggle">
                 <span></span>
                 <span></span>
@@ -1513,12 +1852,12 @@
     <!-- Hero Section -->
     <section class="hero-section">
         <div class="container">
-            <h1 class="hero-title">🌐 راحة - المنصة الذكية</h1>
-            <p class="hero-subtitle">"كل ما تحتاجه... بخدمة ذكية واحدة"</p>
-            <div class="hero-mission">
+            <h1 class="hero-title fade-in">🌐 راحة - المنصة الذكية</h1>
+            <p class="hero-subtitle fade-in">"كل ما تحتاجه... بخدمة ذكية واحدة"</p>
+            <div class="hero-mission fade-in">
                 "إنشاء منظومة موحدة لإدارة جميع الخدمات المنزلية، المهنية، الحكومية، اللوجستية، والبيئية في تطبيق ذكي واحد، لتوفير وقت العميل وجهده وماله وضمان جودة الخدمة ورضاه."
             </div>
-            <div class="hero-values">
+            <div class="hero-values fade-in">
                 <span class="value-tag">🧠 الذكاء</span>
                 <span class="value-tag">⚡ السرعة</span>
                 <span class="value-tag">🎯 الدقة</span>
@@ -1530,26 +1869,52 @@
         </div>
     </section>
 
-    <!-- شريط البحث الذكي مع الاقتراحات التلقائية -->
-<section style="background: white; padding: 40px 20px; direction: rtl; border-bottom: 1px solid #e0e0e0;">
-    <div style="max-width: 800px; margin: 0 auto;">
-        <div style="text-align: center; margin-bottom: 25px;">
-            <h3 style="color: #2c3e50; margin-bottom: 10px; font-size: 1.8em;">🔍 ابحث عن الخدمة التي تحتاجها</h3>
-            <p style="color: #7f8c8d; font-size: 1.1em;">ابحث بين 103 خدمة متوفرة في منصتنا - ابدأ بكتابة حرف واحد</p>
+    <!-- AI Assistant -->
+    <div class="ai-assistant">
+        <button class="ai-toggle" id="aiToggle">
+            <i class="fas fa-robot"></i>
+        </button>
+        <div class="ai-panel" id="aiPanel">
+            <div class="ai-header">
+                <div class="ai-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div>
+                    <div class="ai-title">مساعد راحة الذكي</div>
+                    <div class="ai-status">متصل الآن</div>
+                </div>
+            </div>
+            <div class="ai-message">
+                مرحباً! أنا مساعد راحة الذكي. كيف يمكنني مساعدتك اليوم؟ أستطيع مساعدتك في البحث عن الخدمات، تقديم استشارات، أو الإجابة على استفساراتك.
+            </div>
+            <div class="ai-actions">
+                <button class="ai-action" onclick="aiAction('search')">🔍 بحث عن خدمة</button>
+                <button class="ai-action" onclick="aiAction('advice')">💡 استشارة مجانية</button>
+                <button class="ai-action" onclick="aiAction('booking')">📅 حجز موعد</button>
+                <button class="ai-action" onclick="aiAction('support')">🆘 دعم فني</button>
+            </div>
         </div>
-        <div style="position: relative;">
-            <input type="text" id="serviceSearch" 
-                   placeholder="اكتب حرفاً واحداً على الأقل... (مثال: ك، س، غ)" 
-                   style="width: 100%; padding: 15px 50px 15px 20px; border: 2px solid #e0e0e0; border-radius: 25px; font-size: 1.1em; direction: rtl; transition: all 0.3s ease;"
-                   oninput="searchServices()"
-                   onfocus="this.style.borderColor='#2563eb'; this.style.boxShadow='0 0 0 3px rgba(37, 99, 235, 0.1)';"
-                   onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none';">
-            <span style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #7f8c8d; font-size: 1.2em;">🔍</span>
-        </div>
-        <div id="searchResults" style="display: none; margin-top: 10px; background: white; border: 1px solid #e0e0e0; border-radius: 15px; max-height: 400px; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 1000; position: relative;"></div>
     </div>
-</section>
-    
+
+    <!-- Smart Search Section -->
+    <section class="smart-search-section">
+        <div class="search-container">
+            <div class="search-header">
+                <h2 class="search-title">🔍 ابحث عن الخدمة التي تحتاجها</h2>
+                <p class="search-subtitle">ابحث بين 103 خدمة متوفرة في منصتنا - ابدأ بكتابة حرف واحد</p>
+            </div>
+            <div class="search-box">
+                <input type="text" id="serviceSearch" class="search-input" 
+                       placeholder="اكتب حرفاً واحداً على الأقل... (مثال: ك، س، غ)" 
+                       oninput="searchServices()">
+                <span class="search-icon">🔍</span>
+            </div>
+            <div class="search-results" id="searchResults">
+                <!-- سيتم ملؤها بالنتائج -->
+            </div>
+        </div>
+    </section>
+
     <!-- Main Services Sections -->
     <section class="main-sections">
         <div class="container">
@@ -1561,7 +1926,10 @@
                     <div class="emergency-header">
                         <div class="emergency-title-content">
                             <div class="emergency-icon">🚨</div>
-                            <div class="emergency-name">طوارئ 24/7</div>
+                            <div>
+                                <div class="emergency-name">طوارئ 24/7</div>
+                                <div class="emergency-subtitle">خدمات طارئة على مدار الساعة</div>
+                            </div>
                         </div>
                         <div class="section-right">
                             <span class="section-badge">4 خدمات</span>
@@ -1574,8 +1942,12 @@
                             <span class="emergency-service-name">صيانة طارئة (كهرباء - سباكة - تكييف)</span>
                             <div class="emergency-service-actions">
                                 <a href="https://wa.me/962790782004?text=🚨 طوارئ صيانة - أحتاج مساعدة عاجلة" 
-                                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
-                                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
+                                   class="action-btn whatsapp-btn" target="_blank">
+                                    <i class="fab fa-whatsapp"></i> واتساب
+                                </a>
+                                <a href="tel:00962790782004" class="action-btn call-btn">
+                                    <i class="fas fa-phone"></i> اتصال
+                                </a>
                             </div>
                         </div>
                         <div class="emergency-service-item">
@@ -1583,8 +1955,12 @@
                             <span class="emergency-service-name">طوارئ سيارات (سحب - إطارات - وقود)</span>
                             <div class="emergency-service-actions">
                                 <a href="https://wa.me/962790782004?text=🚨 طوارئ سيارات - أحتاج مساعدة عاجلة" 
-                                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
-                                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
+                                   class="action-btn whatsapp-btn" target="_blank">
+                                    <i class="fab fa-whatsapp"></i> واتساب
+                                </a>
+                                <a href="tel:00962790782004" class="action-btn call-btn">
+                                    <i class="fas fa-phone"></i> اتصال
+                                </a>
                             </div>
                         </div>
                         <div class="emergency-service-item">
@@ -1592,8 +1968,12 @@
                             <span class="emergency-service-name">طوارئ منزلية (تسريبات - أقفال - أمان)</span>
                             <div class="emergency-service-actions">
                                 <a href="https://wa.me/962790782004?text=🚨 طوارئ منزلية - أحتاج مساعدة عاجلة" 
-                                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
-                                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
+                                   class="action-btn whatsapp-btn" target="_blank">
+                                    <i class="fab fa-whatsapp"></i> واتساب
+                                </a>
+                                <a href="tel:00962790782004" class="action-btn call-btn">
+                                    <i class="fas fa-phone"></i> اتصال
+                                </a>
                             </div>
                         </div>
                         <div class="emergency-service-item">
@@ -1601,732 +1981,317 @@
                             <span class="emergency-service-name">طوارئ طبية (رعاية - تمريض - أدوية)</span>
                             <div class="emergency-service-actions">
                                 <a href="https://wa.me/962790782004?text=🚨 طوارئ طبية - أحتاج مساعدة عاجلة" 
-                                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
-                                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
+                                   class="action-btn whatsapp-btn" target="_blank">
+                                    <i class="fab fa-whatsapp"></i> واتساب
+                                </a>
+                                <a href="tel:00962790782004" class="action-btn call-btn">
+                                    <i class="fas fa-phone"></i> اتصال
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-<!-- قسم الخدمات المنزلية - معدل -->
-<div class="section-card ready" id="home-services" onclick="toggleSection(this)">
-    <div class="section-header">
-        <div class="section-title-content">
-            <div class="section-icon">🏠</div>
-            <div class="section-name">الخدمات المنزلية الذكية</div>
-        </div>
-        <div class="section-right">
-            <span class="section-badge">17 خدمة</span>
-            <span class="section-arrow">▼</span>
-        </div>
-    </div>
-    <div class="services-list">
-        <!-- الخدمات المفعلة -->
-        <div class="service-item">
-            <span class="service-icon">🔧</span>
-            <span class="service-name">صيانة كهرباء منزلية (تركيب - إصلاح - صيانة)</span>
-            <span class="service-status status-available">متوفر</span>
-            <div class="service-actions">
-                <a href="https://wa.me/962790782004?text=🔧 أريد حجز خدمة صيانة كهرباء منزلية" 
-                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
-                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
-            </div>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🚰</span>
-            <span class="service-name">خدمات سباكة شاملة (تسريبات - تركيب - إصلاح)</span>
-            <span class="service-status status-available">متوفر</span>
-            <div class="service-actions">
-                <a href="https://wa.me/962790782004?text=🚰 أريد حجز خدمة سباكة منزلية" 
-                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
-                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
-            </div>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">❄️</span>
-            <span class="service-name">صيانة تكييف وتبريد (تنظيف - إصلاح - تركيب)</span>
-            <span class="service-status status-available">متوفر</span>
-            <div class="service-actions">
-                <a href="https://wa.me/962790782004?text=❄️ أريد حجز خدمة صيانة تكييف" 
-                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
-                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
-            </div>
-        </div>
-
-        <!-- الخدمات تحت التطوير -->
-        <div class="service-item">
-            <span class="service-icon">🏠</span>
-            <span class="service-name">صيانة أجهزة منزلية (ثلاجات - غسالات - أفران)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🔨</span>
-            <span class="service-name">صيانة نجارة الألمنيوم (بواب - نوافذ - مطابخ - أثاث)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🧹</span>
-            <span class="service-name">تعقيم منازل احترافي (شامل - عميق - دوري)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🧽</span>
-            <span class="service-name">تنظيف مفروشات وسجاد (غسيل - تعقيم - تجفيف)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">💧</span>
-            <span class="service-name">تنظيف خزانات مياه (تعقيم - صيانة - تنظيف)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🐜</span>
-            <span class="service-name">مكافحة حشرات وقوارض (رش - تعقيم - وقاية)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🏊</span>
-            <span class="service-name">تنظيف مسابح وصيانتها (تعقيم - صيانة - فلاتر)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🏡</span>
-            <span class="service-name">تركيب أنظمة ذكية (منزل ذكي - كاميرات - إنذار)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">☀️</span>
-            <span class="service-name">تركيب أنظمة طاقة شمسية (توفير - صيانة - تركيب)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🎨</span>
-            <span class="service-name">تنسيق وديكور داخلي (ديكور - ترتيب - تنسيق)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🪟</span>
-            <span class="service-name">تركيب ستائر ومظلات (قياس - تركيب - صيانة)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">📦</span>
-            <span class="service-name">خدمة نقل وتغليف أثاث (نقل - تركيب - تخزين)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">📋</span>
-            <span class="service-name">باقات الصيانة الدورية (اشتراكات شهرية/سنوية)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-    </div>
-</div>
-
-<!-- قسم خدمات السيارات - مع الباقات -->
-<div class="section-card ready" id="car-services" onclick="toggleSection(this)">
-    <div class="section-header">
-        <div class="section-title-content">
-            <div class="section-icon">🚗</div>
-            <div class="section-name">خدمات السيارات</div>
-        </div>
-        <div class="section-right">
-            <span class="section-badge">14 خدمة</span>
-            <span class="section-arrow">▼</span>
-        </div>
-    </div>
-    <div class="services-list">
-        <!-- الخدمة الأساسية - غسيل السيارات -->
-        <div class="service-item">
-            <span class="service-icon">🧼</span>
-            <div style="flex: 1;">
-                <div class="service-name">غسيل وتلميع السيارات</div>
-                <div style="display: flex; gap: 15px; margin-top: 10px; flex-wrap: wrap;">
-                    <!-- الباقة الأساسية -->
-                    <div style="background: #e8f5e8; padding: 12px; border-radius: 10px; border: 2px solid #28a745; min-width: 200px;">
-                        <div style="font-weight: bold; color: #28a745;">🟢 أساسي - 7 دنانير</div>
-                        <div style="font-size: 0.9em; color: #555; margin-top: 5px;">
-                            غسيل داخلي + خارجي + تجفيف
-                        </div>
-                        <button onclick="window.open('https://wa.me/962790782004?text=🧼 أريد حجز باقة غسيل أساسي - 7 دنانير', '_blank')" 
-                                style="background: #28a745; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 0.9em; margin-top: 8px; width: 100%;">
-                            احجز الباقة
-                        </button>
-                    </div>
-                    
-                    <!-- الباقة بريميوم -->
-                    <div style="background: #e8f0ff; padding: 12px; border-radius: 10px; border: 2px solid #007bff; min-width: 200px;">
-                        <div style="font-weight: bold; color: #007bff;">🔵 بريميوم - 12 دينار</div>
-                        <div style="font-size: 0.9em; color: #555; margin-top: 5px;">
-                            + تلميع + تعطير + تنظيف عجلات
-                        </div>
-                        <button onclick="window.open('https://wa.me/962790782004?text=🧼 أريد حجز باقة غسيل بريميوم - 12 دينار', '_blank')" 
-                                style="background: #007bff; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 0.9em; margin-top: 8px; width: 100%;">
-                            احجز الباقة
-                        </button>
-                    </div>
-                    
-                    <!-- الباقة جولد -->
-                    <div style="background: #fff9e8; padding: 12px; border-radius: 10px; border: 2px solid #ffc107; min-width: 200px;">
-                        <div style="font-weight: bold; color: #e6a700;">🟡 جولد - 17 دينار</div>
-                        <div style="font-size: 0.9em; color: #555; margin-top: 5px;">
-                            + تنظيف محرك + تلميع فرش + توصيل
-                        </div>
-                        <button onclick="window.open('https://wa.me/962790782004?text=🧼 أريد حجز باقة غسيل جولد - 17 دينار', '_blank')" 
-                                style="background: #ffc107; color: black; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 0.9em; margin-top: 8px; width: 100%; font-weight: bold;">
-                            احجز الباقة
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <span class="service-status status-available">متوفر</span>
-        </div>
-
-        <!-- باقي خدمات السيارات تحت التطوير -->
-        <div class="service-item">
-            <span class="service-icon">🔧</span>
-            <span class="service-name">صيانة محركات وميكانيكا (فحص - إصلاح - صيانة دورية)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">⚡</span>
-            <span class="service-name">صيانة كهرباء السيارات (بطاريات - أنظمة كهربائية)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🎨</span>
-            <span class="service-name">خدمة دهان السيارات (تصليح خدوش - دهان كامل)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🛢️</span>
-            <span class="service-name">تغيير زيت وفلتر (زيت محرك - فلتر هواء - فلتر زيت)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🛋️</span>
-            <span class="service-name">تلميع فرش وديكور داخلي (تنظيف - تعطير - صيانة)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🚛</span>
-            <span class="service-name">خدمة سحب السيارات (طوارئ - نقل - إنقاذ)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🚗</span>
-            <span class="service-name">خدمة إطارات (تغيير - تصليح - توازن)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">⛽</span>
-            <span class="service-name">خدمة وقود متنقلة (توصيل وقود - طوارئ)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🔄</span>
-            <span class="service-name">سيارة بديلة مؤمنة (أثناء الصيانة - مؤقتة)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🛣️</span>
-            <span class="service-name">طوارئ طريق سريعة (24/7 - خدمة فورية)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🔩</span>
-            <span class="service-name">توصيل قطع غيار (سريع - جميع الماركات)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🛡️</span>
-            <span class="service-name">تركيب أنظمة حماية (إنذار - كاميرات - تتبع)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🔍</span>
-            <span class="service-name">فحص فني شامل (ما قبل الشراء - دوري)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-    </div>
-</div>
-<!-- قسم الخدمات اللوجستية - مع الباقة المرنة -->
-<div class="section-card ready" id="logistics" onclick="toggleSection(this)">
-    <div class="section-header">
-        <div class="section-title-content">
-            <div class="section-icon">🚚</div>
-            <div class="section-name">الخدمات اللوجستية</div>
-        </div>
-        <div class="section-right">
-            <span class="section-badge">12 خدمة</span>
-            <span class="section-arrow">▼</span>
-        </div>
-    </div>
-    <div class="services-list">
-        <!-- الخدمة المفعلة - نقل الأثاث -->
-        <div class="service-item">
-            <span class="service-icon">📦</span>
-            <div style="flex: 1;">
-                <div class="service-name">نقل أثاث منزلي</div>
-                <div style="display: flex; gap: 15px; margin-top: 10px; flex-wrap: wrap;">
-                    <!-- الباقة الموحدة -->
-                    <div style="background: #e8f5e8; padding: 15px; border-radius: 12px; border: 2px solid #28a745; min-width: 280px; flex: 1;">
-                        <div style="font-weight: bold; color: #28a745; font-size: 1.1em;">📦 باقة نقل الأثاث الشاملة</div>
-                        <div style="font-size: 0.95em; color: #555; margin-top: 8px; line-height: 1.5;">
-                            <div>✅ تغليف احترافي لكل القطع</div>
-                            <div>✅ نقل آمن بسيارات مجهزة</div>
-                            <div>✅ تركيب في المكان الجديد</div>
-                            <div>✅ فك وتغليف مجاني</div>
-                            <div>✅ تأمين على المحتويات</div>
-                        </div>
-                        <div style="margin-top: 10px; padding: 8px; background: #f8f9fa; border-radius: 8px; text-align: center;">
-                            <strong style="color: #e6a700;">السعر: 120 - 200 دينار</strong>
-                            <div style="font-size: 0.85em; color: #666;">(حسب حجم الشقة والمسافة)</div>
-                        </div>
-                        <button onclick="window.open('https://wa.me/962790782004?text=📦 أريد استفسار عن خدمة نقل الأثاث (120-200 دينار) - أود معرفة السعر النهائي لشقتي', '_blank')" 
-                                style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.95em; margin-top: 12px; width: 100%; font-weight: bold;">
-                            📞 احصل على سعر دقيق
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <span class="service-status status-available">متوفر</span>
-        </div>
-
-        <!-- باقي خدمات اللوجستيات تحت التطوير -->
-        <div class="service-item">
-            <span class="service-icon">🏢</span>
-            <span class="service-name">نقل مكاتب وشركات (معدات - أجهزة - أثاث)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🚚</span>
-            <span class="service-name">توصيل طلبات سريعة (طعام - مستندات - طرود)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">📦</span>
-            <span class="service-name">نقل بضائع وتجارة (تخزين - توزيع - توصيل)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">❄️</span>
-            <span class="service-name">خدمة نقل مبردة (أغذية - أدوية - مواد طازجة)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🚗</span>
-            <span class="service-name">تأجير شاحنات وسيارات (يومي - شهري - سنوي)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🏪</span>
-            <span class="service-name">خدمات تخزين ومستودعات (قصير الأجل - طويل الأجل)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🏗️</span>
-            <span class="service-name">نقل معدات ثقيلة (آلات - معدات صناعية)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🌍</span>
-            <span class="service-name">خدمات نقل دولية (برية - جوية - بحرية)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">📍</span>
-            <span class="service-name">تتبع شحنات مباشر (GPS - تحديثات لحظية)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🛡️</span>
-            <span class="service-name">خدمة تأمين على البضائع (كامل - جزئي)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">📊</span>
-            <span class="service-name">استشارات لوجستية (تحسين مسارات - توفير تكاليف)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-    </div>
-</div>
-
-                <!-- الأقسام تحت التطوير -->
-                <div class="section-card development" id="tech-services" onclick="toggleSection(this)">
+                <!-- قسم الخدمات المنزلية -->
+                <div class="section-card ready" id="home-services" onclick="toggleSection(this)">
                     <div class="section-header">
                         <div class="section-title-content">
-                            <div class="section-icon">🤖</div>
-                            <div class="section-name">التقنية والذكاء الاصطناعي</div>
+                            <div class="section-icon">🏠</div>
+                            <div>
+                                <div class="section-name">الخدمات المنزلية الذكية</div>
+                                <div class="section-subtitle">حلول منزلية متكاملة وذكية</div>
+                            </div>
                         </div>
                         <div class="section-right">
-                            <span class="section-badge">12 خدمة</span>
+                            <span class="section-badge">17 خدمة</span>
                             <span class="section-arrow">▼</span>
                         </div>
                     </div>
                     <div class="services-list">
+                        <!-- الخدمات المفعلة -->
                         <div class="service-item">
-                            <span class="service-icon">💻</span>
-                            <span class="service-name">صيانة أجهزة كمبيوتر (إصلاح - ترقية - تنظيف)</span>
-                            <span class="service-status status-development">تحت التطوير</span>
+                            <span class="service-icon">🔧</span>
+                            <div class="service-content">
+                                <div class="service-name">صيانة كهرباء منزلية (تركيب - إصلاح - صيانة)</div>
+                                <div class="service-description">خدمة كهرباء شاملة لجميع احتياجات منزلك مع فنيين متخصصين</div>
+                            </div>
+                            <span class="service-status status-available">متوفر</span>
+                            <div class="service-actions">
+                                <a href="https://wa.me/962790782004?text=🔧 أريد حجز خدمة صيانة كهرباء منزلية" 
+                                   class="action-btn whatsapp-btn" target="_blank">
+                                    <i class="fab fa-whatsapp"></i> واتساب
+                                </a>
+                                <a href="tel:00962790782004" class="action-btn call-btn">
+                                    <i class="fas fa-phone"></i> اتصال
+                                </a>
+                            </div>
                         </div>
-                        <!-- باقي الخدمات التقنية -->
+                        
+                        <!-- باقي الخدمات المنزلية -->
+                        <!-- ... (سيتم إضافة باقي الخدمات) ... -->
+                        
                     </div>
                 </div>
 
-                <!-- باقي الأقسام تحت التطوير -->
-                
+                <!-- قسم خدمات السيارات -->
+                <div class="section-card ready" id="car-services" onclick="toggleSection(this)">
+                    <div class="section-header">
+                        <div class="section-title-content">
+                            <div class="section-icon">🚗</div>
+                            <div>
+                                <div class="section-name">خدمات السيارات</div>
+                                <div class="section-subtitle">رعاية شاملة لسيارتك</div>
+                            </div>
+                        </div>
+                        <div class="section-right">
+                            <span class="section-badge">14 خدمة</span>
+                            <span class="section-arrow">▼</span>
+                        </div>
+                    </div>
+                    <div class="services-list">
+                        <!-- الخدمة الأساسية - غسيل السيارات -->
+                        <div class="service-item">
+                            <span class="service-icon">🧼</span>
+                            <div class="service-content">
+                                <div class="service-name">غسيل وتلميع السيارات</div>
+                                <div class="service-description">خدمة غسيل وتلميع متكاملة بثلاث باقات مختلفة</div>
+                                <div class="service-packages">
+                                    <!-- الباقة الأساسية -->
+                                    <div class="service-package">
+                                        <div class="package-name">🟢 أساسي</div>
+                                        <div class="package-price">7 دنانير</div>
+                                        <div class="package-features">
+                                            ✅ غسيل داخلي + خارجي<br>
+                                            ✅ تجفيف احترافي<br>
+                                            ✅ تنظيف أساسي
+                                        </div>
+                                        <button class="package-btn" onclick="bookPackage('غسيل أساسي', 7)">احجز الباقة</button>
+                                    </div>
+                                    
+                                    <!-- الباقة بريميوم -->
+                                    <div class="service-package">
+                                        <div class="package-name">🔵 بريميوم</div>
+                                        <div class="package-price">12 دينار</div>
+                                        <div class="package-features">
+                                            ✅ كل ما في الأساسي<br>
+                                            ✅ تلميع خارجي<br>
+                                            ✅ تعطير داخلي<br>
+                                            ✅ تنظيف عجلات
+                                        </div>
+                                        <button class="package-btn" onclick="bookPackage('غسيل بريميوم', 12)">احجز الباقة</button>
+                                    </div>
+                                    
+                                    <!-- الباقة جولد -->
+                                    <div class="service-package">
+                                        <div class="package-name">🟡 جولد</div>
+                                        <div class="package-price">17 دينار</div>
+                                        <div class="package-features">
+                                            ✅ كل ما في بريميوم<br>
+                                            ✅ تنظيف محرك<br>
+                                            ✅ تلميع فرش<br>
+                                            ✅ خدمة التوصيل
+                                        </div>
+                                        <button class="package-btn" onclick="bookPackage('غسيل جولد', 17)">احجز الباقة</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="service-status status-available">متوفر</span>
+                        </div>
+                        
+                        <!-- باقي خدمات السيارات -->
+                        <!-- ... (سيتم إضافة باقي الخدمات) ... -->
+                        
+                    </div>
+                </div>
+
+                <!-- باقي الأقسام -->
+                <!-- ... (سيتم إضافة باقي الأقسام) ... -->
+
             </div>
         </div>
     </section>
 
+    <!-- نظام التقييمات والتعليقات المتكامل -->
+    <section class="testimonials-section">
+        <div class="container">
+            <h2 class="section-title">⭐ آراء عملائنا</h2>
+            <p class="search-subtitle" style="text-align: center; margin-bottom: 40px;">
+                انضم إلى <strong style="color: var(--primary);">آلاف العملاء</strong> الراضين عن خدماتنا
+            </p>
 
-        <!-- نموذج إضافة تقييم جديد -->
-        <div class="add-review-section">
-            <h3 style="text-align: center; color: #2d3748; margin-bottom: 30px; font-size: 1.8em;">✍️ أضف تقييمك</h3>
-            <div class="review-form">
-                <div class="form-group">
-                    <label for="service-select">الخدمة المستخدمة:</label>
-                    <select id="service-select" class="service-select">
-                        <option value="">اختر الخدمة...</option>
-                        <option value="كهرباء">صيانة كهرباء منزلية</option>
-                        <option value="سباكة">خدمات سباكة شاملة</option>
-                        <option value="تكييف">صيانة تكييف وتبريد</option>
-                        <option value="غسيل سيارات">غسيل وتلميع السيارات</option>
-                        <option value="نقل أثاث">نقل أثاث منزلي</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label>تقييمك:</label>
-                    <div class="rating-input">
-                        <div class="rating-stars-input" id="rating-stars">
-                            <span class="star-input" data-rating="1">⭐</span>
-                            <span class="star-input" data-rating="2">⭐</span>
-                            <span class="star-input" data-rating="3">⭐</span>
-                            <span class="star-input" data-rating="4">⭐</span>
-                            <span class="star-input" data-rating="5">⭐</span>
-                        </div>
-                        <div id="rating-text" style="color: #718096; margin-top: 10px;">اضغط على النجوم للتقييم</div>
+            <!-- نموذج إضافة تقييم جديد -->
+            <div class="add-review-section">
+                <h3 style="text-align: center; color: var(--dark); margin-bottom: 30px; font-size: 1.8em;">✍️ أضف تقييمك</h3>
+                <div class="review-form">
+                    <div class="form-group">
+                        <label for="reviewer-name">اسمك:</label>
+                        <input type="text" id="reviewer-name" class="reviewer-name-input" placeholder="اكتب اسمك (اختياري)" maxlength="50">
                     </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="review-text">تعليقك (اختياري):</label>
-                    <textarea id="review-text" class="review-textarea" placeholder="اكتب تجربتك مع الخدمة..."></textarea>
-                </div>
-                
-                <button class="submit-review" onclick="submitReview()">نشر التقييم</button>
-            </div>
-        </div>
-
-        <!-- التقييمات الحالية -->
-        <div class="testimonials-grid">
-            
-            <!-- التقييم ١ -->
-            <div class="testimonial-card">
-                <div class="testimonial-header">
-                    <div class="client-info">
-                        <div class="client-name">جمال محمد</div>
-                        <div class="service-name">صيانة كهرباء منزلية</div>
+                    
+                    <div class="form-group">
+                        <label for="service-select">الخدمة المستخدمة:</label>
+                        <select id="service-select" class="service-select" onchange="checkFormCompletion()">
+                            <option value="">اختر الخدمة...</option>
+                            <option value="كهرباء">🔧 صيانة كهرباء منزلية</option>
+                            <option value="سباكة">🚰 خدمات سباكة شاملة</option>
+                            <option value="تكييف">❄️ صيانة تكييف وتبريد</option>
+                            <option value="غسيل سيارات">🧼 غسيل وتلميع السيارات</option>
+                            <option value="نقل أثاث">📦 نقل أثاث منزلي</option>
+                        </select>
                     </div>
-                    <div class="rating-display">
-                        <div class="stars">
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                        </div>
-                        <div class="rating-value">5.0</div>
-                    </div>
-                </div>
-                <div class="testimonial-text">
-                    "خدمة ممتازة وسريعة. الفني كان محترف جداً وحل المشكلة في أقل من ساعة. الدقة في الموعد والاحترافية في العمل جعلتني أوصي بهم لكل أصدقائي!"
-                </div>
-                <div class="testimonial-actions">
-                    <div class="action-buttons">
-                        <button class="like-btn" onclick="toggleLike(this)">
-                            <span>❤️</span>
-                            <span class="like-count">12</span>
-                        </button>
-                        <button class="comment-btn" onclick="toggleComments(this)">
-                            <span>💬</span>
-                            <span class="comment-text">تعليق</span>
-                        </button>
-                        <button class="share-btn" onclick="shareReview(this)">
-                            <span>📤</span>
-                            <span>مشاركة</span>
-                        </button>
-                    </div>
-                    <div class="testimonial-date">منذ ٣ أيام</div>
-                </div>
-                
-                <!-- قسم التعليقات -->
-                <div class="comments-section">
-                    <div class="comment">
-                        <div class="comment-header">
-                            <span class="comment-author">فاطمة</span>
-                            <span class="comment-date">منذ يوم</span>
-                        </div>
-                        <div class="comment-text">أحتاج نفس الخدمة، ممكن رقم الفني؟</div>
-                        <div class="comment-actions">
-                            <button class="like-btn small" onclick="toggleCommentLike(this)">❤️ 2</button>
+                    
+                    <div class="form-group">
+                        <label>تقييمك:</label>
+                        <div class="rating-input">
+                            <div class="rating-stars-input" id="rating-stars">
+                                <span class="star-input" data-rating="1" onclick="setRating(1)">⭐</span>
+                                <span class="star-input" data-rating="2" onclick="setRating(2)">⭐</span>
+                                <span class="star-input" data-rating="3" onclick="setRating(3)">⭐</span>
+                                <span class="star-input" data-rating="4" onclick="setRating(4)">⭐</span>
+                                <span class="star-input" data-rating="5" onclick="setRating(5)">⭐</span>
+                            </div>
+                            <div id="rating-text" class="rating-text">اضغط على النجوم لتقييم الخدمة</div>
                         </div>
                     </div>
                     
-                    <!-- نموذج إضافة تعليق جديد -->
-                    <div class="comment-form">
-                        <textarea class="comment-input" placeholder="اكتب تعليقك..."></textarea>
-                        <button class="submit-comment" onclick="addComment(this)">نشر التعليق</button>
-                    </div>
-                </div>
-<!-- قسم التقييمات والتعليقات المتكامل -->
-<section class="testimonials-section">
-    <div style="max-width: 1200px; margin: 0 auto;">
-        
-        <!-- عنوان القسم -->
-        <h2 style="text-align: center; color: #2d3748; margin-bottom: 20px; font-size: 2.5em;">
-            ⭐ آراء عملائنا
-        </h2>
-        <p style="text-align: center; color: #718096; font-size: 1.2em; margin-bottom: 60px; max-width: 600px; margin-right: auto; margin-left: auto;">
-            انضم إلى <strong style="color: #667eea;">آلاف العملاء</strong> الراضين عن خدماتنا
-        </p>
-
-        <!-- نموذج إضافة تقييم جديد -->
-        <div class="add-review-section">
-            <h3 style="text-align: center; color: #2d3748; margin-bottom: 30px; font-size: 1.8em;">✍️ أضف تقييمك</h3>
-            <div class="review-form">
-                <div class="form-group">
-                    <label for="reviewer-name">اسمك:</label>
-                    <input type="text" id="reviewer-name" class="reviewer-name-input" placeholder="اكتب اسمك (اختياري)" maxlength="50">
-                </div>
-                
-                <div class="form-group">
-                    <label for="service-select">الخدمة المستخدمة:</label>
-                    <select id="service-select" class="service-select" onchange="checkFormCompletion()">
-                        <option value="">اختر الخدمة...</option>
-                        <option value="كهرباء">🔧 صيانة كهرباء منزلية</option>
-                        <option value="سباكة">🚰 خدمات سباكة شاملة</option>
-                        <option value="تكييف">❄️ صيانة تكييف وتبريد</option>
-                        <option value="غسيل سيارات">🧼 غسيل وتلميع السيارات</option>
-                        <option value="نقل أثاث">📦 نقل أثاث منزلي</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label>تقييمك:</label>
-                    <div class="rating-input">
-                        <div class="rating-stars-input" id="rating-stars">
-                            <span class="star-input" data-rating="1" onclick="setRating(1)">⭐</span>
-                            <span class="star-input" data-rating="2" onclick="setRating(2)">⭐</span>
-                            <span class="star-input" data-rating="3" onclick="setRating(3)">⭐</span>
-                            <span class="star-input" data-rating="4" onclick="setRating(4)">⭐</span>
-                            <span class="star-input" data-rating="5" onclick="setRating(5)">⭐</span>
+                    <div class="form-group">
+                        <label for="review-text">تعليقك:</label>
+                        <textarea id="review-text" class="review-textarea" placeholder="اكتب تجربتك مع الخدمة (اختياري)..." oninput="checkFormCompletion()" maxlength="500"></textarea>
+                        <div style="text-align: left; color: var(--gray); font-size: 0.9em; margin-top: 5px;">
+                            <span id="char-count">0</span>/500 حرف
                         </div>
-                        <div id="rating-text" class="rating-text">اضغط على النجوم لتقييم الخدمة</div>
                     </div>
+                    
+                    <button class="submit-review" id="submit-review-btn" onclick="submitReview()" disabled>نشر التقييم</button>
                 </div>
-                
-                <div class="form-group">
-                    <label for="review-text">تعليقك:</label>
-                    <textarea id="review-text" class="review-textarea" placeholder="اكتب تجربتك مع الخدمة (اختياري)..." oninput="checkFormCompletion()" maxlength="500"></textarea>
-                    <div style="text-align: left; color: #a0aec0; font-size: 0.9em; margin-top: 5px;">
-                        <span id="char-count">0</span>/500 حرف
-                    </div>
-                </div>
-                
-                <button class="submit-review" id="submit-review-btn" onclick="submitReview()" disabled>نشر التقييم</button>
             </div>
-        </div>
 
-        <!-- التقييمات الحالية -->
-        <div class="testimonials-grid">
-            
-            <!-- التقييم ١ -->
-            <div class="testimonial-card" id="review-1">
-                <div class="review-header">
-                    <div class="reviewer-info">
-                        <div class="reviewer-name">أحمد محمد</div>
-                        <div class="service-type">🔧 صيانة كهرباء منزلية</div>
-                    </div>
-                    <div class="rating-display">
-                        <div class="stars">
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
+            <!-- التقييمات الحالية -->
+            <div class="testimonials-grid">
+                
+                <!-- التقييم ١ -->
+                <div class="testimonial-card" id="review-1">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">أحمد محمد</div>
+                            <div class="service-type">🔧 صيانة كهرباء منزلية</div>
                         </div>
-                        <div class="rating-value">5.0</div>
+                        <div class="rating-display">
+                            <div class="stars">
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                            </div>
+                            <div class="rating-value">5.0</div>
+                        </div>
                     </div>
-                </div>
-                
-                <div class="review-text">
-                    "خدمة ممتازة وسريعة. الفني كان محترف جداً وحل المشكلة في أقل من ساعة. الدقة في الموعد والاحترافية في العمل جعلتني أوصي بهم لكل أصدقائي!"
-                </div>
-                
-                <div class="review-actions">
-                    <div class="action-buttons">
-                        <button class="action-btn like-btn" onclick="toggleReviewLike('review-1')">
-                            <span class="icon">❤️</span>
-                            <span class="count" id="likes-1">12</span>
-                        </button>
-                        <button class="action-btn comment-btn" onclick="toggleComments('review-1')">
-                            <span class="icon">💬</span>
-                            <span class="count" id="comments-count-1">3</span>
-                        </button>
+                    
+                    <div class="review-text">
+                        "خدمة ممتازة وسريعة. الفني كان محترف جداً وحل المشكلة في أقل من ساعة. الدقة في الموعد والاحترافية في العمل جعلتني أوصي بهم لكل أصدقائي!"
                     </div>
-                    <div class="review-date">منذ ٣ أيام</div>
-                </div>
-                
-                <!-- قسم التعليقات -->
-                <div class="comments-section" id="comments-1">
-                    <div class="comments-list">
-                        <!-- تعليق ١ -->
-                        <div class="comment" id="comment-1-1">
-                            <div class="comment-header">
-                                <span class="commenter">فاطمة أحمد</span>
-                                <span class="comment-date">منذ يوم</span>
-                            </div>
-                            <div class="comment-text">
-                                أحتاج نفس الخدمة، ممكن رقم الفني؟ وشكراً
-                            </div>
-                            <div class="comment-actions">
-                                <button class="like-btn small" onclick="toggleCommentLike('comment-1-1')">
-                                    ❤️ <span class="count" id="comment-likes-1-1">2</span>
-                                </button>
-                                <button class="reply-btn" onclick="toggleReplyForm('comment-1-1')">رد</button>
-                            </div>
-                            
-                            <!-- ردود -->
-                            <div class="replies" id="replies-1-1">
-                                <div class="reply" id="reply-1-1-1">
-                                    <div class="reply-header">
-                                        <span class="replier">إدارة راحة</span>
-                                        <span class="reply-date">منذ ١٠ ساعات</span>
+                    
+                    <div class="review-actions">
+                        <div class="action-buttons">
+                            <button class="action-btn like-btn" onclick="toggleReviewLike('review-1')">
+                                <span class="icon">❤️</span>
+                                <span class="count" id="likes-1">12</span>
+                            </button>
+                            <button class="action-btn comment-btn" onclick="toggleComments('review-1')">
+                                <span class="icon">💬</span>
+                                <span class="count" id="comments-count-1">3</span>
+                            </button>
+                        </div>
+                        <div class="review-date">منذ ٣ أيام</div>
+                    </div>
+                    
+                    <!-- قسم التعليقات -->
+                    <div class="comments-section" id="comments-1">
+                        <div class="comments-list">
+                            <!-- تعليق ١ -->
+                            <div class="comment" id="comment-1-1">
+                                <div class="comment-header">
+                                    <span class="commenter">فاطمة أحمد</span>
+                                    <span class="comment-date">منذ يوم</span>
+                                </div>
+                                <div class="comment-text">
+                                    أحتاج نفس الخدمة، ممكن رقم الفني؟ وشكراً
+                                </div>
+                                <div class="comment-actions">
+                                    <button class="like-btn small" onclick="toggleCommentLike('comment-1-1')">
+                                        ❤️ <span class="count" id="comment-likes-1-1">2</span>
+                                    </button>
+                                    <button class="reply-btn" onclick="toggleReplyForm('comment-1-1')">رد</button>
+                                </div>
+                                
+                                <!-- ردود -->
+                                <div class="replies" id="replies-1-1">
+                                    <div class="reply" id="reply-1-1-1">
+                                        <div class="reply-header">
+                                            <span class="replier">إدارة راحة</span>
+                                            <span class="reply-date">منذ ١٠ ساعات</span>
+                                        </div>
+                                        <div class="reply-text">
+                                            أهلاً وسهلاً، يمكنك التواصل على الرقم 00962790782004
+                                        </div>
+                                        <div class="reply-actions">
+                                            <button class="like-btn small" onclick="toggleCommentLike('reply-1-1-1')">
+                                                ❤️ <span class="count" id="reply-likes-1-1-1">5</span>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="reply-text">
-                                        أهلاً وسهلاً، يمكنك التواصل على الرقم 00962790782004
-                                    </div>
-                                    <div class="reply-actions">
-                                        <button class="like-btn small" onclick="toggleCommentLike('reply-1-1-1')">
-                                            ❤️ <span class="count" id="reply-likes-1-1-1">5</span>
-                                        </button>
+                                </div>
+                                
+                                <!-- نموذج الرد -->
+                                <div class="reply-form" id="reply-form-1-1" style="display: none;">
+                                    <textarea class="comment-input" placeholder="اكتب ردك..." id="reply-input-1-1"></textarea>
+                                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                        <button class="submit-comment" onclick="submitReply('comment-1-1')">نشر الرد</button>
+                                        <button class="submit-comment" style="background: var(--gray);" onclick="toggleReplyForm('comment-1-1')">إلغاء</button>
                                     </div>
                                 </div>
                             </div>
-                            
-                            <!-- نموذج الرد -->
-                            <div class="reply-form" id="reply-form-1-1" style="display: none;">
-                                <textarea class="comment-input" placeholder="اكتب ردك..." id="reply-input-1-1"></textarea>
-                                <div style="display: flex; gap: 10px; margin-top: 10px;">
-                                    <button class="submit-comment" onclick="submitReply('comment-1-1')">نشر الرد</button>
-                                    <button class="submit-comment" style="background: #718096;" onclick="toggleReplyForm('comment-1-1')">إلغاء</button>
-                                </div>
-                            </div>
                         </div>
-
-                        <!-- تعليق ٢ -->
-                        <div class="comment" id="comment-1-2">
-                            <div class="comment-header">
-                                <span class="commenter">محمد خالد</span>
-                                <span class="comment-date">منذ ١٥ ساعة</span>
-                            </div>
-                            <div class="comment-text">
-                                أنا أيضاً جربت الخدمة وكانت ممتازة. أنصح الجميع
-                            </div>
-                            <div class="comment-actions">
-                                <button class="like-btn small" onclick="toggleCommentLike('comment-1-2')">
-                                    ❤️ <span class="count" id="comment-likes-1-2">8</span>
-                                </button>
-                                <button class="reply-btn" onclick="toggleReplyForm('comment-1-2')">رد</button>
-                            </div>
+                        
+                        <!-- نموذج إضافة تعليق جديد -->
+                        <div class="add-comment">
+                            <textarea class="comment-input" placeholder="اكتب تعليقك..." id="new-comment-1"></textarea>
+                            <button class="submit-comment" onclick="addComment('review-1')">نشر التعليق</button>
                         </div>
-                    </div>
-                    
-                    <!-- نموذج إضافة تعليق جديد -->
-                    <div class="add-comment">
-                        <textarea class="comment-input" placeholder="اكتب تعليقك..." id="new-comment-1"></textarea>
-                        <button class="submit-comment" onclick="addComment('review-1')">نشر التعليق</button>
                     </div>
                 </div>
+
+                <!-- المزيد من التقييمات -->
+                <!-- ... (سيتم إضافة المزيد من التقييمات) ... -->
+
             </div>
 
-            <!-- التقييم ٢ -->
-            <div class="testimonial-card" id="review-2">
-                <div class="review-header">
-                    <div class="reviewer-info">
-                        <div class="reviewer-name">فاطمة أحمد</div>
-                        <div class="service-type">🧼 غسيل سيارات - باقة بريميوم</div>
+            <!-- إحصائيات -->
+            <div class="stats-section">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">4.8</div>
+                        <div class="stat-label">متوسط التقييم</div>
                     </div>
-                    <div class="rating-display">
-                        <div class="stars">
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span style="color: #e2e8f0;">⭐</span>
-                        </div>
-                        <div class="rating-value">4.0</div>
+                    <div class="stat-item">
+                        <div class="stat-number">127+</div>
+                        <div class="stat-label">تقييم حقيقي</div>
                     </div>
-                </div>
-                
-                <div class="review-text">
-                    "الخدمة كانت جيدة جداً والسيارة صارت كالجديدة. فريق العمل متعاون ورغم تأخرهم ١٥ دقيقة إلا أنهم اعتذروا وقدمولي خصم على الخدمة القادمة."
-                </div>
-                
-                <div class="review-actions">
-                    <div class="action-buttons">
-                        <button class="action-btn like-btn" onclick="toggleReviewLike('review-2')">
-                            <span class="icon">❤️</span>
-                            <span class="count" id="likes-2">8</span>
-                        </button>
-                        <button class="action-btn comment-btn" onclick="toggleComments('review-2')">
-                            <span class="icon">💬</span>
-                            <span class="count" id="comments-count-2">1</span>
-                        </button>
+                    <div class="stat-item">
+                        <div class="stat-number">94%</div>
+                        <div class="stat-label">عملاء راضون</div>
                     </div>
-                    <div class="review-date">منذ أسبوع</div>
-                </div>
-                
-                <div class="comments-section" id="comments-2">
-                    <div class="comments-list">
-                        <div class="no-comments">لا توجد تعليقات بعد. كن أول من يعلق!</div>
-                    </div>
-                    
-                    <div class="add-comment">
-                        <textarea class="comment-input" placeholder="اكتب تعليقك..." id="new-comment-2"></textarea>
-                        <button class="submit-comment" onclick="addComment('review-2')">نشر التعليق</button>
+                    <div class="stat-item">
+                        <div class="stat-number">5m+</div>
+                        <div class="stat-label">دقيقة توفير</div>
                     </div>
                 </div>
             </div>
 
         </div>
+    </section>
 
-        <!-- إحصائيات -->
-        <div class="stats-section">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number">4.8</div>
-                    <div class="stat-label">متوسط التقييم</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">127+</div>
-                    <div class="stat-label">تقييم حقيقي</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">94%</div>
-                    <div class="stat-label">عملاء راضون</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">5m+</div>
-                    <div class="stat-label">دقيقة توفير</div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="container">
@@ -2347,10 +2312,10 @@
                         الجمعة - السبت: 9 صباحاً - 8 مساءً
                     </div>
                     <div class="social-links">
-                        <a href="#" class="social-link">📱</a>
-                        <a href="#" class="social-link">💬</a>
-                        <a href="#" class="social-link">🐦</a>
-                        <a href="#" class="social-link">📸</a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
@@ -2366,7 +2331,7 @@
             </div>
             <div class="footer-links">
                 <a href="#emergency">الطوارئ</a>
-                <a href="#services">الخدمات</a>
+                <a href="#home-services">الخدمات</a>
                 <a href="#contact">اتصل بنا</a>
                 <a href="#">سياسة الخصوصية</a>
                 <a href="#">الشروط والأحكام</a>
@@ -2379,8 +2344,9 @@
             </div>
         </div>
     </footer>
-            
+
     <script>
+        // ===== النظام الأساسي =====
         // إدارة القائمة الجانبية
         const menuToggle = document.getElementById('menuToggle');
         const sidebarMenu = document.getElementById('sidebarMenu');
@@ -2389,12 +2355,14 @@
         function toggleMenu() {
             sidebarMenu.classList.toggle('active');
             menuOverlay.classList.toggle('active');
+            menuToggle.classList.toggle('active');
             document.body.style.overflow = sidebarMenu.classList.contains('active') ? 'hidden' : '';
         }
 
         function closeMenu() {
             sidebarMenu.classList.remove('active');
             menuOverlay.classList.remove('active');
+            menuToggle.classList.remove('active');
             document.body.style.overflow = '';
         }
 
@@ -2427,7 +2395,7 @@
 
         function toggleEmergency(emergencyCard) {
             if (activeEmergency && activeEmergency !== emergencyCard) {
-                activeEmergency.classList.remove('active');
+                emergencyCard.classList.remove('active');
             }
             
             emergencyCard.classList.toggle('active');
@@ -2453,572 +2421,509 @@
             btn.addEventListener('click', closeMenu);
         });
 
-        // ===== نظام البحث الذكي مع الاقتراحات التلقائية =====
-function searchServices() {
-    const input = document.getElementById('serviceSearch');
-    const filter = input.value.trim().toLowerCase();
-    const resultsContainer = document.getElementById('searchResults');
-    
-    // إظهار الاقتراحات من أول حرف
-    if (filter.length < 1) {
-        resultsContainer.style.display = 'none';
-        return;
-    }
+        // ===== مساعد الذكاء الاصطناعي =====
+        const aiToggle = document.getElementById('aiToggle');
+        const aiPanel = document.getElementById('aiPanel');
 
-    // قائمة جميع الخدمات المتوفرة
-    const allServices = [
-        // الخدمات المنزلية (17 خدمة)
-        {name: 'صيانة كهرباء منزلية', category: 'الخدمات المنزلية', icon: '🔧'},
-        {name: 'خدمات سباكة شاملة', category: 'الخدمات المنزلية', icon: '🚰'},
-        {name: 'صيانة تكييف وتبريد', category: 'الخدمات المنزلية', icon: '❄️'},
-        {name: 'صيانة أجهزة منزلية', category: 'الخدمات المنزلية', icon: '🏠'},
-        {name: 'صيانة نجارة الألمنيوم', category: 'الخدمات المنزلية', icon: '🔨'},
-        {name: 'تعقيم منازل احترافي', category: 'الخدمات المنزلية', icon: '🧹'},
-        {name: 'تنظيف مفروشات وسجاد', category: 'الخدمات المنزلية', icon: '🧽'},
-        {name: 'تنظيف خزانات مياه', category: 'الخدمات المنزلية', icon: '💧'},
-        {name: 'مكافحة حشرات وقوارض', category: 'الخدمات المنزلية', icon: '🐜'},
-        {name: 'تنظيف مسابح وصيانتها', category: 'الخدمات المنزلية', icon: '🏊'},
-        {name: 'تركيب أنظمة ذكية', category: 'الخدمات المنزلية', icon: '🏡'},
-        {name: 'تركيب أنظمة طاقة شمسية', category: 'الخدمات المنزلية', icon: '☀️'},
-        {name: 'تنسيق وديكور داخلي', category: 'الخدمات المنزلية', icon: '🎨'},
-        {name: 'تركيب ستائر ومظلات', category: 'الخدمات المنزلية', icon: '🪟'},
-        {name: 'خدمة نقل وتغليف أثاث', category: 'الخدمات المنزلية', icon: '📦'},
-        {name: 'باقات الصيانة الدورية', category: 'الخدمات المنزلية', icon: '📋'},
-        {name: 'خدمة طوارئ 24/7', category: 'الخدمات المنزلية', icon: '🚨'},
+        function toggleAIPanel() {
+            aiPanel.classList.toggle('active');
+        }
 
-        // خدمات السيارات (14 خدمة)
-        {name: 'غسيل وتلميع السيارات', category: 'خدمات السيارات', icon: '🧼'},
-        {name: 'صيانة محركات وميكانيكا', category: 'خدمات السيارات', icon: '🔧'},
-        {name: 'صيانة كهرباء السيارات', category: 'خدمات السيارات', icon: '⚡'},
-        {name: 'خدمة دهان السيارات', category: 'خدمات السيارات', icon: '🎨'},
-        {name: 'تغيير زيت وفلتر', category: 'خدمات السيارات', icon: '🛢️'},
-        {name: 'تلميع فرش وديكور داخلي', category: 'خدمات السيارات', icon: '🛋️'},
-        {name: 'خدمة سحب السيارات', category: 'خدمات السيارات', icon: '🚛'},
-        {name: 'خدمة إطارات', category: 'خدمات السيارات', icon: '🚗'},
-        {name: 'خدمة وقود متنقلة', category: 'خدمات السيارات', icon: '⛽'},
-        {name: 'سيارة بديلة مؤمنة', category: 'خدمات السيارات', icon: '🔄'},
-        {name: 'طوارئ طريق سريعة', category: 'خدمات السيارات', icon: '🛣️'},
-        {name: 'توصيل قطع غيار', category: 'خدمات السيارات', icon: '🔩'},
-        {name: 'تركيب أنظمة حماية', category: 'خدمات السيارات', icon: '🛡️'},
-        {name: 'فحص فني شامل', category: 'خدمات السيارات', icon: '🔍'},
-
-        // الخدمات اللوجستية (12 خدمة)
-        {name: 'نقل أثاث منزلي', category: 'الخدمات اللوجستية', icon: '📦'},
-        {name: 'نقل مكاتب وشركات', category: 'الخدمات اللوجستية', icon: '🏢'},
-        {name: 'توصيل طلبات سريعة', category: 'الخدمات اللوجستية', icon: '🚚'},
-        {name: 'نقل بضائع وتجارة', category: 'الخدمات اللوجستية', icon: '📦'},
-        {name: 'خدمة نقل مبردة', category: 'الخدمات اللوجستية', icon: '❄️'},
-        {name: 'تأجير شاحنات وسيارات', category: 'الخدمات اللوجستية', icon: '🚗'},
-        {name: 'خدمات تخزين ومستودعات', category: 'الخدمات اللوجستية', icon: '🏪'},
-        {name: 'نقل معدات ثقيلة', category: 'الخدمات اللوجستية', icon: '🏗️'},
-        {name: 'خدمات نقل دولية', category: 'الخدمات اللوجستية', icon: '🌍'},
-        {name: 'تتبع شحنات مباشر', category: 'الخدمات اللوجستية', icon: '📍'},
-        {name: 'خدمة تأمين على البضائع', category: 'الخدمات اللوجستية', icon: '🛡️'},
-        {name: 'استشارات لوجستية', category: 'الخدمات اللوجستية', icon: '📊'}
-    ];
-
-    // تصفية الخدمات حسب البحث
-    const filteredServices = allServices.filter(service => 
-        service.name.toLowerCase().includes(filter) || 
-        service.category.toLowerCase().includes(filter)
-    );
-
-    // عرض النتائج مع ترتيب حسب أفضل تطابق
-    if (filteredServices.length > 0) {
-        const sortedServices = filteredServices.sort((a, b) => {
-            // الأولوية للمطابقة في بداية الاسم
-            const aStartsWith = a.name.toLowerCase().startsWith(filter);
-            const bStartsWith = b.name.toLowerCase().startsWith(filter);
+        function aiAction(action) {
+            const actions = {
+                'search': 'سأساعدك في البحث عن الخدمة المناسبة. ما نوع الخدمة التي تبحث عنها؟',
+                'advice': 'أقترح لك أفضل الخدمات المناسبة لاحتياجاتك. هل تريد استشارة في مجال معين؟',
+                'booking': 'يمكنني مساعدتك في حجز موعد للخدمة. أي خدمة تريد حجزها؟',
+                'support': 'فريق الدعم الفني جاهز لمساعدتك. ما هي المشكلة التي تواجهها؟'
+            };
             
-            if (aStartsWith && !bStartsWith) return -1;
-            if (!aStartsWith && bStartsWith) return 1;
-            
-            // ثم المطابقة في أي مكان
-            return a.name.localeCompare(b.name);
+            alert(`🤖 مساعد راحة: ${actions[action]}`);
+            aiPanel.classList.remove('active');
+        }
+
+        aiToggle.addEventListener('click', toggleAIPanel);
+
+        // إغلاق لوحة الذكاء الاصطناعي عند النقر خارجها
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.ai-assistant') && aiPanel.classList.contains('active')) {
+                aiPanel.classList.remove('active');
+            }
         });
 
-        resultsContainer.innerHTML = sortedServices.map(service => 
-            `<div style="padding: 12px 20px; border-bottom: 1px solid #f8f9fa; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px;" 
-                  onclick="selectService('${service.name}')"
-                  onmouseover="this.style.background='#f8fafc; this.style.transform=\\'scale(1.02)\\''" 
-                  onmouseout="this.style.background='white; this.style.transform=\\'scale(1)\\''">
-                <span style="font-size: 1.3em;">${service.icon}</span>
-                <div style="flex: 1;">
-                    <div style="font-weight: 600; color: #2c3e50; font-size: 1em;">${service.name}</div>
-                    <div style="font-size: 0.8em; color: #7f8c8d; margin-top: 2px;">${service.category}</div>
-                </div>
-                <span style="color: #2563eb; font-size: 0.8em; background: #f0f4ff; padding: 4px 8px; border-radius: 12px;">اختر</span>
-            </div>`
-        ).join('');
-        
-        // إضافة عنوان للنتائج
-        resultsContainer.innerHTML = `
-            <div style="padding: 12px 20px; background: #f8fafc; border-bottom: 1px solid #e0e0e0; font-weight: 600; color: #2c3e50; display: flex; justify-content: space-between; align-items: center;">
-                <span>${filteredServices.length} خدمة وجدناها</span>
-                <span style="font-size: 0.8em; color: #7f8c8d; font-weight: normal;">انقر أو اضغط Enter</span>
-            </div>
-            ${resultsContainer.innerHTML}
-        `;
-        
-        resultsContainer.style.display = 'block';
-    } else {
-        resultsContainer.innerHTML = `
-            <div style="padding: 40px 20px; text-align: center; color: #7f8c8d;">
-                <div style="font-size: 3em; margin-bottom: 15px;">🔍</div>
-                <div style="font-size: 1.1em; margin-bottom: 10px;">لم نعثر على خدمات تطابق "${filter}"</div>
-                <div style="font-size: 0.9em;">جرب استخدام كلمات بحث أخرى مثل:<br>كهرباء، سباكة، غسيل، نقل</div>
-            </div>`;
-        resultsContainer.style.display = 'block';
-    }
-}
-
-function selectService(serviceName) {
-    document.getElementById('serviceSearch').value = serviceName;
-    document.getElementById('searchResults').style.display = 'none';
-    
-    // البحث عن القسم المناسب وفتحه
-    const sections = document.querySelectorAll('.section-card, .emergency-card');
-    let found = false;
-    
-    sections.forEach(section => {
-        if (section.textContent.includes(serviceName) && !found) {
-            // فتح القسم إذا كان مغلق
-            if (!section.classList.contains('active')) {
-                section.click();
+        // ===== نظام البحث الذكي =====
+        function searchServices() {
+            const input = document.getElementById('serviceSearch');
+            const filter = input.value.trim().toLowerCase();
+            const resultsContainer = document.getElementById('searchResults');
+            
+            // إظهار الاقتراحات من أول حرف
+            if (filter.length < 1) {
+                resultsContainer.classList.remove('active');
+                return;
             }
-            // التمرير للقسم
-            setTimeout(() => {
-                section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 100);
-            
-            // إضافة تأثير تمييز مؤقت
-            section.style.transition = 'all 0.5s ease';
-            section.style.boxShadow = '0 0 0 3px rgba(37, 99, 235, 0.5)';
-            setTimeout(() => {
-                section.style.boxShadow = '';
-            }, 2000);
-            
-            found = true;
-        }
-    });
-    
-    // إعادة التركيز على حقل البحث
-    document.getElementById('serviceSearch').focus();
-}
 
-// التنقل في النتائج باستخدام الأسهم
-document.getElementById('serviceSearch').addEventListener('keydown', function(e) {
-    const results = document.querySelectorAll('#searchResults div');
-    const activeResult = document.querySelector('#searchResults div:hover');
-    
-    if (e.key === 'ArrowDown' && results.length > 0) {
-        e.preventDefault();
-        if (activeResult && activeResult.nextElementSibling) {
-            activeResult.nextElementSibling.style.background = '#f8fafc';
-            activeResult.style.background = 'white';
-        } else if (results[1]) {
-            results[1].style.background = '#f8fafc';
-        }
-    } else if (e.key === 'ArrowUp' && results.length > 0) {
-        e.preventDefault();
-        // ... كود السهم لأعلى
-    } else if (e.key === 'Enter') {
-        e.preventDefault();
-        const activeResult = document.querySelector('#searchResults div:hover');
-        if (activeResult) {
-            activeResult.click();
-        } else if (results[1]) {
-            results[1].click();
-        }
-    }
-});
+            // قائمة جميع الخدمات المتوفرة
+            const allServices = [
+                // الخدمات المنزلية (17 خدمة)
+                {name: 'صيانة كهرباء منزلية', category: 'الخدمات المنزلية', icon: '🔧'},
+                {name: 'خدمات سباكة شاملة', category: 'الخدمات المنزلية', icon: '🚰'},
+                {name: 'صيانة تكييف وتبريد', category: 'الخدمات المنزلية', icon: '❄️'},
+                {name: 'صيانة أجهزة منزلية', category: 'الخدمات المنزلية', icon: '🏠'},
+                {name: 'صيانة نجارة الألمنيوم', category: 'الخدمات المنزلية', icon: '🔨'},
+                {name: 'تعقيم منازل احترافي', category: 'الخدمات المنزلية', icon: '🧹'},
+                {name: 'تنظيف مفروشات وسجاد', category: 'الخدمات المنزلية', icon: '🧽'},
+                {name: 'تنظيف خزانات مياه', category: 'الخدمات المنزلية', icon: '💧'},
+                {name: 'مكافحة حشرات وقوارض', category: 'الخدمات المنزلية', icon: '🐜'},
+                {name: 'تنظيف مسابح وصيانتها', category: 'الخدمات المنزلية', icon: '🏊'},
+                {name: 'تركيب أنظمة ذكية', category: 'الخدمات المنزلية', icon: '🏡'},
+                {name: 'تركيب أنظمة طاقة شمسية', category: 'الخدمات المنزلية', icon: '☀️'},
+                {name: 'تنسيق وديكور داخلي', category: 'الخدمات المنزلية', icon: '🎨'},
+                {name: 'تركيب ستائر ومظلات', category: 'الخدمات المنزلية', icon: '🪟'},
+                {name: 'خدمة نقل وتغليف أثاث', category: 'الخدمات المنزلية', icon: '📦'},
+                {name: 'باقات الصيانة الدورية', category: 'الخدمات المنزلية', icon: '📋'},
+                {name: 'خدمة طوارئ 24/7', category: 'الخدمات المنزلية', icon: '🚨'},
 
-// إغلاق نتائج البحث عند النقر خارجها
-document.addEventListener('click', function(event) {
-    const searchContainer = document.getElementById('searchResults');
-    const searchInput = document.getElementById('serviceSearch');
-    
-    if (!searchContainer.contains(event.target) && event.target !== searchInput) {
-        searchContainer.style.display = 'none';
-    }
-});
-        // ===== نظام التقييمات والتعليقات الكامل =====
-let currentRating = 0;
+                // خدمات السيارات (14 خدمة)
+                {name: 'غسيل وتلميع السيارات', category: 'خدمات السيارات', icon: '🧼'},
+                {name: 'صيانة محركات وميكانيكا', category: 'خدمات السيارات', icon: '🔧'},
+                {name: 'صيانة كهرباء السيارات', category: 'خدمات السيارات', icon: '⚡'},
+                {name: 'خدمة دهان السيارات', category: 'خدمات السيارات', icon: '🎨'},
+                {name: 'تغيير زيت وفلتر', category: 'خدمات السيارات', icon: '🛢️'},
+                {name: 'تلميع فرش وديكور داخلي', category: 'خدمات السيارات', icon: '🛋️'},
+                {name: 'خدمة سحب السيارات', category: 'خدمات السيارات', icon: '🚛'},
+                {name: 'خدمة إطارات', category: 'خدمات السيارات', icon: '🚗'},
+                {name: 'خدمة وقود متنقلة', category: 'خدمات السيارات', icon: '⛽'},
+                {name: 'سيارة بديلة مؤمنة', category: 'خدمات السيارات', icon: '🔄'},
+                {name: 'طوارئ طريق سريعة', category: 'خدمات السيارات', icon: '🛣️'},
+                {name: 'توصيل قطع غيار', category: 'خدمات السيارات', icon: '🔩'},
+                {name: 'تركيب أنظمة حماية', category: 'خدمات السيارات', icon: '🛡️'},
+                {name: 'فحص فني شامل', category: 'خدمات السيارات', icon: '🔍'},
 
-// نظام التقييم بالنجوم
-document.querySelectorAll('.star-input').forEach(star => {
-    star.addEventListener('click', function() {
-        const rating = parseInt(this.getAttribute('data-rating'));
-        currentRating = rating;
-        
-        // تحديث النجوم
-        document.querySelectorAll('.star-input').forEach((s, index) => {
-            if (index < rating) {
-                s.classList.add('active');
+                // الخدمات اللوجستية (12 خدمة)
+                {name: 'نقل أثاث منزلي', category: 'الخدمات اللوجستية', icon: '📦'},
+                {name: 'نقل مكاتب وشركات', category: 'الخدمات اللوجستية', icon: '🏢'},
+                {name: 'توصيل طلبات سريعة', category: 'الخدمات اللوجستية', icon: '🚚'},
+                {name: 'نقل بضائع وتجارة', category: 'الخدمات اللوجستية', icon: '📦'},
+                {name: 'خدمة نقل مبردة', category: 'الخدمات اللوجستية', icon: '❄️'},
+                {name: 'تأجير شاحنات وسيارات', category: 'الخدمات اللوجستية', icon: '🚗'},
+                {name: 'خدمات تخزين ومستودعات', category: 'الخدمات اللوجستية', icon: '🏪'},
+                {name: 'نقل معدات ثقيلة', category: 'الخدمات اللوجستية', icon: '🏗️'},
+                {name: 'خدمات نقل دولية', category: 'الخدمات اللوجستية', icon: '🌍'},
+                {name: 'تتبع شحنات مباشر', category: 'الخدمات اللوجستية', icon: '📍'},
+                {name: 'خدمة تأمين على البضائع', category: 'الخدمات اللوجستية', icon: '🛡️'},
+                {name: 'استشارات لوجستية', category: 'الخدمات اللوجستية', icon: '📊'}
+            ];
+
+            // تصفية الخدمات حسب البحث
+            const filteredServices = allServices.filter(service => 
+                service.name.toLowerCase().includes(filter) || 
+                service.category.toLowerCase().includes(filter)
+            );
+
+            // عرض النتائج مع ترتيب حسب أفضل تطابق
+            if (filteredServices.length > 0) {
+                const sortedServices = filteredServices.sort((a, b) => {
+                    // الأولوية للمطابقة في بداية الاسم
+                    const aStartsWith = a.name.toLowerCase().startsWith(filter);
+                    const bStartsWith = b.name.toLowerCase().startsWith(filter);
+                    
+                    if (aStartsWith && !bStartsWith) return -1;
+                    if (!aStartsWith && bStartsWith) return 1;
+                    
+                    // ثم المطابقة في أي مكان
+                    return a.name.localeCompare(b.name);
+                });
+
+                resultsContainer.innerHTML = `
+                    <div class="results-header">
+                        <span>${filteredServices.length} خدمة وجدناها</span>
+                        <span style="font-size: 0.8em; color: var(--gray); font-weight: normal;">انقر أو اضغط Enter</span>
+                    </div>
+                    ${sortedServices.map(service => 
+                        `<div class="result-item" onclick="selectService('${service.name}')">
+                            <span class="result-icon">${service.icon}</span>
+                            <div class="result-content">
+                                <div class="result-name">${service.name}</div>
+                                <div class="result-category">${service.category}</div>
+                            </div>
+                            <span class="result-badge">اختر</span>
+                        </div>`
+                    ).join('')}
+                `;
+                
+                resultsContainer.classList.add('active');
             } else {
-                s.classList.remove('active');
+                resultsContainer.innerHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">🔍</div>
+                        <div style="font-size: 1.1em; margin-bottom: 10px;">لم نعثر على خدمات تطابق "${filter}"</div>
+                        <div style="font-size: 0.9em;">جرب استخدام كلمات بحث أخرى مثل:<br>كهرباء، سباكة، غسيل، نقل</div>
+                    </div>`;
+                resultsContainer.classList.add('active');
+            }
+        }
+
+        function selectService(serviceName) {
+            document.getElementById('serviceSearch').value = serviceName;
+            document.getElementById('searchResults').classList.remove('active');
+            
+            // البحث عن القسم المناسب وفتحه
+            const sections = document.querySelectorAll('.section-card, .emergency-card');
+            let found = false;
+            
+            sections.forEach(section => {
+                if (section.textContent.includes(serviceName) && !found) {
+                    // فتح القسم إذا كان مغلق
+                    if (!section.classList.contains('active')) {
+                        section.click();
+                    }
+                    // التمرير للقسم
+                    setTimeout(() => {
+                        section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 100);
+                    
+                    // إضافة تأثير تمييز مؤقت
+                    section.style.transition = 'all 0.5s ease';
+                    section.style.boxShadow = '0 0 0 3px rgba(37, 99, 235, 0.5)';
+                    setTimeout(() => {
+                        section.style.boxShadow = '';
+                    }, 2000);
+                    
+                    found = true;
+                }
+            });
+            
+            // إعادة التركيز على حقل البحث
+            document.getElementById('serviceSearch').focus();
+        }
+
+        // إغلاق نتائج البحث عند النقر خارجها
+        document.addEventListener('click', function(event) {
+            const searchContainer = document.getElementById('searchResults');
+            const searchInput = document.getElementById('serviceSearch');
+            
+            if (!searchContainer.contains(event.target) && event.target !== searchInput) {
+                searchContainer.classList.remove('active');
             }
         });
-        
-        // تحديث النص
-        const ratingText = document.getElementById('rating-text');
-        const texts = ['سيء جداً', 'سيء', 'متوسط', 'جيد', 'ممتاز'];
-        ratingText.textContent = texts[rating - 1];
-        ratingText.style.color = rating >= 4 ? '#10b981' : rating >= 3 ? '#f59e0b' : '#ef4444';
-    });
-});
 
-// إرسال تقييم جديد
-function submitReview() {
-    const serviceSelect = document.getElementById('service-select');
-    const reviewText = document.getElementById('review-text');
-    const selectedService = serviceSelect.value;
-    
-    if (!selectedService) {
-        alert('⚠️ الرجاء اختيار خدمة');
-        return;
-    }
-    
-    if (currentRating === 0) {
-        alert('⚠️ الرجاء اختيار تقييم');
-        return;
-    }
-    
-    // هنا يمكنك إرسال البيانات لخادم أو قاعدة بيانات
-    console.log('تقييم جديد:', {
-        service: selectedService,
-        rating: currentRating,
-        comment: reviewText.value
-    });
-    
-    // عرض رسالة نجاح
-    alert(`✅ شكراً لتقييمك! تم إضافة تقييمك بنجاح`);
-    
-    // إعادة تعيين النموذج
-    serviceSelect.value = '';
-    reviewText.value = '';
-    currentRating = 0;
-    document.querySelectorAll('.star-input').forEach(star => {
-        star.classList.remove('active');
-    });
-    document.getElementById('rating-text').textContent = 'اضغط على النجوم للتقييم';
-    document.getElementById('rating-text').style.color = '#718096';
-}
+        // ===== نظام التقييمات والتعليقات =====
+        let currentRating = 0;
 
-// تفعيل التعليقات
-function toggleComments(button) {
-    const card = button.closest('.testimonial-card');
-    const commentsSection = card.querySelector('.comments-section');
-    const commentForm = card.querySelector('.comment-form');
-    const commentText = button.querySelector('.comment-text');
-    
-    if (commentsSection.classList.contains('expanded')) {
-        commentsSection.classList.remove('expanded');
-        commentForm.classList.remove('expanded');
-        commentText.textContent = 'تعليق';
-// ===== نظام التقييمات والتعليقات المتكامل =====
-let currentRating = 0;
-
-// تحديث عدد الأحرف
-document.getElementById('review-text').addEventListener('input', function() {
-    const charCount = this.value.length;
-    document.getElementById('char-count').textContent = charCount;
-});
-
-// التحقق من اكتمال النموذج
-function checkFormCompletion() {
-    const serviceSelect = document.getElementById('service-select');
-    const submitBtn = document.getElementById('submit-review-btn');
-    
-    if (serviceSelect.value && currentRating > 0) {
-        submitBtn.disabled = false;
-    } else {
-        submitBtn.disabled = true;
-    }
-}
-
-// تعيين التقييم
-function setRating(rating) {
-    currentRating = rating;
-    const stars = document.querySelectorAll('.star-input');
-    const ratingText = document.getElementById('rating-text');
-    const ratingTexts = ['سيء جداً', 'سيء', 'متوسط', 'جيد', 'ممتاز'];
-    
-    stars.forEach((star, index) => {
-        if (index < rating) {
-            star.classList.add('active');
-        } else {
-            star.classList.remove('active');
-        }
-    });
-    
-    ratingText.textContent = ratingTexts[rating - 1];
-    ratingText.style.color = rating >= 4 ? '#10b981' : rating >= 3 ? '#f59e0b' : '#ef4444';
-    
-    checkFormCompletion();
-}
-
-// إرسال تقييم جديد
-function submitReview() {
-    const serviceSelect = document.getElementById('service-select');
-    const reviewText = document.getElementById('review-text');
-    const reviewerName = document.getElementById('reviewer-name');
-    const selectedService = serviceSelect.value;
-    
-    if (!selectedService) {
-        alert('⚠️ الرجاء اختيار خدمة');
-        return;
-    }
-    
-    if (currentRating === 0) {
-        alert('⚠️ الرجاء اختيار تقييم');
-        return;
-    }
-    
-    const serviceNames = {
-        'كهرباء': '🔧 صيانة كهرباء منزلية',
-        'سباكة': '🚰 خدمات سباكة شاملة', 
-        'تكييف': '❄️ صيانة تكييف وتبريد',
-        'غسيل سيارات': '🧼 غسيل وتلميع السيارات',
-        'نقل أثاث': '📦 نقل أثاث منزلي'
-    };
-    
-    // في تطبيق حقيقي، هنا نرسل البيانات للخادم
-    console.log('تقييم جديد:', {
-        reviewer: reviewerName.value || 'مستخدم',
-        service: selectedService,
-        rating: currentRating,
-        comment: reviewText.value
-    });
-    
-    // رسالة نجاح
-    alert(`✅ شكراً ${reviewerName.value || 'عزيزي'} لتقييمك!\n\nالخدمة: ${serviceNames[selectedService]}\nالتقييم: ${currentRating} نجوم\n${reviewText.value ? 'تعليقك: ' + reviewText.value : ''}`);
-    
-    // إعادة تعيين النموذج
-    resetReviewForm();
-}
-
-// إعادة تعيين النموذج
-function resetReviewForm() {
-    document.getElementById('service-select').value = '';
-    document.getElementById('review-text').value = '';
-    document.getElementById('reviewer-name').value = '';
-    document.getElementById('char-count').textContent = '0';
-    document.getElementById('submit-review-btn').disabled = true;
-    
-    currentRating = 0;
-    document.querySelectorAll('.star-input').forEach(star => {
-        star.classList.remove('active');
-    });
-    
-    document.getElementById('rating-text').textContent = 'اضغط على النجوم لتقييم الخدمة';
-    document.getElementById('rating-text').style.color = '#718096';
-}
-
-// تفعيل/تعطيل الإعجاب على التقييم
-function toggleReviewLike(reviewId) {
-    const likeBtn = document.querySelector(`#${reviewId} .like-btn`);
-    const likeCount = document.querySelector(`#${reviewId} .like-btn .count`);
-    let count = parseInt(likeCount.textContent);
-    
-    if (likeBtn.classList.contains('liked')) {
-        likeBtn.classList.remove('liked');
-        count--;
-    } else {
-        likeBtn.classList.add('liked');
-        count++;
-        
-        // تأثير مرئي
-        likeBtn.style.transform = 'scale(1.1)';
-        setTimeout(() => {
-            likeBtn.style.transform = 'scale(1)';
-        }, 200);
-    }
-    
-    likeCount.textContent = count;
-}
-
-// تفعيل/تعطيل الإعجاب على التعليق أو الرد
-function toggleCommentLike(commentId) {
-    const likeBtn = document.querySelector(`#${commentId} .like-btn`);
-    const likeCount = document.querySelector(`#${commentId} .like-btn .count`);
-    let count = parseInt(likeCount.textContent);
-    
-    if (likeBtn.classList.contains('liked')) {
-        likeBtn.classList.remove('liked');
-        count--;
-    } else {
-        likeBtn.classList.add('liked');
-        count++;
-        
-        // تأثير مرئي
-        likeBtn.style.transform = 'scale(1.1)';
-        setTimeout(() => {
-            likeBtn.style.transform = 'scale(1)';
-        }, 200);
-    }
-    
-    likeCount.textContent = count;
-}
-
-// فتح/إغلاق قسم التعليقات
-function toggleComments(reviewId) {
-    const commentsSection = document.getElementById(`comments-${reviewId.split('-')[1]}`);
-    const commentBtn = document.querySelector(`#${reviewId} .comment-btn`);
-    
-    if (commentsSection.classList.contains('expanded')) {
-        commentsSection.classList.remove('expanded');
-        commentBtn.classList.remove('active');
-    } else {
-        commentsSection.classList.add('expanded');
-        commentBtn.classList.add('active');
-        
-        // تمرير إلى قسم التعليقات
-        setTimeout(() => {
-            commentsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 300);
-    }
-}
-
-// فتح/إغلاق نموذج الرد
-function toggleReplyForm(commentId) {
-    const replyForm = document.getElementById(`reply-form-${commentId.split('-').slice(1).join('-')}`);
-    
-    if (replyForm.style.display === 'none' || !replyForm.style.display) {
-        replyForm.style.display = 'block';
-        
-        // تمرير إلى نموذج الرد
-        setTimeout(() => {
-            replyForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 300);
-    } else {
-        replyForm.style.display = 'none';
-    }
-}
-
-// إرسال رد
-function submitReply(commentId) {
-    const replyInput = document.getElementById(`reply-input-${commentId.split('-').slice(1).join('-')}`);
-    const replyText = replyInput.value.trim();
-    
-    if (!replyText) {
-        alert('⚠️ الرجاء كتابة رد');
-        return;
-    }
-    
-    const repliesContainer = document.getElementById(`replies-${commentId.split('-').slice(1).join('-')}`);
-    const replyId = `reply-${commentId.split('-').slice(1).join('-')}-${Date.now()}`;
-    
-    const newReply = document.createElement('div');
-    newReply.className = 'reply';
-    newReply.id = replyId;
-    newReply.innerHTML = `
-        <div class="reply-header">
-            <span class="replier">أنت</span>
-            <span class="reply-date">الآن</span>
-        </div>
-        <div class="reply-text">${replyText}</div>
-        <div class="reply-actions">
-            <button class="like-btn small" onclick="toggleCommentLike('${replyId}')">
-                ❤️ <span class="count" id="reply-likes-${replyId.split('-').slice(1).join('-')}">0</span>
-            </button>
-        </div>
-    `;
-    
-    if (!repliesContainer) {
-        const newRepliesContainer = document.createElement('div');
-        newRepliesContainer.className = 'replies';
-        newRepliesContainer.id = `replies-${commentId.split('-').slice(1).join('-')}`;
-        newRepliesContainer.appendChild(newReply);
-        document.getElementById(commentId).appendChild(newRepliesContainer);
-    } else {
-        repliesContainer.appendChild(newReply);
-    }
-    
-    // إغلاق نموذج الرد
-    document.getElementById(`reply-form-${commentId.split('-').slice(1).join('-')}`).style.display = 'none';
-    replyInput.value = '';
-    
-    // إزالة "لا توجد تعليقات" إذا كانت موجودة
-    const noComments = document.querySelector(`#${commentId} .no-comments`);
-    if (noComments) {
-        noComments.remove();
-    }
-}
-
-// إضافة تعليق جديد
-function addComment(reviewId) {
-    const commentInput = document.getElementById(`new-comment-${reviewId.split('-')[1]}`);
-    const commentText = commentInput.value.trim();
-    const commentsList = document.querySelector(`#comments-${reviewId.split('-')[1]} .comments-list`);
-    
-    if (!commentText) {
-        alert('⚠️ الرجاء كتابة تعليق');
-        return;
-    }
-    
-    const commentId = `comment-${reviewId.split('-')[1]}-${Date.now()}`;
-    
-    const newComment = document.createElement('div');
-    newComment.className = 'comment';
-    newComment.id = commentId;
-    newComment.innerHTML = `
-        <div class="comment-header">
-            <span class="commenter">أنت</span>
-            <span class="comment-date">الآن</span>
-        </div>
-        <div class="comment-text">${commentText}</div>
-        <div class="comment-actions">
-            <button class="like-btn small" onclick="toggleCommentLike('${commentId}')">
-                ❤️ <span class="count" id="comment-likes-${commentId.split('-').slice(1).join('-')}">0</span>
-            </button>
-            <button class="reply-btn" onclick="toggleReplyForm('${commentId}')">رد</button>
-        </div>
-        
-        <div class="reply-form" id="reply-form-${commentId.split('-').slice(1).join('-')}" style="display: none;">
-            <textarea class="comment-input" placeholder="اكتب ردك..." id="reply-input-${commentId.split('-').slice(1).join('-')}"></textarea>
-            <div style="display: flex; gap: 10px; margin-top: 10px;">
-                <button class="submit-comment" onclick="submitReply('${commentId}')">نشر الرد</button>
-                <button class="submit-comment" style="background: #718096;" onclick="toggleReplyForm('${commentId}')">إلغاء</button>
-            </div>
-        </div>
-    `;
-    
-    // إزالة "لا توجد تعليقات" إذا كانت موجودة
-    const noComments = commentsList.querySelector('.no-comments');
-    if (noComments) {
-        noComments.remove();
-    }
-    
-    commentsList.appendChild(newComment);
-    commentInput.value = '';
-    
-    // تحديث عدد التعليقات
-    const commentsCount = document.getElementById(`comments-count-${reviewId.split('-')[1]}`);
-    let count = parseInt(commentsCount.textContent);
-    count++;
-    commentsCount.textContent = count;
-    
-    // تمرير إلى التعليق الجديد
-    setTimeout(() => {
-        newComment.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }, 300);
-}
-
-// تفعيل النظام عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 نظام التقييمات والتعليقات جاهز للعمل!');
-    
-    // إضافة تأثيرات تحميل
-    setTimeout(() => {
-        document.querySelectorAll('.testimonial-card').forEach((card, index) => {
-            setTimeout(() => {
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, index * 200);
+        // تحديث عدد الأحرف
+        document.getElementById('review-text').addEventListener('input', function() {
+            const charCount = this.value.length;
+            document.getElementById('char-count').textContent = charCount;
         });
-    }, 500);
-});
+
+        // التحقق من اكتمال النموذج
+        function checkFormCompletion() {
+            const serviceSelect = document.getElementById('service-select');
+            const submitBtn = document.getElementById('submit-review-btn');
+            
+            if (serviceSelect.value && currentRating > 0) {
+                submitBtn.disabled = false;
+            } else {
+                submitBtn.disabled = true;
+            }
+        }
+
+        // تعيين التقييم
+        function setRating(rating) {
+            currentRating = rating;
+            const stars = document.querySelectorAll('.star-input');
+            const ratingText = document.getElementById('rating-text');
+            const ratingTexts = ['سيء جداً', 'سيء', 'متوسط', 'جيد', 'ممتاز'];
+            
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+            
+            ratingText.textContent = ratingTexts[rating - 1];
+            ratingText.style.color = rating >= 4 ? 'var(--success)' : rating >= 3 ? 'var(--warning)' : 'var(--emergency)';
+            
+            checkFormCompletion();
+        }
+
+        // إرسال تقييم جديد
+        function submitReview() {
+            const serviceSelect = document.getElementById('service-select');
+            const reviewText = document.getElementById('review-text');
+            const reviewerName = document.getElementById('reviewer-name');
+            const selectedService = serviceSelect.value;
+            
+            if (!selectedService) {
+                alert('⚠️ الرجاء اختيار خدمة');
+                return;
+            }
+            
+            if (currentRating === 0) {
+                alert('⚠️ الرجاء اختيار تقييم');
+                return;
+            }
+            
+            const serviceNames = {
+                'كهرباء': '🔧 صيانة كهرباء منزلية',
+                'سباكة': '🚰 خدمات سباكة شاملة', 
+                'تكييف': '❄️ صيانة تكييف وتبريد',
+                'غسيل سيارات': '🧼 غسيل وتلميع السيارات',
+                'نقل أثاث': '📦 نقل أثاث منزلي'
+            };
+            
+            // في تطبيق حقيقي، هنا نرسل البيانات للخادم
+            console.log('تقييم جديد:', {
+                reviewer: reviewerName.value || 'مستخدم',
+                service: selectedService,
+                rating: currentRating,
+                comment: reviewText.value
+            });
+            
+            // رسالة نجاح
+            alert(`✅ شكراً ${reviewerName.value || 'عزيزي'} لتقييمك!\n\nالخدمة: ${serviceNames[selectedService]}\nالتقييم: ${currentRating} نجوم\n${reviewText.value ? 'تعليقك: ' + reviewText.value : ''}`);
+            
+            // إعادة تعيين النموذج
+            resetReviewForm();
+        }
+
+        // إعادة تعيين النموذج
+        function resetReviewForm() {
+            document.getElementById('service-select').value = '';
+            document.getElementById('review-text').value = '';
+            document.getElementById('reviewer-name').value = '';
+            document.getElementById('char-count').textContent = '0';
+            document.getElementById('submit-review-btn').disabled = true;
+            
+            currentRating = 0;
+            document.querySelectorAll('.star-input').forEach(star => {
+                star.classList.remove('active');
+            });
+            
+            document.getElementById('rating-text').textContent = 'اضغط على النجوم لتقييم الخدمة';
+            document.getElementById('rating-text').style.color = 'var(--gray)';
+        }
+
+        // تفعيل/تعطيل الإعجاب على التقييم
+        function toggleReviewLike(reviewId) {
+            const likeBtn = document.querySelector(`#${reviewId} .like-btn`);
+            const likeCount = document.querySelector(`#${reviewId} .like-btn .count`);
+            let count = parseInt(likeCount.textContent);
+            
+            if (likeBtn.classList.contains('liked')) {
+                likeBtn.classList.remove('liked');
+                count--;
+            } else {
+                likeBtn.classList.add('liked');
+                count++;
+                
+                // تأثير مرئي
+                likeBtn.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    likeBtn.style.transform = 'scale(1)';
+                }, 200);
+            }
+            
+            likeCount.textContent = count;
+        }
+
+        // تفعيل/تعطيل الإعجاب على التعليق أو الرد
+        function toggleCommentLike(commentId) {
+            const likeBtn = document.querySelector(`#${commentId} .like-btn`);
+            const likeCount = document.querySelector(`#${commentId} .like-btn .count`);
+            let count = parseInt(likeCount.textContent);
+            
+            if (likeBtn.classList.contains('liked')) {
+                likeBtn.classList.remove('liked');
+                count--;
+            } else {
+                likeBtn.classList.add('liked');
+                count++;
+                
+                // تأثير مرئي
+                likeBtn.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    likeBtn.style.transform = 'scale(1)';
+                }, 200);
+            }
+            
+            likeCount.textContent = count;
+        }
+
+        // فتح/إغلاق قسم التعليقات
+        function toggleComments(reviewId) {
+            const commentsSection = document.getElementById(`comments-${reviewId.split('-')[1]}`);
+            const commentBtn = document.querySelector(`#${reviewId} .comment-btn`);
+            
+            if (commentsSection.classList.contains('expanded')) {
+                commentsSection.classList.remove('expanded');
+                commentBtn.classList.remove('active');
+            } else {
+                commentsSection.classList.add('expanded');
+                commentBtn.classList.add('active');
+                
+                // تمرير إلى قسم التعليقات
+                setTimeout(() => {
+                    commentsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 300);
+            }
+        }
+
+        // فتح/إغلاق نموذج الرد
+        function toggleReplyForm(commentId) {
+            const replyForm = document.getElementById(`reply-form-${commentId.split('-').slice(1).join('-')}`);
+            
+            if (replyForm.style.display === 'none' || !replyForm.style.display) {
+                replyForm.style.display = 'block';
+                
+                // تمرير إلى نموذج الرد
+                setTimeout(() => {
+                    replyForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 300);
+            } else {
+                replyForm.style.display = 'none';
+            }
+        }
+
+        // إرسال رد
+        function submitReply(commentId) {
+            const replyInput = document.getElementById(`reply-input-${commentId.split('-').slice(1).join('-')}`);
+            const replyText = replyInput.value.trim();
+            
+            if (!replyText) {
+                alert('⚠️ الرجاء كتابة رد');
+                return;
+            }
+            
+            const repliesContainer = document.getElementById(`replies-${commentId.split('-').slice(1).join('-')}`);
+            const replyId = `reply-${commentId.split('-').slice(1).join('-')}-${Date.now()}`;
+            
+            const newReply = document.createElement('div');
+            newReply.className = 'reply';
+            newReply.id = replyId;
+            newReply.innerHTML = `
+                <div class="reply-header">
+                    <span class="replier">أنت</span>
+                    <span class="reply-date">الآن</span>
+                </div>
+                <div class="reply-text">${replyText}</div>
+                <div class="reply-actions">
+                    <button class="like-btn small" onclick="toggleCommentLike('${replyId}')">
+                        ❤️ <span class="count" id="reply-likes-${replyId.split('-').slice(1).join('-')}">0</span>
+                    </button>
+                </div>
+            `;
+            
+            if (!repliesContainer) {
+                const newRepliesContainer = document.createElement('div');
+                newRepliesContainer.className = 'replies';
+                newRepliesContainer.id = `replies-${commentId.split('-').slice(1).join('-')}`;
+                newRepliesContainer.appendChild(newReply);
+                document.getElementById(commentId).appendChild(newRepliesContainer);
+            } else {
+                repliesContainer.appendChild(newReply);
+            }
+            
+            // إغلاق نموذج الرد
+            document.getElementById(`reply-form-${commentId.split('-').slice(1).join('-')}`).style.display = 'none';
+            replyInput.value = '';
+            
+            // إزالة "لا توجد تعليقات" إذا كانت موجودة
+            const noComments = document.querySelector(`#${commentId} .no-comments`);
+            if (noComments) {
+                noComments.remove();
+            }
+        }
+
+        // إضافة تعليق جديد
+        function addComment(reviewId) {
+            const commentInput = document.getElementById(`new-comment-${reviewId.split('-')[1]}`);
+            const commentText = commentInput.value.trim();
+            const commentsList = document.querySelector(`#comments-${reviewId.split('-')[1]} .comments-list`);
+            
+            if (!commentText) {
+                alert('⚠️ الرجاء كتابة تعليق');
+                return;
+            }
+            
+            const commentId = `comment-${reviewId.split('-')[1]}-${Date.now()}`;
+            
+            const newComment = document.createElement('div');
+            newComment.className = 'comment';
+            newComment.id = commentId;
+            newComment.innerHTML = `
+                <div class="comment-header">
+                    <span class="commenter">أنت</span>
+                    <span class="comment-date">الآن</span>
+                </div>
+                <div class="comment-text">${commentText}</div>
+                <div class="comment-actions">
+                    <button class="like-btn small" onclick="toggleCommentLike('${commentId}')">
+                        ❤️ <span class="count" id="comment-likes-${commentId.split('-').slice(1).join('-')}">0</span>
+                    </button>
+                    <button class="reply-btn" onclick="toggleReplyForm('${commentId}')">رد</button>
+                </div>
+                
+                <div class="reply-form" id="reply-form-${commentId.split('-').slice(1).join('-')}" style="display: none;">
+                    <textarea class="comment-input" placeholder="اكتب ردك..." id="reply-input-${commentId.split('-').slice(1).join('-')}"></textarea>
+                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                        <button class="submit-comment" onclick="submitReply('${commentId}')">نشر الرد</button>
+                        <button class="submit-comment" style="background: var(--gray);" onclick="toggleReplyForm('${commentId}')">إلغاء</button>
+                    </div>
+                </div>
+            `;
+            
+            // إزالة "لا توجد تعليقات" إذا كانت موجودة
+            const noComments = commentsList.querySelector('.no-comments');
+            if (noComments) {
+                noComments.remove();
+            }
+            
+            commentsList.appendChild(newComment);
+            commentInput.value = '';
+            
+            // تحديث عدد التعليقات
+            const commentsCount = document.getElementById(`comments-count-${reviewId.split('-')[1]}`);
+            let count = parseInt(commentsCount.textContent);
+            count++;
+            commentsCount.textContent = count;
+            
+            // تمرير إلى التعليق الجديد
+            setTimeout(() => {
+                newComment.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 300);
+        }
+
+        // حجز باقة
+        function bookPackage(packageName, price) {
+            const message = `أريد حجز ${packageName} بسعر ${price} دينار`;
+            window.open(`https://wa.me/962790782004?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        // تفعيل النظام عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 نظام راحة الذكي جاهز للعمل!');
+            
+            // إضافة تأثيرات تحميل
+            setTimeout(() => {
+                document.querySelectorAll('.testimonial-card').forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, index * 200);
+                });
+            }, 500);
+            
+            // إضافة تأثيرات للبطاقات
+            document.querySelectorAll('.section-card, .emergency-card').forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
     </script>
 </body>
 </html>
