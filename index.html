@@ -1978,91 +1978,7 @@
             </div>
         </div>
     </section>
-<!-- قسم التقييمات المتطور -->
-<section class="testimonials-section">
-    <div style="max-width: 1200px; margin: 0 auto;">
-        <h2 style="text-align: center; color: #2d3748; margin-bottom: 20px; font-size: 2.5em;">
-            ⭐ ماذا يقول عملاؤنا؟
-        </h2>
-        <p style="text-align: center; color: #718096; font-size: 1.2em; margin-bottom: 60px; max-width: 600px; margin-right: auto; margin-left: auto;">
-            انضم إلى <strong style="color: #667eea;">+127</strong> عميلاً راضياً عن خدماتنا المميزة
-        </p>
-        
-        <div class="testimonials-grid">
-            
-            <!-- التقييم ١ -->
-            <div class="testimonial-card">
-                <div class="testimonial-header">
-                    <div class="client-info">
-                        <div class="client-name">جميل محمد</div>
-                        <div class="service-name">صيانة كهرباء منزلية</div>
-                    </div>
-                    <div class="rating-display">
-                        <div class="stars">
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                        </div>
-                        <div class="rating-value">5.0</div>
-                    </div>
-                </div>
-                <div class="testimonial-text">
-                    "خدمة ممتازة وسريعة. الفني كان محترف جداً وحل المشكلة في أقل من ساعة. الدقة في الموعد والاحترافية في العمل جعلتني أوصي بهم لكل أصدقائي!"
-                </div>
-                <div class="testimonial-actions">
-                    <div class="action-buttons">
-                        <button class="like-btn" onclick="toggleLike(this)">
-                            <span>❤️</span>
-                            <span class="like-count">12</span>
-                        </button>
-                        <button class="comment-btn" onclick="toggleComments(this)">
-                            <span>💬</span>
-                            <span>تعليق</span>
-                        </button>
-                    </div>
-                    <div class="testimonial-date">منذ ٣ أيام</div>
-                </div>
-                
-                <!-- قسم التعليقات -->
-                <div class="comments-section" style="display: none;">
-                    <div class="comment">
-                        <div class="comment-header">
-                            <span class="comment-author">جلال</span>
-                        </div>
-                        <div class="comment-text">أحتاج نفس الخدمة، ممكن رقم الفني؟</div>
-                    </div>
-                    <div class="add-comment">
-                        <textarea class="comment-input" placeholder="اكتب تعليقك..."></textarea>
-                        <button class="submit-comment" onclick="addComment(this)">إرسال</button>
-                    </div>
-                </div>
-            </div>
 
-            <!-- التقييم ٢ -->
-            <div class="testimonial-card">
-                <div class="testimonial-header">
-                    <div class="client-info">
-                        <div class="client-name">نادر عيسى</div>
-                        <div class="service-name">غسيل سيارات - باقة بريميوم</div>
-                    </div>
-                    <div class="rating-display">
-                        <div class="stars">
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-<!-- قسم التقييمات المتطور والكامل -->
-<section class="testimonials-section">
-    <div style="max-width: 1200px; margin: 0 auto;">
-        
-        <!-- عنوان القسم -->
-        <h2 style="text-align: center; color: #2d3748; margin-bottom: 20px; font-size: 2.5em;">
-            ⭐ آراء عملائنا
-        </h2>
-        <p style="text-align: center; color: #718096; font-size: 1.2em; margin-bottom: 60px; max-width: 600px; margin-right: auto; margin-left: auto;">
-            انضم إلى <strong style="color: #667eea;">+127</strong> عميلاً راضياً عن خدماتنا المميزة
-        </p>
 
         <!-- نموذج إضافة تقييم جديد -->
         <div class="add-review-section">
@@ -2164,21 +2080,238 @@
                         <button class="submit-comment" onclick="addComment(this)">نشر التعليق</button>
                     </div>
                 </div>
+<!-- قسم التقييمات والتعليقات المتكامل -->
+<section class="testimonials-section">
+    <div style="max-width: 1200px; margin: 0 auto;">
+        
+        <!-- عنوان القسم -->
+        <h2 style="text-align: center; color: #2d3748; margin-bottom: 20px; font-size: 2.5em;">
+            ⭐ آراء عملائنا
+        </h2>
+        <p style="text-align: center; color: #718096; font-size: 1.2em; margin-bottom: 60px; max-width: 600px; margin-right: auto; margin-left: auto;">
+            انضم إلى <strong style="color: #667eea;">آلاف العملاء</strong> الراضين عن خدماتنا
+        </p>
+
+        <!-- نموذج إضافة تقييم جديد -->
+        <div class="add-review-section">
+            <h3 style="text-align: center; color: #2d3748; margin-bottom: 30px; font-size: 1.8em;">✍️ أضف تقييمك</h3>
+            <div class="review-form">
+                <div class="form-group">
+                    <label for="reviewer-name">اسمك:</label>
+                    <input type="text" id="reviewer-name" class="reviewer-name-input" placeholder="اكتب اسمك (اختياري)" maxlength="50">
+                </div>
+                
+                <div class="form-group">
+                    <label for="service-select">الخدمة المستخدمة:</label>
+                    <select id="service-select" class="service-select" onchange="checkFormCompletion()">
+                        <option value="">اختر الخدمة...</option>
+                        <option value="كهرباء">🔧 صيانة كهرباء منزلية</option>
+                        <option value="سباكة">🚰 خدمات سباكة شاملة</option>
+                        <option value="تكييف">❄️ صيانة تكييف وتبريد</option>
+                        <option value="غسيل سيارات">🧼 غسيل وتلميع السيارات</option>
+                        <option value="نقل أثاث">📦 نقل أثاث منزلي</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>تقييمك:</label>
+                    <div class="rating-input">
+                        <div class="rating-stars-input" id="rating-stars">
+                            <span class="star-input" data-rating="1" onclick="setRating(1)">⭐</span>
+                            <span class="star-input" data-rating="2" onclick="setRating(2)">⭐</span>
+                            <span class="star-input" data-rating="3" onclick="setRating(3)">⭐</span>
+                            <span class="star-input" data-rating="4" onclick="setRating(4)">⭐</span>
+                            <span class="star-input" data-rating="5" onclick="setRating(5)">⭐</span>
+                        </div>
+                        <div id="rating-text" class="rating-text">اضغط على النجوم لتقييم الخدمة</div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="review-text">تعليقك:</label>
+                    <textarea id="review-text" class="review-textarea" placeholder="اكتب تجربتك مع الخدمة (اختياري)..." oninput="checkFormCompletion()" maxlength="500"></textarea>
+                    <div style="text-align: left; color: #a0aec0; font-size: 0.9em; margin-top: 5px;">
+                        <span id="char-count">0</span>/500 حرف
+                    </div>
+                </div>
+                
+                <button class="submit-review" id="submit-review-btn" onclick="submitReview()" disabled>نشر التقييم</button>
+            </div>
+        </div>
+
+        <!-- التقييمات الحالية -->
+        <div class="testimonials-grid">
+            
+            <!-- التقييم ١ -->
+            <div class="testimonial-card" id="review-1">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-name">أحمد محمد</div>
+                        <div class="service-type">🔧 صيانة كهرباء منزلية</div>
+                    </div>
+                    <div class="rating-display">
+                        <div class="stars">
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                        </div>
+                        <div class="rating-value">5.0</div>
+                    </div>
+                </div>
+                
+                <div class="review-text">
+                    "خدمة ممتازة وسريعة. الفني كان محترف جداً وحل المشكلة في أقل من ساعة. الدقة في الموعد والاحترافية في العمل جعلتني أوصي بهم لكل أصدقائي!"
+                </div>
+                
+                <div class="review-actions">
+                    <div class="action-buttons">
+                        <button class="action-btn like-btn" onclick="toggleReviewLike('review-1')">
+                            <span class="icon">❤️</span>
+                            <span class="count" id="likes-1">12</span>
+                        </button>
+                        <button class="action-btn comment-btn" onclick="toggleComments('review-1')">
+                            <span class="icon">💬</span>
+                            <span class="count" id="comments-count-1">3</span>
+                        </button>
+                    </div>
+                    <div class="review-date">منذ ٣ أيام</div>
+                </div>
+                
+                <!-- قسم التعليقات -->
+                <div class="comments-section" id="comments-1">
+                    <div class="comments-list">
+                        <!-- تعليق ١ -->
+                        <div class="comment" id="comment-1-1">
+                            <div class="comment-header">
+                                <span class="commenter">فاطمة أحمد</span>
+                                <span class="comment-date">منذ يوم</span>
+                            </div>
+                            <div class="comment-text">
+                                أحتاج نفس الخدمة، ممكن رقم الفني؟ وشكراً
+                            </div>
+                            <div class="comment-actions">
+                                <button class="like-btn small" onclick="toggleCommentLike('comment-1-1')">
+                                    ❤️ <span class="count" id="comment-likes-1-1">2</span>
+                                </button>
+                                <button class="reply-btn" onclick="toggleReplyForm('comment-1-1')">رد</button>
+                            </div>
+                            
+                            <!-- ردود -->
+                            <div class="replies" id="replies-1-1">
+                                <div class="reply" id="reply-1-1-1">
+                                    <div class="reply-header">
+                                        <span class="replier">إدارة راحة</span>
+                                        <span class="reply-date">منذ ١٠ ساعات</span>
+                                    </div>
+                                    <div class="reply-text">
+                                        أهلاً وسهلاً، يمكنك التواصل على الرقم 00962790782004
+                                    </div>
+                                    <div class="reply-actions">
+                                        <button class="like-btn small" onclick="toggleCommentLike('reply-1-1-1')">
+                                            ❤️ <span class="count" id="reply-likes-1-1-1">5</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- نموذج الرد -->
+                            <div class="reply-form" id="reply-form-1-1" style="display: none;">
+                                <textarea class="comment-input" placeholder="اكتب ردك..." id="reply-input-1-1"></textarea>
+                                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                    <button class="submit-comment" onclick="submitReply('comment-1-1')">نشر الرد</button>
+                                    <button class="submit-comment" style="background: #718096;" onclick="toggleReplyForm('comment-1-1')">إلغاء</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- تعليق ٢ -->
+                        <div class="comment" id="comment-1-2">
+                            <div class="comment-header">
+                                <span class="commenter">محمد خالد</span>
+                                <span class="comment-date">منذ ١٥ ساعة</span>
+                            </div>
+                            <div class="comment-text">
+                                أنا أيضاً جربت الخدمة وكانت ممتازة. أنصح الجميع
+                            </div>
+                            <div class="comment-actions">
+                                <button class="like-btn small" onclick="toggleCommentLike('comment-1-2')">
+                                    ❤️ <span class="count" id="comment-likes-1-2">8</span>
+                                </button>
+                                <button class="reply-btn" onclick="toggleReplyForm('comment-1-2')">رد</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- نموذج إضافة تعليق جديد -->
+                    <div class="add-comment">
+                        <textarea class="comment-input" placeholder="اكتب تعليقك..." id="new-comment-1"></textarea>
+                        <button class="submit-comment" onclick="addComment('review-1')">نشر التعليق</button>
+                    </div>
+                </div>
             </div>
 
-            <!-- باقي التقييمات بنفس الهيكل -->
-            
+            <!-- التقييم ٢ -->
+            <div class="testimonial-card" id="review-2">
+                <div class="review-header">
+                    <div class="reviewer-info">
+                        <div class="reviewer-name">فاطمة أحمد</div>
+                        <div class="service-type">🧼 غسيل سيارات - باقة بريميوم</div>
+                    </div>
+                    <div class="rating-display">
+                        <div class="stars">
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span class="star">⭐</span>
+                            <span style="color: #e2e8f0;">⭐</span>
+                        </div>
+                        <div class="rating-value">4.0</div>
+                    </div>
+                </div>
+                
+                <div class="review-text">
+                    "الخدمة كانت جيدة جداً والسيارة صارت كالجديدة. فريق العمل متعاون ورغم تأخرهم ١٥ دقيقة إلا أنهم اعتذروا وقدمولي خصم على الخدمة القادمة."
+                </div>
+                
+                <div class="review-actions">
+                    <div class="action-buttons">
+                        <button class="action-btn like-btn" onclick="toggleReviewLike('review-2')">
+                            <span class="icon">❤️</span>
+                            <span class="count" id="likes-2">8</span>
+                        </button>
+                        <button class="action-btn comment-btn" onclick="toggleComments('review-2')">
+                            <span class="icon">💬</span>
+                            <span class="count" id="comments-count-2">1</span>
+                        </button>
+                    </div>
+                    <div class="review-date">منذ أسبوع</div>
+                </div>
+                
+                <div class="comments-section" id="comments-2">
+                    <div class="comments-list">
+                        <div class="no-comments">لا توجد تعليقات بعد. كن أول من يعلق!</div>
+                    </div>
+                    
+                    <div class="add-comment">
+                        <textarea class="comment-input" placeholder="اكتب تعليقك..." id="new-comment-2"></textarea>
+                        <button class="submit-comment" onclick="addComment('review-2')">نشر التعليق</button>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- إحصائيات -->
-        <div class="rating-stats">
+        <div class="stats-section">
             <div class="stats-grid">
                 <div class="stat-item">
                     <div class="stat-number">4.8</div>
                     <div class="stat-label">متوسط التقييم</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">127</div>
+                    <div class="stat-number">127+</div>
                     <div class="stat-label">تقييم حقيقي</div>
                 </div>
                 <div class="stat-item">
@@ -2186,7 +2319,7 @@
                     <div class="stat-label">عملاء راضون</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">5m</div>
+                    <div class="stat-number">5m+</div>
                     <div class="stat-label">دقيقة توفير</div>
                 </div>
             </div>
@@ -2583,123 +2716,308 @@ function toggleComments(button) {
         commentsSection.classList.remove('expanded');
         commentForm.classList.remove('expanded');
         commentText.textContent = 'تعليق';
+// ===== نظام التقييمات والتعليقات المتكامل =====
+let currentRating = 0;
+
+// تحديث عدد الأحرف
+document.getElementById('review-text').addEventListener('input', function() {
+    const charCount = this.value.length;
+    document.getElementById('char-count').textContent = charCount;
+});
+
+// التحقق من اكتمال النموذج
+function checkFormCompletion() {
+    const serviceSelect = document.getElementById('service-select');
+    const submitBtn = document.getElementById('submit-review-btn');
+    
+    if (serviceSelect.value && currentRating > 0) {
+        submitBtn.disabled = false;
+    } else {
+        submitBtn.disabled = true;
+    }
+}
+
+// تعيين التقييم
+function setRating(rating) {
+    currentRating = rating;
+    const stars = document.querySelectorAll('.star-input');
+    const ratingText = document.getElementById('rating-text');
+    const ratingTexts = ['سيء جداً', 'سيء', 'متوسط', 'جيد', 'ممتاز'];
+    
+    stars.forEach((star, index) => {
+        if (index < rating) {
+            star.classList.add('active');
+        } else {
+            star.classList.remove('active');
+        }
+    });
+    
+    ratingText.textContent = ratingTexts[rating - 1];
+    ratingText.style.color = rating >= 4 ? '#10b981' : rating >= 3 ? '#f59e0b' : '#ef4444';
+    
+    checkFormCompletion();
+}
+
+// إرسال تقييم جديد
+function submitReview() {
+    const serviceSelect = document.getElementById('service-select');
+    const reviewText = document.getElementById('review-text');
+    const reviewerName = document.getElementById('reviewer-name');
+    const selectedService = serviceSelect.value;
+    
+    if (!selectedService) {
+        alert('⚠️ الرجاء اختيار خدمة');
+        return;
+    }
+    
+    if (currentRating === 0) {
+        alert('⚠️ الرجاء اختيار تقييم');
+        return;
+    }
+    
+    const serviceNames = {
+        'كهرباء': '🔧 صيانة كهرباء منزلية',
+        'سباكة': '🚰 خدمات سباكة شاملة', 
+        'تكييف': '❄️ صيانة تكييف وتبريد',
+        'غسيل سيارات': '🧼 غسيل وتلميع السيارات',
+        'نقل أثاث': '📦 نقل أثاث منزلي'
+    };
+    
+    // في تطبيق حقيقي، هنا نرسل البيانات للخادم
+    console.log('تقييم جديد:', {
+        reviewer: reviewerName.value || 'مستخدم',
+        service: selectedService,
+        rating: currentRating,
+        comment: reviewText.value
+    });
+    
+    // رسالة نجاح
+    alert(`✅ شكراً ${reviewerName.value || 'عزيزي'} لتقييمك!\n\nالخدمة: ${serviceNames[selectedService]}\nالتقييم: ${currentRating} نجوم\n${reviewText.value ? 'تعليقك: ' + reviewText.value : ''}`);
+    
+    // إعادة تعيين النموذج
+    resetReviewForm();
+}
+
+// إعادة تعيين النموذج
+function resetReviewForm() {
+    document.getElementById('service-select').value = '';
+    document.getElementById('review-text').value = '';
+    document.getElementById('reviewer-name').value = '';
+    document.getElementById('char-count').textContent = '0';
+    document.getElementById('submit-review-btn').disabled = true;
+    
+    currentRating = 0;
+    document.querySelectorAll('.star-input').forEach(star => {
+        star.classList.remove('active');
+    });
+    
+    document.getElementById('rating-text').textContent = 'اضغط على النجوم لتقييم الخدمة';
+    document.getElementById('rating-text').style.color = '#718096';
+}
+
+// تفعيل/تعطيل الإعجاب على التقييم
+function toggleReviewLike(reviewId) {
+    const likeBtn = document.querySelector(`#${reviewId} .like-btn`);
+    const likeCount = document.querySelector(`#${reviewId} .like-btn .count`);
+    let count = parseInt(likeCount.textContent);
+    
+    if (likeBtn.classList.contains('liked')) {
+        likeBtn.classList.remove('liked');
+        count--;
+    } else {
+        likeBtn.classList.add('liked');
+        count++;
+        
+        // تأثير مرئي
+        likeBtn.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+            likeBtn.style.transform = 'scale(1)';
+        }, 200);
+    }
+    
+    likeCount.textContent = count;
+}
+
+// تفعيل/تعطيل الإعجاب على التعليق أو الرد
+function toggleCommentLike(commentId) {
+    const likeBtn = document.querySelector(`#${commentId} .like-btn`);
+    const likeCount = document.querySelector(`#${commentId} .like-btn .count`);
+    let count = parseInt(likeCount.textContent);
+    
+    if (likeBtn.classList.contains('liked')) {
+        likeBtn.classList.remove('liked');
+        count--;
+    } else {
+        likeBtn.classList.add('liked');
+        count++;
+        
+        // تأثير مرئي
+        likeBtn.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+            likeBtn.style.transform = 'scale(1)';
+        }, 200);
+    }
+    
+    likeCount.textContent = count;
+}
+
+// فتح/إغلاق قسم التعليقات
+function toggleComments(reviewId) {
+    const commentsSection = document.getElementById(`comments-${reviewId.split('-')[1]}`);
+    const commentBtn = document.querySelector(`#${reviewId} .comment-btn`);
+    
+    if (commentsSection.classList.contains('expanded')) {
+        commentsSection.classList.remove('expanded');
+        commentBtn.classList.remove('active');
     } else {
         commentsSection.classList.add('expanded');
-        commentForm.classList.add('expanded');
-        commentText.textContent = 'إخفاء';
+        commentBtn.classList.add('active');
+        
+        // تمرير إلى قسم التعليقات
+        setTimeout(() => {
+            commentsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 300);
+    }
+}
+
+// فتح/إغلاق نموذج الرد
+function toggleReplyForm(commentId) {
+    const replyForm = document.getElementById(`reply-form-${commentId.split('-').slice(1).join('-')}`);
+    
+    if (replyForm.style.display === 'none' || !replyForm.style.display) {
+        replyForm.style.display = 'block';
+        
+        // تمرير إلى نموذج الرد
+        setTimeout(() => {
+            replyForm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }, 300);
+    } else {
+        replyForm.style.display = 'none';
+    }
+}
+
+// إرسال رد
+function submitReply(commentId) {
+    const replyInput = document.getElementById(`reply-input-${commentId.split('-').slice(1).join('-')}`);
+    const replyText = replyInput.value.trim();
+    
+    if (!replyText) {
+        alert('⚠️ الرجاء كتابة رد');
+        return;
+    }
+    
+    const repliesContainer = document.getElementById(`replies-${commentId.split('-').slice(1).join('-')}`);
+    const replyId = `reply-${commentId.split('-').slice(1).join('-')}-${Date.now()}`;
+    
+    const newReply = document.createElement('div');
+    newReply.className = 'reply';
+    newReply.id = replyId;
+    newReply.innerHTML = `
+        <div class="reply-header">
+            <span class="replier">أنت</span>
+            <span class="reply-date">الآن</span>
+        </div>
+        <div class="reply-text">${replyText}</div>
+        <div class="reply-actions">
+            <button class="like-btn small" onclick="toggleCommentLike('${replyId}')">
+                ❤️ <span class="count" id="reply-likes-${replyId.split('-').slice(1).join('-')}">0</span>
+            </button>
+        </div>
+    `;
+    
+    if (!repliesContainer) {
+        const newRepliesContainer = document.createElement('div');
+        newRepliesContainer.className = 'replies';
+        newRepliesContainer.id = `replies-${commentId.split('-').slice(1).join('-')}`;
+        newRepliesContainer.appendChild(newReply);
+        document.getElementById(commentId).appendChild(newRepliesContainer);
+    } else {
+        repliesContainer.appendChild(newReply);
+    }
+    
+    // إغلاق نموذج الرد
+    document.getElementById(`reply-form-${commentId.split('-').slice(1).join('-')}`).style.display = 'none';
+    replyInput.value = '';
+    
+    // إزالة "لا توجد تعليقات" إذا كانت موجودة
+    const noComments = document.querySelector(`#${commentId} .no-comments`);
+    if (noComments) {
+        noComments.remove();
     }
 }
 
 // إضافة تعليق جديد
-function addComment(button) {
-    const commentForm = button.closest('.comment-form');
-    const commentInput = commentForm.querySelector('.comment-input');
+function addComment(reviewId) {
+    const commentInput = document.getElementById(`new-comment-${reviewId.split('-')[1]}`);
     const commentText = commentInput.value.trim();
-    const commentsContainer = commentForm.parentElement;
+    const commentsList = document.querySelector(`#comments-${reviewId.split('-')[1]} .comments-list`);
     
-    if (commentText) {
-        // إنشاء تعليق جديد
-        const newComment = document.createElement('div');
-        newComment.className = 'comment';
-        newComment.innerHTML = `
-            <div class="comment-header">
-                <span class="comment-author">أنت</span>
-                <span class="comment-date">الآن</span>
-            </div>
-            <div class="comment-text">${commentText}</div>
-            <div class="comment-actions">
-                <button class="like-btn small" onclick="toggleCommentLike(this)">❤️ 0</button>
-            </div>
-        `;
-        
-        // إضافة التعليق في الأعلى
-        commentsContainer.insertBefore(newComment, commentForm);
-        
-        // مسح حقل الإدخال
-        commentInput.value = '';
-        
-        // تحديث عدد التعليقات
-        const commentBtn = commentForm.closest('.testimonial-card').querySelector('.comment-btn .comment-text');
-        const currentText = commentBtn.textContent;
-        if (currentText === 'تعليق' || currentText === 'إخفاء') {
-            commentBtn.textContent = 'تعليق 1';
-        } else {
-            const count = parseInt(currentText.replace('تعليق ', '')) + 1;
-            commentBtn.textContent = `تعليق ${count}`;
-        }
-    } else {
+    if (!commentText) {
         alert('⚠️ الرجاء كتابة تعليق');
-    }
-}
-
-// نظام الإعجابات
-function toggleLike(button) {
-    const likeCount = button.querySelector('.like-count');
-    let count = parseInt(likeCount.textContent);
-    
-    if (button.classList.contains('liked')) {
-        button.classList.remove('liked');
-        count--;
-        likeCount.textContent = count;
-    } else {
-        button.classList.add('liked');
-        count++;
-        likeCount.textContent = count;
-        
-        // تأثير visual
-        button.style.transform = 'scale(1.2)';
-        setTimeout(() => {
-            button.style.transform = 'scale(1)';
-        }, 200);
-    }
-}
-
-function toggleCommentLike(button) {
-    let count = parseInt(button.textContent.replace('❤️ ', ''));
-    
-    if (button.classList.contains('liked')) {
-        button.classList.remove('liked');
-        count--;
-    } else {
-        button.classList.add('liked');
-        count++;
-        
-        // تأثير visual
-        button.style.transform = 'scale(1.1)';
-        setTimeout(() => {
-            button.style.transform = 'scale(1)';
-        }, 150);
+        return;
     }
     
-    button.textContent = `❤️ ${count}`;
-}
-
-// مشاركة التقييم
-function shareReview(button) {
-    const card = button.closest('.testimonial-card');
-    const clientName = card.querySelector('.client-name').textContent;
-    const serviceName = card.querySelector('.service-name').textContent;
-    const rating = card.querySelector('.rating-value').textContent;
+    const commentId = `comment-${reviewId.split('-')[1]}-${Date.now()}`;
     
-    const shareText = `📣 تقييم ${clientName} لخدمة ${serviceName}: ${rating} ⭐\n\n"${card.querySelector('.testimonial-text').textContent}"`;
-    
-    // نسخ للنصوص الحافظة
-    navigator.clipboard.writeText(shareText).then(() => {
-        // تأثير visual
-        const originalText = button.innerHTML;
-        button.innerHTML = '<span>✅</span><span>تم النسخ!</span>';
-        button.style.background = '#10b981';
+    const newComment = document.createElement('div');
+    newComment.className = 'comment';
+    newComment.id = commentId;
+    newComment.innerHTML = `
+        <div class="comment-header">
+            <span class="commenter">أنت</span>
+            <span class="comment-date">الآن</span>
+        </div>
+        <div class="comment-text">${commentText}</div>
+        <div class="comment-actions">
+            <button class="like-btn small" onclick="toggleCommentLike('${commentId}')">
+                ❤️ <span class="count" id="comment-likes-${commentId.split('-').slice(1).join('-')}">0</span>
+            </button>
+            <button class="reply-btn" onclick="toggleReplyForm('${commentId}')">رد</button>
+        </div>
         
-        setTimeout(() => {
-            button.innerHTML = originalText;
-            button.style.background = '';
-        }, 2000);
-    });
+        <div class="reply-form" id="reply-form-${commentId.split('-').slice(1).join('-')}" style="display: none;">
+            <textarea class="comment-input" placeholder="اكتب ردك..." id="reply-input-${commentId.split('-').slice(1).join('-')}"></textarea>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <button class="submit-comment" onclick="submitReply('${commentId}')">نشر الرد</button>
+                <button class="submit-comment" style="background: #718096;" onclick="toggleReplyForm('${commentId}')">إلغاء</button>
+            </div>
+        </div>
+    `;
+    
+    // إزالة "لا توجد تعليقات" إذا كانت موجودة
+    const noComments = commentsList.querySelector('.no-comments');
+    if (noComments) {
+        noComments.remove();
+    }
+    
+    commentsList.appendChild(newComment);
+    commentInput.value = '';
+    
+    // تحديث عدد التعليقات
+    const commentsCount = document.getElementById(`comments-count-${reviewId.split('-')[1]}`);
+    let count = parseInt(commentsCount.textContent);
+    count++;
+    commentsCount.textContent = count;
+    
+    // تمرير إلى التعليق الجديد
+    setTimeout(() => {
+        newComment.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 300);
 }
 
 // تفعيل النظام عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 نظام التقييمات جاهز للاستخدام!');
+    console.log('🚀 نظام التقييمات والتعليقات جاهز للعمل!');
+    
+    // إضافة تأثيرات تحميل
+    setTimeout(() => {
+        document.querySelectorAll('.testimonial-card').forEach((card, index) => {
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 200);
+        });
+    }, 500);
 });
     </script>
 </body>
