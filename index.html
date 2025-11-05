@@ -684,66 +684,6 @@
         color: #d1d5db;
         font-size: 1.2rem;
     }
-/* === نظام التقييمات المتطور === */
-.testimonials-section {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    padding: 80px 20px;
-    direction: rtl;
-}
-
-.testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-    max-width: 1200px;
-    margin: 0 auto 50px;
-}
-
-.testimonial-card {
-    background: white;
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    border: 2px solid #e2e8f0;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.testimonial-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.testimonial-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-    border-color: #667eea;
-}
-
-.testimonial-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 15px;
-    gap: 15px;
-}
-
-.client-info {
-    flex: 1;
-}
-
-.client-name {
-    font-weight: 700;
-    color: #2d3748;
-    font-size: 1.1em;
-    margin-bottom: 5px;
-}
 
 .service-name {
     color: #718096;
@@ -897,74 +837,590 @@
     transform: translateY(-2px);
     box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
 }
+/* ===== نظام التعليقات والتقييمات المتكامل ===== */
+.testimonials-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 60px 20px;
+    direction: rtl;
+}
 
-/* تحسينات التعليقات */
+.add-review-section {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    margin-bottom: 40px;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    border: 2px solid #e2e8f0;
+}
+
+.review-form {
+    direction: rtl;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #2d3748;
+    font-size: 1.1em;
+}
+
+.service-select, .review-textarea, .reviewer-name-input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 1em;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.service-select:focus, .review-textarea:focus, .reviewer-name-input:focus {
+    border-color: #667eea;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.review-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.reviewer-name-input {
+    max-width: 300px;
+}
+
+.rating-input {
+    direction: ltr;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.rating-stars-input {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.star-input {
+    font-size: 2.5em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #e2e8f0;
+    filter: grayscale(1);
+}
+
+.star-input:hover {
+    transform: scale(1.3);
+    filter: grayscale(0);
+}
+
+.star-input.active {
+    color: #ffd700;
+    filter: grayscale(0);
+    transform: scale(1.2);
+}
+
+.rating-text {
+    color: #718096;
+    font-size: 1.1em;
+    margin-top: 15px;
+    min-height: 24px;
+}
+
+.submit-review {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 16px 50px;
+    border-radius: 12px;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 30px auto 0;
+    width: 100%;
+    max-width: 300px;
+}
+
+.submit-review:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+}
+
+.submit-review:disabled {
+    background: #a0aec0;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+}
+
+.testimonial-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    border: 2px solid #e2e8f0;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.reviewer-info {
+    flex: 1;
+}
+
+.reviewer-name {
+    font-weight: 700;
+    color: #2d3748;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.service-type {
+    color: #718096;
+    font-size: 0.95em;
+}
+
+.rating-display {
+    direction: ltr;
+    text-align: left;
+}
+
+.stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 5px;
+}
+
+.star {
+    color: #ffd700;
+    font-size: 1.3em;
+}
+
+.rating-value {
+    font-weight: 600;
+    color: #2d3748;
+    font-size: 1em;
+}
+
+.review-text {
+    color: #4a5568;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-size: 1.05em;
+    background: #f8fafc;
+    padding: 15px;
+    border-radius: 12px;
+    border-right: 4px solid #667eea;
+}
+
+.review-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    color: #718096;
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95em;
+    font-weight: 500;
+}
+
+.action-btn:hover {
+    background: #f7fafc;
+    color: #4a5568;
+    transform: translateY(-2px);
+}
+
+.like-btn.liked {
+    color: #e53e3e;
+    background: #fed7d7;
+}
+
+.comment-btn.active {
+    color: #667eea;
+    background: #f0f4ff;
+}
+
+.review-date {
+    color: #a0aec0;
+    font-size: 0.85em;
+}
+
 .comments-section {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.5s ease;
+    margin-top: 0;
 }
 
 .comments-section.expanded {
-    max-height: 1000px;
+    max-height: 2000px;
+    margin-top: 20px;
 }
 
-.comment-form {
-    display: none;
+.comments-list {
+    margin-bottom: 20px;
+}
+
+.comment {
+    background: #f8fafc;
+    padding: 18px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+}
+
+.comment:hover {
+    background: #f0f4ff;
+    border-color: #c3dafe;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.commenter {
+    font-weight: 600;
+    color: #2d3748;
+    font-size: 1em;
+}
+
+.comment-date {
+    color: #a0aec0;
+    font-size: 0.8em;
+}
+
+.comment-text {
+    color: #4a5568;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    font-size: 1em;
+}
+
+.comment-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.like-btn.small, .reply-btn {
+    background: none;
+    border: none;
+    color: #718096;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.85em;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.like-btn.small:hover, .reply-btn:hover {
+    background: #edf2f7;
+}
+
+.like-btn.small.liked {
+    color: #e53e3e;
+    background: #fed7d7;
+}
+
+.reply-btn.active {
+    color: #667eea;
+    background: #f0f4ff;
+}
+
+.replies {
     margin-top: 15px;
+    padding-right: 20px;
+    border-right: 3px solid #e2e8f0;
 }
 
-.comment-form.expanded {
-    display: block;
+.reply {
+    background: white;
+    padding: 12px 15px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+.reply-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.replier {
+    font-weight: 600;
+    color: #667eea;
+    font-size: 0.9em;
+}
+
+.reply-date {
+    color: #a0aec0;
+    font-size: 0.75em;
+}
+
+.reply-text {
+    color: #4a5568;
+    line-height: 1.5;
+    font-size: 0.9em;
+}
+
+.reply-actions {
+    margin-top: 8px;
+}
+
+.add-comment {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    border: 2px solid #e2e8f0;
 }
 
 .comment-input {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #e2e8f0;
+    padding: 15px;
+    border: 2px solid #e2e8f0;
     border-radius: 12px;
     resize: vertical;
     min-height: 80px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-family: inherit;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.comment-input:focus {
+    border-color: #667eea;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 .submit-comment {
     background: #667eea;
     color: white;
     border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
+    padding: 12px 30px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    font-size: 1em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
 }
 
-.submit-comment:hover {
+.submit-comment:hover:not(:disabled) {
     background: #5a6fd8;
+    transform: translateY(-2px);
+}
+
+.submit-comment:disabled {
+    background: #a0aec0;
+    cursor: not-allowed;
+}
+
+.reply-form {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f8fafc;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+}
+
+.stats-section {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    max-width: 1000px;
+    margin: 0 auto;
+    border: 2px solid #e2e8f0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    text-align: center;
+}
+
+.stat-item {
+    padding: 20px;
+}
+
+.stat-number {
+    font-size: 3em;
+    font-weight: 800;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.stat-label {
+    color: #718096;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.no-comments {
+    text-align: center;
+    color: #a0aec0;
+    padding: 30px;
+    font-style: italic;
 }
 
 /* تحسينات للجوال */
 @media (max-width: 768px) {
-    .add-review-section {
-        padding: 25px 20px;
-        margin: 0 10px 40px;
+    .testimonials-section {
+        padding: 40px 15px;
     }
     
-    .rating-stars-input {
-        gap: 3px;
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .testimonial-card {
+        padding: 20px;
+        margin: 0 5px;
+    }
+    
+    .add-review-section {
+        padding: 25px 20px;
+        margin: 0 10px 30px;
+    }
+    
+    .review-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .rating-display {
+        align-self: flex-start;
+    }
+    
+    .review-actions {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .action-buttons {
+        width: 100%;
+        justify-content: space-around;
+    }
+    
+    .stats-section {
+        padding: 30px 20px;
+        margin: 0 10px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
     }
     
     .star-input {
-        font-size: 1.8em;
+        font-size: 2em;
     }
     
-    .submit-review {
-        width: 100%;
-        padding: 15px 20px;
+    .rating-stars-input {
+        gap: 5px;
     }
 }
 
-</style>
+@media (max-width: 480px) {
+    .testimonials-section {
+        padding: 30px 10px;
+    }
+    
+    .testimonial-card {
+        padding: 15px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .action-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-number {
+        font-size: 2.5em;
+    }
+}
     </style>
 </head>
 <body>
