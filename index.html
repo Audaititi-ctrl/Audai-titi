@@ -38,6 +38,7 @@
             box-sizing: border-box;
         }
 
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: var(--light);
@@ -1776,6 +1777,202 @@
                 width: 250px;
             }
         }
+                /* إضافة أنماط خاصة بنظام التعليقات */
+        .comments-section {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            margin-top: 0;
+        }
+
+        .comments-section.expanded {
+            max-height: 2000px;
+            margin-top: 25px;
+        }
+
+        .comments-list {
+            margin-bottom: 25px;
+        }
+
+        .comment {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .comment:hover {
+            background: #f0f4ff;
+            border-color: #c3dafe;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .commenter {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1.1rem;
+        }
+
+        .comment-date {
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        .comment-text {
+            color: #4a5568;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .comment-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .like-btn.small, .reply-btn {
+            background: none;
+            border: none;
+            color: var(--gray);
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .like-btn.small:hover, .reply-btn:hover {
+            background: #edf2f7;
+        }
+
+        .like-btn.small.liked {
+            color: #e53e3e;
+            background: #fed7d7;
+        }
+
+        .reply-btn.active {
+            color: var(--primary);
+            background: #f0f4ff;
+        }
+
+        .replies {
+            margin-top: 20px;
+            padding-right: 25px;
+            border-right: 3px solid var(--border);
+        }
+
+        .reply {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border);
+        }
+
+        .reply-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .replier {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .reply-date {
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        .reply-text {
+            color: #4a5568;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .reply-actions {
+            margin-top: 10px;
+        }
+
+        .add-comment {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid var(--border);
+        }
+
+        .comment-input {
+            width: 100%;
+            padding: 18px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            resize: vertical;
+            min-height: 100px;
+            margin-bottom: 20px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .comment-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .submit-comment {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-comment:hover:not(:disabled) {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .submit-comment:disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+        }
+
+        .reply-form {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .no-comments {
+            text-align: center;
+            color: var(--gray);
+            padding: 40px;
+            font-style: italic;
+            font-size: 1.1rem;
+        }
     </style>
 </head>
 <body>
@@ -2561,7 +2758,6 @@
             </div>
         </div>
     </section>
-
     <!-- نظام التقييمات والتعليقات المتكامل -->
     <section class="testimonials-section">
         <div class="container">
@@ -2703,6 +2899,23 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- تعليق ٢ -->
+                            <div class="comment" id="comment-1-2">
+                                <div class="comment-header">
+                                    <span class="commenter">محمد خالد</span>
+                                    <span class="comment-date">منذ ١٥ ساعة</span>
+                                </div>
+                                <div class="comment-text">
+                                    أنا أيضاً جربت الخدمة وكانت ممتازة. أنصح الجميع
+                                </div>
+                                <div class="comment-actions">
+                                    <button class="like-btn small" onclick="toggleCommentLike('comment-1-2')">
+                                        ❤️ <span class="count" id="comment-likes-1-2">8</span>
+                                    </button>
+                                    <button class="reply-btn" onclick="toggleReplyForm('comment-1-2')">رد</button>
+                                </div>
+                            </div>
                         </div>
                         
                         <!-- نموذج إضافة تعليق جديد -->
@@ -2713,8 +2926,54 @@
                     </div>
                 </div>
 
-                <!-- المزيد من التقييمات -->
-                <!-- ... (سيتم إضافة المزيد من التقييمات) ... -->
+                <!-- التقييم ٢ -->
+                <div class="testimonial-card" id="review-2">
+                    <div class="review-header">
+                        <div class="reviewer-info">
+                            <div class="reviewer-name">فاطمة أحمد</div>
+                            <div class="service-type">🧼 غسيل سيارات - باقة بريميوم</div>
+                        </div>
+                        <div class="rating-display">
+                            <div class="stars">
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span class="star">⭐</span>
+                                <span style="color: #e2e8f0;">⭐</span>
+                            </div>
+                            <div class="rating-value">4.0</div>
+                        </div>
+                    </div>
+                    
+                    <div class="review-text">
+                        "الخدمة كانت جيدة جداً والسيارة صارت كالجديدة. فريق العمل متعاون ورغم تأخرهم ١٥ دقيقة إلا أنهم اعتذروا وقدمولي خصم على الخدمة القادمة."
+                    </div>
+                    
+                    <div class="review-actions">
+                        <div class="action-buttons">
+                            <button class="action-btn like-btn" onclick="toggleReviewLike('review-2')">
+                                <span class="icon">❤️</span>
+                                <span class="count" id="likes-2">8</span>
+                            </button>
+                            <button class="action-btn comment-btn" onclick="toggleComments('review-2')">
+                                <span class="icon">💬</span>
+                                <span class="count" id="comments-count-2">1</span>
+                            </button>
+                        </div>
+                        <div class="review-date">منذ أسبوع</div>
+                    </div>
+                    
+                    <div class="comments-section" id="comments-2">
+                        <div class="comments-list">
+                            <div class="no-comments">لا توجد تعليقات بعد. كن أول من يعلق!</div>
+                        </div>
+                        
+                        <div class="add-comment">
+                            <textarea class="comment-input" placeholder="اكتب تعليقك..." id="new-comment-2"></textarea>
+                            <button class="submit-comment" onclick="addComment('review-2')">نشر التعليق</button>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
@@ -2742,7 +3001,6 @@
 
         </div>
     </section>
-    
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="container">
@@ -3057,8 +3315,7 @@
                 searchContainer.classList.remove('active');
             }
         });
-        
-        // ===== نظام التقييمات والتعليقات =====
+        // ===== نظام التقييمات والتعليقات المتكامل =====
         let currentRating = 0;
 
         // تحديث عدد الأحرف
@@ -3288,7 +3545,7 @@
             }
         }
 
-        // إضافة تعليق جديد
+        // إضافة تعليق جديد - الإصلاح الأساسي هنا
         function addComment(reviewId) {
             const commentInput = document.getElementById(`new-comment-${reviewId.split('-')[1]}`);
             const commentText = commentInput.value.trim();
@@ -3297,6 +3554,12 @@
             if (!commentText) {
                 alert('⚠️ الرجاء كتابة تعليق');
                 return;
+            }
+            
+            // إزالة "لا توجد تعليقات" إذا كانت موجودة
+            const noComments = commentsList.querySelector('.no-comments');
+            if (noComments) {
+                noComments.remove();
             }
             
             const commentId = `comment-${reviewId.split('-')[1]}-${Date.now()}`;
@@ -3326,12 +3589,6 @@
                 </div>
             `;
             
-            // إزالة "لا توجد تعليقات" إذا كانت موجودة
-            const noComments = commentsList.querySelector('.no-comments');
-            if (noComments) {
-                noComments.remove();
-            }
-            
             commentsList.appendChild(newComment);
             commentInput.value = '';
             
@@ -3345,25 +3602,22 @@
             setTimeout(() => {
                 newComment.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
             }, 300);
-        }
-
-        // حجز باقة
-        function bookPackage(packageName, price) {
-            const message = `أريد حجز ${packageName} بسعر ${price} دينار`;
-            window.open(`https://wa.me/962790782004?text=${encodeURIComponent(message)}`, '_blank');
+            
+            // إظهار رسالة نجاح
+            alert('✅ تم نشر تعليقك بنجاح!');
         }
 
         // تفعيل النظام عند تحميل الصفحة
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 نظام راحة الذكي جاهز للعمل!');
+            console.log('🚀 نظام التقييمات والتعليقات جاهز للعمل!');
             
             // إضافة تأثيرات تحميل
             setTimeout(() => {
-                document.querySelectorAll('.section-card, .emergency-card').forEach((card, index) => {
+                document.querySelectorAll('.testimonial-card').forEach((card, index) => {
                     setTimeout(() => {
                         card.style.opacity = '1';
                         card.style.transform = 'translateY(0)';
-                    }, index * 100);
+                    }, index * 200);
                 });
             }, 500);
         });
