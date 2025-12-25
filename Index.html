@@ -3,450 +3,378 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة الخدمات الذكية المتنقلة - Engineering Hub</title>
-    <meta name="description" content="أول منصة عربية تدمج الذكاء الاصطناعي مع الخدمات المتنقلة اليومية">
+    <title>Smart Services | خدمات التفتيش والصيانة</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        /* ===== RESET & BASE ===== */
+        /* ===== THE SHERIFF STYLE PALETTE ===== */
+        :root {
+            --sheriff-black: #111111;      /* أسود ليلي */
+            --sheriff-dark: #1a1a1a;       /* رمادي داكن جداً للخلفيات */
+            --sheriff-gold: #c5a059;       /* ذهبي "الشريف" المميز */
+            --sheriff-gold-hover: #b08d45;
+            --text-white: #ffffff;
+            --text-gray: #b0b0b0;
+            --border-color: #333333;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            /* لوحة الألوان الهندسية */
-            --primary: #004a99;       /* أزرق هندسي داكن */
-            --secondary: #003366;     /* كحلي عميق للخلفيات */
-            --accent: #ffc107;        /* أصفر السلامة (للتنبيهات والأزرار) */
-            --text-dark: #212529;     /* لون النصوص */
-            --text-light: #f8f9fa;    /* لون النصوص الفاتحة */
-            --border: #dee2e6;        /* لون الحدود */
-            --card-bg: #ffffff;
-            --radius: 4px;            /* زوايا حادة للدقة */
-        }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Cairo', sans-serif; /* خط عربي قوي ورسمي */
+            background-color: var(--sheriff-black);
+            color: var(--text-white);
             line-height: 1.6;
-            color: var(--text-dark);
-            background-color: #f0f2f5;
-            /* خلفية شبكة الرسم الهندسي */
-            background-image: 
-                linear-gradient(rgba(0, 74, 153, 0.05) 1px, transparent 1px), 
-                linear-gradient(90deg, rgba(0, 74, 153, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* حاوية الخلفية المتحركة */
-        #particles-js {
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, .btn {
+            font-family: 'Oswald', 'Cairo', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: rgba(17, 17, 17, 0.95);
+            padding: 1.2rem 0;
+            border-bottom: 2px solid var(--sheriff-gold);
             position: fixed;
             width: 100%;
-            height: 100%;
             top: 0;
-            left: 0;
-            z-index: -1; /* خلف كل شيء */
-            background: linear-gradient(135deg, #001f3f 0%, #003366 100%); /* خلفية زرقاء عميقة */
+            z-index: 1000;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* ===== HEADER ===== */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 1rem 0;
-            border-bottom: 3px solid var(--primary); /* قاعدة صلبة */
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
-
-        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: var(--primary);
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-white);
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .nav-links a {
-            margin-right: 25px;
+        .logo i { color: var(--sheriff-gold); }
+
+        .nav-btn {
+            background: transparent;
+            border: 2px solid var(--sheriff-gold);
+            color: var(--sheriff-gold);
+            padding: 8px 20px;
+            font-weight: 700;
             text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 600;
-            font-size: 1.05rem;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            font-size: 0.9rem;
         }
 
-        .nav-links a:hover {
-            color: var(--primary);
+        .nav-btn:hover {
+            background: var(--sheriff-gold);
+            color: var(--sheriff-black);
         }
 
         /* ===== HERO SECTION ===== */
         .hero {
-            padding: 160px 0 100px;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            color: white;
+            padding-top: 80px;
             position: relative;
         }
 
-        .hero h1 {
+        /* تأثير الخطوط المائلة في الخلفية (Signature Look) */
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: repeating-linear-gradient(
+                45deg,
+                var(--sheriff-gold),
+                var(--sheriff-gold) 10px,
+                var(--sheriff-black) 10px,
+                var(--sheriff-black) 20px
+            );
+        }
+
+        .hero-content h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
-            font-weight: 800;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            letter-spacing: -1px;
+            font-weight: 900;
+            line-height: 1.2;
         }
 
-        .hero p {
-            font-size: 1.4rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.95;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 400;
-            background: rgba(0,0,0,0.3); /* خلفية خفيفة للنص */
-            padding: 10px 20px;
-            border-radius: var(--radius);
-            border: 1px solid rgba(255,255,255,0.2);
+        .hero-content span {
+            color: var(--sheriff-gold);
+            display: block;
         }
 
-        /* ===== BUTTONS ===== */
-        .btn {
-            background: var(--accent);
-            color: #000; /* نص أسود للتباين مع الأصفر */
-            padding: 14px 40px;
-            border: none;
-            border-radius: var(--radius); /* زوايا حادة */
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .main-btn {
+            background: var(--sheriff-gold);
+            color: var(--sheriff-black);
+            padding: 15px 40px;
             font-size: 1.1rem;
-            font-weight: 700;
+            font-weight: 800;
+            border: none;
             cursor: pointer;
             text-decoration: none;
+            transition: transform 0.2s;
             display: inline-block;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 0 #b38600; /* تأثير زر ميكانيكي */
         }
 
-        .btn:hover {
-            transform: translateY(2px);
-            box-shadow: 0 2px 0 #b38600;
-            background: #ffca2c;
-        }
-        
-        .btn:active {
-            transform: translateY(4px);
-            box-shadow: none;
+        .main-btn:hover {
+            background: var(--sheriff-gold-hover);
+            transform: translateY(-2px);
         }
 
-        /* ===== SERVICES SECTION ===== */
-        .services-section {
-            background: #f8f9fa;
+        /* ===== SERVICES GRID (The Sheriff Style Cards) ===== */
+        .services {
             padding: 100px 0;
-            position: relative;
-            z-index: 2;
+            background: var(--sheriff-dark);
         }
 
-        .section-title {
+        .section-header {
             text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
             font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 4rem;
-            color: var(--secondary);
-            position: relative;
-            display: inline-block;
-            width: 100%;
+            color: var(--text-white);
+            margin-bottom: 15px;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
+        .divider {
+            width: 60px;
             height: 4px;
-            background: var(--primary);
-            margin: 15px auto 0;
+            background: var(--sheriff-gold);
+            margin: 0 auto;
         }
 
-        .services-grid {
+        .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
-            margin-top: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
-        .service-card {
-            background: var(--card-bg);
-            border-radius: var(--radius);
-            padding: 35px 25px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            border: 1px solid var(--border);
-            border-top: 4px solid var(--secondary); /* تمييز علوي */
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border-color: var(--primary);
-        }
-
-        .service-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            background: #f0f4ff;
-            width: 90px;
-            height: 90px;
-            line-height: 90px;
-            border-radius: 50%;
-            margin-left: auto;
-            margin-right: auto;
-            border: 1px solid var(--border);
-        }
-
-        .service-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            color: var(--secondary);
-            font-weight: 700;
-        }
-
-        .service-card p {
-            color: #666;
-            font-size: 1rem;
-        }
-
-        /* ===== FEATURES SECTION ===== */
-        .features {
-            background: #ffffff;
-            padding: 100px 0;
-            border-top: 1px solid var(--border);
+        .card {
+            background: var(--sheriff-black);
+            border: 1px solid var(--border-color);
+            padding: 40px 30px;
+            transition: all 0.3s ease;
             position: relative;
-            z-index: 2;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--sheriff-gold);
+            transform: translateY(-5px);
+        }
+
+        /* شريط ذهبي جانبي يظهر عند التحويم */
+        .card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--sheriff-gold);
+            transform: scaleY(0);
+            transition: transform 0.3s;
+            transform-origin: bottom;
+        }
+
+        .card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .icon-box {
+            font-size: 2.5rem;
+            color: var(--sheriff-gold);
+            margin-bottom: 25px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-white);
+        }
+
+        .card p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+
+        .link-arrow {
+            color: var(--sheriff-gold);
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+        }
+
+        /* ===== WHY US BAR (Striped Section) ===== */
+        .features-bar {
+            background: var(--sheriff-gold);
+            color: var(--sheriff-black);
+            padding: 60px 0;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .feature {
+            grid-template-columns: repeat(3, 1fr);
             text-align: center;
-            padding: 30px;
-            border: 2px dashed var(--border); /* إطار متقطع هندسي */
-            border-radius: var(--radius);
-            transition: border-color 0.3s;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 20px;
         }
 
-        .feature:hover {
-            border-color: var(--primary);
-            background: #f8faff;
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
+        .feature-item h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--sheriff-black);
+            display: inline-block;
+            padding-bottom: 5px;
         }
         
-        .feature h3 {
-            color: var(--secondary);
-            margin-bottom: 10px;
+        .feature-item p {
+            font-weight: 600;
         }
 
         /* ===== FOOTER ===== */
-        .footer {
-            background: #1a1a1a;
-            color: #dcdcdc;
-            padding: 60px 0 30px;
+        footer {
+            background: #000;
+            padding: 50px 0;
             text-align: center;
-            border-top: 4px solid var(--accent);
-            position: relative;
-            z-index: 2;
+            border-top: 1px solid #333;
         }
-
-        .footer p {
-            margin-bottom: 10px;
+        
+        .footer-text {
+            color: var(--text-gray);
+            font-size: 0.9rem;
         }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            .hero p { font-size: 1.1rem; }
-            .nav-links { display: none; } /* يمكن إضافة قائمة هامبرغر لاحقاً */
+            .hero-content h1 { font-size: 2.5rem; }
+            .features-grid { grid-template-columns: 1fr; gap: 40px; }
+            .container { flex-direction: column; gap: 15px; }
         }
     </style>
 </head>
 <body>
 
-    <div id="particles-js"></div>
-
     <header class="header">
-        <div class="container nav-container">
-            <div class="logo">
-                <span style="font-size: 2rem;">⚙️</span> 
-                SmartServices
+        <div class="container">
+            <a href="#" class="logo">
+                <i class="fas fa-shield-alt"></i> SMART SERVICES
+            </a>
+            <div style="display: flex; gap: 15px;">
+                <a href="#services" class="nav-btn">الخدمات</a>
+                <a href="#contact" class="main-btn" style="padding: 8px 25px; font-size: 0.9rem;">اتصل الآن</a>
             </div>
-            <nav class="nav-links">
-                <a href="#services">الخدمات</a>
-                <a href="#features">المميزات</a>
-                <a href="#contact">اتصل بنا</a>
-            </nav>
         </div>
     </header>
 
     <section class="hero">
-        <div class="container">
-            <h1>منصة الخدمات الذكية المتنقلة</h1>
-            <p>أول منصة هندسية تدمج الذكاء الاصطناعي مع الخدمات التشغيلية اليومية</p>
-            <a href="#services" class="btn">اطلب خدمة الآن</a>
+        <div class="hero-content">
+            <p>دقة هندسية. التزام صارم. نتائج مضمونة.</p>
+            <h1>نظام إدارة<br><span>الخدمات المتنقلة</span></h1>
+            <a href="#services" class="main-btn">اطلب الخدمة <i class="fas fa-arrow-left" style="margin-right: 10px;"></i></a>
         </div>
     </section>
 
-    <section id="services" class="services-section">
-        <div class="container">
-            <h2 class="section-title">منظومة الخدمات المتكاملة</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🔧</div>
-                    <h3>الصيانة المنزلية</h3>
-                    <p>كهرباء، سباكة، وتكييف بأدوات احترافية وفنيين مختصين.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🚗</div>
-                    <h3>غسيل السيارات</h3>
-                    <p>وحدة غسيل متنقلة تصل لموقعك مع معدات الضغط العالي.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">☕</div>
-                    <h3>باريستا متنقل</h3>
-                    <p>محطة قهوة مختصة متكاملة لخدمة الفعاليات والمكاتب.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📏</div>
-                    <h3>خياط متنقل</h3>
-                    <p>خدمات القياس والتفصيل والتعديل الفوري في موقعك.</p>
-                </div>
+    <section id="services" class="services">
+        <div class="section-header">
+            <h2>المهام التشغيلية</h2>
+            <div class="divider"></div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <div class="icon-box"><i class="fas fa-tools"></i></div>
+                <h3>الصيانة العامة</h3>
+                <p>فحص هندسي شامل وإصلاح الأعطال المنزلية (كهرباء، سباكة) بمعايير صناعية دقيقة.</p>
+                <a href="#" class="link-arrow">احجز فني <i class="fas fa-chevron-left"></i></a>
+            </div>
+
+            <div class="card">
+                <div class="icon-box"><i class="fas fa-car"></i></div>
+                <h3>وحدة الغسيل المتنقل</h3>
+                <p>خدمة غسيل السيارات (Detailing) باستخدام ضغط عالي ومواد آمنة في موقعك.</p>
+                <a href="#" class="link-arrow">اطلب الوحدة <i class="fas fa-chevron-left"></i></a>
+            </div>
+
+            <div class="card">
+                <div class="icon-box"><i class="fas fa-coffee"></i></div>
+                <h3>ضيافة ومناسبات</h3>
+                <p>تجهيز محطات القهوة (Barista Station) والضيافة للمناسبات الرسمية والخاصة.</p>
+                <a href="#" class="link-arrow">تجهيز مناسبة <i class="fas fa-chevron-left"></i></a>
             </div>
         </div>
     </section>
 
-    <section id="features" class="features">
-        <div class="container">
-            <h2 class="section-title">معايير الجودة</h2>
-            <div class="features-grid">
-                <div class="feature">
-                    <div class="feature-icon">⚡</div>
-                    <h3>سرعة الاستجابة</h3>
-                    <p>نظام جدولة ذكي يضمن وصول الفني في الوقت المحدد.</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🛡️</div>
-                    <h3>الاعتمادية</h3>
-                    <p>كادر فني مدرب ومعدات مفحوصة لضمان السلامة.</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">📊</div>
-                    <h3>الشفافية</h3>
-                    <p>أسعار واضحة وفواتير إلكترونية مفصلة لكل خدمة.</p>
-                </div>
+    <section class="features-bar">
+        <div class="features-grid">
+            <div class="feature-item">
+                <h3>24/7</h3>
+                <p>جاهزية على مدار الساعة</p>
+            </div>
+            <div class="feature-item">
+                <h3>100%</h3>
+                <p>ضمان الجودة الهندسية</p>
+            </div>
+            <div class="feature-item">
+                <h3>ISO</h3>
+                <p>مطابق للمواصفات</p>
             </div>
         </div>
     </section>
 
-    <footer id="contact" class="footer">
-        <div class="container">
-            <h3 style="color: white; margin-bottom: 20px;">SmartServices Hub</h3>
-            <p>© 2024 جميع الحقوق محفوظة - هندسة وتطوير</p>
-            <p style="opacity: 0.7; font-size: 0.9rem;">إربد، الأردن | 00962790782004</p>
+    <footer id="contact">
+        <div class="container" style="display: block;">
+            <i class="fas fa-shield-alt" style="color: var(--sheriff-gold); font-size: 2rem; margin-bottom: 20px;"></i>
+            <p class="footer-text">© 2024 Smart Services Hub. All Rights Reserved.</p>
+            <p class="footer-text" style="margin-top: 10px;">Engineering & Operations Division</p>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
-    <script>
-        // إعدادات الخلفية المتحركة (الشبكة الهندسية)
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#ffffff" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.5, "random": false },
-                "size": { "value": 3, "random": true },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#ffffff",
-                    "opacity": 0.4,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 2,
-                    "direction": "none",
-                    "random": false,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": { "enable": true, "mode": "grab" },
-                    "onclick": { "enable": true, "mode": "push" },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
-                    "push": { "particles_nb": 4 }
-                }
-            },
-            "retina_detect": true
-        });
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // تأثير الهيدر عند التمرير
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('.header');
-            if (window.scrollY > 50) {
-                header.style.padding = '0.5rem 0';
-            } else {
-                header.style.padding = '1rem 0';
-            }
-        });
-    </script>
 </body>
 </html>
