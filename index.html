@@ -6,20 +6,19 @@
     <title>RASIN | راسن - ثبات ونماء</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* ===== 1. ENGINEERING PALETTE (THE SHERIFF STYLE) ===== */
+        /* ===== 1. ENGINEERING PALETTE ===== */
         :root {
-            --bg-dark: #0a0a0a;       /* أسود فحمي */
-            --card-dark: #161616;     /* رمادي داكن جداً للكروت */
-            --gold-main: #d4af37;     /* ذهبي معدني */
-            --gold-glow: #aa8c2c;     /* ذهبي غامق للظلال */
+            --bg-dark: #0a0a0a;
+            --card-dark: #161616;
+            --gold-main: #d4af37;
+            --gold-glow: #aa8c2c;
             --text-white: #ffffff;
             --text-gray: #a0a0a0;
-            --danger: #ff4444;        /* للخصومات */
-            --locked: #333333;        /* لون العناصر المغلقة */
+            --danger: #b91c1c;  /* أحمر الطوارئ الداكن */
+            --success: #15803d; /* أخضر للباقات */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,232 +31,133 @@
             line-height: 1.6;
         }
 
-        /* خلفية الجزيئات المتحركة */
         #particles-js {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
         }
 
-        /* ===== 2. HEADER: STRUCTURAL ===== */
+        /* ===== 2. HEADER ===== */
         .header {
-            background: rgba(10, 10, 10, 0.9);
+            background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 2px solid var(--gold-main);
             padding: 15px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+            position: sticky; top: 0; z-index: 1000;
         }
 
         .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            max-width: 1200px; margin: 0 auto; padding: 0 20px;
+            display: flex; justify-content: space-between; align-items: center;
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: var(--text-white);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            letter-spacing: 1px;
+            font-size: 1.6rem; font-weight: 900; color: var(--text-white);
+            text-decoration: none; display: flex; align-items: center; gap: 10px;
         }
-
         .logo span { color: var(--gold-main); }
-        .logo i { font-size: 1.4rem; }
 
         .member-btn {
-            background: transparent;
-            border: 1px solid var(--gold-main);
-            color: var(--gold-main);
-            padding: 8px 20px;
-            border-radius: 4px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: 0.3s;
-            font-size: 0.9rem;
+            background: transparent; border: 1px solid var(--gold-main);
+            color: var(--gold-main); padding: 5px 12px; border-radius: 4px;
+            font-weight: 600; text-decoration: none; font-size: 0.75rem;
+            display: flex; align-items: center; gap: 5px;
         }
 
-        .member-btn:hover {
-            background: var(--gold-main);
-            color: #000;
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-        }
-
-        /* ===== 3. HERO: THE OFFER ===== */
+        /* ===== 3. HERO ===== */
         .hero {
-            height: 90vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            padding-top: 60px;
+            padding: 80px 0 40px; text-align: center;
         }
+        .hero h1 { font-size: 3rem; line-height: 1.2; margin-bottom: 10px; }
+        .hero h1 span { color: var(--gold-main); }
+        .hero p { color: var(--text-gray); max-width: 600px; margin: 0 auto 30px; }
 
-        .hero-content h1 {
-            font-size: 3.5rem;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            font-weight: 900;
-        }
-
-        .hero-content h1 span {
-            color: var(--gold-main);
-            display: block;
-            font-size: 4.5rem;
-        }
-
-        .free-badge {
-            background: var(--danger);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 20px;
-            box-shadow: 0 0 20px rgba(255, 68, 68, 0.4);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        .hero-p {
-            font-size: 1.2rem;
-            color: var(--text-gray);
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-
-        .cta-btn {
-            background: linear-gradient(45deg, var(--gold-main), var(--gold-glow));
-            color: #000;
-            padding: 15px 50px;
-            font-size: 1.2rem;
-            font-weight: 800;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            border-radius: 2px; /* زوايا حادة */
-            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-            transition: transform 0.2s;
-            display: inline-block;
-        }
-
-        .cta-btn:hover { transform: translateY(-3px); }
-
-        /* ===== 4. GRID SYSTEM (BRICK BY BRICK) ===== */
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-            position: relative;
-        }
-        
-        .section-title h2 { font-size: 2.5rem; color: var(--gold-main); }
-        .section-title p { color: var(--text-gray); }
+        /* ===== 4. SMART SERVICES GRID ===== */
+        .section-title { text-align: center; margin: 40px 0 20px; }
+        .section-title h2 { color: var(--gold-main); font-size: 2rem; }
 
         .grid-container {
-            max-width: 1200px;
-            margin: 0 auto 100px;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            max-width: 1200px; margin: 0 auto 80px; padding: 0 20px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 25px;
         }
 
-        /* الكروت الفعالة */
+        /* الكروت القابلة للتوسيع (Accordions) */
         .card {
-            background: var(--card-dark);
-            border: 1px solid #333;
-            padding: 30px;
+            background: var(--card-dark); border: 1px solid #333;
+            border-radius: 8px; overflow: hidden; transition: 0.3s;
             position: relative;
-            transition: 0.3s;
-            overflow: hidden;
         }
 
-        .card:hover {
-            border-color: var(--gold-main);
-            transform: translateY(-5px);
+        .card-header {
+            padding: 25px; cursor: pointer; display: flex;
+            justify-content: space-between; align-items: center;
+            background: linear-gradient(to bottom, #222, #161616);
         }
 
-        .card-icon {
-            font-size: 2.5rem;
-            color: var(--gold-main);
-            margin-bottom: 20px;
-        }
+        .card-header:hover { background: #252525; }
 
-        .card h3 { margin-bottom: 10px; font-size: 1.4rem; }
-        .card p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 20px; }
-
-        .price-tag {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            font-weight: bold;
-        }
+        .card-title { display: flex; align-items: center; gap: 15px; }
+        .card-icon { font-size: 2rem; color: var(--gold-main); }
+        .card h3 { margin: 0; font-size: 1.3rem; }
+        .card p { color: var(--text-gray); font-size: 0.85rem; margin: 0; }
+        .arrow { transition: 0.3s; color: var(--gold-main); }
         
-        .old-price { text-decoration: line-through; color: #666; font-size: 0.9rem; }
-        .free-price { color: var(--gold-main); font-size: 1.2rem; }
+        .card.active { border-color: var(--gold-main); }
+        .card.active .arrow { transform: rotate(180deg); }
 
-        /* الكروت المستقبلية (Locked Phases) */
-        .locked-card {
-            background: rgba(20, 20, 20, 0.5);
-            border: 1px dashed #444;
-            opacity: 0.6;
-            cursor: not-allowed;
-            position: relative;
+        /* منطقة التفاصيل المخفية */
+        .card-body {
+            max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out;
+            background: #111; border-top: 1px solid #333;
         }
 
-        .locked-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #888;
+        .card.active .card-body { max-height: 1000px; } /* يسمح بالتمدد */
+
+        /* تصميم الباقات داخل الكرت */
+        .packages-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 10px; padding: 20px;
         }
 
-        .lock-icon { font-size: 2rem; margin-bottom: 10px; color: #555; }
-        .phase-badge {
-            background: #333;
-            color: #aaa;
-            padding: 4px 10px;
-            font-size: 0.7rem;
-            border-radius: 4px;
-            margin-top: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .package-item {
+            background: #1a1a1a; border: 1px solid #444; padding: 15px;
+            border-radius: 6px; text-align: center; transition: 0.2s;
+        }
+        .package-item:hover { border-color: var(--gold-main); transform: translateY(-3px); }
+
+        .pkg-name { font-weight: bold; color: var(--text-white); margin-bottom: 5px; display: block;}
+        .pkg-price { color: var(--gold-main); font-size: 1.2rem; font-weight: 900; display: block; margin-bottom: 10px;}
+        .pkg-desc { font-size: 0.75rem; color: #888; display: block; margin-bottom: 10px; line-height: 1.4;}
+
+        .order-btn {
+            background: var(--gold-main); color: #000; border: none;
+            padding: 5px 15px; border-radius: 4px; font-weight: bold;
+            font-size: 0.8rem; cursor: pointer; width: 100%; display: block; text-decoration: none;
         }
 
-        /* ===== 5. FOOTER ===== */
-        footer {
-            background: #050505;
-            border-top: 1px solid #222;
-            padding: 40px 0;
-            text-align: center;
-            color: #666;
+        /* كرت الطوارئ الخاص */
+        .emergency-card { border: 2px solid var(--danger); box-shadow: 0 0 10px rgba(185, 28, 28, 0.2); }
+        .emergency-card .card-icon { color: var(--danger); animation: pulse 2s infinite; }
+        .emergency-card .card-header { background: linear-gradient(to bottom, #2a0a0a, #161616); }
+        
+        .emergency-list { padding: 0; list-style: none; }
+        .emergency-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 20px; border-bottom: 1px solid #333;
+        }
+        .emergency-item:last-child { border-bottom: none; }
+        .em-btn {
+            background: var(--danger); color: white; padding: 6px 15px;
+            text-decoration: none; border-radius: 4px; font-size: 0.8rem;
         }
 
-        /* Responsive */
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+
+        /* Footer */
+        footer { background: #050505; border-top: 1px solid #222; padding: 40px 0; text-align: center; color: #666; margin-top: 50px; }
+
         @media (max-width: 768px) {
-            .hero-content h1 span { font-size: 3rem; }
-            .hero-content h1 { font-size: 2rem; }
+            .hero h1 { font-size: 2.2rem; }
             .grid-container { grid-template-columns: 1fr; }
         }
     </style>
@@ -279,126 +179,164 @@
 
     <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <div class="free-badge">🌟 عرض الإطلاق: أول خدمة مجاناً</div>
-                <h1>نبدأ معك.. <br><span>طوبة طوبة</span></h1>
-                <p class="hero-p">
-                    منصة راسن للخدمات والاستثمار التعاوني.
-                    ابدأ بتجربة خدماتنا التشغيلية اليوم، وشاركنا بناء مدن المستقبل غداً.
-                </p>
-                <a href="#services" class="cta-btn">جرب الخدمة الآن</a>
-            </div>
+            <h1>منظومة راسن<br><span>للخدمات الذكية</span></h1>
+            <p>نظام تشغيلي متكامل يجمع بين الطوارئ، الصيانة، والرفاهية.</p>
         </div>
     </section>
 
     <section id="services">
-        <div class="section-title">
-            <p>المرحلة الأولى - PHASE 1</p>
-            <h2>الخدمات التشغيلية</h2>
-        </div>
-
         <div class="grid-container">
-            <div class="card">
-                <div class="card-icon"><i class="fas fa-car-side"></i></div>
-                <h3>غسيل وتفصيل متنقل</h3>
-                <p>وحدة متنقلة تصل لباب بيتك مع كافة التجهيزات.</p>
-                <div class="price-tag">
-                    <span class="old-price">15.00 JOD</span>
-                    <span class="free-price">0.00 JOD (مجاناً للتجربة)</span>
+
+            <div class="card emergency-card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="fas fa-siren-on card-icon"></i> <div>
+                            <h3>طوارئ 24/7</h3>
+                            <p style="color: #ff6666;">استجابة فورية (خدمة مدفوعة)</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down arrow"></i>
                 </div>
-                <br>
-                <a href="https://wa.me/962790782004?text=مرحبا، بدي أجرب خدمة الغسيل المجانية - تجربة أولى" class="member-btn" style="width:100%; display:block; text-align:center;">اطلبها الآن</a>
+                <div class="card-body">
+                    <ul class="emergency-list">
+                        <li class="emergency-item">
+                            <span><i class="fas fa-car-crash"></i> طوارئ سيارات (بنش/ونش)</span>
+                            <a href="https://wa.me/962790782004?text=🚨 حالة طارئة: أحتاج مساعدة طريق/ونش" class="em-btn">طلب</a>
+                        </li>
+                        <li class="emergency-item">
+                            <span><i class="fas fa-tint"></i> سباكة طارئة (تسريب)</span>
+                            <a href="https://wa.me/962790782004?text=🚨 حالة طارئة: أحتاج سباك فوراً" class="em-btn">طلب</a>
+                        </li>
+                        <li class="emergency-item">
+                            <span><i class="fas fa-bolt"></i> كهرباء (انقطاع تام)</span>
+                            <a href="https://wa.me/962790782004?text=🚨 حالة طارئة: عطل كهرباء خطير" class="em-btn">طلب</a>
+                        </li>
+                        <li class="emergency-item">
+                            <span><i class="fas fa-first-aid"></i> إسعاف أولي منزلي</span>
+                            <a href="tel:911" class="em-btn" style="background:#000; border:1px solid red;">اتصل 911</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="card">
-                <div class="card-icon"><i class="fas fa-tools"></i></div>
-                <h3>الصيانة العامة</h3>
-                <p>فحص هندسي شامل وإصلاحات فورية.</p>
-                <div class="price-tag">
-                    <span class="old-price">20.00 JOD</span>
-                    <span class="free-price">مجاناً (رسوم الكشفية)</span>
+            <div class="card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="fas fa-car card-icon"></i>
+                        <div>
+                            <h3>العناية بالسيارات</h3>
+                            <p>باقات غسيل وتلميع متنقل</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down arrow"></i>
                 </div>
-                <br>
-                <a href="https://wa.me/962790782004?text=مرحبا، بدي أجرب خدمة الصيانة - كشفية مجانية" class="member-btn" style="width:100%; display:block; text-align:center;">اطلب الفني</a>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="section-title">
-            <p>خارطة الطريق - ROADMAP</p>
-            <h2>مشاريعنا القادمة</h2>
-            <p style="font-size: 0.9rem; margin-top: 10px;">كل دينار تنفقه في الخدمات أعلاه، يبني لك رصيداً هنا</p>
-        </div>
-
-        <div class="grid-container">
-            <div class="card locked-card">
-                <div class="locked-overlay">
-                    <i class="fas fa-lock lock-icon"></i>
-                    <h3>راسن العقارية</h3>
-                    <div class="phase-badge">Phase 2: Loading...</div>
+                <div class="card-body">
+                    <div class="packages-grid">
+                        <div class="package-item">
+                            <span class="pkg-name">أساسي Basic</span>
+                            <span class="pkg-price">7.00 JD</span>
+                            <span class="pkg-desc">غسيل خارجي + داخلي + تجفيف</span>
+                            <a href="https://wa.me/962790782004?text=مرحبا، أريد حجز باقة غسيل أساسي (7 دنانير)" class="order-btn">حجز</a>
+                        </div>
+                        <div class="package-item" style="border-color: var(--gold-main);">
+                            <span class="pkg-name" style="color:var(--gold-main)">بريميوم Premium</span>
+                            <span class="pkg-price">12.00 JD</span>
+                            <span class="pkg-desc">أساسي + واكس + تلميع طبلون + تعطير</span>
+                            <a href="https://wa.me/962790782004?text=مرحبا، أريد حجز باقة غسيل بريميوم (12 دينار)" class="order-btn">حجز</a>
+                        </div>
+                        <div class="package-item">
+                            <span class="pkg-name">جولد Gold</span>
+                            <span class="pkg-price">25.00 JD</span>
+                            <span class="pkg-desc">تلميع شامل (Detailing) + تعقيم مكيف</span>
+                            <a href="https://wa.me/962790782004?text=مرحبا، أريد حجز باقة جولد ديتييل (25 دينار)" class="order-btn">حجز</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-icon"><i class="fas fa-city"></i></div>
-                <h3>الاستثمار العقاري</h3>
-                <p>تملك وحدات سكنية باستخدام نقاط الولاء الخاصة بك.</p>
-            </div>
-
-            <div class="card locked-card">
-                <div class="locked-overlay">
-                    <i class="fas fa-lock lock-icon"></i>
-                    <h3>المدينة الذكية</h3>
-                    <div class="phase-badge">Phase 3: Concept</div>
-                </div>
-                <div class="card-icon"><i class="fas fa-network-wired"></i></div>
-                <h3>Smart City</h3>
-                <p>مجتمع سكني متكامل يدار بالكامل عبر منصة راسن.</p>
             </div>
 
-            <div class="card locked-card">
-                <div class="locked-overlay">
-                    <i class="fas fa-lock lock-icon"></i>
-                    <h3>محفظة المستثمر</h3>
-                    <div class="phase-badge">Coming Soon</div>
+            <div class="card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="fas fa-tools card-icon"></i>
+                        <div>
+                            <h3>الصيانة المنزلية</h3>
+                            <p>فنيون مختصون (كشفية مجانية للأعضاء)</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-down arrow"></i>
                 </div>
-                <div class="card-icon"><i class="fas fa-wallet"></i></div>
-                <h3>Rasin Wallet</h3>
-                <p>لوحة تحكم لمتابعة عوائدك وأسهمك في المنصة.</p>
+                <div class="card-body">
+                    <div class="packages-grid">
+                        <div class="package-item">
+                            <span class="pkg-name">كهرباء</span>
+                            <span class="pkg-desc">إصلاح أعطال، تمديدات، إنارة</span>
+                            <a href="https://wa.me/962790782004?text=طلب فني كهرباء" class="order-btn">طلب فني</a>
+                        </div>
+                        <div class="package-item">
+                            <span class="pkg-name">سباكة وصحية</span>
+                            <span class="pkg-desc">تسريبات، تركيب، فلاتر</span>
+                            <a href="https://wa.me/962790782004?text=طلب فني سباكة" class="order-btn">طلب فني</a>
+                        </div>
+                        <div class="package-item">
+                            <span class="pkg-name">تكييف</span>
+                            <span class="pkg-desc">صيانة، تنظيف، تعبئة غاز</span>
+                            <a href="https://wa.me/962790782004?text=طلب فني تكييف" class="order-btn">طلب فني</a>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <div class="card" style="opacity: 0.6; cursor: not-allowed;">
+                <div class="card-header">
+                    <div class="card-title">
+                        <i class="fas fa-city card-icon" style="color: #555;"></i>
+                        <div>
+                            <h3>المدينة الذكية</h3>
+                            <p>Phase 2: Loading...</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-lock arrow" style="color:#555"></i>
+                </div>
+            </div>
+
         </div>
     </section>
 
     <footer>
-        <div class="container" style="display: block;">
-            <h2 style="color: var(--text-white); margin-bottom: 10px;">RASIN</h2>
-            <p>© 2025 Rasin Group. Building the Future, Brick by Brick.</p>
+        <div class="container">
+            <h2 style="color: #fff; margin-bottom: 10px;">RASIN GROUP</h2>
+            <p>© 2025 جميع الحقوق محفوظة</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        // تفعيل الخلفية
         particlesJS("particles-js", {
             "particles": {
                 "number": { "value": 60 },
-                "color": { "value": "#d4af37" }, /* لون ذهبي للجزيئات */
+                "color": { "value": "#d4af37" },
                 "shape": { "type": "circle" },
                 "opacity": { "value": 0.3 },
                 "size": { "value": 3 },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#d4af37", /* خطوط ربط ذهبية */
-                    "opacity": 0.2,
-                    "width": 1
-                },
+                "line_linked": { "enable": true, "distance": 150, "color": "#d4af37", "opacity": 0.2, "width": 1 },
                 "move": { "enable": true, "speed": 1 }
-            },
-            "interactivity": {
-                "events": {
-                    "onhover": { "enable": true, "mode": "grab" },
-                    "onclick": { "enable": true, "mode": "push" }
-                }
             }
         });
+
+        // دالة توسيع الكروت (Accordions)
+        function toggleCard(card) {
+            // إغلاق الكروت الأخرى المفتوحة
+            const allCards = document.querySelectorAll('.card');
+            allCards.forEach(c => {
+                if (c !== card && c.classList.contains('active')) {
+                    c.classList.remove('active');
+                }
+            });
+
+            // فتح/إغلاق الكرت الحالي
+            card.classList.toggle('active');
+        }
     </script>
 </body>
 </html>
