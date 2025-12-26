@@ -7,21 +7,22 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <style>
-        /* ===== 1. ENGINEERING PALETTE ===== */
+        /* ===== 1. ENGINEERING PALETTE (THE SHERIFF STYLE) ===== */
         :root {
-            --bg-dark: #0a0a0a;
-            --card-dark: #161616;
+            --bg-dark: #050505;
+            --card-dark: #121212;
             --gold-main: #d4af37;
-            --gold-glow: #aa8c2c;
+            --gold-hover: #f1c40f;
             --text-white: #ffffff;
             --text-gray: #a0a0a0;
-            --danger: #b91c1c;  /* أحمر الطوارئ الداكن */
-            --success: #15803d; /* أخضر للباقات */
+            --danger: #b91c1c;
+            --free: #2ecc71; /* لون المجاني */
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
 
         body {
             font-family: 'Cairo', sans-serif;
@@ -31,6 +32,7 @@
             line-height: 1.6;
         }
 
+        /* خلفية ذكية */
         #particles-js {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1; background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
@@ -38,11 +40,12 @@
 
         /* ===== 2. HEADER ===== */
         .header {
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--gold-main);
+            background: rgba(5, 5, 5, 0.9);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
             padding: 15px 0;
             position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
         }
 
         .container {
@@ -51,114 +54,186 @@
         }
 
         .logo {
-            font-size: 1.6rem; font-weight: 900; color: var(--text-white);
+            font-size: 1.8rem; font-weight: 900; color: var(--text-white);
             text-decoration: none; display: flex; align-items: center; gap: 10px;
+            letter-spacing: 1px;
         }
+        .logo i { color: var(--gold-main); font-size: 1.4rem; }
         .logo span { color: var(--gold-main); }
 
         .member-btn {
-            background: transparent; border: 1px solid var(--gold-main);
-            color: var(--gold-main); padding: 5px 12px; border-radius: 4px;
-            font-weight: 600; text-decoration: none; font-size: 0.75rem;
-            display: flex; align-items: center; gap: 5px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold-main);
+            color: var(--gold-main);
+            padding: 6px 15px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.4s;
+            font-size: 0.85rem;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .member-btn:hover {
+            background: var(--gold-main); color: #000;
+            box-shadow: 0 0 15px var(--gold-main);
         }
 
-        /* ===== 3. HERO ===== */
+        /* ===== 3. HERO SECTION ===== */
         .hero {
-            padding: 80px 0 40px; text-align: center;
+            padding: 100px 0 60px; text-align: center; position: relative;
         }
-        .hero h1 { font-size: 3rem; line-height: 1.2; margin-bottom: 10px; }
-        .hero h1 span { color: var(--gold-main); }
-        .hero p { color: var(--text-gray); max-width: 600px; margin: 0 auto 30px; }
+        
+        .hero-badge {
+            background: linear-gradient(45deg, #d4af37, #f1c40f);
+            color: #000; padding: 5px 20px; border-radius: 20px;
+            font-weight: bold; font-size: 0.9rem; display: inline-block;
+            margin-bottom: 20px; box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+        }
 
-        /* ===== 4. SMART SERVICES GRID ===== */
-        .section-title { text-align: center; margin: 40px 0 20px; }
-        .section-title h2 { color: var(--gold-main); font-size: 2rem; }
+        .hero h1 {
+            font-size: 3.5rem; line-height: 1.2; margin-bottom: 15px;
+            font-weight: 900;
+        }
+        .hero h1 span { color: var(--gold-main); text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
+        
+        .hero p {
+            color: var(--text-gray); max-width: 600px; margin: 0 auto 40px;
+            font-size: 1.2rem;
+        }
 
+        /* زر الدعوة الرئيسي */
+        .cta-main {
+            background: var(--gold-main); color: #000;
+            padding: 15px 40px; font-size: 1.2rem; font-weight: 800;
+            border-radius: 5px; text-decoration: none;
+            display: inline-block; transition: 0.3s;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+        }
+        .cta-main:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); }
+
+        /* ===== 4. SERVICES GRID (ACCORDION STYLE) ===== */
         .grid-container {
-            max-width: 1200px; margin: 0 auto 80px; padding: 0 20px;
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
+            max-width: 1000px; margin: 0 auto 100px; padding: 0 20px;
+            display: flex; flex-direction: column; gap: 20px;
         }
 
-        /* الكروت القابلة للتوسيع (Accordions) */
+        /* الكرت القابل للتوسيع */
         .card {
-            background: var(--card-dark); border: 1px solid #333;
-            border-radius: 8px; overflow: hidden; transition: 0.3s;
+            background: var(--card-dark);
+            border: 1px solid #333;
+            border-radius: 10px; overflow: hidden;
+            transition: all 0.3s ease;
             position: relative;
         }
-
-        .card-header {
-            padding: 25px; cursor: pointer; display: flex;
-            justify-content: space-between; align-items: center;
-            background: linear-gradient(to bottom, #222, #161616);
-        }
-
-        .card-header:hover { background: #252525; }
-
-        .card-title { display: flex; align-items: center; gap: 15px; }
-        .card-icon { font-size: 2rem; color: var(--gold-main); }
-        .card h3 { margin: 0; font-size: 1.3rem; }
-        .card p { color: var(--text-gray); font-size: 0.85rem; margin: 0; }
-        .arrow { transition: 0.3s; color: var(--gold-main); }
         
-        .card.active { border-color: var(--gold-main); }
-        .card.active .arrow { transform: rotate(180deg); }
+        .card:hover { border-color: #555; transform: translateX(-5px); }
+        .card.active { border-color: var(--gold-main); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
 
-        /* منطقة التفاصيل المخفية */
-        .card-body {
-            max-height: 0; overflow: hidden; transition: max-height 0.5s ease-out;
-            background: #111; border-top: 1px solid #333;
+        /* رأس الكرت */
+        .card-header {
+            padding: 25px; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+            background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(0,0,0,0) 100%);
         }
 
-        .card.active .card-body { max-height: 1000px; } /* يسمح بالتمدد */
+        .card-info { display: flex; align-items: center; gap: 20px; }
+        
+        .icon-box {
+            width: 60px; height: 60px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; color: var(--gold-main);
+            border: 1px solid #333;
+        }
+
+        .card-texts h3 { font-size: 1.4rem; margin-bottom: 5px; color: #fff; }
+        .card-texts p { font-size: 0.9rem; color: #888; }
+        
+        .toggle-icon { font-size: 1.2rem; color: var(--gold-main); transition: 0.3s; }
+        .card.active .toggle-icon { transform: rotate(180deg); }
+
+        /* جسم الكرت (المحتوى المخفي) */
+        .card-body {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+            background: #0f0f0f;
+        }
+        .card.active .card-body { max-height: 1000px; border-top: 1px solid #333; }
+
+        .body-content { padding: 25px; }
 
         /* تصميم الباقات داخل الكرت */
-        .packages-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 10px; padding: 20px;
+        .packages-wrapper {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
         }
 
-        .package-item {
-            background: #1a1a1a; border: 1px solid #444; padding: 15px;
-            border-radius: 6px; text-align: center; transition: 0.2s;
+        .pkg-card {
+            background: #181818; border: 1px solid #333;
+            padding: 20px; border-radius: 8px; text-align: center;
+            position: relative; overflow: hidden;
         }
-        .package-item:hover { border-color: var(--gold-main); transform: translateY(-3px); }
-
-        .pkg-name { font-weight: bold; color: var(--text-white); margin-bottom: 5px; display: block;}
-        .pkg-price { color: var(--gold-main); font-size: 1.2rem; font-weight: 900; display: block; margin-bottom: 10px;}
-        .pkg-desc { font-size: 0.75rem; color: #888; display: block; margin-bottom: 10px; line-height: 1.4;}
-
-        .order-btn {
-            background: var(--gold-main); color: #000; border: none;
-            padding: 5px 15px; border-radius: 4px; font-weight: bold;
-            font-size: 0.8rem; cursor: pointer; width: 100%; display: block; text-decoration: none;
-        }
-
-        /* كرت الطوارئ الخاص */
-        .emergency-card { border: 2px solid var(--danger); box-shadow: 0 0 10px rgba(185, 28, 28, 0.2); }
-        .emergency-card .card-icon { color: var(--danger); animation: pulse 2s infinite; }
-        .emergency-card .card-header { background: linear-gradient(to bottom, #2a0a0a, #161616); }
         
-        .emergency-list { padding: 0; list-style: none; }
-        .emergency-item {
+        /* شارة المجاني */
+        .free-ribbon {
+            position: absolute; top: 12px; right: -30px;
+            background: var(--free); color: #fff;
+            width: 100px; transform: rotate(45deg);
+            font-size: 0.7rem; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .pkg-title { font-weight: bold; font-size: 1.1rem; margin-bottom: 10px; display: block; }
+        
+        .price-area { margin: 15px 0; }
+        .old-price { text-decoration: line-through; color: #666; font-size: 0.9rem; display: block; }
+        .new-price { color: var(--free); font-size: 1.4rem; font-weight: 900; }
+        .paid-price { color: var(--gold-main); font-size: 1.4rem; font-weight: 900; }
+
+        .features-list { text-align: right; margin: 15px 0; font-size: 0.85rem; color: #aaa; list-style: none; }
+        .features-list li { margin-bottom: 5px; }
+        .features-list li i { color: var(--gold-main); margin-left: 5px; }
+
+        .btn-book {
+            display: block; width: 100%; padding: 10px;
+            background: transparent; border: 1px solid var(--gold-main);
+            color: var(--gold-main); border-radius: 5px;
+            text-decoration: none; font-weight: bold; transition: 0.3s;
+        }
+        .btn-book:hover { background: var(--gold-main); color: #000; }
+        .btn-free { background: var(--free); border-color: var(--free); color: #fff; }
+        .btn-free:hover { background: #27ae60; }
+
+        /* الطوارئ */
+        .emergency-card { border: 1px solid var(--danger); }
+        .emergency-card .icon-box { color: var(--danger); border-color: rgba(185, 28, 28, 0.3); }
+        .emergency-card .toggle-icon { color: var(--danger); }
+        .emergency-list li {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 15px 20px; border-bottom: 1px solid #333;
+            padding: 15px; border-bottom: 1px solid #222;
         }
-        .emergency-item:last-child { border-bottom: none; }
-        .em-btn {
-            background: var(--danger); color: white; padding: 6px 15px;
-            text-decoration: none; border-radius: 4px; font-size: 0.8rem;
+        .em-call-btn {
+            background: var(--danger); color: white; padding: 5px 15px;
+            border-radius: 4px; text-decoration: none; font-size: 0.8rem;
         }
 
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        /* ===== 5. FOOTER & NAMES ===== */
+        .footer {
+            background: #080808; border-top: 3px solid var(--gold-main);
+            padding: 60px 0 30px; margin-top: 80px; text-align: center;
+        }
+        .footer h2 { color: #fff; margin-bottom: 10px; font-size: 2rem; }
+        .footer h2 span { color: var(--gold-main); }
+        .footer-links { margin: 20px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .footer-links a { color: #666; text-decoration: none; transition: 0.3s; }
+        .footer-links a:hover { color: var(--gold-main); }
+        .copyright { color: #444; font-size: 0.9rem; margin-top: 30px; border-top: 1px solid #222; padding-top: 20px;}
 
-        /* Footer */
-        footer { background: #050505; border-top: 1px solid #222; padding: 40px 0; text-align: center; color: #666; margin-top: 50px; }
-
+        /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            .grid-container { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+            .card-info { gap: 15px; }
+            .icon-box { width: 50px; height: 50px; font-size: 1.5rem; }
+            .card-texts h3 { font-size: 1.2rem; }
         }
     </style>
 </head>
@@ -169,173 +244,224 @@
     <header class="header">
         <div class="container">
             <a href="#" class="logo">
-                <i class="fas fa-cubes"></i> RASIN <span>.INC</span>
+                <i class="fas fa-layer-group"></i> RASIN <span>GROUP</span>
             </a>
             <a href="#" class="member-btn">
-                <i class="fas fa-user-shield"></i> بوابة الشركاء
+                <i class="fas fa-id-card-alt"></i> منطقة الشركاء
             </a>
         </div>
     </header>
 
-    <section class="hero">
+    <section class="hero animate__animated animate__fadeIn">
         <div class="container">
-            <h1>منظومة راسن<br><span>للخدمات الذكية</span></h1>
-            <p>نظام تشغيلي متكامل يجمع بين الطوارئ، الصيانة، والرفاهية.</p>
+            <div class="hero-badge">⚡ عرض الافتتاح الرسمي</div>
+            <h1>نبدأ معك..<br><span>طوبة طوبة</span></h1>
+            <p>منصة راسن للخدمات والاستثمار التعاوني.<br>جرب خدماتنا التشغيلية اليوم، وشاركنا بناء المستقبل.</p>
+            <a href="#services" class="cta-main">جرب الخدمة مجاناً</a>
         </div>
     </section>
 
     <section id="services">
-        <div class="grid-container">
-
-            <div class="card emergency-card" onclick="toggleCard(this)">
-                <div class="card-header">
-                    <div class="card-title">
-                        <i class="fas fa-siren-on card-icon"></i> <div>
-                            <h3>طوارئ 24/7</h3>
-                            <p style="color: #ff6666;">استجابة فورية (خدمة مدفوعة)</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-down arrow"></i>
-                </div>
-                <div class="card-body">
-                    <ul class="emergency-list">
-                        <li class="emergency-item">
-                            <span><i class="fas fa-car-crash"></i> طوارئ سيارات (بنش/ونش)</span>
-                            <a href="https://wa.me/962790782004?text=🚨 حالة طارئة: أحتاج مساعدة طريق/ونش" class="em-btn">طلب</a>
-                        </li>
-                        <li class="emergency-item">
-                            <span><i class="fas fa-tint"></i> سباكة طارئة (تسريب)</span>
-                            <a href="https://wa.me/962790782004?text=🚨 حالة طارئة: أحتاج سباك فوراً" class="em-btn">طلب</a>
-                        </li>
-                        <li class="emergency-item">
-                            <span><i class="fas fa-bolt"></i> كهرباء (انقطاع تام)</span>
-                            <a href="https://wa.me/962790782004?text=🚨 حالة طارئة: عطل كهرباء خطير" class="em-btn">طلب</a>
-                        </li>
-                        <li class="emergency-item">
-                            <span><i class="fas fa-first-aid"></i> إسعاف أولي منزلي</span>
-                            <a href="tel:911" class="em-btn" style="background:#000; border:1px solid red;">اتصل 911</a>
-                        </li>
-                    </ul>
-                </div>
+        <div class="container">
+            <div class="section-title">
+                <h2>الخدمات التشغيلية</h2>
+                <p style="color:#666">اختر الخدمة لعرض الخيارات المتاحة</p>
             </div>
 
-            <div class="card" onclick="toggleCard(this)">
-                <div class="card-header">
-                    <div class="card-title">
-                        <i class="fas fa-car card-icon"></i>
-                        <div>
-                            <h3>العناية بالسيارات</h3>
-                            <p>باقات غسيل وتلميع متنقل</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-down arrow"></i>
-                </div>
-                <div class="card-body">
-                    <div class="packages-grid">
-                        <div class="package-item">
-                            <span class="pkg-name">أساسي Basic</span>
-                            <span class="pkg-price">7.00 JD</span>
-                            <span class="pkg-desc">غسيل خارجي + داخلي + تجفيف</span>
-                            <a href="https://wa.me/962790782004?text=مرحبا، أريد حجز باقة غسيل أساسي (7 دنانير)" class="order-btn">حجز</a>
-                        </div>
-                        <div class="package-item" style="border-color: var(--gold-main);">
-                            <span class="pkg-name" style="color:var(--gold-main)">بريميوم Premium</span>
-                            <span class="pkg-price">12.00 JD</span>
-                            <span class="pkg-desc">أساسي + واكس + تلميع طبلون + تعطير</span>
-                            <a href="https://wa.me/962790782004?text=مرحبا، أريد حجز باقة غسيل بريميوم (12 دينار)" class="order-btn">حجز</a>
-                        </div>
-                        <div class="package-item">
-                            <span class="pkg-name">جولد Gold</span>
-                            <span class="pkg-price">25.00 JD</span>
-                            <span class="pkg-desc">تلميع شامل (Detailing) + تعقيم مكيف</span>
-                            <a href="https://wa.me/962790782004?text=مرحبا، أريد حجز باقة جولد ديتييل (25 دينار)" class="order-btn">حجز</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="grid-container">
 
-            <div class="card" onclick="toggleCard(this)">
-                <div class="card-header">
-                    <div class="card-title">
-                        <i class="fas fa-tools card-icon"></i>
-                        <div>
-                            <h3>الصيانة المنزلية</h3>
-                            <p>فنيون مختصون (كشفية مجانية للأعضاء)</p>
+                <div class="card animate__animated animate__fadeInUp" onclick="toggleCard(this)">
+                    <div class="card-header">
+                        <div class="card-info">
+                            <div class="icon-box"><i class="fas fa-car"></i></div>
+                            <div class="card-texts">
+                                <h3>غسيل السيارات المتنقل</h3>
+                                <p style="color: var(--free);">● أول غسلة عادية مجاناً</p>
+                            </div>
                         </div>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
                     </div>
-                    <i class="fas fa-chevron-down arrow"></i>
-                </div>
-                <div class="card-body">
-                    <div class="packages-grid">
-                        <div class="package-item">
-                            <span class="pkg-name">كهرباء</span>
-                            <span class="pkg-desc">إصلاح أعطال، تمديدات، إنارة</span>
-                            <a href="https://wa.me/962790782004?text=طلب فني كهرباء" class="order-btn">طلب فني</a>
-                        </div>
-                        <div class="package-item">
-                            <span class="pkg-name">سباكة وصحية</span>
-                            <span class="pkg-desc">تسريبات، تركيب، فلاتر</span>
-                            <a href="https://wa.me/962790782004?text=طلب فني سباكة" class="order-btn">طلب فني</a>
-                        </div>
-                        <div class="package-item">
-                            <span class="pkg-name">تكييف</span>
-                            <span class="pkg-desc">صيانة، تنظيف، تعبئة غاز</span>
-                            <a href="https://wa.me/962790782004?text=طلب فني تكييف" class="order-btn">طلب فني</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    <div class="card-body">
+                        <div class="body-content">
+                            <div class="packages-wrapper">
+                                <div class="pkg-card" style="border-color: var(--free);">
+                                    <div class="free-ribbon">FREE</div>
+                                    <span class="pkg-title">غسيل عادي (Normal)</span>
+                                    <div class="price-area">
+                                        <span class="old-price">7.00 JD</span>
+                                        <span class="new-price">0.00 JD</span>
+                                    </div>
+                                    <ul class="features-list">
+                                        <li><i class="fas fa-check"></i> غسيل خارجي بالبخار</li>
+                                        <li><i class="fas fa-check"></i> تنظيف داخلي سريع</li>
+                                        <li><i class="fas fa-check"></i> تلميع إطارات</li>
+                                    </ul>
+                                    <a href="https://wa.me/962790782004?text=مرحباً، أريد تجربة خدمة الغسيل العادي المجانية (عرض التأسيس)" class="btn-book btn-free">احجز مجاناً</a>
+                                </div>
+                                
+                                <div class="pkg-card">
+                                    <span class="pkg-title">بريميوم (Premium)</span>
+                                    <div class="price-area">
+                                        <span class="paid-price">12.00 JD</span>
+                                    </div>
+                                    <ul class="features-list">
+                                        <li><i class="fas fa-check"></i> كل ميزات العادي</li>
+                                        <li><i class="fas fa-check"></i> واكس (Wax)</li>
+                                        <li><i class="fas fa-check"></i> تعطير داخلي</li>
+                                    </ul>
+                                    <a href="https://wa.me/962790782004?text=طلب باقة بريميوم للسيارات (12 JD)" class="btn-book">طلب (مدفوع)</a>
+                                </div>
 
-            <div class="card" style="opacity: 0.6; cursor: not-allowed;">
-                <div class="card-header">
-                    <div class="card-title">
-                        <i class="fas fa-city card-icon" style="color: #555;"></i>
-                        <div>
-                            <h3>المدينة الذكية</h3>
-                            <p>Phase 2: Loading...</p>
+                                <div class="pkg-card">
+                                    <span class="pkg-title">جولد (Gold)</span>
+                                    <div class="price-area">
+                                        <span class="paid-price">25.00 JD</span>
+                                    </div>
+                                    <ul class="features-list">
+                                        <li><i class="fas fa-check"></i> تلميع شامل (Detailing)</li>
+                                        <li><i class="fas fa-check"></i> تنظيف محرك</li>
+                                        <li><i class="fas fa-check"></i> تعقيم مكيف</li>
+                                    </ul>
+                                    <a href="https://wa.me/962790782004?text=طلب باقة جولد للسيارات (25 JD)" class="btn-book">طلب (مدفوع)</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <i class="fas fa-lock arrow" style="color:#555"></i>
                 </div>
-            </div>
 
+                <div class="card animate__animated animate__fadeInUp" style="animation-delay: 0.1s;" onclick="toggleCard(this)">
+                    <div class="card-header">
+                        <div class="card-info">
+                            <div class="icon-box"><i class="fas fa-tools"></i></div>
+                            <div class="card-texts">
+                                <h3>الصيانة العامة</h3>
+                                <p style="color: var(--free);">● كشفية مجانية للأعضاء</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="body-content">
+                            <div class="packages-wrapper">
+                                <div class="pkg-card">
+                                    <span class="pkg-title">كهرباء / سباكة</span>
+                                    <div class="price-area">
+                                        <span class="old-price">10.00 JD</span>
+                                        <span class="new-price">0.00 JD</span>
+                                        <span style="display:block; font-size:0.8rem; color:#888">(أجور الزيارة والكشف)</span>
+                                    </div>
+                                    <a href="https://wa.me/962790782004?text=مرحباً، عندي عطل وأريد الاستفادة من الكشفية المجانية" class="btn-book btn-free">طلب فني</a>
+                                </div>
+                                <div class="pkg-card">
+                                    <span class="pkg-title">تكييف وتبريد</span>
+                                    <div class="price-area">
+                                        <span class="paid-price">20.00 JD</span>
+                                        <span style="display:block; font-size:0.8rem; color:#888">(غسيل وتنظيف الوحدة)</span>
+                                    </div>
+                                    <a href="https://wa.me/962790782004?text=طلب صيانة مكيفات" class="btn-book">حجز موعد</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card emergency-card animate__animated animate__fadeInUp" style="animation-delay: 0.2s;" onclick="toggleCard(this)">
+                    <div class="card-header">
+                        <div class="card-info">
+                            <div class="icon-box"><i class="fas fa-ambulance"></i></div>
+                            <div class="card-texts">
+                                <h3 style="color:var(--danger)">خدمات الطوارئ SOS</h3>
+                                <p style="color: #ff6666;">استجابة فورية (خدمة مدفوعة)</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="body-content">
+                            <ul class="emergency-list" style="list-style:none; padding:0">
+                                <li>
+                                    <span style="color:#fff"><i class="fas fa-truck-pickup" style="margin-left:10px; color:var(--danger)"></i> ونش / بنشر متنقل</span>
+                                    <a href="https://wa.me/962790782004?text=SOS: أحتاج ونش أو خدمة طريق فوراً" class="em-call-btn">طلب</a>
+                                </li>
+                                <li>
+                                    <span style="color:#fff"><i class="fas fa-water" style="margin-left:10px; color:var(--danger)"></i> سباك طوارئ (تسريب)</span>
+                                    <a href="https://wa.me/962790782004?text=SOS: طوارئ سباكة وتسريب" class="em-call-btn">طلب</a>
+                                </li>
+                                <li>
+                                    <span style="color:#fff"><i class="fas fa-bolt" style="margin-left:10px; color:var(--danger)"></i> كهربائي طوارئ</span>
+                                    <a href="https://wa.me/962790782004?text=SOS: انقطاع كهرباء طارئ" class="em-call-btn">طلب</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" style="opacity: 0.5; cursor: not-allowed;">
+                    <div class="card-header">
+                        <div class="card-info">
+                            <div class="icon-box" style="border-color:#444; color:#666"><i class="fas fa-city"></i></div>
+                            <div class="card-texts">
+                                <h3 style="color:#888">المدينة الذكية</h3>
+                                <p>Phase 2: Loading...</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-lock toggle-icon" style="color:#666"></i>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <h2 style="color: #fff; margin-bottom: 10px;">RASIN GROUP</h2>
-            <p>© 2025 جميع الحقوق محفوظة</p>
+    <footer class="footer">
+        <div class="container" style="display:block">
+            <h2>RASIN <span>GROUP</span></h2>
+            <p style="color:#888; max-width:500px; margin:0 auto">
+                راسن ليست مجرد منصة خدمات، بل هي الأساس الذي نبني عليه مجتمعاً استثمارياً ذكياً.
+            </p>
+            
+            <div class="footer-links">
+                <a href="#">من نحن</a>
+                <a href="#">الخدمات</a>
+                <a href="#">الاستثمار</a>
+                <a href="#">سياسة الخصوصية</a>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2025 Rasin Group. Developed by Audai Titi.</p>
+            </div>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // تفعيل الخلفية
+        /* إعدادات الخلفية */
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 60 },
+                "number": { "value": 50 },
                 "color": { "value": "#d4af37" },
                 "shape": { "type": "circle" },
                 "opacity": { "value": 0.3 },
                 "size": { "value": 3 },
-                "line_linked": { "enable": true, "distance": 150, "color": "#d4af37", "opacity": 0.2, "width": 1 },
+                "line_linked": { "enable": true, "distance": 150, "color": "#d4af37", "opacity": 0.1, "width": 1 },
                 "move": { "enable": true, "speed": 1 }
             }
         });
 
-        // دالة توسيع الكروت (Accordions)
-        function toggleCard(card) {
-            // إغلاق الكروت الأخرى المفتوحة
+        /* دالة فتح وإغلاق الكروت */
+        function toggleCard(selectedCard) {
+            // البحث عن كل الكروت
             const allCards = document.querySelectorAll('.card');
-            allCards.forEach(c => {
-                if (c !== card && c.classList.contains('active')) {
-                    c.classList.remove('active');
+            
+            // إغلاق أي كرت مفتوح غير الذي تم الضغط عليه
+            allCards.forEach(card => {
+                if (card !== selectedCard && card.classList.contains('active')) {
+                    card.classList.remove('active');
                 }
             });
 
-            // فتح/إغلاق الكرت الحالي
-            card.classList.toggle('active');
+            // فتح أو إغلاق الكرت المضغوط
+            selectedCard.classList.toggle('active');
         }
     </script>
 </body>
