@@ -3,2107 +3,402 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>راحة - المنصة الذكية للخدمات المتكاملة</title>
+    <title>RASIN | راسن - ثبات ونماء</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+        /* ===== 1. ENGINEERING PALETTE (THE SHERIFF STYLE) ===== */
         :root {
-            --primary: #2563eb;
-            --secondary: #7c3aed;
-            --accent: #f59e0b;
-            --emergency: #dc2626;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --future: #6b7280;
-            --dark: #1f2937;
-            --light: #f8fafc;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --bg-dark: #0a0a0a;       /* أسود فحمي */
+            --card-dark: #161616;     /* رمادي داكن جداً للكروت */
+            --gold-main: #d4af37;     /* ذهبي معدني */
+            --gold-glow: #aa8c2c;     /* ذهبي غامق للظلال */
+            --text-white: #ffffff;
+            --text-gray: #a0a0a0;
+            --danger: #ff4444;        /* للخصومات */
+            --locked: #333333;        /* لون العناصر المغلقة */
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            overflow-x: hidden;
             line-height: 1.6;
-            min-height: 100vh;
+        }
+
+        /* خلفية الجزيئات المتحركة */
+        #particles-js {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+        }
+
+        /* ===== 2. HEADER: STRUCTURAL ===== */
+        .header {
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--gold-main);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
-        }
-
-        /* ===== HEADER ===== */
-        .main-header {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-            border-bottom: 3px solid var(--accent);
-        }
-
-        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.4rem;
-            font-weight: bold;
-            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-white);
+            text-decoration: none;
             display: flex;
             align-items: center;
             gap: 10px;
+            letter-spacing: 1px;
         }
 
-        .logo-icon {
-            font-size: 1.8rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .logo span { color: var(--gold-main); }
+        .logo i { font-size: 1.4rem; }
+
+        .member-btn {
+            background: transparent;
+            border: 1px solid var(--gold-main);
+            color: var(--gold-main);
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 0.9rem;
         }
 
-        .menu-toggle {
+        .member-btn:hover {
+            background: var(--gold-main);
+            color: #000;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* ===== 3. HERO: THE OFFER ===== */
+        .hero {
+            height: 90vh;
             display: flex;
-            flex-direction: column;
-            gap: 4px;
-            cursor: pointer;
-            padding: 8px;
-            background: none;
-            border: none;
-        }
-
-        .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: var(--primary);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        /* ===== SIDEBAR MENU ===== */
-        .sidebar-menu {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 350px;
-            height: 100vh;
-            background: white;
-            box-shadow: -5px 0 30px rgba(0,0,0,0.15);
-            transition: right 0.3s ease;
-            z-index: 2000;
-            padding: 80px 30px 30px;
-            overflow-y: auto;
-        }
-
-        .sidebar-menu.active {
-            right: 0;
-        }
-
-        .menu-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1500;
-        }
-
-        .menu-overlay.active {
-            display: block;
-        }
-
-        .menu-category {
-            margin-bottom: 15px;
-            border: 2px solid #f1f5f9;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-
-        .menu-category-btn {
-            width: 100%;
-            background: #f8fafc;
-            border: none;
-            padding: 18px 20px;
-            text-align: right;
-            font-weight: 600;
-            color: var(--dark);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-
-        .menu-category-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
-
-        .menu-category-icon {
-            font-size: 1.4rem;
-            margin-left: 10px;
-        }
-
-        /* ===== HERO SECTION ===== */
-        .hero-section {
-            padding: 120px 0 80px;
-            color: white;
-            text-align: center;
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(124, 58, 237, 0.95));
-        }
-
-        .hero-title {
-            font-size: 2.8rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-        }
-
-        .hero-subtitle {
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-            font-weight: 600;
-        }
-
-        .hero-mission {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 25px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            max-width: 800px;
-            margin: 0 auto 2rem;
-            line-height: 1.8;
-        }
-
-        .hero-values {
-            display: flex;
             justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 2rem;
+            text-align: center;
+            position: relative;
+            padding-top: 60px;
         }
 
-        .value-tag {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
-            border-radius: 25px;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 900;
         }
 
-        /* ===== MAIN SECTIONS ===== */
-        .main-sections {
-            padding: 80px 0;
-            background: white;
+        .hero-content h1 span {
+            color: var(--gold-main);
+            display: block;
+            font-size: 4.5rem;
         }
 
+        .free-badge {
+            background: var(--danger);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(255, 68, 68, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .hero-p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-btn {
+            background: linear-gradient(45deg, var(--gold-main), var(--gold-glow));
+            color: #000;
+            padding: 15px 50px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 2px; /* زوايا حادة */
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+
+        .cta-btn:hover { transform: translateY(-3px); }
+
+        /* ===== 4. GRID SYSTEM (BRICK BY BRICK) ===== */
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--dark);
+            margin-bottom: 50px;
+            position: relative;
         }
+        
+        .section-title h2 { font-size: 2.5rem; color: var(--gold-main); }
+        .section-title p { color: var(--text-gray); }
 
-        .sections-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 30px;
-        }
-
-        /* ===== EMERGENCY CARD ===== */
-        .emergency-card {
-            background: white;
-            border: 3px solid var(--emergency);
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-            grid-column: 1 / -1;
-        }
-
-        .emergency-header {
-            padding: 25px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #fef2f2;
-            border-bottom: 2px solid #fecaca;
-        }
-
-        .emergency-title-content {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .emergency-icon {
-            font-size: 2.2rem;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 15px;
-            background: rgba(220, 38, 38, 0.15);
-        }
-
-        .emergency-name {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--emergency);
-        }
-
-        .emergency-arrow {
-            font-size: 1.3rem;
-            transition: transform 0.3s ease;
-            color: var(--emergency);
-        }
-
-        .emergency-card.active .emergency-arrow {
-            transform: rotate(180deg);
-        }
-
-        .emergency-services {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-        }
-
-        .emergency-card.active .emergency-services {
-            max-height: 1000px;
-        }
-
-        .emergency-service-item {
-            padding: 20px 25px;
-            border-bottom: 1px solid #fecaca;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: background 0.3s ease;
-        }
-
-        .emergency-service-item:hover {
-            background: #fef2f2;
-        }
-
-        .emergency-service-icon {
-            font-size: 1.6rem;
-            width: 40px;
-            text-align: center;
-        }
-
-        .emergency-service-name {
-            flex: 1;
-            color: var(--dark);
-            font-size: 1.1rem;
-            font-weight: 600;
-        }
-
-        .emergency-service-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        /* ===== REGULAR CARDS ===== */
-        .section-card {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            border: 3px solid transparent;
-            overflow: hidden;
-        }
-
-        .section-card.ready { border-color: var(--success); }
-        .section-card.development { border-color: var(--warning); }
-        .section-card.future { border-color: var(--future); }
-
-        .section-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-        }
-
-        .section-header {
-            padding: 25px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #f8fafc;
-            border-bottom: 2px solid #e5e7eb;
-        }
-
-        .section-title-content {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .section-icon {
-            font-size: 2.2rem;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 15px;
-        }
-
-        .ready .section-icon { background: rgba(16, 185, 129, 0.15); }
-        .development .section-icon { background: rgba(245, 158, 11, 0.15); }
-        .future .section-icon { background: rgba(107, 114, 128, 0.15); }
-
-        .section-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--dark);
-        }
-
-        .section-badge {
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: white;
-        }
-
-        .ready .section-badge { background: var(--success); }
-        .development .section-badge { background: var(--warning); }
-        .future .section-badge { background: var(--future); }
-
-        .section-arrow {
-            font-size: 1.3rem;
-            transition: transform 0.3s ease;
-            margin-right: 10px;
-        }
-
-        .section-card.active .section-arrow {
-            transform: rotate(180deg);
-        }
-
-        .services-list {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-        }
-
-        .section-card.active .services-list {
-            max-height: 3000px;
-        }
-
-        .service-item {
-            padding: 20px 25px;
-            border-bottom: 1px solid #f1f5f9;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            transition: background 0.3s ease;
-        }
-
-        .service-item:hover {
-            background: #f8fafc;
-        }
-
-        .service-icon {
-            font-size: 1.4rem;
-            width: 40px;
-            text-align: center;
-        }
-
-        .service-name {
-            flex: 1;
-            color: var(--dark);
-            font-size: 1.1rem;
-        }
-
-        .service-status {
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            margin-left: 10px;
-        }
-
-        .status-available {
-            background: var(--success);
-            color: white;
-        }
-
-        .status-development {
-            background: var(--warning);
-            color: white;
-        }
-
-        .service-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .action-btn {
-            padding: 10px 18px;
-            border: none;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .whatsapp-btn {
-            background: #25D366;
-            color: white;
-        }
-
-        .whatsapp-btn:hover {
-            background: #128C7E;
-            transform: translateY(-2px);
-        }
-
-        .call-btn {
-            background: var(--primary);
-            color: white;
-        }
-
-        .call-btn:hover {
-            background: #1d4ed8;
-            transform: translateY(-2px);
-        }
-
-        /* ===== CONTACT & FOOTER ===== */
-        .contact-section {
-            background: #f8fafc;
-            padding: 80px 0;
-        }
-
-        .contact-grid {
+        .grid-container {
+            max-width: 1200px;
+            margin: 0 auto 100px;
+            padding: 0 20px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto;
+            gap: 25px;
         }
 
-        .contact-info {
-            text-align: center;
+        /* الكروت الفعالة */
+        .card {
+            background: var(--card-dark);
+            border: 1px solid #333;
+            padding: 30px;
+            position: relative;
+            transition: 0.3s;
+            overflow: hidden;
         }
 
-        .contact-item {
-            margin: 2rem 0;
-            font-size: 1.2rem;
+        .card:hover {
+            border-color: var(--gold-main);
+            transform: translateY(-5px);
         }
 
-        .contact-item strong {
-            color: var(--primary);
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 1.3rem;
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--gold-main);
+            margin-bottom: 20px;
         }
 
-        .social-links {
+        .card h3 { margin-bottom: 10px; font-size: 1.4rem; }
+        .card p { color: var(--text-gray); font-size: 0.95rem; margin-bottom: 20px; }
+
+        .price-tag {
             display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 2rem;
-        }
-
-        .social-link {
-            width: 55px;
-            height: 55px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            transform: translateY(-3px);
-            background: var(--secondary);
-        }
-
-        .footer {
-            background: var(--dark);
-            color: white;
-            padding: 50px 0 30px;
-            text-align: center;
-        }
-
-        .footer-logo {
-            color: white;
-            justify-content: center;
-            margin-bottom: 2rem;
-            display: flex;
-            align-items: center;
             gap: 10px;
-            font-size: 1.5rem;
+            align-items: center;
             font-weight: bold;
         }
+        
+        .old-price { text-decoration: line-through; color: #666; font-size: 0.9rem; }
+        .free-price { color: var(--gold-main); font-size: 1.2rem; }
 
-        .footer-links {
+        /* الكروت المستقبلية (Locked Phases) */
+        .locked-card {
+            background: rgba(20, 20, 20, 0.5);
+            border: 1px dashed #444;
+            opacity: 0.6;
+            cursor: not-allowed;
+            position: relative;
+        }
+
+        .locked-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            gap: 30px;
-            margin: 2rem 0;
-            flex-wrap: wrap;
+            color: #888;
         }
 
-        .footer-links a {
-            color: #d1d5db;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 1.1rem;
+        .lock-icon { font-size: 2rem; margin-bottom: 10px; color: #555; }
+        .phase-badge {
+            background: #333;
+            color: #aaa;
+            padding: 4px 10px;
+            font-size: 0.7rem;
+            border-radius: 4px;
+            margin-top: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .footer-links a:hover {
-            color: white;
+        /* ===== 5. FOOTER ===== */
+        footer {
+            background: #050505;
+            border-top: 1px solid #222;
+            padding: 40px 0;
+            text-align: center;
+            color: #666;
         }
 
-        .copyright {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid #374151;
-            color: #9ca3af;
-            line-height: 1.6;
-            font-size: 1.1rem;
-        }
-
-        .footer-quote {
-            font-style: italic;
-            margin-top: 1rem;
-            color: #d1d5db;
-            font-size: 1.2rem;
-        }
-
-        /* ===== RESPONSIVE DESIGN ===== */
+        /* Responsive */
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.2rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.4rem;
-            }
-            
-            .sections-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .section-header {
-                padding: 20px;
-            }
-
-            .section-name {
-                font-size: 1.2rem;
-            }
-
-            .service-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
-
-            .service-actions {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .action-btn {
-                flex: 1;
-                text-align: center;
-                justify-content: center;
-            }
-
-            .sidebar-menu {
-                width: 300px;
-            }
-
-            .emergency-service-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 12px;
-            }
-
-            .emergency-service-actions {
-                width: 100%;
-                justify-content: space-between;
-            }
+            .hero-content h1 span { font-size: 3rem; }
+            .hero-content h1 { font-size: 2rem; }
+            .grid-container { grid-template-columns: 1fr; }
         }
-
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: 1.8rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .section-card {
-                margin: 0 10px;
-            }
-
-            .hero-values {
-                gap: 10px;
-            }
-
-            .value-tag {
-                padding: 8px 16px;
-                font-size: 0.9rem;
-            }
-        }
-            .footer-quote {
-        font-style: italic;
-        margin-top: 1rem;
-        color: #d1d5db;
-        font-size: 1.2rem;
-    }
-/* === نظام التقييمات المتطور === */
-.testimonials-section {
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    padding: 80px 20px;
-    direction: rtl;
-}
-
-.testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
-    max-width: 1200px;
-    margin: 0 auto 50px;
-}
-
-.testimonial-card {
-    background: white;
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    border: 2px solid #e2e8f0;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.testimonial-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
-
-.testimonial-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-    border-color: #667eea;
-}
-
-.testimonial-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 15px;
-    gap: 15px;
-}
-
-.client-info {
-    flex: 1;
-}
-
-.client-name {
-    font-weight: 700;
-    color: #2d3748;
-    font-size: 1.1em;
-    margin-bottom: 5px;
-}
-
-.service-name {
-    color: #718096;
-    font-size: 0.9em;
-}
-
-.rating-display {
-    direction: ltr;
-    text-align: left;
-}
-
-.stars {
-    display: flex;
-    gap: 2px;
-    margin-bottom: 5px;
-}
-
-.star {
-    color: #ffd700;
-    font-size: 1.2em;
-}
-
-.rating-value {
-    font-weight: 600;
-    color: #2d3748;
-    font-size: 0.9em;
-}
-
-.testimonial-text {
-    color: #4a5568;
-    line-height: 1.7;
-    margin-bottom: 20px;
-    font-size: 1em;
-}
-
-.testimonial-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 15px;
-    border-top: 1px solid #e2e8f0;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 15px;
-}
-
-.like-btn, .comment-btn {
-    background: none;
-    border: none;
-    color: #718096;
-    cursor: pointer;
-    padding: 8px 12px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 0.9em;
-}
-
-.like-btn:hover, .comment-btn:hover {
-    background: #f7fafc;
-    color: #4a5568;
-}
-
-.like-btn.liked {
-    color: #e53e3e;
-}
-
-.like-btn.liked:hover {
-    background: #fed7d7;
-}
-
-.testimonial-date {
-    color: #a0aec0;
-    font-size: 0.8em;
-}
-
-/* إحصائيات التقييمات */
-.rating-stats {
-    background: white;
-    border-radius: 20px;
-    padding: 40px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
-    text-align: center;
-}
-
-.stat-item {
-    padding: 20px;
-}
-
-.stat-number {
-    font-size: 3em;
-    font-weight: 800;
-    margin-bottom: 10px;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.stat-label {
-    color: #718096;
-    font-size: 1.1em;
-    font-weight: 600;
-}
-
-/* تفاعلات التعليقات */
-.comments-section {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #e2e8f0;
-}
-
-.comment {
-    padding: 15px;
-    background: #f7fafc;
-    border-radius: 12px;
-    margin-bottom: 10px;
-}
-
-.comment-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-}
-
-.comment-author {
-    font-weight: 600;
-    color: #2d3748;
-}
-
-.comment-text {
-    color: #4a5568;
-    line-height: 1.6;
-}
-
-.add-comment {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.comment-input {
-    flex: 1;
-    padding: 12px;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    resize: vertical;
-    min-height: 60px;
-    font-family: inherit;
-}
-
-.submit-comment {
-    background: #667eea;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.submit-comment:hover {
-    background: #5a6fd8;
-}
-
-/* تحسينات للجوال */
-@media (max-width: 768px) {
-    .testimonials-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .testimonial-card {
-        padding: 20px;
-        margin: 0 10px;
-    }
-    
-    .testimonial-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .rating-display {
-        align-self: flex-start;
-    }
-    
-    .testimonial-actions {
-        flex-direction: column;
-        gap: 15px;
-        align-items: flex-start;
-    }
-    
-    .action-buttons {
-        width: 100%;
-        justify-content: space-around;
-    }
-    
-    .rating-stats {
-        padding: 30px 20px;
-        margin: 0 10px;
-    }
-    
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-    }
-    
-    .stat-number {
-        font-size: 2.5em;
-    }
-}
-
-@media (max-width: 480px) {
-    .testimonials-section {
-        padding: 60px 15px;
-    }
-    
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .testimonial-card {
-        padding: 15px;
-    }
-    
-    .add-comment {
-        flex-direction: column;
-    }
-}
-</style>
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="main-header">
-        <div class="container nav-container">
-            <div class="logo">
-                <span class="logo-icon">🌐</span>
-                راحة - SmartLife Hub
-            </div>
-            <button class="menu-toggle" id="menuToggle">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+
+    <div id="particles-js"></div>
+
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">
+                <i class="fas fa-cubes"></i> RASIN <span>.INC</span>
+            </a>
+            <a href="#" class="member-btn">
+                <i class="fas fa-user-shield"></i> بوابة الشركاء
+            </a>
         </div>
     </header>
 
-    <!-- Sidebar Menu -->
-    <div class="menu-overlay" id="menuOverlay"></div>
-    <nav class="sidebar-menu" id="sidebarMenu">
-        <div class="menu-category">
-            <button class="menu-category-btn" onclick="scrollToSection('emergency')">
-                <span>🚨 قسم الطوارئ</span>
-                <span class="menu-category-icon">🚨</span>
-            </button>
-        </div>
-        <div class="menu-category">
-            <button class="menu-category-btn" onclick="scrollToSection('home-services')">
-                <span>🏠 الخدمات المنزلية</span>
-                <span class="menu-category-icon">🏠</span>
-            </button>
-        </div>
-        <div class="menu-category">
-            <button class="menu-category-btn" onclick="scrollToSection('car-services')">
-                <span>🚗 خدمات السيارات</span>
-                <span class="menu-category-icon">🚗</span>
-            </button>
-        </div>
-        <div class="menu-category">
-            <button class="menu-category-btn" onclick="scrollToSection('logistics')">
-                <span>🚚 الخدمات اللوجستية</span>
-                <span class="menu-category-icon">🚚</span>
-            </button>
-        </div>
-        <div class="menu-category">
-            <button class="menu-category-btn" onclick="scrollToSection('tech-services')">
-                <span>🤖 التقنية والذكاء</span>
-                <span class="menu-category-icon">🤖</span>
-            </button>
-        </div>
-        <div class="menu-category">
-            <button class="menu-category-btn" onclick="scrollToSection('professional')">
-                <span>🛠️ الخدمات المهنية</span>
-                <span class="menu-category-icon">🛠️</span>
-            </button>
-        </div>
-        <div class="menu-category">
-            <button class="menu-category-btn" onclick="scrollToSection('environmental')">
-                <span>🌱 الخدمات البيئية</span>
-                <span class="menu-category-icon">🌱</span>
-            </button>
-        </div>
-        <div class="menu-category">
-            <button class="menu-category-btn" onclick="scrollToSection('administrative')">
-                <span>📋 الخدمات الإدارية</span>
-                <span class="menu-category-icon">📋</span>
-            </button>
-        </div>
-        <div class="menu-category">
-            <button class="menu-category-btn" onclick="scrollToSection('commercial')">
-                <span>🏢 الخدمات التجارية</span>
-                <span class="menu-category-icon">🏢</span>
-            </button>
-        </div>
-        <div class="menu-category">
-            <button class="menu-category-btn" onclick="scrollToSection('educational')">
-                <span>🎓 الخدمات التعليمية</span>
-                <span class="menu-category-icon">🎓</span>
-            </button>
-        </div>
-        <div class="menu-category">
-            <button class="menu-category-btn" onclick="scrollToSection('health')">
-                <span>⚕️ الخدمات الصحية</span>
-                <span class="menu-category-icon">⚕️</span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section class="hero-section">
+    <section class="hero">
         <div class="container">
-            <h1 class="hero-title">🌐 راحة - المنصة الذكية</h1>
-            <p class="hero-subtitle">"كل ما تحتاجه... بخدمة ذكية واحدة"</p>
-            <div class="hero-mission">
-                "إنشاء منظومة موحدة لإدارة جميع الخدمات المنزلية، المهنية، الحكومية، اللوجستية، والبيئية في تطبيق ذكي واحد، لتوفير وقت العميل وجهده وماله وضمان جودة الخدمة ورضاه."
-            </div>
-            <div class="hero-values">
-                <span class="value-tag">🧠 الذكاء</span>
-                <span class="value-tag">⚡ السرعة</span>
-                <span class="value-tag">🎯 الدقة</span>
-                <span class="value-tag">🛡️ الأمان</span>
-                <span class="value-tag">🔗 التكامل</span>
-                <span class="value-tag">🌱 الاستدامة</span>
-                <span class="value-tag">❤️ الإنسانية</span>
+            <div class="hero-content">
+                <div class="free-badge">🌟 عرض الإطلاق: أول خدمة مجاناً</div>
+                <h1>نبدأ معك.. <br><span>طوبة طوبة</span></h1>
+                <p class="hero-p">
+                    منصة راسن للخدمات والاستثمار التعاوني.
+                    ابدأ بتجربة خدماتنا التشغيلية اليوم، وشاركنا بناء مدن المستقبل غداً.
+                </p>
+                <a href="#services" class="cta-btn">جرب الخدمة الآن</a>
             </div>
         </div>
     </section>
 
-    <!-- شريط البحث الذكي مع الاقتراحات التلقائية -->
-<section style="background: white; padding: 40px 20px; direction: rtl; border-bottom: 1px solid #e0e0e0;">
-    <div style="max-width: 800px; margin: 0 auto;">
-        <div style="text-align: center; margin-bottom: 25px;">
-            <h3 style="color: #2c3e50; margin-bottom: 10px; font-size: 1.8em;">🔍 ابحث عن الخدمة التي تحتاجها</h3>
-            <p style="color: #7f8c8d; font-size: 1.1em;">ابحث بين 103 خدمة متوفرة في منصتنا - ابدأ بكتابة حرف واحد</p>
-        </div>
-        <div style="position: relative;">
-            <input type="text" id="serviceSearch" 
-                   placeholder="اكتب حرفاً واحداً على الأقل... (مثال: ك، س، غ)" 
-                   style="width: 100%; padding: 15px 50px 15px 20px; border: 2px solid #e0e0e0; border-radius: 25px; font-size: 1.1em; direction: rtl; transition: all 0.3s ease;"
-                   oninput="searchServices()"
-                   onfocus="this.style.borderColor='#2563eb'; this.style.boxShadow='0 0 0 3px rgba(37, 99, 235, 0.1)';"
-                   onblur="this.style.borderColor='#e0e0e0'; this.style.boxShadow='none';">
-            <span style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #7f8c8d; font-size: 1.2em;">🔍</span>
-        </div>
-        <div id="searchResults" style="display: none; margin-top: 10px; background: white; border: 1px solid #e0e0e0; border-radius: 15px; max-height: 400px; overflow-y: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 1000; position: relative;"></div>
-    </div>
-</section>
-    
-    <!-- Main Services Sections -->
-    <section class="main-sections">
-        <div class="container">
-            <h2 class="section-title">🏗️ منظومتنا الشاملة: 103 خدمة في 10 أقسام</h2>
-            
-            <div class="sections-container">
-                <!-- بطاقة الطوارئ -->
-                <div class="emergency-card" id="emergency" onclick="toggleEmergency(this)">
-                    <div class="emergency-header">
-                        <div class="emergency-title-content">
-                            <div class="emergency-icon">🚨</div>
-                            <div class="emergency-name">طوارئ 24/7</div>
-                        </div>
-                        <div class="section-right">
-                            <span class="section-badge">4 خدمات</span>
-                            <span class="emergency-arrow">▼</span>
-                        </div>
-                    </div>
-                    <div class="emergency-services">
-                        <div class="emergency-service-item">
-                            <span class="emergency-service-icon">🔧</span>
-                            <span class="emergency-service-name">صيانة طارئة (كهرباء - سباكة - تكييف)</span>
-                            <div class="emergency-service-actions">
-                                <a href="https://wa.me/962790782004?text=🚨 طوارئ صيانة - أحتاج مساعدة عاجلة" 
-                                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
-                                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
-                            </div>
-                        </div>
-                        <div class="emergency-service-item">
-                            <span class="emergency-service-icon">🚗</span>
-                            <span class="emergency-service-name">طوارئ سيارات (سحب - إطارات - وقود)</span>
-                            <div class="emergency-service-actions">
-                                <a href="https://wa.me/962790782004?text=🚨 طوارئ سيارات - أحتاج مساعدة عاجلة" 
-                                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
-                                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
-                            </div>
-                        </div>
-                        <div class="emergency-service-item">
-                            <span class="emergency-service-icon">🏠</span>
-                            <span class="emergency-service-name">طوارئ منزلية (تسريبات - أقفال - أمان)</span>
-                            <div class="emergency-service-actions">
-                                <a href="https://wa.me/962790782004?text=🚨 طوارئ منزلية - أحتاج مساعدة عاجلة" 
-                                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
-                                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
-                            </div>
-                        </div>
-                        <div class="emergency-service-item">
-                            <span class="emergency-service-icon">⚕️</span>
-                            <span class="emergency-service-name">طوارئ طبية (رعاية - تمريض - أدوية)</span>
-                            <div class="emergency-service-actions">
-                                <a href="https://wa.me/962790782004?text=🚨 طوارئ طبية - أحتاج مساعدة عاجلة" 
-                                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
-                                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-<!-- قسم الخدمات المنزلية - معدل -->
-<div class="section-card ready" id="home-services" onclick="toggleSection(this)">
-    <div class="section-header">
-        <div class="section-title-content">
-            <div class="section-icon">🏠</div>
-            <div class="section-name">الخدمات المنزلية الذكية</div>
-        </div>
-        <div class="section-right">
-            <span class="section-badge">17 خدمة</span>
-            <span class="section-arrow">▼</span>
-        </div>
-    </div>
-    <div class="services-list">
-        <!-- الخدمات المفعلة -->
-        <div class="service-item">
-            <span class="service-icon">🔧</span>
-            <span class="service-name">صيانة كهرباء منزلية (تركيب - إصلاح - صيانة)</span>
-            <span class="service-status status-available">متوفر</span>
-            <div class="service-actions">
-                <a href="https://wa.me/962790782004?text=🔧 أريد حجز خدمة صيانة كهرباء منزلية" 
-                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
-                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
-            </div>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🚰</span>
-            <span class="service-name">خدمات سباكة شاملة (تسريبات - تركيب - إصلاح)</span>
-            <span class="service-status status-available">متوفر</span>
-            <div class="service-actions">
-                <a href="https://wa.me/962790782004?text=🚰 أريد حجز خدمة سباكة منزلية" 
-                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
-                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
-            </div>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">❄️</span>
-            <span class="service-name">صيانة تكييف وتبريد (تنظيف - إصلاح - تركيب)</span>
-            <span class="service-status status-available">متوفر</span>
-            <div class="service-actions">
-                <a href="https://wa.me/962790782004?text=❄️ أريد حجز خدمة صيانة تكييف" 
-                   class="action-btn whatsapp-btn" target="_blank">واتساب</a>
-                <a href="tel:00962790782004" class="action-btn call-btn">اتصال</a>
-            </div>
+    <section id="services">
+        <div class="section-title">
+            <p>المرحلة الأولى - PHASE 1</p>
+            <h2>الخدمات التشغيلية</h2>
         </div>
 
-        <!-- الخدمات تحت التطوير -->
-        <div class="service-item">
-            <span class="service-icon">🏠</span>
-            <span class="service-name">صيانة أجهزة منزلية (ثلاجات - غسالات - أفران)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🔨</span>
-            <span class="service-name">صيانة نجارة الألمنيوم (بواب - نوافذ - مطابخ - أثاث)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🧹</span>
-            <span class="service-name">تعقيم منازل احترافي (شامل - عميق - دوري)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🧽</span>
-            <span class="service-name">تنظيف مفروشات وسجاد (غسيل - تعقيم - تجفيف)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">💧</span>
-            <span class="service-name">تنظيف خزانات مياه (تعقيم - صيانة - تنظيف)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🐜</span>
-            <span class="service-name">مكافحة حشرات وقوارض (رش - تعقيم - وقاية)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🏊</span>
-            <span class="service-name">تنظيف مسابح وصيانتها (تعقيم - صيانة - فلاتر)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🏡</span>
-            <span class="service-name">تركيب أنظمة ذكية (منزل ذكي - كاميرات - إنذار)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">☀️</span>
-            <span class="service-name">تركيب أنظمة طاقة شمسية (توفير - صيانة - تركيب)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🎨</span>
-            <span class="service-name">تنسيق وديكور داخلي (ديكور - ترتيب - تنسيق)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🪟</span>
-            <span class="service-name">تركيب ستائر ومظلات (قياس - تركيب - صيانة)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">📦</span>
-            <span class="service-name">خدمة نقل وتغليف أثاث (نقل - تركيب - تخزين)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">📋</span>
-            <span class="service-name">باقات الصيانة الدورية (اشتراكات شهرية/سنوية)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-    </div>
-</div>
-
-<!-- قسم خدمات السيارات - مع الباقات -->
-<div class="section-card ready" id="car-services" onclick="toggleSection(this)">
-    <div class="section-header">
-        <div class="section-title-content">
-            <div class="section-icon">🚗</div>
-            <div class="section-name">خدمات السيارات</div>
-        </div>
-        <div class="section-right">
-            <span class="section-badge">14 خدمة</span>
-            <span class="section-arrow">▼</span>
-        </div>
-    </div>
-    <div class="services-list">
-        <!-- الخدمة الأساسية - غسيل السيارات -->
-        <div class="service-item">
-            <span class="service-icon">🧼</span>
-            <div style="flex: 1;">
-                <div class="service-name">غسيل وتلميع السيارات</div>
-                <div style="display: flex; gap: 15px; margin-top: 10px; flex-wrap: wrap;">
-                    <!-- الباقة الأساسية -->
-                    <div style="background: #e8f5e8; padding: 12px; border-radius: 10px; border: 2px solid #28a745; min-width: 200px;">
-                        <div style="font-weight: bold; color: #28a745;">🟢 أساسي - 7 دنانير</div>
-                        <div style="font-size: 0.9em; color: #555; margin-top: 5px;">
-                            غسيل داخلي + خارجي + تجفيف
-                        </div>
-                        <button onclick="window.open('https://wa.me/962790782004?text=🧼 أريد حجز باقة غسيل أساسي - 7 دنانير', '_blank')" 
-                                style="background: #28a745; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 0.9em; margin-top: 8px; width: 100%;">
-                            احجز الباقة
-                        </button>
-                    </div>
-                    
-                    <!-- الباقة بريميوم -->
-                    <div style="background: #e8f0ff; padding: 12px; border-radius: 10px; border: 2px solid #007bff; min-width: 200px;">
-                        <div style="font-weight: bold; color: #007bff;">🔵 بريميوم - 12 دينار</div>
-                        <div style="font-size: 0.9em; color: #555; margin-top: 5px;">
-                            + تلميع + تعطير + تنظيف عجلات
-                        </div>
-                        <button onclick="window.open('https://wa.me/962790782004?text=🧼 أريد حجز باقة غسيل بريميوم - 12 دينار', '_blank')" 
-                                style="background: #007bff; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 0.9em; margin-top: 8px; width: 100%;">
-                            احجز الباقة
-                        </button>
-                    </div>
-                    
-                    <!-- الباقة جولد -->
-                    <div style="background: #fff9e8; padding: 12px; border-radius: 10px; border: 2px solid #ffc107; min-width: 200px;">
-                        <div style="font-weight: bold; color: #e6a700;">🟡 جولد - 17 دينار</div>
-                        <div style="font-size: 0.9em; color: #555; margin-top: 5px;">
-                            + تنظيف محرك + تلميع فرش + توصيل
-                        </div>
-                        <button onclick="window.open('https://wa.me/962790782004?text=🧼 أريد حجز باقة غسيل جولد - 17 دينار', '_blank')" 
-                                style="background: #ffc107; color: black; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 0.9em; margin-top: 8px; width: 100%; font-weight: bold;">
-                            احجز الباقة
-                        </button>
-                    </div>
+        <div class="grid-container">
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-car-side"></i></div>
+                <h3>غسيل وتفصيل متنقل</h3>
+                <p>وحدة متنقلة تصل لباب بيتك مع كافة التجهيزات.</p>
+                <div class="price-tag">
+                    <span class="old-price">15.00 JOD</span>
+                    <span class="free-price">0.00 JOD (مجاناً للتجربة)</span>
                 </div>
-            </div>
-            <span class="service-status status-available">متوفر</span>
-        </div>
-
-        <!-- باقي خدمات السيارات تحت التطوير -->
-        <div class="service-item">
-            <span class="service-icon">🔧</span>
-            <span class="service-name">صيانة محركات وميكانيكا (فحص - إصلاح - صيانة دورية)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">⚡</span>
-            <span class="service-name">صيانة كهرباء السيارات (بطاريات - أنظمة كهربائية)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🎨</span>
-            <span class="service-name">خدمة دهان السيارات (تصليح خدوش - دهان كامل)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🛢️</span>
-            <span class="service-name">تغيير زيت وفلتر (زيت محرك - فلتر هواء - فلتر زيت)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🛋️</span>
-            <span class="service-name">تلميع فرش وديكور داخلي (تنظيف - تعطير - صيانة)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🚛</span>
-            <span class="service-name">خدمة سحب السيارات (طوارئ - نقل - إنقاذ)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🚗</span>
-            <span class="service-name">خدمة إطارات (تغيير - تصليح - توازن)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">⛽</span>
-            <span class="service-name">خدمة وقود متنقلة (توصيل وقود - طوارئ)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🔄</span>
-            <span class="service-name">سيارة بديلة مؤمنة (أثناء الصيانة - مؤقتة)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🛣️</span>
-            <span class="service-name">طوارئ طريق سريعة (24/7 - خدمة فورية)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🔩</span>
-            <span class="service-name">توصيل قطع غيار (سريع - جميع الماركات)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🛡️</span>
-            <span class="service-name">تركيب أنظمة حماية (إنذار - كاميرات - تتبع)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🔍</span>
-            <span class="service-name">فحص فني شامل (ما قبل الشراء - دوري)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-    </div>
-</div>
-<!-- قسم الخدمات اللوجستية - مع الباقة المرنة -->
-<div class="section-card ready" id="logistics" onclick="toggleSection(this)">
-    <div class="section-header">
-        <div class="section-title-content">
-            <div class="section-icon">🚚</div>
-            <div class="section-name">الخدمات اللوجستية</div>
-        </div>
-        <div class="section-right">
-            <span class="section-badge">12 خدمة</span>
-            <span class="section-arrow">▼</span>
-        </div>
-    </div>
-    <div class="services-list">
-        <!-- الخدمة المفعلة - نقل الأثاث -->
-        <div class="service-item">
-            <span class="service-icon">📦</span>
-            <div style="flex: 1;">
-                <div class="service-name">نقل أثاث منزلي</div>
-                <div style="display: flex; gap: 15px; margin-top: 10px; flex-wrap: wrap;">
-                    <!-- الباقة الموحدة -->
-                    <div style="background: #e8f5e8; padding: 15px; border-radius: 12px; border: 2px solid #28a745; min-width: 280px; flex: 1;">
-                        <div style="font-weight: bold; color: #28a745; font-size: 1.1em;">📦 باقة نقل الأثاث الشاملة</div>
-                        <div style="font-size: 0.95em; color: #555; margin-top: 8px; line-height: 1.5;">
-                            <div>✅ تغليف احترافي لكل القطع</div>
-                            <div>✅ نقل آمن بسيارات مجهزة</div>
-                            <div>✅ تركيب في المكان الجديد</div>
-                            <div>✅ فك وتغليف مجاني</div>
-                            <div>✅ تأمين على المحتويات</div>
-                        </div>
-                        <div style="margin-top: 10px; padding: 8px; background: #f8f9fa; border-radius: 8px; text-align: center;">
-                            <strong style="color: #e6a700;">السعر: 120 - 200 دينار</strong>
-                            <div style="font-size: 0.85em; color: #666;">(حسب حجم الشقة والمسافة)</div>
-                        </div>
-                        <button onclick="window.open('https://wa.me/962790782004?text=📦 أريد استفسار عن خدمة نقل الأثاث (120-200 دينار) - أود معرفة السعر النهائي لشقتي', '_blank')" 
-                                style="background: #28a745; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 0.95em; margin-top: 12px; width: 100%; font-weight: bold;">
-                            📞 احصل على سعر دقيق
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <span class="service-status status-available">متوفر</span>
-        </div>
-
-        <!-- باقي خدمات اللوجستيات تحت التطوير -->
-        <div class="service-item">
-            <span class="service-icon">🏢</span>
-            <span class="service-name">نقل مكاتب وشركات (معدات - أجهزة - أثاث)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🚚</span>
-            <span class="service-name">توصيل طلبات سريعة (طعام - مستندات - طرود)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">📦</span>
-            <span class="service-name">نقل بضائع وتجارة (تخزين - توزيع - توصيل)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">❄️</span>
-            <span class="service-name">خدمة نقل مبردة (أغذية - أدوية - مواد طازجة)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🚗</span>
-            <span class="service-name">تأجير شاحنات وسيارات (يومي - شهري - سنوي)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🏪</span>
-            <span class="service-name">خدمات تخزين ومستودعات (قصير الأجل - طويل الأجل)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🏗️</span>
-            <span class="service-name">نقل معدات ثقيلة (آلات - معدات صناعية)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🌍</span>
-            <span class="service-name">خدمات نقل دولية (برية - جوية - بحرية)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">📍</span>
-            <span class="service-name">تتبع شحنات مباشر (GPS - تحديثات لحظية)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">🛡️</span>
-            <span class="service-name">خدمة تأمين على البضائع (كامل - جزئي)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-        <div class="service-item">
-            <span class="service-icon">📊</span>
-            <span class="service-name">استشارات لوجستية (تحسين مسارات - توفير تكاليف)</span>
-            <span class="service-status status-development">قيد التطوير</span>
-        </div>
-    </div>
-</div>
-
-                <!-- الأقسام تحت التطوير -->
-                <div class="section-card development" id="tech-services" onclick="toggleSection(this)">
-                    <div class="section-header">
-                        <div class="section-title-content">
-                            <div class="section-icon">🤖</div>
-                            <div class="section-name">التقنية والذكاء الاصطناعي</div>
-                        </div>
-                        <div class="section-right">
-                            <span class="section-badge">12 خدمة</span>
-                            <span class="section-arrow">▼</span>
-                        </div>
-                    </div>
-                    <div class="services-list">
-                        <div class="service-item">
-                            <span class="service-icon">💻</span>
-                            <span class="service-name">صيانة أجهزة كمبيوتر (إصلاح - ترقية - تنظيف)</span>
-                            <span class="service-status status-development">تحت التطوير</span>
-                        </div>
-                        <!-- باقي الخدمات التقنية -->
-                    </div>
-                </div>
-
-                <!-- باقي الأقسام تحت التطوير -->
-                
-            </div>
-        </div>
-    </section>
-<!-- قسم التقييمات المتطور -->
-<section class="testimonials-section">
-    <div style="max-width: 1200px; margin: 0 auto;">
-        <h2 style="text-align: center; color: #2d3748; margin-bottom: 20px; font-size: 2.5em;">
-            ⭐ ماذا يقول عملاؤنا؟
-        </h2>
-        <p style="text-align: center; color: #718096; font-size: 1.2em; margin-bottom: 60px; max-width: 600px; margin-right: auto; margin-left: auto;">
-            انضم إلى <strong style="color: #667eea;">+127</strong> عميلاً راضياً عن خدماتنا المميزة
-        </p>
-        
-        <div class="testimonials-grid">
-            
-            <!-- التقييم ١ -->
-            <div class="testimonial-card">
-                <div class="testimonial-header">
-                    <div class="client-info">
-                        <div class="client-name">جميل محمد</div>
-                        <div class="service-name">صيانة كهرباء منزلية</div>
-                    </div>
-                    <div class="rating-display">
-                        <div class="stars">
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                        </div>
-                        <div class="rating-value">5.0</div>
-                    </div>
-                </div>
-                <div class="testimonial-text">
-                    "خدمة ممتازة وسريعة. الفني كان محترف جداً وحل المشكلة في أقل من ساعة. الدقة في الموعد والاحترافية في العمل جعلتني أوصي بهم لكل أصدقائي!"
-                </div>
-                <div class="testimonial-actions">
-                    <div class="action-buttons">
-                        <button class="like-btn" onclick="toggleLike(this)">
-                            <span>❤️</span>
-                            <span class="like-count">12</span>
-                        </button>
-                        <button class="comment-btn" onclick="toggleComments(this)">
-                            <span>💬</span>
-                            <span>تعليق</span>
-                        </button>
-                    </div>
-                    <div class="testimonial-date">منذ ٣ أيام</div>
-                </div>
-                
-                <!-- قسم التعليقات -->
-                <div class="comments-section" style="display: none;">
-                    <div class="comment">
-                        <div class="comment-header">
-                            <span class="comment-author">فاطمة</span>
-                        </div>
-                        <div class="comment-text">أحتاج نفس الخدمة، ممكن رقم الفني؟</div>
-                    </div>
-                    <div class="add-comment">
-                        <textarea class="comment-input" placeholder="اكتب تعليقك..."></textarea>
-                        <button class="submit-comment" onclick="addComment(this)">إرسال</button>
-                    </div>
-                </div>
+                <br>
+                <a href="https://wa.me/962790782004?text=مرحبا، بدي أجرب خدمة الغسيل المجانية - تجربة أولى" class="member-btn" style="width:100%; display:block; text-align:center;">اطلبها الآن</a>
             </div>
 
-            <!-- التقييم ٢ -->
-            <div class="testimonial-card">
-                <div class="testimonial-header">
-                    <div class="client-info">
-                        <div class="client-name">فاطمة عيسى</div>
-                        <div class="service-name">غسيل سيارات - باقة بريميوم</div>
-                    </div>
-                    <div class="rating-display">
-                        <div class="stars">
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span style="color: #e2e8f0;">⭐</span>
-                        </div>
-                        <div class="rating-value">4.0</div>
-                    </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-tools"></i></div>
+                <h3>الصيانة العامة</h3>
+                <p>فحص هندسي شامل وإصلاحات فورية.</p>
+                <div class="price-tag">
+                    <span class="old-price">20.00 JOD</span>
+                    <span class="free-price">مجاناً (رسوم الكشفية)</span>
                 </div>
-                <div class="testimonial-text">
-                    "الخدمة كانت جيدة جداً والسيارة صارت كالجديدة. فريق العمل متعاون ورغم تأخرهم ١٥ دقيقة إلا أنهم اعتذروا وقدمولي خصم على الخدمة القادمة."
-                </div>
-                <div class="testimonial-actions">
-                    <div class="action-buttons">
-                        <button class="like-btn" onclick="toggleLike(this)">
-                            <span>❤️</span>
-                            <span class="like-count">8</span>
-                        </button>
-                        <button class="comment-btn" onclick="toggleComments(this)">
-                            <span>💬</span>
-                            <span>تعليق</span>
-                        </button>
-                    </div>
-                    <div class="testimonial-date">منذ أسبوع</div>
-                </div>
-            </div>
-
-            <!-- التقييم ٣ -->
-            <div class="testimonial-card">
-                <div class="testimonial-header">
-                    <div class="client-info">
-                        <div class="client-name">خالد إبراهيم</div>
-                        <div class="service-name">نقل أثاث منزلي</div>
-                    </div>
-                    <div class="rating-display">
-                        <div class="stars">
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                            <span class="star">⭐</span>
-                        </div>
-                        <div class="rating-value">5.0</div>
-                    </div>
-                </div>
-                <div class="testimonial-text">
-                    "ما شاء الله فريق محترف جداً. قاموا بتغليف الأثاث بعناية فائقة ونقله بدون أي خدش. السعر كان معقول جداً مقارنة بالجودة العالية. أنصح بهم وبقوة!"
-                </div>
-                <div class="testimonial-actions">
-                    <div class="action-buttons">
-                        <button class="like-btn liked" onclick="toggleLike(this)">
-                            <span>❤️</span>
-                            <span class="like-count">23</span>
-                        </button>
-                        <button class="comment-btn" onclick="toggleComments(this)">
-                            <span>💬</span>
-                            <span>تعليق</span>
-                        </button>
-                    </div>
-                    <div class="testimonial-date">منذ ٥ أيام</div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- إحصائيات مذهلة -->
-        <div class="rating-stats">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number">4.8</div>
-                    <div class="stat-label">متوسط التقييم</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">127</div>
-                    <div class="stat-label">تقييم حقيقي</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">94%</div>
-                    <div class="stat-label">عملاء راضون</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number">5m</div>
-                    <div class="stat-label">دقيقة توفير</div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
-    <!-- Contact Section -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2 class="section-title">📞 تواصل معنا</h2>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <strong>📧 البريد الإلكتروني</strong>
-                        Uday.altiti@gmail.com
-                    </div>
-                    <div class="contact-item">
-                        <strong>📞 الهاتف الرئيسي</strong>
-                        00962790782004
-                    </div>
-                    <div class="contact-item">
-                        <strong>🕒 أوقات العمل</strong>
-                        الأحد - الخميس: 8 صباحاً - 10 مساءً<br>
-                        الجمعة - السبت: 9 صباحاً - 8 مساءً
-                    </div>
-                    <div class="social-links">
-                        <a href="#" class="social-link">📱</a>
-                        <a href="#" class="social-link">💬</a>
-                        <a href="#" class="social-link">🐦</a>
-                        <a href="#" class="social-link">📸</a>
-                    </div>
-                </div>
+                <br>
+                <a href="https://wa.me/962790782004?text=مرحبا، بدي أجرب خدمة الصيانة - كشفية مجانية" class="member-btn" style="width:100%; display:block; text-align:center;">اطلب الفني</a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-logo">
-                <span>🌐</span>
-                راحة - SmartLife Hub
-            </div>
-            <div class="footer-links">
-                <a href="#emergency">الطوارئ</a>
-                <a href="#services">الخدمات</a>
-                <a href="#contact">اتصل بنا</a>
-                <a href="#">سياسة الخصوصية</a>
-                <a href="#">الشروط والأحكام</a>
-            </div>
-            <div class="copyright">
-                © 2024 راحة - المنصة الذكية للخدمات المتكاملة. جميع الحقوق محفوظة.<br>
-                <div class="footer-quote">
-                    "راحة العميل تبدأ من دقيقة في وقته.. وتنتهي بحياة متوازنة مع أسرته وعمله"
+    <section>
+        <div class="section-title">
+            <p>خارطة الطريق - ROADMAP</p>
+            <h2>مشاريعنا القادمة</h2>
+            <p style="font-size: 0.9rem; margin-top: 10px;">كل دينار تنفقه في الخدمات أعلاه، يبني لك رصيداً هنا</p>
+        </div>
+
+        <div class="grid-container">
+            <div class="card locked-card">
+                <div class="locked-overlay">
+                    <i class="fas fa-lock lock-icon"></i>
+                    <h3>راسن العقارية</h3>
+                    <div class="phase-badge">Phase 2: Loading...</div>
                 </div>
+                <div class="card-icon"><i class="fas fa-city"></i></div>
+                <h3>الاستثمار العقاري</h3>
+                <p>تملك وحدات سكنية باستخدام نقاط الولاء الخاصة بك.</p>
             </div>
+
+            <div class="card locked-card">
+                <div class="locked-overlay">
+                    <i class="fas fa-lock lock-icon"></i>
+                    <h3>المدينة الذكية</h3>
+                    <div class="phase-badge">Phase 3: Concept</div>
+                </div>
+                <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+                <h3>Smart City</h3>
+                <p>مجتمع سكني متكامل يدار بالكامل عبر منصة راسن.</p>
+            </div>
+
+            <div class="card locked-card">
+                <div class="locked-overlay">
+                    <i class="fas fa-lock lock-icon"></i>
+                    <h3>محفظة المستثمر</h3>
+                    <div class="phase-badge">Coming Soon</div>
+                </div>
+                <div class="card-icon"><i class="fas fa-wallet"></i></div>
+                <h3>Rasin Wallet</h3>
+                <p>لوحة تحكم لمتابعة عوائدك وأسهمك في المنصة.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container" style="display: block;">
+            <h2 style="color: var(--text-white); margin-bottom: 10px;">RASIN</h2>
+            <p>© 2025 Rasin Group. Building the Future, Brick by Brick.</p>
         </div>
     </footer>
-            
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // إدارة القائمة الجانبية
-        const menuToggle = document.getElementById('menuToggle');
-        const sidebarMenu = document.getElementById('sidebarMenu');
-        const menuOverlay = document.getElementById('menuOverlay');
-
-        function toggleMenu() {
-            sidebarMenu.classList.toggle('active');
-            menuOverlay.classList.toggle('active');
-            document.body.style.overflow = sidebarMenu.classList.contains('active') ? 'hidden' : '';
-        }
-
-        function closeMenu() {
-            sidebarMenu.classList.remove('active');
-            menuOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        menuToggle.addEventListener('click', toggleMenu);
-        menuOverlay.addEventListener('click', closeMenu);
-
-        // التمرير للأقسام
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
-                closeMenu();
-            }
-        }
-
-        // إدارة فتح وإغلاق الأقسام العادية
-        let activeSection = null;
-
-        function toggleSection(section) {
-            if (activeSection && activeSection !== section) {
-                activeSection.classList.remove('active');
-            }
-            
-            section.classList.toggle('active');
-            activeSection = section.classList.contains('active') ? section : null;
-        }
-
-        // إدارة فتح وإغلاق قسم الطوارئ
-        let activeEmergency = null;
-
-        function toggleEmergency(emergencyCard) {
-            if (activeEmergency && activeEmergency !== emergencyCard) {
-                activeEmergency.classList.remove('active');
-            }
-            
-            emergencyCard.classList.toggle('active');
-            activeEmergency = emergencyCard.classList.contains('active') ? emergencyCard : null;
-        }
-
-        // إغلاق الأقسام بالنقر خارجها
-        document.addEventListener('click', function(event) {
-            if (!event.target.closest('.section-card') && !event.target.closest('.emergency-card')) {
-                if (activeSection) {
-                    activeSection.classList.remove('active');
-                    activeSection = null;
-                }
-                if (activeEmergency) {
-                    activeEmergency.classList.remove('active');
-                    activeEmergency = null;
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 60 },
+                "color": { "value": "#d4af37" }, /* لون ذهبي للجزيئات */
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.3 },
+                "size": { "value": 3 },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#d4af37", /* خطوط ربط ذهبية */
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": { "enable": true, "speed": 1 }
+            },
+            "interactivity": {
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" }
                 }
             }
         });
-
-        // إغلاق القائمة عند النقر على رابط
-        document.querySelectorAll('.menu-category-btn').forEach(btn => {
-            btn.addEventListener('click', closeMenu);
-        });
-
-        // ===== نظام البحث الذكي مع الاقتراحات التلقائية =====
-function searchServices() {
-    const input = document.getElementById('serviceSearch');
-    const filter = input.value.trim().toLowerCase();
-    const resultsContainer = document.getElementById('searchResults');
-    
-    // إظهار الاقتراحات من أول حرف
-    if (filter.length < 1) {
-        resultsContainer.style.display = 'none';
-        return;
-    }
-
-    // قائمة جميع الخدمات المتوفرة
-    const allServices = [
-        // الخدمات المنزلية (17 خدمة)
-        {name: 'صيانة كهرباء منزلية', category: 'الخدمات المنزلية', icon: '🔧'},
-        {name: 'خدمات سباكة شاملة', category: 'الخدمات المنزلية', icon: '🚰'},
-        {name: 'صيانة تكييف وتبريد', category: 'الخدمات المنزلية', icon: '❄️'},
-        {name: 'صيانة أجهزة منزلية', category: 'الخدمات المنزلية', icon: '🏠'},
-        {name: 'صيانة نجارة الألمنيوم', category: 'الخدمات المنزلية', icon: '🔨'},
-        {name: 'تعقيم منازل احترافي', category: 'الخدمات المنزلية', icon: '🧹'},
-        {name: 'تنظيف مفروشات وسجاد', category: 'الخدمات المنزلية', icon: '🧽'},
-        {name: 'تنظيف خزانات مياه', category: 'الخدمات المنزلية', icon: '💧'},
-        {name: 'مكافحة حشرات وقوارض', category: 'الخدمات المنزلية', icon: '🐜'},
-        {name: 'تنظيف مسابح وصيانتها', category: 'الخدمات المنزلية', icon: '🏊'},
-        {name: 'تركيب أنظمة ذكية', category: 'الخدمات المنزلية', icon: '🏡'},
-        {name: 'تركيب أنظمة طاقة شمسية', category: 'الخدمات المنزلية', icon: '☀️'},
-        {name: 'تنسيق وديكور داخلي', category: 'الخدمات المنزلية', icon: '🎨'},
-        {name: 'تركيب ستائر ومظلات', category: 'الخدمات المنزلية', icon: '🪟'},
-        {name: 'خدمة نقل وتغليف أثاث', category: 'الخدمات المنزلية', icon: '📦'},
-        {name: 'باقات الصيانة الدورية', category: 'الخدمات المنزلية', icon: '📋'},
-        {name: 'خدمة طوارئ 24/7', category: 'الخدمات المنزلية', icon: '🚨'},
-
-        // خدمات السيارات (14 خدمة)
-        {name: 'غسيل وتلميع السيارات', category: 'خدمات السيارات', icon: '🧼'},
-        {name: 'صيانة محركات وميكانيكا', category: 'خدمات السيارات', icon: '🔧'},
-        {name: 'صيانة كهرباء السيارات', category: 'خدمات السيارات', icon: '⚡'},
-        {name: 'خدمة دهان السيارات', category: 'خدمات السيارات', icon: '🎨'},
-        {name: 'تغيير زيت وفلتر', category: 'خدمات السيارات', icon: '🛢️'},
-        {name: 'تلميع فرش وديكور داخلي', category: 'خدمات السيارات', icon: '🛋️'},
-        {name: 'خدمة سحب السيارات', category: 'خدمات السيارات', icon: '🚛'},
-        {name: 'خدمة إطارات', category: 'خدمات السيارات', icon: '🚗'},
-        {name: 'خدمة وقود متنقلة', category: 'خدمات السيارات', icon: '⛽'},
-        {name: 'سيارة بديلة مؤمنة', category: 'خدمات السيارات', icon: '🔄'},
-        {name: 'طوارئ طريق سريعة', category: 'خدمات السيارات', icon: '🛣️'},
-        {name: 'توصيل قطع غيار', category: 'خدمات السيارات', icon: '🔩'},
-        {name: 'تركيب أنظمة حماية', category: 'خدمات السيارات', icon: '🛡️'},
-        {name: 'فحص فني شامل', category: 'خدمات السيارات', icon: '🔍'},
-
-        // الخدمات اللوجستية (12 خدمة)
-        {name: 'نقل أثاث منزلي', category: 'الخدمات اللوجستية', icon: '📦'},
-        {name: 'نقل مكاتب وشركات', category: 'الخدمات اللوجستية', icon: '🏢'},
-        {name: 'توصيل طلبات سريعة', category: 'الخدمات اللوجستية', icon: '🚚'},
-        {name: 'نقل بضائع وتجارة', category: 'الخدمات اللوجستية', icon: '📦'},
-        {name: 'خدمة نقل مبردة', category: 'الخدمات اللوجستية', icon: '❄️'},
-        {name: 'تأجير شاحنات وسيارات', category: 'الخدمات اللوجستية', icon: '🚗'},
-        {name: 'خدمات تخزين ومستودعات', category: 'الخدمات اللوجستية', icon: '🏪'},
-        {name: 'نقل معدات ثقيلة', category: 'الخدمات اللوجستية', icon: '🏗️'},
-        {name: 'خدمات نقل دولية', category: 'الخدمات اللوجستية', icon: '🌍'},
-        {name: 'تتبع شحنات مباشر', category: 'الخدمات اللوجستية', icon: '📍'},
-        {name: 'خدمة تأمين على البضائع', category: 'الخدمات اللوجستية', icon: '🛡️'},
-        {name: 'استشارات لوجستية', category: 'الخدمات اللوجستية', icon: '📊'}
-    ];
-
-    // تصفية الخدمات حسب البحث
-    const filteredServices = allServices.filter(service => 
-        service.name.toLowerCase().includes(filter) || 
-        service.category.toLowerCase().includes(filter)
-    );
-
-    // عرض النتائج مع ترتيب حسب أفضل تطابق
-    if (filteredServices.length > 0) {
-        const sortedServices = filteredServices.sort((a, b) => {
-            // الأولوية للمطابقة في بداية الاسم
-            const aStartsWith = a.name.toLowerCase().startsWith(filter);
-            const bStartsWith = b.name.toLowerCase().startsWith(filter);
-            
-            if (aStartsWith && !bStartsWith) return -1;
-            if (!aStartsWith && bStartsWith) return 1;
-            
-            // ثم المطابقة في أي مكان
-            return a.name.localeCompare(b.name);
-        });
-
-        resultsContainer.innerHTML = sortedServices.map(service => 
-            `<div style="padding: 12px 20px; border-bottom: 1px solid #f8f9fa; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 12px;" 
-                  onclick="selectService('${service.name}')"
-                  onmouseover="this.style.background='#f8fafc; this.style.transform=\\'scale(1.02)\\''" 
-                  onmouseout="this.style.background='white; this.style.transform=\\'scale(1)\\''">
-                <span style="font-size: 1.3em;">${service.icon}</span>
-                <div style="flex: 1;">
-                    <div style="font-weight: 600; color: #2c3e50; font-size: 1em;">${service.name}</div>
-                    <div style="font-size: 0.8em; color: #7f8c8d; margin-top: 2px;">${service.category}</div>
-                </div>
-                <span style="color: #2563eb; font-size: 0.8em; background: #f0f4ff; padding: 4px 8px; border-radius: 12px;">اختر</span>
-            </div>`
-        ).join('');
-        
-        // إضافة عنوان للنتائج
-        resultsContainer.innerHTML = `
-            <div style="padding: 12px 20px; background: #f8fafc; border-bottom: 1px solid #e0e0e0; font-weight: 600; color: #2c3e50; display: flex; justify-content: space-between; align-items: center;">
-                <span>${filteredServices.length} خدمة وجدناها</span>
-                <span style="font-size: 0.8em; color: #7f8c8d; font-weight: normal;">انقر أو اضغط Enter</span>
-            </div>
-            ${resultsContainer.innerHTML}
-        `;
-        
-        resultsContainer.style.display = 'block';
-    } else {
-        resultsContainer.innerHTML = `
-            <div style="padding: 40px 20px; text-align: center; color: #7f8c8d;">
-                <div style="font-size: 3em; margin-bottom: 15px;">🔍</div>
-                <div style="font-size: 1.1em; margin-bottom: 10px;">لم نعثر على خدمات تطابق "${filter}"</div>
-                <div style="font-size: 0.9em;">جرب استخدام كلمات بحث أخرى مثل:<br>كهرباء، سباكة، غسيل، نقل</div>
-            </div>`;
-        resultsContainer.style.display = 'block';
-    }
-}
-
-function selectService(serviceName) {
-    document.getElementById('serviceSearch').value = serviceName;
-    document.getElementById('searchResults').style.display = 'none';
-    
-    // البحث عن القسم المناسب وفتحه
-    const sections = document.querySelectorAll('.section-card, .emergency-card');
-    let found = false;
-    
-    sections.forEach(section => {
-        if (section.textContent.includes(serviceName) && !found) {
-            // فتح القسم إذا كان مغلق
-            if (!section.classList.contains('active')) {
-                section.click();
-            }
-            // التمرير للقسم
-            setTimeout(() => {
-                section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 100);
-            
-            // إضافة تأثير تمييز مؤقت
-            section.style.transition = 'all 0.5s ease';
-            section.style.boxShadow = '0 0 0 3px rgba(37, 99, 235, 0.5)';
-            setTimeout(() => {
-                section.style.boxShadow = '';
-            }, 2000);
-            
-            found = true;
-        }
-    });
-    
-    // إعادة التركيز على حقل البحث
-    document.getElementById('serviceSearch').focus();
-}
-
-// التنقل في النتائج باستخدام الأسهم
-document.getElementById('serviceSearch').addEventListener('keydown', function(e) {
-    const results = document.querySelectorAll('#searchResults div');
-    const activeResult = document.querySelector('#searchResults div:hover');
-    
-    if (e.key === 'ArrowDown' && results.length > 0) {
-        e.preventDefault();
-        if (activeResult && activeResult.nextElementSibling) {
-            activeResult.nextElementSibling.style.background = '#f8fafc';
-            activeResult.style.background = 'white';
-        } else if (results[1]) {
-            results[1].style.background = '#f8fafc';
-        }
-    } else if (e.key === 'ArrowUp' && results.length > 0) {
-        e.preventDefault();
-        // ... كود السهم لأعلى
-    } else if (e.key === 'Enter') {
-        e.preventDefault();
-        const activeResult = document.querySelector('#searchResults div:hover');
-        if (activeResult) {
-            activeResult.click();
-        } else if (results[1]) {
-            results[1].click();
-        }
-    }
-});
-
-// إغلاق نتائج البحث عند النقر خارجها
-document.addEventListener('click', function(event) {
-    const searchContainer = document.getElementById('searchResults');
-    const searchInput = document.getElementById('serviceSearch');
-    
-    if (!searchContainer.contains(event.target) && event.target !== searchInput) {
-        searchContainer.style.display = 'none';
-    }
-});
-// ===== نظام التقييمات التفاعلي المتكامل =====
-function toggleLike(button) {
-    const likeCount = button.querySelector('.like-count');
-    let count = parseInt(likeCount.textContent);
-    
-    if (button.classList.contains('liked')) {
-        button.classList.remove('liked');
-        count--;
-    } else {
-        button.classList.add('liked');
-        count++;
-    }
-    
-    likeCount.textContent = count;
-}
-
-function toggleComments(button) {
-    const card = button.closest('.testimonial-card');
-    const commentsSection = card.querySelector('.comments-section');
-    
-    if (commentsSection.style.display === 'none' || !commentsSection.style.display) {
-        commentsSection.style.display = 'block';
-        button.innerHTML = '<span>💬</span><span>إخفاء</span>';
-    } else {
-        commentsSection.style.display = 'none';
-        button.innerHTML = '<span>💬</span><span>تعليق</span>';
-    }
-}
-
-function addComment(button) {
-    const commentSection = button.closest('.comments-section');
-    const commentInput = commentSection.querySelector('.comment-input');
-    const commentText = commentInput.value.trim();
-    
-    if (commentText) {
-        const commentsContainer = commentSection.querySelector('.comments-section');
-        const newComment = document.createElement('div');
-        newComment.className = 'comment';
-        newComment.innerHTML = `
-            <div class="comment-header">
-                <span class="comment-author">أنت</span>
-            </div>
-            <div class="comment-text">${commentText}</div>
-        `;
-        
-        // إضافة التعليق في الأعلى
-        commentsContainer.insertBefore(newComment, commentsContainer.firstChild);
-        
-        // مسح حقل الإدخال
-        commentInput.value = '';
-        
-        // إظهار رسالة نجاح
-        alert('تم إضافة تعليقك بنجاح!');
-    }
-}
-
-// تفعيل التفاعلات عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('نظام التقييمات جاهز! 🚀');
-});
-                document.getElementById('serviceSearch').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                const firstResult = document.querySelector('#searchResults div');
-                if (firstResult) {
-                    firstResult.click();
-                }
-            }
-        });
-
-        // ===== نظام التقييمات التفاعلي المتكامل =====
-        function toggleLike(button) {
-            const likeCount = button.querySelector('.like-count');
-            let count = parseInt(likeCount.textContent);
-            
-            if (button.classList.contains('liked')) {
-                button.classList.remove('liked');
-                count--;
-            } else {
-                button.classList.add('liked');
-                count++;
-            }
-            
-            likeCount.textContent = count;
-        }
-
-        // ... ضع كل كود JavaScript الجديد هنا ...
-        
     </script>
 </body>
 </html>
