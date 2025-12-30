@@ -23,9 +23,9 @@
             --border: #27272a;
             
             /* Membership Colors */
-            --shihab: #cd7f32; /* Bronze */
-            --star: #c0c0c0;   /* Silver */
-            --galaxy: #d4af37; /* Gold/Diamond */
+            --shihab: #cd7f32; 
+            --star: #c0c0c0;   
+            --galaxy: #d4af37; 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
@@ -103,7 +103,7 @@
         .points-label { font-size: 0.9rem; color: #ccc; z-index: 2; position: relative; letter-spacing: 1px; }
         .wallet-note { font-size: 0.75rem; color: #888; margin-top: 15px; z-index: 2; position: relative; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; }
 
-        /* ===== 5. SERVICES GRID ===== */
+        /* ===== 5. GRID SYSTEM ===== */
         .grid-container {
             max-width: 800px; margin: 0 auto 60px; padding: 0 15px;
             display: flex; flex-direction: column; gap: 15px;
@@ -158,7 +158,7 @@
         .normal-price { color: var(--primary-gold); font-weight: 900; font-size: 1.1rem; }
 
         .btn-action {
-            display: block; width: 100%; padding: 8px; margin-top: 8px;
+            display: block; width: 100%; padding: 6px; margin-top: 8px;
             border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.85rem; transition: 0.2s;
         }
         .btn-green { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid var(--success); }
@@ -173,7 +173,7 @@
         .em-row { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; padding-bottom: 10px; margin-bottom: 10px; }
         .em-row:last-child { border: none; padding: 0; margin: 0; }
 
-        /* ===== 6. MEMBERSHIPS (INVESTMENT) ===== */
+        /* ===== 6. MEMBERSHIPS ===== */
         .invest-section { margin: 60px auto 40px; max-width: 800px; padding: 0 15px; }
         .invest-header { text-align: center; margin-bottom: 30px; }
         .invest-header h2 { color: #fff; font-size: 1.5rem; margin-bottom: 5px; }
@@ -205,23 +205,52 @@
         .mem-features li { margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
         .mem-features li i { color: var(--success); width: 20px; }
 
-        /* ===== 7. AI BUTTON ===== */
-        .ai-btn {
+        /* ===== 7. AI SMART WIDGET (NEW) ===== */
+        .ai-widget-btn {
             position: fixed; bottom: 20px; left: 20px;
-            width: 55px; height: 55px; background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            width: 60px; height: 60px; background: linear-gradient(135deg, #3b82f6, #1d4ed8);
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 1.5rem; box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
-            z-index: 2000; animation: pulse 2s infinite; text-decoration: none; border: 2px solid rgba(255,255,255,0.1);
+            color: white; font-size: 1.8rem; box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            z-index: 2000; cursor: pointer; animation: pulse 2s infinite; border: 2px solid rgba(255,255,255,0.2);
         }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
-        /* ===== 8. FOOTER & MODAL ===== */
+        .ai-chat-window {
+            display: none; position: fixed; bottom: 90px; left: 20px; width: 300px;
+            background: #111; border: 1px solid var(--primary-blue); border-radius: 12px;
+            z-index: 2001; overflow: hidden; box-shadow: 0 5px 30px rgba(0,0,0,0.8);
+            flex-direction: column;
+        }
+        .chat-header {
+            background: linear-gradient(90deg, #1d4ed8, #3b82f6); padding: 15px; color: white;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .chat-header h4 { font-size: 0.9rem; margin: 0; }
+        .chat-close { cursor: pointer; font-size: 1.2rem; }
+        .chat-body { padding: 15px; text-align: center; }
+        .chat-msg { background: #222; padding: 10px; border-radius: 8px; font-size: 0.85rem; color: #ccc; margin-bottom: 15px; text-align: right; border-right: 3px solid var(--primary-blue); }
+        body.ltr .chat-msg { text-align: left; border-right: none; border-left: 3px solid var(--primary-blue); }
+        
+        .chat-options { display: grid; gap: 8px; }
+        .chat-opt-btn {
+            background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 8px;
+            border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: 0.2s; display: block; width: 100%; text-decoration: none;
+        }
+        .chat-opt-btn:hover { background: #333; border-color: var(--primary-blue); }
+        .btn-whatsapp-chat { background: #25D366; border-color: #25D366; color: #000; font-weight: bold; }
+
+        /* ===== 8. FOOTER & COUNTER ===== */
         .footer {
             margin-top: 60px; padding: 40px 20px; background: #000; 
             border-top: 2px solid var(--primary-gold); text-align: center;
         }
-        .legal-link { color: #666; font-size: 0.8rem; text-decoration: underline; cursor: pointer; display: inline-block; margin-top: 10px; }
-
+        .about-text { color: #888; font-size: 0.9rem; max-width: 600px; margin: 10px auto 20px; line-height: 1.6; }
+        .visit-counter { 
+            background: #111; border: 1px solid #333; padding: 5px 15px; 
+            border-radius: 50px; font-size: 0.8rem; color: var(--primary-gold); display: inline-block; margin-top: 10px;
+        }
+        
+        /* Modal Content (Privacy/Terms) */
         .modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.95); z-index: 3000; justify-content: center; align-items: center; padding: 20px;
@@ -239,9 +268,13 @@
         .legal-block h4 { color: var(--primary-gold); margin-bottom: 10px; }
         .legal-block p { color: #ccc; font-size: 0.85rem; line-height: 1.5; }
 
+        /* Future Projects Icons Fix */
+        .locked-card { opacity: 0.7; background: #080808; border: 1px dashed #444; }
+
         @media (max-width: 768px) {
             .nav-box { gap: 10px; }
             .hero h1 { font-size: 1.8rem; }
+            .ai-chat-window { width: 260px; left: 20px; }
         }
     </style>
 </head>
@@ -249,7 +282,30 @@
 
     <div id="particles-js"></div>
 
-    <a href="https://wa.me/962790782004?text=FALAK: لدي استفسار..." class="ai-btn"><i class="fas fa-robot"></i></a>
+    <div class="ai-widget-btn" onclick="toggleChat()">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <div class="ai-chat-window" id="aiChatWindow">
+        <div class="chat-header">
+            <h4><i class="fas fa-brain"></i> Falak AI Assistant</h4>
+            <span class="chat-close" onclick="toggleChat()">&times;</span>
+        </div>
+        <div class="chat-body">
+            <div class="chat-msg" data-i18n="ai_welcome">مرحباً بك في فلك! أنا مساعدك الذكي. كيف يمكنني خدمتك اليوم؟</div>
+            <div class="chat-options">
+                <a href="https://wa.me/962790782004" class="chat-opt-btn btn-whatsapp-chat">
+                    <i class="fab fa-whatsapp"></i> <span data-i18n="start_chat">محادثة واتساب</span>
+                </a>
+                <button class="chat-opt-btn" onclick="openLegalModal('privacy')">
+                    <i class="fas fa-user-shield"></i> <span data-i18n="privacy_btn">سياسة الخصوصية</span>
+                </button>
+                <button class="chat-opt-btn" onclick="openLegalModal('terms')">
+                    <i class="fas fa-file-contract"></i> <span data-i18n="terms_btn">الشروط والأحكام</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <header class="header">
         <div class="container">
@@ -433,7 +489,8 @@
 
     <div class="grid-container" style="margin-top:40px;">
         <h3 style="text-align:center; color:#fff; margin-bottom:15px;" data-i18n="future">مشاريع المستقبل</h3>
-        <div class="card" style="opacity:0.6; background:#000; border:1px dashed #444;">
+        
+        <div class="card locked-card">
             <div class="card-header" style="cursor:default">
                 <div class="card-info">
                     <div class="icon-box" style="border-color:#555; color:#666"><i class="fas fa-shopping-cart"></i></div>
@@ -445,33 +502,53 @@
                 <i class="fas fa-lock" style="color:#555"></i>
             </div>
         </div>
+
+        <div class="card locked-card">
+            <div class="card-header" style="cursor:default">
+                <div class="card-info">
+                    <div class="icon-box" style="border-color:#555; color:#666"><i class="fas fa-building"></i></div>
+                    <div class="card-texts">
+                        <h3 style="color:#888" data-i18n="real_estate">فلك العقارية</h3>
+                        <p data-i18n="coming">قريباً..</p>
+                    </div>
+                </div>
+                <i class="fas fa-lock" style="color:#555"></i>
+            </div>
+        </div>
+
+        <div class="card locked-card">
+            <div class="card-header" style="cursor:default">
+                <div class="card-info">
+                    <div class="icon-box" style="border-color:#555; color:#666"><i class="fas fa-wallet"></i></div>
+                    <div class="card-texts">
+                        <h3 style="color:#888" data-i18n="invest_portfolio">المحفظة الاستثمارية</h3>
+                        <p data-i18n="coming">قريباً..</p>
+                    </div>
+                </div>
+                <i class="fas fa-lock" style="color:#555"></i>
+            </div>
+        </div>
     </div>
 
     <footer class="footer">
         <h2 style="color:#fff">FALAK <span>GROUP</span></h2>
-        <span class="legal-link" onclick="openModal()" data-i18n="terms">الشروط والأحكام & إخلاء المسؤولية</span>
+        
+        <div class="about-text" data-i18n="about_footer">
+            منصة فلك هي الأولى من نوعها في الأردن، تهدف لدمج الخدمات التشغيلية مع الاستثمار التعاوني، لبناء مجتمع اقتصادي متكامل يخدم الفرد والمجتمع.
+        </div>
+
+        <div class="visit-counter">
+            <i class="fas fa-eye"></i> <span data-i18n="visitors">الزوار:</span> <span id="visitorCount">5240</span>
+        </div>
+        <br>
         <p style="font-size: 0.8rem; margin-top: 20px; opacity: 0.5;">© 2025 Falak Group.</p>
     </footer>
 
     <div id="legalModal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h3 style="color:#fff; border-bottom:1px solid #333; padding-bottom:10px;" data-i18n="modal_t">الشروط والسياسات</h3>
-            
-            <div class="legal-block">
-                <h4 data-i18n="l1_t">1. الوساطة والمسؤولية</h4>
-                <p data-i18n="l1_d">منصة فلك هي وسيط تقني يربط العميل بمزودي الخدمة. المسؤولية الفنية المباشرة تقع على المزود، مع ضمان المنصة للجودة.</p>
-            </div>
-            
-            <div class="legal-block">
-                <h4 data-i18n="l2_t">2. نظام الاستثمار والنقاط</h4>
-                <p data-i18n="l2_d">النقاط هي مكافآت ولاء وليست أوراقاً مالية. يتم توزيع عوائد "فلك ماركت" كنقاط إضافية في المحفظة سنوياً أو نصف سنوياً. سعر التكلفة يعني (سعر المصنع + الضرائب + المصاريف التشغيلية).</p>
-            </div>
-
-            <div class="legal-block">
-                <h4 data-i18n="l3_t">3. الإحالة (Referral)</h4>
-                <p data-i18n="l3_d">عند دعوة عضو جديد، يحصل الطرفان على 10 نقاط (0.10 JD) بعد إتمام أول عملية ناجحة للمدعوو.</p>
-            </div>
+            <span class="close-modal" onclick="closeLegalModal()">&times;</span>
+            <div id="modalBody">
+                </div>
         </div>
     </div>
 
@@ -489,10 +566,60 @@
             card.classList.toggle('active');
         }
 
-        // Modal Logic
-        function openModal() { document.getElementById('legalModal').style.display = 'flex'; }
-        function closeModal() { document.getElementById('legalModal').style.display = 'none'; }
-        window.onclick = function(e) { if(e.target == document.getElementById('legalModal')) closeModal(); }
+        // AI Chat Toggle
+        function toggleChat() {
+            const win = document.getElementById('aiChatWindow');
+            win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        // Visitor Counter Simulation
+        let count = localStorage.getItem('falak_visits') || 5240;
+        count = parseInt(count) + 1;
+        localStorage.setItem('falak_visits', count);
+        document.getElementById('visitorCount').innerText = count;
+
+        // Legal Modal Logic
+        const legalContent = {
+            privacy: {
+                title: { ar: "سياسة الخصوصية", en: "Privacy Policy" },
+                body: { 
+                    ar: "<p>نحن في فلك نلتزم بحماية بياناتك الشخصية...</p><p>1. نجمع البيانات لغايات تحسين الخدمة.</p><p>2. لا نشارك بياناتك مع طرف ثالث إلا بغرض تنفيذ الخدمة.</p>",
+                    en: "<p>At Falak, we are committed to protecting your data...</p>"
+                }
+            },
+            terms: {
+                title: { ar: "الشروط والأحكام", en: "Terms & Conditions" },
+                body: {
+                    ar: `
+                        <h4>1. الوساطة والمسؤولية</h4>
+                        <p>منصة فلك هي وسيط تقني يربط العميل بمزودي الخدمة. المسؤولية الفنية المباشرة تقع على المزود.</p>
+                        <h4>2. نظام الاستثمار والنقاط</h4>
+                        <p>النقاط هي مكافآت ولاء وليست أوراقاً مالية. يتم توزيع عوائد 'فلك ماركت' كنقاط إضافية.</p>
+                        <h4>3. الإحالة (Referral)</h4>
+                        <p>عند دعوة عضو جديد، يحصل الطرفان على 10 نقاط.</p>
+                    `,
+                    en: `<h4>1. Liability</h4><p>Falak is a tech intermediary...</p>`
+                }
+            }
+        };
+
+        function openLegalModal(type) {
+            const modal = document.getElementById('legalModal');
+            const body = document.getElementById('modalBody');
+            const lang = document.body.classList.contains('ltr') ? 'en' : 'ar';
+            
+            let content = "";
+            if (legalContent[type]) {
+                content = `<h3>${legalContent[type].title[lang]}</h3>${legalContent[type].body[lang]}`;
+            }
+
+            body.innerHTML = content;
+            modal.style.display = 'flex';
+            toggleChat(); // Close chat
+        }
+
+        function closeLegalModal() { document.getElementById('legalModal').style.display = 'none'; }
+        window.onclick = function(e) { if(e.target == document.getElementById('legalModal')) closeLegalModal(); }
 
         // Language Logic
         let currentLang = 'ar';
@@ -545,15 +672,15 @@
                 pay_pts: "إمكانية دفع الخدمات بالنقاط",
                 future: "مشاريع المستقبل",
                 market: "فلك ماركت",
+                real_estate: "فلك العقارية",
+                invest_portfolio: "المحفظة الاستثمارية",
                 coming: "قريباً..",
-                terms: "الشروط والأحكام & إخلاء المسؤولية",
-                modal_t: "الشروط والسياسات",
-                l1_t: "1. الوساطة والمسؤولية",
-                l1_d: "منصة فلك هي وسيط تقني يربط العميل بمزودي الخدمة. المسؤولية الفنية المباشرة تقع على المزود، مع ضمان المنصة للجودة.",
-                l2_t: "2. نظام الاستثمار والنقاط",
-                l2_d: "النقاط هي مكافآت ولاء وليست أوراقاً مالية. يتم توزيع عوائد 'فلك ماركت' كنقاط إضافية في المحفظة سنوياً. سعر التكلفة يعني (سعر المصنع + الضرائب + المصاريف التشغيلية).",
-                l3_t: "3. الإحالة (Referral)",
-                l3_d: "عند دعوة عضو جديد، يحصل الطرفان على 10 نقاط (0.10 JD) بعد إتمام أول عملية ناجحة للمدعوو."
+                ai_welcome: "مرحباً بك في فلك! أنا مساعدك الذكي. كيف يمكنني خدمتك اليوم؟",
+                start_chat: "محادثة واتساب",
+                privacy_btn: "سياسة الخصوصية",
+                terms_btn: "الشروط والأحكام",
+                about_footer: "منصة فلك هي الأولى من نوعها في الأردن، تهدف لدمج الخدمات التشغيلية مع الاستثمار التعاوني.",
+                visitors: "الزوار:"
             },
             en: {
                 login: "Login",
@@ -603,15 +730,15 @@
                 pay_pts: "Pay Services via Points",
                 future: "Future Projects",
                 market: "Falak Market",
+                real_estate: "Falak Real Estate",
+                invest_portfolio: "Investment Portfolio",
                 coming: "Coming Soon..",
-                terms: "Terms, Conditions & Disclaimer",
-                modal_t: "Terms & Policies",
-                l1_t: "1. Brokerage & Liability",
-                l1_d: "Falak is a tech broker connecting clients with providers. Direct technical liability lies with the provider, backed by Falak's quality assurance.",
-                l2_t: "2. Investment & Points",
-                l2_d: "Points are loyalty rewards, not securities. Market profits are distributed as extra points annually. Cost Price means (Factory Price + Tax + Ops Costs).",
-                l3_t: "3. Referral",
-                l3_d: "Referring a new member grants both parties 10 Points (0.10 JD) after their first successful transaction."
+                ai_welcome: "Welcome to Falak! I'm your AI assistant. How can I help you?",
+                start_chat: "Chat on WhatsApp",
+                privacy_btn: "Privacy Policy",
+                terms_btn: "Terms & Conditions",
+                about_footer: "Falak is Jordan's first platform merging operational services with cooperative investment.",
+                visitors: "Visitors:"
             }
         };
 
