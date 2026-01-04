@@ -10,22 +10,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <style>
-        /* ===== 1. COSMIC PALETTE ===== */
+        /* ===== 1. FALAK COSMIC PALETTE (UPDATED) ===== */
         :root {
-            --bg-deep: #050505;
-            --bg-card: #0f0f13;
-            --primary-gold: #d4af37;
+            --bg-deep: #001F3F;      /* Navy Blue - Falak Base */
+            --bg-card: #002b55;      /* Lighter Navy */
+            --primary-gold: #D4AF37; /* Royal Gold */
             --primary-blue: #3b82f6; 
             --text-white: #ffffff;
-            --text-gray: #9ca3af;
+            --text-gray: #ccc;
             --danger: #ef4444;
             --success: #10b981;
-            --border: #27272a;
+            --border: #D4AF37;       /* Gold Borders */
             
             /* Membership Colors */
-            --shihab: #cd7f32; 
-            --star: #c0c0c0;   
-            --galaxy: #d4af37; 
+            --shihab: #cd7f32;  /* Bronze */
+            --star: #C0C0C0;    /* Silver */
+            --galaxy: #D4AF37;  /* Gold/Diamond */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
@@ -42,14 +42,14 @@
 
         #particles-js {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; background: radial-gradient(circle at 50% 50%, #1a1a2e 0%, #000000 100%);
+            z-index: -1; background: radial-gradient(circle at 50% 50%, #001F3F 0%, #000000 100%);
         }
 
         /* ===== 2. HEADER ===== */
         .header {
-            background: rgba(5, 5, 5, 0.95);
+            background: rgba(0, 31, 63, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            border-bottom: 2px solid var(--primary-gold);
             padding: 15px 0;
             position: sticky; top: 0; z-index: 1000;
         }
@@ -58,223 +58,213 @@
         .nav-box { display: flex; justify-content: space-between; align-items: center; }
 
         .logo {
-            font-size: 1.5rem; font-weight: 900; color: var(--text-white);
+            font-size: 1.8rem; font-weight: 900; color: var(--primary-gold);
             text-decoration: none; display: flex; align-items: center; gap: 8px;
+            text-transform: uppercase; letter-spacing: 2px;
         }
         .logo i { color: var(--primary-gold); }
-        .logo span { color: var(--primary-gold); }
 
         .header-controls { display: flex; gap: 10px; align-items: center; }
 
         .lang-btn {
-            background: transparent; border: 1px solid #444; color: #fff;
+            background: transparent; border: 1px solid var(--primary-gold); color: var(--primary-gold);
             padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; transition: 0.3s;
         }
-        .lang-btn:hover { border-color: var(--primary-gold); color: var(--primary-gold); }
+        .lang-btn:hover { background: var(--primary-gold); color: #000; }
 
         .login-btn {
-            background: linear-gradient(45deg, var(--primary-blue), #1e3a8a);
-            color: #fff; padding: 5px 15px; border-radius: 50px; 
-            font-weight: 700; text-decoration: none; font-size: 0.8rem;
+            background: linear-gradient(45deg, var(--primary-gold), #b8860b);
+            color: #000; padding: 6px 20px; border-radius: 50px; 
+            font-weight: 700; text-decoration: none; font-size: 0.9rem;
         }
 
         /* ===== 3. HERO ===== */
-        .hero { padding: 40px 0 20px; text-align: center; }
-        .hero h1 { font-size: 2.2rem; margin-bottom: 10px; font-weight: 900; }
+        .hero { padding: 60px 0 30px; text-align: center; }
+        .hero h1 { font-size: 3rem; margin-bottom: 10px; font-weight: 900; line-height: 1.2; }
         .hero h1 span { color: var(--primary-gold); }
-        .hero p { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 20px; }
+        .hero p { color: var(--text-gray); font-size: 1.1rem; margin-bottom: 20px; }
 
-        /* ===== 4. WALLET SECTION ===== */
+        /* ===== 4. WORKFLOW (NEW) ===== */
+        .workflow-section {
+            padding: 20px 0 40px; text-align: center;
+        }
+        .wf-grid {
+            display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px;
+        }
+        .wf-card {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3);
+            padding: 20px; border-radius: 15px; width: 300px; text-align: center;
+            transition: 0.3s;
+        }
+        .wf-card:hover { transform: translateY(-5px); border-color: var(--primary-gold); }
+        .wf-icon { font-size: 2rem; color: var(--primary-gold); margin-bottom: 10px; }
+        .wf-card h3 { color: #fff; margin-bottom: 5px; }
+        .wf-card p { font-size: 0.85rem; color: #ccc; }
+
+        /* ===== 5. WALLET SECTION ===== */
         .wallet-card {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            border: 1px solid var(--primary-blue); border-radius: 12px;
-            padding: 20px; margin: 0 auto 40px; max-width: 800px;
+            background: linear-gradient(135deg, #002b55, #001F3F);
+            border: 2px solid var(--primary-gold); border-radius: 15px;
+            padding: 25px; margin: 40px auto; max-width: 600px;
             text-align: center; position: relative; overflow: hidden;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
         }
-        .wallet-card::before {
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(59,130,246,0.1) 0%, transparent 70%);
-            animation: rotate 15s linear infinite;
-        }
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        
+        .points-display { font-size: 3rem; font-weight: 900; color: var(--primary-gold); z-index: 2; position: relative; text-shadow: 0 0 10px rgba(212,175,55,0.3); }
+        .points-label { font-size: 1rem; color: #fff; z-index: 2; position: relative; letter-spacing: 1px; }
+        .wallet-note { font-size: 0.8rem; color: #aaa; margin-top: 15px; z-index: 2; position: relative; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; }
 
-        .points-display { font-size: 2.5rem; font-weight: 900; color: var(--primary-blue); z-index: 2; position: relative; text-shadow: 0 0 15px rgba(59,130,246,0.5); }
-        .points-label { font-size: 0.9rem; color: #ccc; z-index: 2; position: relative; letter-spacing: 1px; }
-        .wallet-note { font-size: 0.75rem; color: #888; margin-top: 15px; z-index: 2; position: relative; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; }
+        /* ===== 6. SERVICES GRID ===== */
+        .section-title { text-align: center; margin: 50px 0 30px; color: var(--primary-gold); font-size: 1.8rem; position: relative; }
+        .section-title::after { content: ""; display: block; width: 50px; height: 3px; background: var(--primary-gold); margin: 10px auto 0; }
 
-        /* ===== 5. GRID SYSTEM ===== */
         .grid-container {
-            max-width: 800px; margin: 0 auto 60px; padding: 0 15px;
+            max-width: 900px; margin: 0 auto; padding: 0 15px;
             display: flex; flex-direction: column; gap: 15px;
         }
 
         .card {
-            background: var(--bg-card); border: 1px solid var(--border);
+            background: var(--bg-card); border: 1px solid rgba(212, 175, 55, 0.2);
             border-radius: 10px; overflow: hidden; width: 100%; transition: 0.3s;
         }
-        .card.active { border-color: var(--primary-gold); }
+        .card.active { border-color: var(--primary-gold); box-shadow: 0 0 15px rgba(212,175,55,0.1); }
 
         .card-header {
             padding: 15px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
-            background: linear-gradient(90deg, rgba(255,255,255,0.02), transparent);
+            background: linear-gradient(90deg, rgba(212,175,55,0.05), transparent);
         }
 
         .card-info { display: flex; align-items: center; gap: 15px; }
         .icon-box {
-            width: 40px; height: 40px; background: rgba(255,255,255,0.05);
-            border-radius: 8px; display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; color: var(--primary-gold); border: 1px solid #333;
+            width: 45px; height: 45px; background: rgba(0,0,0,0.3);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; color: var(--primary-gold); border: 1px solid var(--primary-gold);
         }
 
-        .card-texts h3 { font-size: 1rem; margin-bottom: 2px; color: #fff; }
-        .card-texts p { font-size: 0.75rem; color: var(--text-gray); }
+        .card-texts h3 { font-size: 1.1rem; margin-bottom: 2px; color: #fff; }
+        .card-texts p { font-size: 0.8rem; color: var(--text-gray); }
 
         .card-body {
             max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
-            background: #0a0a0c; border-top: 1px solid var(--border);
+            background: #001830; border-top: 1px solid rgba(212,175,55,0.1);
         }
-        .card.active .card-body { max-height: 1500px; }
+        .card.active .card-body { max-height: 1000px; }
 
-        .pkg-wrapper { padding: 15px; display: grid; gap: 10px; }
-        
+        .pkg-wrapper { padding: 20px; display: grid; gap: 15px; }
         .pkg-item {
-            background: #141418; border: 1px solid #333; padding: 12px;
-            border-radius: 6px; text-align: center; position: relative;
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 15px;
+            border-radius: 8px; text-align: center; position: relative;
         }
         
         .badge-free {
-            position: absolute; top: 8px; right: 8px; background: var(--success);
-            color: #fff; font-size: 0.6rem; padding: 2px 6px; border-radius: 3px; font-weight: bold;
+            position: absolute; top: 10px; right: 10px; background: var(--success);
+            color: #fff; font-size: 0.7rem; padding: 3px 8px; border-radius: 4px; font-weight: bold;
         }
-        .points-badge {
-            background: rgba(59, 130, 246, 0.1); color: var(--primary-blue); border: 1px solid rgba(59, 130, 246, 0.3);
-            font-size: 0.7rem; padding: 2px 10px; border-radius: 20px; display: inline-block; margin-top: 5px; font-weight: bold;
-        }
-
-        .price-box { margin: 5px 0; }
-        .old-price { text-decoration: line-through; color: #555; font-size: 0.8rem; margin-right: 5px; }
-        .new-price { color: var(--success); font-weight: 900; font-size: 1.1rem; }
-        .normal-price { color: var(--primary-gold); font-weight: 900; font-size: 1.1rem; }
-
+        
+        .price-box { margin: 8px 0; }
         .btn-action {
-            display: block; width: 100%; padding: 6px; margin-top: 8px;
-            border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.85rem; transition: 0.2s;
+            display: block; width: 100%; padding: 8px; margin-top: 10px;
+            border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: 0.2s;
         }
-        .btn-green { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid var(--success); }
-        .btn-green:hover { background: var(--success); color: #fff; }
-        .btn-gold { background: rgba(212, 175, 55, 0.1); color: var(--primary-gold); border: 1px solid var(--primary-gold); }
-        .btn-gold:hover { background: var(--primary-gold); color: #000; }
+        .btn-gold { background: var(--primary-gold); color: #000; }
+        .btn-gold:hover { background: #b8860b; color: #fff; }
 
-        /* Emergency Special */
-        .card-emergency { border-color: rgba(239, 68, 68, 0.5); }
-        .card-emergency .icon-box { color: var(--danger); border-color: rgba(239, 68, 68, 0.3); }
-        .btn-emergency { background: var(--danger); color: white; padding: 5px 15px; border-radius: 4px; text-decoration: none; font-size: 0.8rem; display: block; width: fit-content; }
-        .em-row { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; padding-bottom: 10px; margin-bottom: 10px; }
-        .em-row:last-child { border: none; padding: 0; margin: 0; }
-
-        /* ===== 6. MEMBERSHIPS ===== */
-        .invest-section { margin: 60px auto 40px; max-width: 800px; padding: 0 15px; }
-        .invest-header { text-align: center; margin-bottom: 30px; }
-        .invest-header h2 { color: #fff; font-size: 1.5rem; margin-bottom: 5px; }
-        .invest-header p { color: #888; font-size: 0.9rem; }
-
-        .mem-grid { display: grid; gap: 20px; }
+        /* ===== 7. MEMBERSHIPS (INVESTMENT) ===== */
+        .invest-section { margin: 60px auto; max-width: 1000px; padding: 0 15px; }
+        .invest-header { text-align: center; margin-bottom: 40px; }
+        
+        .mem-grid { 
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; 
+        }
         
         .mem-card {
-            padding: 25px; border-radius: 12px; position: relative; overflow: hidden;
-            border: 1px solid #333; text-align: center; transition: transform 0.3s;
+            flex: 1; min-width: 280px; max-width: 320px;
+            padding: 30px 20px; border-radius: 20px; position: relative; overflow: hidden;
+            text-align: center; transition: transform 0.3s;
+            display: flex; flex-direction: column;
         }
-        .mem-card:hover { transform: translateY(-5px); }
+        .mem-card:hover { transform: translateY(-10px); }
 
-        .mem-shihab { background: linear-gradient(135deg, #3d2b1f, #1a100a); border: 1px solid var(--shihab); }
-        .mem-star { background: linear-gradient(135deg, #374151, #111827); border: 1px solid var(--star); }
-        .mem-galaxy { background: linear-gradient(135deg, #422006, #000); border: 2px solid var(--galaxy); box-shadow: 0 0 20px rgba(212, 175, 55, 0.2); }
-
-        .mem-badge {
-            position: absolute; top: 15px; right: -30px; transform: rotate(45deg); width: 100px;
-            font-size: 0.7rem; font-weight: bold; color: #fff; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        .mem-shihab { 
+            background: linear-gradient(135deg, #001F3F, #3d2b1f); 
+            border: 2px solid var(--shihab); 
+        }
+        .mem-star { 
+            background: linear-gradient(135deg, #001F3F, #374151); 
+            border: 2px solid var(--star); 
+        }
+        .mem-galaxy { 
+            background: linear-gradient(135deg, rgba(212,175,55,0.2), #000); 
+            border: 2px solid var(--galaxy); 
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2); 
+            transform: scale(1.05);
         }
 
-        .mem-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
-        .mem-price { font-size: 1.2rem; color: #fff; margin-bottom: 15px; display: block; opacity: 0.9; }
-        .mem-desc { font-size: 0.85rem; color: #ccc; margin-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
+        .mem-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 10px; text-transform: uppercase; }
+        .mem-price { font-size: 2rem; font-weight: bold; color: #fff; margin-bottom: 5px; }
+        .mem-price span { font-size: 0.9rem; font-weight: normal; color: #aaa; }
         
-        .mem-features { font-size: 0.85rem; color: #eee; list-style: none; padding: 0; text-align: right; margin: 15px 0; }
+        .mem-features { 
+            font-size: 0.9rem; color: #eee; list-style: none; padding: 0; 
+            text-align: right; margin: 20px 0; flex-grow: 1;
+        }
         body.ltr .mem-features { text-align: left; }
-        .mem-features li { margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
-        .mem-features li i { color: var(--success); width: 20px; }
+        .mem-features li { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .mem-features li i { color: var(--primary-gold); margin-left: 8px; }
+        body.ltr .mem-features li i { margin-left: 0; margin-right: 8px; }
 
-        /* ===== 7. AI SMART WIDGET (NEW) ===== */
+        .mem-btn {
+            display: block; width: 100%; padding: 10px; border: 1px solid #fff;
+            color: #fff; text-decoration: none; border-radius: 50px; transition: 0.3s;
+        }
+        .mem-galaxy .mem-btn { background: var(--primary-gold); color: #000; border-color: var(--primary-gold); font-weight: bold; }
+        .mem-btn:hover { background: #fff; color: #000; }
+
+        /* ===== 8. FAQ & FUTURE ===== */
+        .faq-section { max-width: 800px; margin: 40px auto; padding: 0 15px; }
+        .faq-item { background: rgba(0,0,0,0.3); border: 1px solid #333; margin-bottom: 10px; border-radius: 8px; }
+        .faq-head { padding: 15px; cursor: pointer; display: flex; justify-content: space-between; font-weight: bold; }
+        .faq-body { padding: 0 15px 15px; display: none; color: #ccc; font-size: 0.9rem; }
+        
+        .locked-card { opacity: 0.6; background: #000; border: 1px dashed #555; filter: grayscale(100%); }
+
+        /* ===== 9. FOOTER ===== */
+        .footer {
+            margin-top: 80px; padding: 50px 20px; background: #000; 
+            border-top: 3px solid var(--primary-gold); text-align: center;
+        }
+        .visit-counter { 
+            background: #111; border: 1px solid var(--primary-gold); padding: 8px 20px; 
+            border-radius: 50px; font-size: 0.9rem; color: var(--primary-gold); display: inline-block; margin-top: 20px;
+        }
+
+        /* ===== 10. AI WIDGET ===== */
         .ai-widget-btn {
-            position: fixed; bottom: 20px; left: 20px;
-            width: 60px; height: 60px; background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            position: fixed; bottom: 30px; left: 30px;
+            width: 65px; height: 65px; background: var(--primary-gold);
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: white; font-size: 1.8rem; box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-            z-index: 2000; cursor: pointer; animation: pulse 2s infinite; border: 2px solid rgba(255,255,255,0.2);
+            color: #001F3F; font-size: 2rem; box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+            z-index: 2000; cursor: pointer; animation: pulse 2s infinite; border: 2px solid #fff;
         }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
         .ai-chat-window {
-            display: none; position: fixed; bottom: 90px; left: 20px; width: 300px;
-            background: #111; border: 1px solid var(--primary-blue); border-radius: 12px;
-            z-index: 2001; overflow: hidden; box-shadow: 0 5px 30px rgba(0,0,0,0.8);
+            display: none; position: fixed; bottom: 110px; left: 30px; width: 320px;
+            background: #001830; border: 2px solid var(--primary-gold); border-radius: 15px;
+            z-index: 2001; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.8);
             flex-direction: column;
         }
-        .chat-header {
-            background: linear-gradient(90deg, #1d4ed8, #3b82f6); padding: 15px; color: white;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .chat-header h4 { font-size: 0.9rem; margin: 0; }
-        .chat-close { cursor: pointer; font-size: 1.2rem; }
-        .chat-body { padding: 15px; text-align: center; }
-        .chat-msg { background: #222; padding: 10px; border-radius: 8px; font-size: 0.85rem; color: #ccc; margin-bottom: 15px; text-align: right; border-right: 3px solid var(--primary-blue); }
-        body.ltr .chat-msg { text-align: left; border-right: none; border-left: 3px solid var(--primary-blue); }
-        
-        .chat-options { display: grid; gap: 8px; }
-        .chat-opt-btn {
-            background: #1a1a1a; border: 1px solid #333; color: #fff; padding: 8px;
-            border-radius: 6px; font-size: 0.8rem; cursor: pointer; transition: 0.2s; display: block; width: 100%; text-decoration: none;
-        }
-        .chat-opt-btn:hover { background: #333; border-color: var(--primary-blue); }
-        .btn-whatsapp-chat { background: #25D366; border-color: #25D366; color: #000; font-weight: bold; }
 
-        /* ===== 8. FOOTER & COUNTER ===== */
-        .footer {
-            margin-top: 60px; padding: 40px 20px; background: #000; 
-            border-top: 2px solid var(--primary-gold); text-align: center;
-        }
-        .about-text { color: #888; font-size: 0.9rem; max-width: 600px; margin: 10px auto 20px; line-height: 1.6; }
-        .visit-counter { 
-            background: #111; border: 1px solid #333; padding: 5px 15px; 
-            border-radius: 50px; font-size: 0.8rem; color: var(--primary-gold); display: inline-block; margin-top: 10px;
-        }
-        
-        /* Modal Content (Privacy/Terms) */
-        .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 3000; justify-content: center; align-items: center; padding: 20px;
-        }
-        .modal-content {
-            background: #111; border: 1px solid var(--primary-gold); padding: 25px;
-            border-radius: 8px; max-width: 500px; width: 100%; max-height: 85vh; overflow-y: auto;
-            text-align: right;
-        }
+        /* Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 3000; align-items: center; justify-content: center; }
+        .modal-content { background: #001F3F; border: 1px solid var(--primary-gold); padding: 30px; border-radius: 10px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; color: #fff; text-align: right; }
         body.ltr .modal-content { text-align: left; }
-        .close-modal { float: left; color: #fff; font-size: 1.5rem; cursor: pointer; }
-        body.ltr .close-modal { float: right; }
-        
-        .legal-block { margin-bottom: 20px; border-bottom: 1px solid #333; padding-bottom: 15px; }
-        .legal-block h4 { color: var(--primary-gold); margin-bottom: 10px; }
-        .legal-block p { color: #ccc; font-size: 0.85rem; line-height: 1.5; }
-
-        /* Future Projects Icons Fix */
-        .locked-card { opacity: 0.7; background: #080808; border: 1px dashed #444; }
+        .close-modal { float: left; font-size: 2rem; cursor: pointer; color: var(--primary-gold); }
 
         @media (max-width: 768px) {
-            .nav-box { gap: 10px; }
-            .hero h1 { font-size: 1.8rem; }
-            .ai-chat-window { width: 260px; left: 20px; }
+            .hero h1 { font-size: 2.2rem; }
+            .mem-galaxy { transform: scale(1); }
+            .wf-grid { flex-direction: column; align-items: center; }
         }
     </style>
 </head>
@@ -287,30 +277,27 @@
     </div>
 
     <div class="ai-chat-window" id="aiChatWindow">
-        <div class="chat-header">
-            <h4><i class="fas fa-brain"></i> Falak AI Assistant</h4>
-            <span class="chat-close" onclick="toggleChat()">&times;</span>
+        <div class="chat-header" style="background:var(--primary-gold); padding:15px; color:#000; display:flex; justify-content:space-between; align-items:center;">
+            <h4 style="margin:0"><i class="fas fa-brain"></i> Falak AI</h4>
+            <span style="cursor:pointer; font-size:1.2rem" onclick="toggleChat()">&times;</span>
         </div>
-        <div class="chat-body">
-            <div class="chat-msg" data-i18n="ai_welcome">مرحباً بك في فلك! أنا مساعدك الذكي. كيف يمكنني خدمتك اليوم؟</div>
-            <div class="chat-options">
-                <a href="https://wa.me/962790782004" class="chat-opt-btn btn-whatsapp-chat">
-                    <i class="fab fa-whatsapp"></i> <span data-i18n="start_chat">محادثة واتساب</span>
-                </a>
-                <button class="chat-opt-btn" onclick="openLegalModal('privacy')">
-                    <i class="fas fa-user-shield"></i> <span data-i18n="privacy_btn">سياسة الخصوصية</span>
-                </button>
-                <button class="chat-opt-btn" onclick="openLegalModal('terms')">
-                    <i class="fas fa-file-contract"></i> <span data-i18n="terms_btn">الشروط والأحكام</span>
-                </button>
+        <div class="chat-body" style="padding:20px; text-align:center;">
+            <div style="background:rgba(255,255,255,0.1); padding:10px; border-radius:8px; margin-bottom:15px; color:#fff;" data-i18n="ai_welcome">
+                مرحباً بك في فلك! أنا مساعدك الذكي. كيف يمكنني خدمتك في استثمارك؟
             </div>
+            <a href="https://wa.me/962790782004" class="btn-action btn-gold" style="margin-bottom:10px">
+                <i class="fab fa-whatsapp"></i> <span data-i18n="start_chat">محادثة واتساب</span>
+            </a>
+            <button class="btn-action" style="background:transparent; border:1px solid #555; color:#ccc;" onclick="openLegalModal('privacy')">
+                <span data-i18n="privacy_btn">الخصوصية</span>
+            </button>
         </div>
     </div>
 
     <header class="header">
         <div class="container">
             <div class="nav-box">
-                <a href="#" class="logo"><i class="fas fa-globe"></i> <span>FALAK</span></a>
+                <a href="#" class="logo"><i class="fas fa-crown"></i> <span>FALAK</span></a>
                 <div class="header-controls">
                     <button class="lang-btn" onclick="toggleLang()">EN</button>
                     <a href="#" class="login-btn" data-i18n="login">دخول</a>
@@ -321,8 +308,31 @@
 
     <section class="hero">
         <div class="container">
-            <h1><span data-i18n="hero_1">فَلَك</span> <span style="color:#fff; font-size:1.5rem;" data-i18n="hero_2">للخدمات والاستثمار</span></h1>
-            <p data-i18n="hero_desc">المنصة الأردنية الأولى التي تحول مصاريفك إلى استثمار.</p>
+            <h1><span data-i18n="hero_1">فَلَك</span> <br> <span style="color:#fff; font-size:1.8rem;" data-i18n="hero_2">من الأرض.. نبني القمة</span></h1>
+            <p data-i18n="hero_desc">المنظومة الأولى التي تدمج الخدمات التشغيلية بالاستثمار التعاوني.</p>
+        </div>
+    </section>
+
+    <section class="workflow-section">
+        <div class="container">
+            <h2 class="section-title" data-i18n="how_works">كيف يعمل نظام فلك؟</h2>
+            <div class="wf-grid">
+                <div class="wf-card">
+                    <div class="wf-icon"><i class="fas fa-id-card"></i></div>
+                    <h3 data-i18n="step1_t">1. اختر عضويتك</h3>
+                    <p data-i18n="step1_d">ابدأ برأس مالك (شهاب، نجم، أو جلاكسي) وكن شريكاً.</p>
+                </div>
+                <div class="wf-card">
+                    <div class="wf-icon"><i class="fas fa-shopping-basket"></i></div>
+                    <h3 data-i18n="step2_t">2. تسوق ووفر</h3>
+                    <p data-i18n="step2_d">احصل على أسعار مخفضة في "فلك ماركت" وخدمات الصيانة.</p>
+                </div>
+                <div class="wf-card">
+                    <div class="wf-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3 data-i18n="step3_t">3. احصد العوائد</h3>
+                    <p data-i18n="step3_d">توزيع سنوي للأرباح (40%) ونقاط ولاء قابلة للصرف.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -334,221 +344,187 @@
         </div>
     </div>
 
-    <div class="grid-container">
-        
-        <div class="card" onclick="toggleCard(this)">
-            <div class="card-header">
-                <div class="card-info">
-                    <div class="icon-box"><i class="fas fa-car"></i></div>
-                    <div class="card-texts">
-                        <h3 data-i18n="wash_t">غسيل السيارات</h3>
-                        <p style="color:var(--success)" data-i18n="wash_sub">● التجربة الأولى مجاناً</p>
-                    </div>
-                </div>
-                <i class="fas fa-chevron-down" style="color:#666"></i>
-            </div>
-            <div class="card-body">
-                <div class="pkg-wrapper">
-                    <div class="pkg-item" style="border-color: var(--success);">
-                        <div class="badge-free">TRIAL</div>
-                        <h4 style="color:#fff" data-i18n="wash_1">غسيل عادي</h4>
-                        <div class="price-box">
-                            <span class="old-price">7.00 JD</span>
-                            <span class="new-price">0.00 JD</span>
+    <div class="container">
+        <h2 class="section-title" data-i18n="services_t">خدماتنا التشغيلية</h2>
+        <div class="grid-container">
+            
+            <div class="card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="card-info">
+                        <div class="icon-box"><i class="fas fa-car"></i></div>
+                        <div class="card-texts">
+                            <h3 data-i18n="wash_t">غسيل السيارات</h3>
+                            <p style="color:var(--primary-gold)" data-i18n="wash_sub">لعملاء الباقات فقط</p>
                         </div>
-                        <span class="points-badge">+5 PTS</span>
-                        <a href="https://wa.me/962790782004?text=حجز غسيل مجاني" class="btn-action btn-green" data-i18n="book">حجز</a>
                     </div>
-                    <div class="pkg-item">
-                        <h4 style="color:var(--primary-gold)" data-i18n="wash_2">بريميوم</h4>
-                        <div class="price-box"><span class="normal-price">12.00 JD</span></div>
-                        <span class="points-badge">+7 PTS</span>
-                        <a href="https://wa.me/962790782004?text=حجز غسيل بريميوم" class="btn-action btn-gold" data-i18n="book">حجز</a>
-                    </div>
-                    <div class="pkg-item">
-                        <h4 style="color:var(--primary-gold)" data-i18n="wash_3">جولد (Detailing)</h4>
-                        <div class="price-box"><span class="normal-price">25.00 JD</span></div>
-                        <span class="points-badge">+10 PTS</span>
-                        <a href="https://wa.me/962790782004?text=حجز غسيل جولد" class="btn-action btn-gold" data-i18n="book">حجز</a>
-                    </div>
+                    <i class="fas fa-chevron-down" style="color:#666"></i>
                 </div>
-            </div>
-        </div>
-
-        <div class="card" onclick="toggleCard(this)">
-            <div class="card-header">
-                <div class="card-info">
-                    <div class="icon-box"><i class="fas fa-tools"></i></div>
-                    <div class="card-texts">
-                        <h3 data-i18n="maint_t">صيانة وتكييف</h3>
-                        <p style="color:var(--success)" data-i18n="maint_sub">● كشفية مجانية لأول مرة</p>
-                    </div>
-                </div>
-                <i class="fas fa-chevron-down" style="color:#666"></i>
-            </div>
-            <div class="card-body">
-                <div class="pkg-wrapper">
-                    <div class="pkg-item" style="border-color: var(--success);">
-                        <div class="badge-free">FREE VISIT</div>
-                        <h4 style="color:#fff" data-i18n="maint_1">كهرباء / سباكة</h4>
-                        <div class="price-box">
-                            <span class="old-price">20.00 JD</span>
-                            <span class="new-price">0.00 JD</span>
+                <div class="card-body">
+                    <div class="pkg-wrapper">
+                        <div class="pkg-item">
+                            <h4 style="color:#fff" data-i18n="wash_1">غسيل عادي</h4>
+                            <p style="font-size:0.8rem; color:#aaa">مجاناً حسب رصيد باقتك</p>
+                            <a href="https://wa.me/962790782004?text=حجز غسيل" class="btn-action btn-gold" data-i18n="book">حجز</a>
                         </div>
-                        <span class="points-badge">+7 PTS</span>
-                        <p style="font-size:0.75rem; color:#888" data-i18n="maint_note">كشفية مجانية عند الإصلاح</p>
-                        <a href="https://wa.me/962790782004?text=طلب فني صيانة" class="btn-action btn-green" data-i18n="req">طلب فني</a>
-                    </div>
-                    <div class="pkg-item">
-                        <h4 style="color:#fff" data-i18n="hvac">تكييف وتدفئة</h4>
-                        <div class="price-box"><span class="normal-price" data-i18n="on_check">حسب الكشف</span></div>
-                        <span class="points-badge">+10 PTS</span>
-                        <p style="font-size:0.75rem; color:#888" data-i18n="hvac_desc">تركيب، غسيل، صيانة شاملة</p>
-                        <a href="https://wa.me/962790782004?text=طلب فني تكييف" class="btn-action btn-gold" data-i18n="book_apt">حجز موعد</a>
+                        <div class="pkg-item">
+                            <h4 style="color:#fff" data-i18n="wash_3">تلميع (Detailing)</h4>
+                            <p style="font-size:0.8rem; color:#aaa">خصم خاص للأعضاء</p>
+                            <a href="https://wa.me/962790782004?text=حجز تلميع" class="btn-action btn-gold" data-i18n="book">حجز</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="card card-emergency" onclick="toggleCard(this)">
-            <div class="card-header">
-                <div class="card-info">
-                    <div class="icon-box"><i class="fas fa-ambulance"></i></div>
-                    <div class="card-texts">
-                        <h3 style="color:var(--danger)" data-i18n="sos_t">طوارئ SOS</h3>
-                        <p style="color: #ff6666" data-i18n="sos_sub">استجابة فورية (مدفوعة)</p>
+            <div class="card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="card-info">
+                        <div class="icon-box"><i class="fas fa-tools"></i></div>
+                        <div class="card-texts">
+                            <h3 data-i18n="maint_t">الصيانة المنزلية</h3>
+                            <p data-i18n="maint_sub">كهرباء، سباكة، تكييف</p>
+                        </div>
                     </div>
+                    <i class="fas fa-chevron-down" style="color:#666"></i>
                 </div>
-                <i class="fas fa-exclamation-circle" style="color:var(--danger)"></i>
-            </div>
-            <div class="card-body">
-                <div class="pkg-wrapper">
-                    <div class="em-row">
-                        <span style="color:#fff"><i class="fas fa-truck-pickup"></i> <span data-i18n="winch">ونش / خدمة طريق</span></span>
-                        <a href="https://wa.me/962790782004?text=SOS: Winch" class="btn-emergency" data-i18n="call">طلب</a>
-                    </div>
-                    <div class="em-row">
-                        <span style="color:#fff"><i class="fas fa-bolt"></i> <span data-i18n="elec_sos">كهربائي طوارئ</span></span>
-                        <a href="https://wa.me/962790782004?text=SOS: Electrician" class="btn-emergency" data-i18n="call">طلب</a>
-                    </div>
-                    <div class="em-row">
-                        <span style="color:#fff"><i class="fas fa-water"></i> <span data-i18n="plumb_sos">سباك طوارئ</span></span>
-                        <a href="https://wa.me/962790782004?text=SOS: Plumber" class="btn-emergency" data-i18n="call">طلب</a>
+                <div class="card-body">
+                    <div class="pkg-wrapper">
+                        <div class="pkg-item">
+                            <div class="badge-free">FREE CHECK</div>
+                            <h4 style="color:#fff" data-i18n="maint_1">زيارة فني</h4>
+                            <p style="font-size:0.8rem; color:#aaa">كشفية مجانية لـ جلاكسي</p>
+                            <a href="https://wa.me/962790782004?text=طلب فني صيانة" class="btn-action btn-gold" data-i18n="req">طلب</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
+            <div class="card" onclick="toggleCard(this)">
+                <div class="card-header">
+                    <div class="card-info">
+                        <div class="icon-box" style="border-color:var(--danger); color:var(--danger)"><i class="fas fa-ambulance"></i></div>
+                        <div class="card-texts">
+                            <h3 style="color:var(--danger)" data-i18n="sos_t">طوارئ SOS</h3>
+                            <p data-i18n="sos_sub">ونش، بنشر، كهرباء</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-exclamation-circle" style="color:var(--danger)"></i>
+                </div>
+                <div class="card-body">
+                    <div class="pkg-wrapper">
+                        <div class="pkg-item">
+                            <h4 style="color:#fff" data-i18n="winch">خدمة الونش</h4>
+                            <p style="font-size:0.8rem; color:#aaa">مجاناً لـ جلاكسي (مرة واحدة)</p>
+                            <a href="https://wa.me/962790782004?text=SOS Winch" class="btn-action" style="background:var(--danger); color:#fff" data-i18n="call">طلب فوري</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <div class="invest-section">
         <div class="invest-header">
-            <h2 data-i18n="inv_title">بطاقات شركاء فلك</h2>
-            <p data-i18n="inv_sub">رأس مالك الاستثماري في "فلك ماركت"</p>
+            <h2 class="section-title" data-i18n="inv_title">باقات الاستثمار</h2>
+            <p data-i18n="inv_sub" style="color:#ccc">اختر حصتك في رأس المال</p>
         </div>
 
         <div class="mem-grid">
             <div class="mem-card mem-shihab">
-                <div class="mem-badge" style="background:#cd7f32">BRONZE</div>
-                <div class="mem-title" style="color:#cd7f32" data-i18n="shihab_t">شهاب (SHIHAB)</div>
-                <div class="mem-price">100 - 250 JD</div>
-                <div class="mem-desc" data-i18n="shihab_d">للمشاركة المبدئية</div>
+                <div class="mem-title" style="color:var(--shihab)" data-i18n="shihab_t">شهاب</div>
+                <div class="mem-price">250 <span>JD</span></div>
                 <ul class="mem-features">
-                    <li><i class="fas fa-check"></i> <span data-i18n="disc_10">خصم 10% في فلك ماركت</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="pts_std">تجميع نقاط خدمات (قياسي)</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="profit_share">حصة في توزيع النقاط السنوية</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="sh_1">سيارة واحدة</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="sh_2">خصم 15% خدمات</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="sh_3">خصم 10% ماركت</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="sh_4">4 غسلات (ربع سنوي)</span></li>
                 </ul>
+                <a href="https://wa.me/962790782004?text=اشتراك شهاب" class="mem-btn" data-i18n="sub_btn">اشتراك</a>
             </div>
 
             <div class="mem-card mem-star">
-                <div class="mem-badge" style="background:#c0c0c0; color:#000">SILVER</div>
-                <div class="mem-title" style="color:#c0c0c0" data-i18n="star_t">ستار (STAR)</div>
-                <div class="mem-price">500 - 950 JD</div>
-                <div class="mem-desc" data-i18n="star_d">للاستثمار المتوسط</div>
+                <div class="mem-title" style="color:var(--star)" data-i18n="star_t">نجم (Star)</div>
+                <div class="mem-price">650 <span>JD</span></div>
                 <ul class="mem-features">
-                    <li><i class="fas fa-check"></i> <span data-i18n="disc_20">خصم 20% في فلك ماركت</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="pts_15">تجميع نقاط خدمات x1.5</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="prio_res">أولوية في الحجز</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="st_1">سيارة واحدة</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="st_2">خصم 30% خدمات</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="st_3">خصم 12% ماركت</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="st_4">8 غسلات + 2 تلميع</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="st_5">صيانة (زيت وفحص)</span></li>
                 </ul>
+                <a href="https://wa.me/962790782004?text=اشتراك نجم" class="mem-btn" data-i18n="sub_btn">اشتراك</a>
             </div>
 
             <div class="mem-card mem-galaxy">
-                <div class="mem-badge" style="background:#d4af37; color:#000">GOLD</div>
-                <div class="mem-title" style="color:#d4af37" data-i18n="galaxy_t">جلاكسي (GALAXY)</div>
-                <div class="mem-price">1000 - 5000 JD</div>
-                <div class="mem-desc" data-i18n="galaxy_d">للمستثمر الاستراتيجي</div>
+                <div class="mem-title" style="color:var(--galaxy)" data-i18n="galaxy_t">جلاكسي</div>
+                <div class="mem-price">2000 <span>JD</span></div>
                 <ul class="mem-features">
-                    <li><i class="fas fa-check"></i> <span data-i18n="disc_cost">سعر التكلفة التشغيلية في الماركت</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="free_check">كشفية صيانة مجانية (دائمة)</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="free_wash">غسيل سيارة مجاني (دوري)</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="pay_pts">إمكانية دفع الخدمات بالنقاط</span></li>
+                    <li><i class="fas fa-crown"></i> <span data-i18n="ga_1">سيارتين (التوأم)</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="ga_2">أعلى حصة أرباح (40%)</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="ga_3">خصم 15% ماركت (سقف 100د)</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="ga_4">30 غسلة شاملة</span></li>
+                    <li><i class="fas fa-check"></i> <span data-i18n="ga_5">فاليت + ونش + سيارة بديلة</span></li>
                 </ul>
+                <a href="https://wa.me/962790782004?text=استثمار جلاكسي" class="mem-btn" data-i18n="invest_btn">استثمر الآن</a>
             </div>
         </div>
     </div>
 
-    <div class="grid-container" style="margin-top:40px;">
-        <h3 style="text-align:center; color:#fff; margin-bottom:15px;" data-i18n="future">مشاريع المستقبل</h3>
-        
-        <div class="card locked-card">
-            <div class="card-header" style="cursor:default">
-                <div class="card-info">
-                    <div class="icon-box" style="border-color:#555; color:#666"><i class="fas fa-shopping-cart"></i></div>
-                    <div class="card-texts">
-                        <h3 style="color:#888" data-i18n="market">فلك ماركت</h3>
-                        <p data-i18n="coming">قريباً..</p>
+    <div class="container" style="margin-top:50px;">
+        <h3 class="section-title" style="font-size:1.5rem" data-i18n="future">مشاريع المستقبل</h3>
+        <div class="grid-container">
+            <div class="card locked-card">
+                <div class="card-header" style="cursor:default">
+                    <div class="card-info">
+                        <div class="icon-box" style="border-color:#555; color:#666"><i class="fas fa-store"></i></div>
+                        <div class="card-texts"><h3 style="color:#888" data-i18n="market">فلك ماركت</h3><p data-i18n="coming">قريباً..</p></div>
                     </div>
+                    <i class="fas fa-lock" style="color:#555"></i>
                 </div>
-                <i class="fas fa-lock" style="color:#555"></i>
+            </div>
+            <div class="card locked-card">
+                <div class="card-header" style="cursor:default">
+                    <div class="card-info">
+                        <div class="icon-box" style="border-color:#555; color:#666"><i class="fas fa-city"></i></div>
+                        <div class="card-texts"><h3 style="color:#888" data-i18n="real_estate">فلك العقارية</h3><p data-i18n="coming">قريباً..</p></div>
+                    </div>
+                    <i class="fas fa-lock" style="color:#555"></i>
+                </div>
             </div>
         </div>
+    </div>
 
-        <div class="card locked-card">
-            <div class="card-header" style="cursor:default">
-                <div class="card-info">
-                    <div class="icon-box" style="border-color:#555; color:#666"><i class="fas fa-building"></i></div>
-                    <div class="card-texts">
-                        <h3 style="color:#888" data-i18n="real_estate">فلك العقارية</h3>
-                        <p data-i18n="coming">قريباً..</p>
-                    </div>
-                </div>
-                <i class="fas fa-lock" style="color:#555"></i>
+    <div class="faq-section">
+        <h3 style="text-align:center; color:var(--primary-gold); margin-bottom:20px;" data-i18n="faq_t">أسئلة شائعة</h3>
+        <div class="faq-item">
+            <div class="faq-head" onclick="this.nextElementSibling.style.display=(this.nextElementSibling.style.display=='block'?'none':'block')">
+                <span data-i18n="faq_1_q">كيف يتم توزيع الأرباح؟</span> <i class="fas fa-chevron-down"></i>
             </div>
+            <div class="faq-body" data-i18n="faq_1_a">يتم تخصيص 40% من صافي أرباح السوبر ماركت سنوياً وتوزيعها على الأعضاء.</div>
         </div>
-
-        <div class="card locked-card">
-            <div class="card-header" style="cursor:default">
-                <div class="card-info">
-                    <div class="icon-box" style="border-color:#555; color:#666"><i class="fas fa-wallet"></i></div>
-                    <div class="card-texts">
-                        <h3 style="color:#888" data-i18n="invest_portfolio">المحفظة الاستثمارية</h3>
-                        <p data-i18n="coming">قريباً..</p>
-                    </div>
-                </div>
-                <i class="fas fa-lock" style="color:#555"></i>
+        <div class="faq-item">
+            <div class="faq-head" onclick="this.nextElementSibling.style.display=(this.nextElementSibling.style.display=='block'?'none':'block')">
+                <span data-i18n="faq_2_q">ما هي سياسة الانسحاب؟</span> <i class="fas fa-chevron-down"></i>
             </div>
+            <div class="faq-body" data-i18n="faq_2_a">إخطار قبل 60 يوم. خصم 15% عند توفر بديل، أو 35% للاسترداد الفوري.</div>
         </div>
     </div>
 
     <footer class="footer">
-        <h2 style="color:#fff">FALAK <span>GROUP</span></h2>
-        
+        <h2 style="color:var(--primary-gold)">FALAK <span>GROUP</span></h2>
         <div class="about-text" data-i18n="about_footer">
-            منصة فلك هي الأولى من نوعها في الأردن، تهدف لدمج الخدمات التشغيلية مع الاستثمار التعاوني، لبناء مجتمع اقتصادي متكامل يخدم الفرد والمجتمع.
+            منصة فلك هي الأولى من نوعها في الأردن، تهدف لدمج الخدمات التشغيلية مع الاستثمار التعاوني، لبناء مجتمع اقتصادي متكامل.
         </div>
-
         <div class="visit-counter">
             <i class="fas fa-eye"></i> <span data-i18n="visitors">الزوار:</span> <span id="visitorCount">5240</span>
         </div>
-        <br>
-        <p style="font-size: 0.8rem; margin-top: 20px; opacity: 0.5;">© 2025 Falak Group.</p>
+        <p style="font-size: 0.8rem; margin-top: 20px; opacity: 0.5;">© 2026 Falak Group.</p>
     </footer>
 
     <div id="legalModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeLegalModal()">&times;</span>
-            <div id="modalBody">
-                </div>
+            <div id="modalBody"></div>
         </div>
     </div>
 
@@ -556,7 +532,7 @@
     <script>
         // Init Particles
         particlesJS("particles-js", {
-            "particles": { "number": { "value": 50 }, "color": { "value": "#ffffff" }, "opacity": { "value": 0.2 }, "size": { "value": 2 }, "line_linked": { "enable": true, "color": "#ffffff", "opacity": 0.05 }, "move": { "enable": true, "speed": 0.5 } }
+            "particles": { "number": { "value": 60 }, "color": { "value": "#d4af37" }, "opacity": { "value": 0.3 }, "size": { "value": 2 }, "line_linked": { "enable": true, "color": "#d4af37", "opacity": 0.1 }, "move": { "enable": true, "speed": 0.4 } }
         });
 
         // Toggle Accordion
@@ -566,13 +542,13 @@
             card.classList.toggle('active');
         }
 
-        // AI Chat Toggle
+        // AI Chat
         function toggleChat() {
             const win = document.getElementById('aiChatWindow');
             win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
         }
 
-        // Visitor Counter Simulation
+        // Visitor Counter (Preserved)
         let count = localStorage.getItem('falak_visits') || 5240;
         count = parseInt(count) + 1;
         localStorage.setItem('falak_visits', count);
@@ -582,24 +558,11 @@
         const legalContent = {
             privacy: {
                 title: { ar: "سياسة الخصوصية", en: "Privacy Policy" },
-                body: { 
-                    ar: "<p>نحن في فلك نلتزم بحماية بياناتك الشخصية...</p><p>1. نجمع البيانات لغايات تحسين الخدمة.</p><p>2. لا نشارك بياناتك مع طرف ثالث إلا بغرض تنفيذ الخدمة.</p>",
-                    en: "<p>At Falak, we are committed to protecting your data...</p>"
-                }
+                body: { ar: "<p>نلتزم في فلك بحماية بياناتك...</p>", en: "<p>We are committed to protecting your data...</p>" }
             },
             terms: {
                 title: { ar: "الشروط والأحكام", en: "Terms & Conditions" },
-                body: {
-                    ar: `
-                        <h4>1. الوساطة والمسؤولية</h4>
-                        <p>منصة فلك هي وسيط تقني يربط العميل بمزودي الخدمة. المسؤولية الفنية المباشرة تقع على المزود.</p>
-                        <h4>2. نظام الاستثمار والنقاط</h4>
-                        <p>النقاط هي مكافآت ولاء وليست أوراقاً مالية. يتم توزيع عوائد 'فلك ماركت' كنقاط إضافية.</p>
-                        <h4>3. الإحالة (Referral)</h4>
-                        <p>عند دعوة عضو جديد، يحصل الطرفان على 10 نقاط.</p>
-                    `,
-                    en: `<h4>1. Liability</h4><p>Falak is a tech intermediary...</p>`
-                }
+                body: { ar: "<p>فلك هي منصة استثمار وخدمات...</p>", en: "<p>Falak is an investment platform...</p>" }
             }
         };
 
@@ -607,138 +570,49 @@
             const modal = document.getElementById('legalModal');
             const body = document.getElementById('modalBody');
             const lang = document.body.classList.contains('ltr') ? 'en' : 'ar';
-            
-            let content = "";
             if (legalContent[type]) {
-                content = `<h3>${legalContent[type].title[lang]}</h3>${legalContent[type].body[lang]}`;
+                body.innerHTML = `<h3>${legalContent[type].title[lang]}</h3>${legalContent[type].body[lang]}`;
             }
-
-            body.innerHTML = content;
             modal.style.display = 'flex';
-            toggleChat(); // Close chat
+            toggleChat();
         }
-
         function closeLegalModal() { document.getElementById('legalModal').style.display = 'none'; }
         window.onclick = function(e) { if(e.target == document.getElementById('legalModal')) closeLegalModal(); }
 
-        // Language Logic
+        // Translations
         let currentLang = 'ar';
         const t = {
             ar: {
-                login: "دخول",
-                hero_1: "فَلَك",
-                hero_2: "للخدمات والاستثمار",
-                hero_desc: "المنصة الأردنية الأولى التي تحول مصاريفك إلى استثمار.",
-                wallet_label: "رصيد نقاط فلك",
-                wallet_note: "التحويل متاح عند الوصول لـ 1000 نقطة (10 دنانير).",
-                wash_t: "غسيل السيارات",
-                wash_sub: "● التجربة الأولى مجاناً",
-                wash_1: "غسيل عادي",
-                wash_2: "بريميوم",
-                wash_3: "جولد (Detailing)",
-                book: "حجز",
-                maint_t: "صيانة وتكييف",
-                maint_sub: "● كشفية مجانية لأول مرة",
-                maint_1: "كهرباء / سباكة",
-                maint_note: "كشفية مجانية عند الإصلاح",
-                req: "طلب فني",
-                hvac: "تكييف وتدفئة",
-                on_check: "حسب الكشف",
-                hvac_desc: "تركيب، غسيل، صيانة شاملة",
-                book_apt: "حجز موعد",
-                sos_t: "طوارئ SOS",
-                sos_sub: "استجابة فورية (مدفوعة)",
-                winch: "ونش / خدمة طريق",
-                elec_sos: "كهربائي طوارئ",
-                plumb_sos: "سباك طوارئ",
-                call: "طلب",
-                inv_title: "بطاقات شركاء فلك",
-                inv_sub: "رأس مالك الاستثماري في 'فلك ماركت'",
-                shihab_t: "شهاب (SHIHAB)",
-                shihab_d: "للمشاركة المبدئية",
-                disc_10: "خصم 10% في فلك ماركت",
-                pts_std: "تجميع نقاط خدمات (قياسي)",
-                profit_share: "حصة في توزيع النقاط السنوية",
-                star_t: "ستار (STAR)",
-                star_d: "للاستثمار المتوسط",
-                disc_20: "خصم 20% في فلك ماركت",
-                pts_15: "تجميع نقاط خدمات x1.5",
-                prio_res: "أولوية في الحجز",
-                galaxy_t: "جلاكسي (GALAXY)",
-                galaxy_d: "للمستثمر الاستراتيجي",
-                disc_cost: "سعر التكلفة التشغيلية في الماركت",
-                free_check: "كشفية صيانة مجانية (دائمة)",
-                free_wash: "غسيل سيارة مجاني (دوري)",
-                pay_pts: "إمكانية دفع الخدمات بالنقاط",
-                future: "مشاريع المستقبل",
-                market: "فلك ماركت",
-                real_estate: "فلك العقارية",
-                invest_portfolio: "المحفظة الاستثمارية",
-                coming: "قريباً..",
-                ai_welcome: "مرحباً بك في فلك! أنا مساعدك الذكي. كيف يمكنني خدمتك اليوم؟",
-                start_chat: "محادثة واتساب",
-                privacy_btn: "سياسة الخصوصية",
-                terms_btn: "الشروط والأحكام",
-                about_footer: "منصة فلك هي الأولى من نوعها في الأردن، تهدف لدمج الخدمات التشغيلية مع الاستثمار التعاوني.",
-                visitors: "الزوار:"
+                login: "دخول", hero_1: "فَلَك", hero_2: "من الأرض.. نبني القمة", hero_desc: "المنظومة الأولى التي تدمج الخدمات بالاستثمار.",
+                how_works: "كيف يعمل نظام فلك؟", step1_t: "1. اختر عضويتك", step1_d: "ابدأ استثمارك برأس مال", step2_t: "2. تسوق ووفر", step2_d: "خصومات حصرية في الماركت", step3_t: "3. احصد العوائد", step3_d: "توزيع أرباح سنوية",
+                wallet_label: "رصيد نقاط فلك", wallet_note: "التحويل متاح عند 1000 نقطة (10 دنانير).",
+                services_t: "خدماتنا التشغيلية", wash_t: "غسيل السيارات", wash_sub: "لعملاء الباقات فقط", wash_1: "غسيل عادي", wash_3: "تلميع (Detailing)", book: "حجز",
+                maint_t: "الصيانة المنزلية", maint_sub: "كهرباء، سباكة، تكييف", maint_1: "زيارة فني", req: "طلب",
+                sos_t: "طوارئ SOS", sos_sub: "ونش، بنشر، كهرباء", winch: "خدمة الونش", call: "طلب فوري",
+                inv_title: "باقات الاستثمار", inv_sub: "اختر حصتك في رأس المال",
+                shihab_t: "شهاب", sh_1: "سيارة واحدة", sh_2: "خصم 15% خدمات", sh_3: "خصم 10% ماركت", sh_4: "4 غسلات (ربع سنوي)", sub_btn: "اشتراك",
+                star_t: "نجم (Star)", st_1: "سيارة واحدة", st_2: "خصم 30% خدمات", st_3: "خصم 12% ماركت", st_4: "8 غسلات + 2 تلميع", st_5: "صيانة (زيت وفحص)",
+                galaxy_t: "جلاكسي", ga_1: "سيارتين (التوأم)", ga_2: "أعلى حصة أرباح (40%)", ga_3: "خصم 15% ماركت (سقف 100د)", ga_4: "30 غسلة شاملة", ga_5: "فاليت + ونش + سيارة بديلة", invest_btn: "استثمر الآن",
+                future: "مشاريع المستقبل", market: "فلك ماركت", real_estate: "فلك العقارية", coming: "قريباً..",
+                faq_t: "أسئلة شائعة", faq_1_q: "كيف يتم توزيع الأرباح؟", faq_1_a: "توزع 40% من أرباح الماركت سنوياً.", faq_2_q: "ما هي سياسة الانسحاب؟", faq_2_a: "إخطار 60 يوم، خصم 15% أو 35%.",
+                about_footer: "منصة فلك هي الأولى من نوعها في الأردن، تهدف لدمج الخدمات التشغيلية مع الاستثمار التعاوني.", visitors: "الزوار:",
+                ai_welcome: "مرحباً بك في فلك! كيف يمكنني مساعدتك؟", start_chat: "محادثة واتساب", privacy_btn: "الخصوصية"
             },
             en: {
-                login: "Login",
-                hero_1: "FALAK",
-                hero_2: "Services & Invest",
-                hero_desc: "Jordan's first platform turning expenses into investment.",
-                wallet_label: "Falak Points Balance",
-                wallet_note: "Transfer available at 1000 Points (10 JD).",
-                wash_t: "Car Wash",
-                wash_sub: "● First Trial Free",
-                wash_1: "Basic Wash",
-                wash_2: "Premium",
-                wash_3: "Gold (Detailing)",
-                book: "Book",
-                maint_t: "Maintenance & HVAC",
-                maint_sub: "● First Inspection Free",
-                maint_1: "Elec / Plumbing",
-                maint_note: "Free inspection upon repair",
-                req: "Request",
-                hvac: "HVAC System",
-                on_check: "On Check",
-                hvac_desc: "Install, Clean, Fix",
-                book_apt: "Book",
-                sos_t: "SOS Emergency",
-                sos_sub: "Immediate Response (Paid)",
-                winch: "Winch / Roadside",
-                elec_sos: "SOS Electrician",
-                plumb_sos: "SOS Plumber",
-                call: "Call",
-                inv_title: "Falak Partners",
-                inv_sub: "Your Capital Investment in 'Falak Market'",
-                shihab_t: "SHIHAB (Bronze)",
-                shihab_d: "Entry Level",
-                disc_10: "10% OFF in Falak Market",
-                pts_std: "Standard Points Earning",
-                profit_share: "Annual Points Distribution Share",
-                star_t: "STAR (Silver)",
-                star_d: "Medium Investment",
-                disc_20: "20% OFF in Falak Market",
-                pts_15: "x1.5 Service Points Earning",
-                prio_res: "Priority Booking",
-                galaxy_t: "GALAXY (Gold)",
-                galaxy_d: "Strategic Investor",
-                disc_cost: "Operational Cost Price in Market",
-                free_check: "Permanent Free Inspection",
-                free_wash: "Periodic Free Car Wash",
-                pay_pts: "Pay Services via Points",
-                future: "Future Projects",
-                market: "Falak Market",
-                real_estate: "Falak Real Estate",
-                invest_portfolio: "Investment Portfolio",
-                coming: "Coming Soon..",
-                ai_welcome: "Welcome to Falak! I'm your AI assistant. How can I help you?",
-                start_chat: "Chat on WhatsApp",
-                privacy_btn: "Privacy Policy",
-                terms_btn: "Terms & Conditions",
-                about_footer: "Falak is Jordan's first platform merging operational services with cooperative investment.",
-                visitors: "Visitors:"
+                login: "Login", hero_1: "FALAK", hero_2: "From Earth.. We Build Summit", hero_desc: "First platform merging services with investment.",
+                how_works: "How Falak Works?", step1_t: "1. Choose Plan", step1_d: "Start your capital investment", step2_t: "2. Shop & Save", step2_d: "Exclusive Market discounts", step3_t: "3. Earn Profits", step3_d: "Annual profit distribution",
+                wallet_label: "Falak Points", wallet_note: "Transfer at 1000 Points (10 JD).",
+                services_t: "Operational Services", wash_t: "Car Wash", wash_sub: "For Members Only", wash_1: "Basic Wash", wash_3: "Detailing", book: "Book",
+                maint_t: "Home Maintenance", maint_sub: "Elec, Plumbing, HVAC", maint_1: "Technician Visit", req: "Request",
+                sos_t: "SOS Emergency", sos_sub: "Winch, Flat Tire, Elec", winch: "Winch Service", call: "Call Now",
+                inv_title: "Investment Plans", inv_sub: "Choose your capital share",
+                shihab_t: "Shihab", sh_1: "One Car", sh_2: "15% Service OFF", sh_3: "10% Market OFF", sh_4: "4 Washes (Quarterly)", sub_btn: "Subscribe",
+                star_t: "Star", st_1: "One Car", st_2: "30% Service OFF", st_3: "12% Market OFF", st_4: "8 Washes + 2 Polish", st_5: "Maint (Oil & Check)",
+                galaxy_t: "Galaxy", ga_1: "Twin System (2 Cars)", ga_2: "Highest Profit Share (40%)", ga_3: "15% Market OFF (Cap 100JD)", ga_4: "30 Full Washes", ga_5: "Valet + Winch + Replacement Car", invest_btn: "Invest Now",
+                future: "Future Projects", market: "Falak Market", real_estate: "Falak Real Estate", coming: "Coming Soon..",
+                faq_t: "FAQ", faq_1_q: "How are profits distributed?", faq_1_a: "40% of Market profits distributed annually.", faq_2_q: "Withdrawal Policy?", faq_2_a: "60 days notice. 15% or 35% deduction.",
+                about_footer: "Falak is Jordan's first platform merging services with cooperative investment.", visitors: "Visitors:",
+                ai_welcome: "Welcome to Falak! How can I help?", start_chat: "WhatsApp Chat", privacy_btn: "Privacy"
             }
         };
 
