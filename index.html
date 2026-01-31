@@ -3,638 +3,681 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FALAK | فَلَك - منظومة الخدمات والاستثمار</title>
+    <title>مجموعة فلك | FALAK GROUP - الحصن الاقتصادي</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <style>
-        /* ===== 1. FALAK COSMIC PALETTE (UPDATED) ===== */
+        /* ===== ROYAL THEME SETTINGS ===== */
         :root {
-            --bg-deep: #001F3F;      /* Navy Blue - Falak Base */
-            --bg-card: #002b55;      /* Lighter Navy */
-            --primary-gold: #D4AF37; /* Royal Gold */
-            --primary-blue: #3b82f6; 
-            --text-white: #ffffff;
-            --text-gray: #ccc;
-            --danger: #ef4444;
-            --success: #10b981;
-            --border: #D4AF37;       /* Gold Borders */
-            
-            /* Membership Colors */
-            --shihab: #cd7f32;  /* Bronze */
-            --star: #C0C0C0;    /* Silver */
-            --galaxy: #D4AF37;  /* Gold/Diamond */
+            --navy-dark: #020c1b;
+            --navy-light: #0a192f;
+            --navy-card: #112240;
+            --gold-primary: #d4af37;
+            --gold-secondary: #f3e5ab;
+            --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 50%, #b38728 100%);
+            --text-silver: #8892b0;
+            --text-white: #e6f1ff;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        body { font-family: 'Tajawal', sans-serif; background-color: var(--navy-dark); color: var(--text-silver); overflow-x: hidden; }
+
+        /* Typography & Logo */
+        .text-gold { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; }
+        .falak-logo-text { font-family: 'Tajawal', sans-serif; letter-spacing: 2px; text-transform: uppercase; text-shadow: 0 2px 10px rgba(212, 175, 55, 0.3); }
+        .border-gold { border-color: var(--gold-primary); }
+        .bg-gold { background: var(--gold-gradient); color: var(--navy-dark); }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(17, 34, 64, 0.9);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.5);
+        }
+        .glass-card::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+            transform: skewX(-25deg); transition: 0.5s;
+        }
+        .glass-card:hover::before { left: 100%; }
+
+        /* Buttons */
+        .btn-royal {
+            background: transparent; border: 1px solid var(--gold-primary); color: var(--gold-primary);
+            padding: 8px 20px; font-weight: bold; position: relative; overflow: hidden; transition: all 0.3s; cursor: pointer;
+        }
+        .btn-royal:hover { background: var(--gold-primary); color: var(--navy-dark); box-shadow: 0 0 15px var(--gold-primary); }
+
+        .btn-whatsapp {
+            background: #25D366; color: white; display: flex; align-items: center; justify-content: center; gap: 8px; transition: 0.3s;
+        }
+        .btn-whatsapp:hover { background: #128C7E; transform: scale(1.02); }
+
+        /* Custom Particles */
+        #particles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: radial-gradient(circle at 50% 50%, #0a192f 0%, #020c1b 100%); }
+
+        /* Inputs */
+        .input-royal {
+            width: 100%; background-color: #f1f5f9; color: #0f172a; border: 1px solid var(--gold-primary);
+            border-radius: 8px; padding: 12px; font-size: 0.95rem; outline: none; transition: 0.3s; font-weight: 600;
+        }
+        .input-royal:focus { box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3); border-color: #b38728; background-color: #ffffff; }
+
+        /* Modals */
+        .modal-overlay { background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(5px); }
+        .modal-content { max-height: 85vh; overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--gold-primary) var(--navy-dark); }
         
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: var(--bg-deep);
-            color: var(--text-white);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+        /* Chat */
+        .chat-user { background: var(--gold-gradient); color: #020c1b; font-weight: bold; border-radius: 12px 12px 0 12px; }
+        .chat-ai { background: var(--navy-card); color: #e6f1ff; border: 1px solid var(--gold-primary); border-radius: 12px 12px 12px 0; }
 
-        body.ltr { direction: ltr; font-family: 'Rajdhani', sans-serif; letter-spacing: 0.5px; }
+        /* Accordion */
+        .card-body { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out, opacity 0.5s; opacity: 0; }
+        .card-active .card-body { max-height: 1000px; opacity: 1; border-top: 1px solid rgba(212, 175, 55, 0.2); }
+        .card-active .arrow-icon { transform: rotate(180deg); }
+        .card-active .card-header { background: rgba(212, 175, 55, 0.15); border-left-width: 6px; }
 
-        #particles-js {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; background: radial-gradient(circle at 50% 50%, #001F3F 0%, #000000 100%);
-        }
-
-        /* ===== 2. HEADER ===== */
-        .header {
-            background: rgba(0, 31, 63, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--primary-gold);
-            padding: 15px 0;
-            position: sticky; top: 0; z-index: 1000;
-        }
-
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .nav-box { display: flex; justify-content: space-between; align-items: center; }
-
-        .logo {
-            font-size: 1.8rem; font-weight: 900; color: var(--primary-gold);
-            text-decoration: none; display: flex; align-items: center; gap: 8px;
-            text-transform: uppercase; letter-spacing: 2px;
-        }
-        .logo i { color: var(--primary-gold); }
-
-        .header-controls { display: flex; gap: 10px; align-items: center; }
-
-        .lang-btn {
-            background: transparent; border: 1px solid var(--primary-gold); color: var(--primary-gold);
-            padding: 5px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem; transition: 0.3s;
-        }
-        .lang-btn:hover { background: var(--primary-gold); color: #000; }
-
-        .login-btn {
-            background: linear-gradient(45deg, var(--primary-gold), #b8860b);
-            color: #000; padding: 6px 20px; border-radius: 50px; 
-            font-weight: 700; text-decoration: none; font-size: 0.9rem;
-        }
-
-        /* ===== 3. HERO ===== */
-        .hero { padding: 60px 0 30px; text-align: center; }
-        .hero h1 { font-size: 3rem; margin-bottom: 10px; font-weight: 900; line-height: 1.2; }
-        .hero h1 span { color: var(--primary-gold); }
-        .hero p { color: var(--text-gray); font-size: 1.1rem; margin-bottom: 20px; }
-
-        /* ===== 4. WORKFLOW (NEW) ===== */
-        .workflow-section {
-            padding: 20px 0 40px; text-align: center;
-        }
-        .wf-grid {
-            display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px;
-        }
-        .wf-card {
-            background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3);
-            padding: 20px; border-radius: 15px; width: 300px; text-align: center;
-            transition: 0.3s;
-        }
-        .wf-card:hover { transform: translateY(-5px); border-color: var(--primary-gold); }
-        .wf-icon { font-size: 2rem; color: var(--primary-gold); margin-bottom: 10px; }
-        .wf-card h3 { color: #fff; margin-bottom: 5px; }
-        .wf-card p { font-size: 0.85rem; color: #ccc; }
-
-        /* ===== 5. WALLET SECTION ===== */
-        .wallet-card {
-            background: linear-gradient(135deg, #002b55, #001F3F);
-            border: 2px solid var(--primary-gold); border-radius: 15px;
-            padding: 25px; margin: 40px auto; max-width: 600px;
-            text-align: center; position: relative; overflow: hidden;
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
-        }
-        
-        .points-display { font-size: 3rem; font-weight: 900; color: var(--primary-gold); z-index: 2; position: relative; text-shadow: 0 0 10px rgba(212,175,55,0.3); }
-        .points-label { font-size: 1rem; color: #fff; z-index: 2; position: relative; letter-spacing: 1px; }
-        .wallet-note { font-size: 0.8rem; color: #aaa; margin-top: 15px; z-index: 2; position: relative; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; }
-
-        /* ===== 6. SERVICES GRID ===== */
-        .section-title { text-align: center; margin: 50px 0 30px; color: var(--primary-gold); font-size: 1.8rem; position: relative; }
-        .section-title::after { content: ""; display: block; width: 50px; height: 3px; background: var(--primary-gold); margin: 10px auto 0; }
-
-        .grid-container {
-            max-width: 900px; margin: 0 auto; padding: 0 15px;
-            display: flex; flex-direction: column; gap: 15px;
-        }
-
-        .card {
-            background: var(--bg-card); border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 10px; overflow: hidden; width: 100%; transition: 0.3s;
-        }
-        .card.active { border-color: var(--primary-gold); box-shadow: 0 0 15px rgba(212,175,55,0.1); }
-
-        .card-header {
-            padding: 15px 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
-            background: linear-gradient(90deg, rgba(212,175,55,0.05), transparent);
-        }
-
-        .card-info { display: flex; align-items: center; gap: 15px; }
-        .icon-box {
-            width: 45px; height: 45px; background: rgba(0,0,0,0.3);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; color: var(--primary-gold); border: 1px solid var(--primary-gold);
-        }
-
-        .card-texts h3 { font-size: 1.1rem; margin-bottom: 2px; color: #fff; }
-        .card-texts p { font-size: 0.8rem; color: var(--text-gray); }
-
-        .card-body {
-            max-height: 0; overflow: hidden; transition: max-height 0.4s ease;
-            background: #001830; border-top: 1px solid rgba(212,175,55,0.1);
-        }
-        .card.active .card-body { max-height: 1000px; }
-
-        .pkg-wrapper { padding: 20px; display: grid; gap: 15px; }
-        .pkg-item {
-            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 15px;
-            border-radius: 8px; text-align: center; position: relative;
-        }
-        
-        .badge-free {
-            position: absolute; top: 10px; right: 10px; background: var(--success);
-            color: #fff; font-size: 0.7rem; padding: 3px 8px; border-radius: 4px; font-weight: bold;
-        }
-        
-        .price-box { margin: 8px 0; }
-        .btn-action {
-            display: block; width: 100%; padding: 8px; margin-top: 10px;
-            border-radius: 25px; text-decoration: none; font-weight: bold; font-size: 0.9rem; transition: 0.2s;
-        }
-        .btn-gold { background: var(--primary-gold); color: #000; }
-        .btn-gold:hover { background: #b8860b; color: #fff; }
-
-        /* ===== 7. MEMBERSHIPS (INVESTMENT) ===== */
-        .invest-section { margin: 60px auto; max-width: 1000px; padding: 0 15px; }
-        .invest-header { text-align: center; margin-bottom: 40px; }
-        
-        .mem-grid { 
-            display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; 
-        }
-        
-        .mem-card {
-            flex: 1; min-width: 280px; max-width: 320px;
-            padding: 30px 20px; border-radius: 20px; position: relative; overflow: hidden;
-            text-align: center; transition: transform 0.3s;
-            display: flex; flex-direction: column;
-        }
-        .mem-card:hover { transform: translateY(-10px); }
-
-        .mem-shihab { 
-            background: linear-gradient(135deg, #001F3F, #3d2b1f); 
-            border: 2px solid var(--shihab); 
-        }
-        .mem-star { 
-            background: linear-gradient(135deg, #001F3F, #374151); 
-            border: 2px solid var(--star); 
-        }
-        .mem-galaxy { 
-            background: linear-gradient(135deg, rgba(212,175,55,0.2), #000); 
-            border: 2px solid var(--galaxy); 
-            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2); 
-            transform: scale(1.05);
-        }
-
-        .mem-title { font-size: 1.5rem; font-weight: 900; margin-bottom: 10px; text-transform: uppercase; }
-        .mem-price { font-size: 2rem; font-weight: bold; color: #fff; margin-bottom: 5px; }
-        .mem-price span { font-size: 0.9rem; font-weight: normal; color: #aaa; }
-        
-        .mem-features { 
-            font-size: 0.9rem; color: #eee; list-style: none; padding: 0; 
-            text-align: right; margin: 20px 0; flex-grow: 1;
-        }
-        body.ltr .mem-features { text-align: left; }
-        .mem-features li { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .mem-features li i { color: var(--primary-gold); margin-left: 8px; }
-        body.ltr .mem-features li i { margin-left: 0; margin-right: 8px; }
-
-        .mem-btn {
-            display: block; width: 100%; padding: 10px; border: 1px solid #fff;
-            color: #fff; text-decoration: none; border-radius: 50px; transition: 0.3s;
-        }
-        .mem-galaxy .mem-btn { background: var(--primary-gold); color: #000; border-color: var(--primary-gold); font-weight: bold; }
-        .mem-btn:hover { background: #fff; color: #000; }
-
-        /* ===== 8. FAQ & FUTURE ===== */
-        .faq-section { max-width: 800px; margin: 40px auto; padding: 0 15px; }
-        .faq-item { background: rgba(0,0,0,0.3); border: 1px solid #333; margin-bottom: 10px; border-radius: 8px; }
-        .faq-head { padding: 15px; cursor: pointer; display: flex; justify-content: space-between; font-weight: bold; }
-        .faq-body { padding: 0 15px 15px; display: none; color: #ccc; font-size: 0.9rem; }
-        
-        .locked-card { opacity: 0.6; background: #000; border: 1px dashed #555; filter: grayscale(100%); }
-
-        /* ===== 9. FOOTER ===== */
-        .footer {
-            margin-top: 80px; padding: 50px 20px; background: #000; 
-            border-top: 3px solid var(--primary-gold); text-align: center;
-        }
-        .visit-counter { 
-            background: #111; border: 1px solid var(--primary-gold); padding: 8px 20px; 
-            border-radius: 50px; font-size: 0.9rem; color: var(--primary-gold); display: inline-block; margin-top: 20px;
-        }
-
-        /* ===== 10. AI WIDGET ===== */
-        .ai-widget-btn {
-            position: fixed; bottom: 30px; left: 30px;
-            width: 65px; height: 65px; background: var(--primary-gold);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            color: #001F3F; font-size: 2rem; box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
-            z-index: 2000; cursor: pointer; animation: pulse 2s infinite; border: 2px solid #fff;
-        }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
-
-        .ai-chat-window {
-            display: none; position: fixed; bottom: 110px; left: 30px; width: 320px;
-            background: #001830; border: 2px solid var(--primary-gold); border-radius: 15px;
-            z-index: 2001; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.8);
-            flex-direction: column;
-        }
-
-        /* Modal */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 3000; align-items: center; justify-content: center; }
-        .modal-content { background: #001F3F; border: 1px solid var(--primary-gold); padding: 30px; border-radius: 10px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; color: #fff; text-align: right; }
-        body.ltr .modal-content { text-align: left; }
-        .close-modal { float: left; font-size: 2rem; cursor: pointer; color: var(--primary-gold); }
-
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
-            .mem-galaxy { transform: scale(1); }
-            .wf-grid { flex-direction: column; align-items: center; }
-        }
     </style>
 </head>
-<body>
+<body class="antialiased" onclick="handleBodyClick(event)">
 
-    <div id="particles-js"></div>
+    <canvas id="particles-container"></canvas>
 
-    <div class="ai-widget-btn" onclick="toggleChat()">
-        <i class="fas fa-robot"></i>
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 bg-[#020c1b] z-[9999] flex flex-col items-center justify-center transition-opacity duration-700">
+        <div class="relative">
+            <div class="w-32 h-32 rounded-full border-t-4 border-b-4 border-[#d4af37] animate-spin"></div>
+            <div class="absolute inset-0 flex items-center justify-center text-4xl">👑</div>
+        </div>
+        <h2 class="text-[#d4af37] text-3xl font-black mt-6 tracking-widest falak-logo-text animate-pulse">FALAK GROUP</h2>
+        <p class="text-gray-400 text-sm mt-2">تهيئة النظام الأمني والمالي...</p>
     </div>
 
-    <div class="ai-chat-window" id="aiChatWindow">
-        <div class="chat-header" style="background:var(--primary-gold); padding:15px; color:#000; display:flex; justify-content:space-between; align-items:center;">
-            <h4 style="margin:0"><i class="fas fa-brain"></i> Falak AI</h4>
-            <span style="cursor:pointer; font-size:1.2rem" onclick="toggleChat()">&times;</span>
-        </div>
-        <div class="chat-body" style="padding:20px; text-align:center;">
-            <div style="background:rgba(255,255,255,0.1); padding:10px; border-radius:8px; margin-bottom:15px; color:#fff;" data-i18n="ai_welcome">
-                مرحباً بك في فلك! أنا مساعدك الذكي. كيف يمكنني خدمتك في استثمارك؟
+    <!-- Navbar -->
+    <nav class="fixed w-full z-40 bg-navy-dark/95 backdrop-blur-md border-b border-white/5 shadow-2xl">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 flex items-center justify-center bg-gradient-to-br from-[#d4af37] to-[#8a6e2f] rounded-xl shadow-[0_0_20px_#d4af37]">
+                    <i class="fas fa-crown text-navy-dark text-2xl"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-xl font-black text-white falak-logo-text tracking-widest">FALAK</span>
+                    <span class="text-[10px] text-[#d4af37] tracking-[4px] uppercase font-bold">GROUP</span>
+                </div>
             </div>
-            <a href="https://wa.me/962790782004" class="btn-action btn-gold" style="margin-bottom:10px">
-                <i class="fab fa-whatsapp"></i> <span data-i18n="start_chat">محادثة واتساب</span>
-            </a>
-            <button class="btn-action" style="background:transparent; border:1px solid #555; color:#ccc;" onclick="openLegalModal('privacy')">
-                <span data-i18n="privacy_btn">الخصوصية</span>
-            </button>
-        </div>
-    </div>
+            
+            <div class="hidden lg:flex gap-8 text-sm font-bold tracking-wide">
+                <a href="#hero" class="hover:text-gold-primary transition duration-300">الرئيسية</a>
+                <a href="#memberships" class="hover:text-gold-primary transition duration-300">باقات العضوية</a>
+                <a href="#services" class="hover:text-gold-primary transition duration-300">الخدمات</a>
+                <button onclick="openModal('bookletModal')" class="hover:text-gold-primary transition duration-300 flex items-center gap-2"><i class="fas fa-book"></i> الكتيب والدستور</button>
+            </div>
 
-    <header class="header">
-        <div class="container">
-            <div class="nav-box">
-                <a href="#" class="logo"><i class="fas fa-crown"></i> <span>FALAK</span></a>
-                <div class="header-controls">
-                    <button class="lang-btn" onclick="toggleLang()">EN</button>
-                    <a href="#" class="login-btn" data-i18n="login">دخول</a>
+            <div class="flex gap-3">
+                <button onclick="openModal('signupModal')" class="btn-royal text-xs rounded px-5 py-2.5 flex items-center gap-2 shadow-lg">
+                    <i class="fas fa-fingerprint"></i> دخول الأعضاء
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header id="hero" class="relative min-h-screen flex items-center justify-center text-center pt-24 pb-12">
+        <div class="container mx-auto px-4 z-10">
+            <div class="inline-block px-6 py-2 border border-gold-primary/50 rounded-full text-gold-primary text-xs font-bold mb-8 bg-gold-primary/10 backdrop-blur-md animate-fade-in-up shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                ✦ السيادة الاقتصادية.. قرار لا يقبل التردد ✦
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black text-white mb-6 leading-tight drop-shadow-2xl">
+                نحن لا نبحث عن مساهمين<br> <span class="text-gold">نحن ننتقي شركاء</span>
+            </h1>
+            <p class="text-lg text-gray-300 max-w-3xl mx-auto mb-12 leading-loose font-light">
+                في فلك، بنينا حصناً اقتصادياً يحمي مدخراتك ويحول إنفاقك إلى أصول.
+                <br>نطبق دستور <strong>(40-40-20)</strong> الصارم. انضم للنخبة قبل إغلاق باب التأسيس.
+            </p>
+            
+            <div class="flex flex-col md:flex-row justify-center gap-6 mb-16">
+                <button onclick="document.getElementById('memberships').scrollIntoView()" class="bg-gold text-navy-dark px-10 py-4 rounded font-bold hover:scale-105 transition shadow-[0_0_30px_rgba(212,175,55,0.4)] flex items-center justify-center gap-3 text-lg">
+                    <i class="fas fa-gem"></i> احجز مقعدك الآن
+                </button>
+                <button onclick="openModal('bookletModal')" class="border border-white/30 bg-white/5 px-10 py-4 rounded font-bold text-white hover:bg-white/10 transition backdrop-blur-md flex items-center justify-center gap-3">
+                    <i class="fas fa-file-contract"></i> اقرأ الدستور
+                </button>
+            </div>
+
+            <!-- Dynamic Live Counter -->
+            <div class="inline-flex flex-col md:flex-row items-center gap-4 bg-navy-card/80 px-8 py-4 rounded-2xl border border-gold-primary/20 backdrop-blur-xl shadow-2xl">
+                <div class="flex items-center gap-3">
+                    <span class="relative flex h-4 w-4">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-4 w-4 bg-green-500"></span>
+                    </span>
+                    <span class="text-sm text-gray-300 font-bold">نشاط المنصة المباشر:</span>
+                </div>
+                <div class="flex gap-8 text-center">
+                    <div>
+                        <div class="text-2xl font-black text-white" id="liveVisitors">5,420</div>
+                        <div class="text-[10px] text-gray-400 uppercase tracking-wider">زائر نشط</div>
+                    </div>
+                    <div class="w-px bg-white/10 h-10"></div>
+                    <div>
+                        <div class="text-2xl font-black text-gold" id="foundersCount">850</div>
+                        <div class="text-[10px] text-gray-400 uppercase tracking-wider">عضو مؤسس</div>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="container">
-            <h1><span data-i18n="hero_1">فَلَك</span> <br> <span style="color:#fff; font-size:1.8rem;" data-i18n="hero_2">من الأرض.. نبني القمة</span></h1>
-            <p data-i18n="hero_desc">المنظومة الأولى التي تدمج الخدمات التشغيلية بالاستثمار التعاوني.</p>
-        </div>
-    </section>
+    <!-- Membership Tiers (The Missing Part Fixed) -->
+    <section id="memberships" class="py-24 bg-navy-light relative border-t border-white/5">
+        <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-5"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-white mb-4">مراتب النخبة</h2>
+                <p class="text-gray-400">اختر مكانك في النظام. المقاعد محدودة.</p>
+            </div>
 
-    <section class="workflow-section">
-        <div class="container">
-            <h2 class="section-title" data-i18n="how_works">كيف يعمل نظام فلك؟</h2>
-            <div class="wf-grid">
-                <div class="wf-card">
-                    <div class="wf-icon"><i class="fas fa-id-card"></i></div>
-                    <h3 data-i18n="step1_t">1. اختر عضويتك</h3>
-                    <p data-i18n="step1_d">ابدأ برأس مالك (شهاب، نجم، أو جلاكسي) وكن شريكاً.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- 1. MADAR -->
+                <div class="glass-card flex flex-col h-full border-t-4 border-blue-500">
+                    <div class="p-6 text-center border-b border-white/5">
+                        <h3 class="text-2xl font-bold text-white">مدار</h3>
+                        <p class="text-xs text-blue-400 font-bold mt-1">للمستفيد الذكي</p>
+                        <div class="mt-4 text-4xl font-black text-white">99 <span class="text-sm font-normal text-gray-400">د.أ</span></div>
+                        <span class="text-[10px] text-gray-500">سنوياً</span>
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <ul class="space-y-4 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-blue-500"></i> خصومات فورية</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-blue-500"></i> تجميع نقاط (1:1)</li>
+                            <li class="flex items-center gap-2 text-gray-500"><i class="fas fa-times"></i> لا يوجد حصص أرباح</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 mt-auto">
+                        <button onclick="whatsapp('أرغب بالاشتراك في عضوية مدار - 99 د.أ')" class="w-full py-3 border border-blue-500 text-blue-400 rounded font-bold hover:bg-blue-500/10 transition">اشتراك</button>
+                    </div>
                 </div>
-                <div class="wf-card">
-                    <div class="wf-icon"><i class="fas fa-shopping-basket"></i></div>
-                    <h3 data-i18n="step2_t">2. تسوق ووفر</h3>
-                    <p data-i18n="step2_d">احصل على أسعار مخفضة في "فلك ماركت" وخدمات الصيانة.</p>
+
+                <!-- 2. SHEHAB -->
+                <div class="glass-card flex flex-col h-full border-t-4 border-orange-500 transform lg:-translate-y-4 shadow-[0_0_30px_rgba(237,137,54,0.1)]">
+                    <div class="absolute top-0 right-0 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-bl">الأكثر طلباً</div>
+                    <div class="p-6 text-center border-b border-white/5">
+                        <h3 class="text-2xl font-bold text-white">شهاب</h3>
+                        <p class="text-xs text-orange-400 font-bold mt-1">الشريك المؤسس</p>
+                        <div class="mt-4 text-4xl font-black text-white">250 <span class="text-sm font-normal text-gray-400">د.أ</span></div>
+                        <span class="text-[10px] text-gray-500">تأسيس (تجديد 25)</span>
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <ul class="space-y-4 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fas fa-crown text-orange-500"></i> <strong>1 حصة</strong> في الأرباح</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-orange-500"></i> خصم ماركت (سقف 20د)</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-orange-500"></i> غسيل 4 مرات/سنة</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 mt-auto">
+                        <button onclick="whatsapp('أرغب بالانضمام كشريك مؤسس (باقة شهاب) - 250 د.أ')" class="w-full py-3 bg-gradient-to-r from-orange-600 to-red-600 text-white rounded font-bold hover:shadow-lg transition">انضم كمؤسس</button>
+                    </div>
                 </div>
-                <div class="wf-card">
-                    <div class="wf-icon"><i class="fas fa-chart-line"></i></div>
-                    <h3 data-i18n="step3_t">3. احصد العوائد</h3>
-                    <p data-i18n="step3_d">توزيع سنوي للأرباح (40%) ونقاط ولاء قابلة للصرف.</p>
+
+                <!-- 3. STAR -->
+                <div class="glass-card flex flex-col h-full border-t-4 border-gray-400">
+                    <div class="p-6 text-center border-b border-white/5">
+                        <h3 class="text-2xl font-bold text-white">نجم</h3>
+                        <p class="text-xs text-gray-400 font-bold mt-1">الشريك الداعم</p>
+                        <div class="mt-4 text-4xl font-black text-white">750 <span class="text-sm font-normal text-gray-400">د.أ</span></div>
+                        <span class="text-[10px] text-gray-500">تأسيس (تجديد 50)</span>
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <ul class="space-y-4 text-sm text-gray-300">
+                            <li class="flex items-center gap-2"><i class="fas fa-crown text-gray-400"></i> <strong>2 حصة</strong> في الأرباح</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-gray-400"></i> خصم ماركت (سقف 40د)</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-gray-400"></i> غسيل 8 مرات/سنة</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 mt-auto">
+                        <button onclick="whatsapp('أرغب بالانضمام كشريك داعم (باقة نجم) - 750 د.أ')" class="w-full py-3 bg-gray-600 text-white rounded font-bold hover:bg-gray-700 transition">انضم كداعم</button>
+                    </div>
                 </div>
+
+                <!-- 4. GALAXY -->
+                <div class="glass-card flex flex-col h-full border-t-4 border-gold-primary transform lg:-translate-y-8 bg-gradient-to-b from-gold-primary/10 to-transparent">
+                    <div class="absolute top-0 right-0 bg-gold-primary text-navy-dark text-xs font-bold px-3 py-1 rounded-bl">VIP</div>
+                    <div class="p-6 text-center border-b border-white/5">
+                        <h3 class="text-2xl font-bold text-gold-primary">مجرة</h3>
+                        <p class="text-xs text-white font-bold mt-1">الشريك الاستراتيجي</p>
+                        <div class="mt-4 text-4xl font-black text-white">2000 <span class="text-sm font-normal text-gray-400">د.أ</span></div>
+                        <span class="text-[10px] text-gray-500">تأسيس (تجديد 75)</span>
+                    </div>
+                    <div class="p-6 flex-grow">
+                        <ul class="space-y-4 text-sm text-white font-medium">
+                            <li class="flex items-center gap-2"><i class="fas fa-crown text-gold-primary"></i> <strong>4 حصص</strong> في الأرباح</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-car text-gold-primary"></i> يشمل <strong>سيارتين</strong></li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-gold-primary"></i> خصم ماركت (سقف 100د)</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check text-gold-primary"></i> ونش مجاني + لا حظر</li>
+                        </ul>
+                    </div>
+                    <div class="p-6 mt-auto">
+                        <button onclick="whatsapp('أرغب بالانضمام كشريك استراتيجي (باقة مجرة) - 2000 د.أ')" class="w-full py-3 bg-gold-primary text-navy-dark font-bold rounded hover:brightness-110 transition shadow-lg">كن شريكاً</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <div class="wallet-card">
-        <div class="points-display">0.00 <span style="font-size:1rem;">PTS</span></div>
-        <div class="points-label" data-i18n="wallet_label">رصيد نقاط فلك</div>
-        <div class="wallet-note">
-            <i class="fas fa-info-circle"></i> <span data-i18n="wallet_note">التحويل متاح عند الوصول لـ 1000 نقطة (10 دنانير).</span>
-        </div>
-    </div>
+    <!-- Services Section (Accordion) -->
+    <section id="services" class="py-20 bg-navy-dark border-t border-white/5">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">خدمات فلك</h2>
+                <p class="text-gray-400">اضغط على البطاقة لفتح قائمة الخدمات (Focus Mode)</p>
+            </div>
 
-    <div class="container">
-        <h2 class="section-title" data-i18n="services_t">خدماتنا التشغيلية</h2>
-        <div class="grid-container">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
+                
+                <!-- SOS -->
+                <div class="glass-card card-wrapper" id="card-sos">
+                    <div class="card-header p-5 border-l-4 border-red-500 flex justify-between items-center bg-white/5" onclick="toggleCard('card-sos', event)">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center text-2xl">🚨</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">الطوارئ (SOS)</h3>
+                                <p class="text-xs text-gray-400">ونش، صيانة طارئة</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down text-gray-400 arrow-icon transition-transform duration-300"></i>
+                    </div>
+                    <div class="card-body bg-black/40">
+                        <div class="p-4 space-y-3">
+                            <div class="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/5">
+                                <div>
+                                    <span class="text-gray-200 text-sm font-bold block">ونش سحب</span>
+                                    <span class="text-[10px] text-gray-500">السعر حسب الموقع والمسافة</span>
+                                </div>
+                                <button onclick="whatsapp('SOS: أحتاج ونش.. يرجى تحديد السعر حسب موقعي')" class="btn-whatsapp px-3 py-1 rounded text-xs font-bold">استفسار</button>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/5">
+                                <div>
+                                    <span class="text-gray-200 text-sm font-bold block">طوارئ منزلية</span>
+                                    <span class="text-[10px] text-gray-500">كهرباء / سباكة - كشفية 20 د.أ</span>
+                                </div>
+                                <button onclick="whatsapp('SOS: أحتاج فني طوارئ منزلي')" class="btn-whatsapp px-3 py-1 rounded text-xs font-bold">طلب فوري</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Home -->
+                <div class="glass-card card-wrapper" id="card-home">
+                    <div class="card-header p-5 border-l-4 border-green-500 flex justify-between items-center bg-white/5" onclick="toggleCard('card-home', event)">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center text-2xl">🏠</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">الخدمات المنزلية</h3>
+                                <p class="text-xs text-gray-400">صيانة شاملة</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down text-gray-400 arrow-icon transition-transform duration-300"></i>
+                    </div>
+                    <div class="card-body bg-black/40">
+                        <div class="p-4 space-y-3">
+                            <div class="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/5">
+                                <div>
+                                    <span class="text-gray-200 text-sm font-bold block">كشفية صيانة موحدة</span>
+                                    <span class="text-[10px] text-gray-500 block">سباكة، كهرباء، تكييف، أجهزة</span>
+                                </div>
+                                <div class="text-left">
+                                    <span class="text-sm text-gold font-bold block">20 د.أ</span>
+                                    <span class="text-[9px] text-green-400">خصم للأعضاء</span>
+                                </div>
+                                <button onclick="whatsapp('حجز موعد صيانة منزلية (كشفية 20 د.أ)')" class="btn-whatsapp px-3 py-1 rounded text-xs font-bold">حجز</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Car -->
+                <div class="glass-card card-wrapper" id="card-car">
+                    <div class="card-header p-5 border-l-4 border-blue-500 flex justify-between items-center bg-white/5" onclick="toggleCard('card-car', event)">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-blue-500/20 flex items-center justify-center text-2xl">🚗</div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">العناية بالسيارات</h3>
+                                <p class="text-xs text-gray-400">غسيل، دراي كلين</p>
+                            </div>
+                        </div>
+                        <i class="fas fa-chevron-down text-gray-400 arrow-icon transition-transform duration-300"></i>
+                    </div>
+                    <div class="card-body bg-black/40">
+                        <div class="p-4 space-y-3">
+                            <div class="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/5">
+                                <span class="text-gray-200 text-sm">غسيل عادي</span>
+                                <button onclick="whatsapp('حجز غسيل عادي - 7 د.أ')" class="btn-whatsapp px-3 py-1 rounded text-xs font-bold">7 د.أ | حجز</button>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/5">
+                                <span class="text-gray-200 text-sm">غسيل بريميوم</span>
+                                <button onclick="whatsapp('حجز غسيل بريميوم - 12 د.أ')" class="btn-whatsapp px-3 py-1 rounded text-xs font-bold">12 د.أ | حجز</button>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-white/5 rounded-lg border border-white/5">
+                                <span class="text-gray-200 text-sm">دراي كلين (Dry Clean)</span>
+                                <button onclick="whatsapp('استفسار عن دراي كلين')" class="btn-whatsapp px-3 py-1 rounded text-xs font-bold">استفسار</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black pt-12 pb-6 border-t border-white/10">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center items-center gap-3 mb-6">
+                <i class="fas fa-crown text-[#d4af37] text-3xl"></i>
+                <span class="text-3xl font-bold text-white">FALAK <span class="text-[#d4af37]">GROUP</span></span>
+            </div>
             
-            <div class="card" onclick="toggleCard(this)">
-                <div class="card-header">
-                    <div class="card-info">
-                        <div class="icon-box"><i class="fas fa-car"></i></div>
-                        <div class="card-texts">
-                            <h3 data-i18n="wash_t">غسيل السيارات</h3>
-                            <p style="color:var(--primary-gold)" data-i18n="wash_sub">لعملاء الباقات فقط</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-down" style="color:#666"></i>
-                </div>
-                <div class="card-body">
-                    <div class="pkg-wrapper">
-                        <div class="pkg-item">
-                            <h4 style="color:#fff" data-i18n="wash_1">غسيل عادي</h4>
-                            <p style="font-size:0.8rem; color:#aaa">مجاناً حسب رصيد باقتك</p>
-                            <a href="https://wa.me/962790782004?text=حجز غسيل" class="btn-action btn-gold" data-i18n="book">حجز</a>
-                        </div>
-                        <div class="pkg-item">
-                            <h4 style="color:#fff" data-i18n="wash_3">تلميع (Detailing)</h4>
-                            <p style="font-size:0.8rem; color:#aaa">خصم خاص للأعضاء</p>
-                            <a href="https://wa.me/962790782004?text=حجز تلميع" class="btn-action btn-gold" data-i18n="book">حجز</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="flex flex-wrap justify-center gap-6 mb-8 text-sm text-gray-400">
+                <button onclick="openModal('termsModal')" class="hover:text-gold-primary transition">الشروط والأحكام الكاملة</button>
+                <button onclick="openModal('bookletModal')" class="hover:text-gold-primary transition">الميثاق الدستوري</button>
             </div>
 
-            <div class="card" onclick="toggleCard(this)">
-                <div class="card-header">
-                    <div class="card-info">
-                        <div class="icon-box"><i class="fas fa-tools"></i></div>
-                        <div class="card-texts">
-                            <h3 data-i18n="maint_t">الصيانة المنزلية</h3>
-                            <p data-i18n="maint_sub">كهرباء، سباكة، تكييف</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-chevron-down" style="color:#666"></i>
-                </div>
-                <div class="card-body">
-                    <div class="pkg-wrapper">
-                        <div class="pkg-item">
-                            <div class="badge-free">FREE CHECK</div>
-                            <h4 style="color:#fff" data-i18n="maint_1">زيارة فني</h4>
-                            <p style="font-size:0.8rem; color:#aaa">كشفية مجانية لـ جلاكسي</p>
-                            <a href="https://wa.me/962790782004?text=طلب فني صيانة" class="btn-action btn-gold" data-i18n="req">طلب</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" onclick="toggleCard(this)">
-                <div class="card-header">
-                    <div class="card-info">
-                        <div class="icon-box" style="border-color:var(--danger); color:var(--danger)"><i class="fas fa-ambulance"></i></div>
-                        <div class="card-texts">
-                            <h3 style="color:var(--danger)" data-i18n="sos_t">طوارئ SOS</h3>
-                            <p data-i18n="sos_sub">ونش، بنشر، كهرباء</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-exclamation-circle" style="color:var(--danger)"></i>
-                </div>
-                <div class="card-body">
-                    <div class="pkg-wrapper">
-                        <div class="pkg-item">
-                            <h4 style="color:#fff" data-i18n="winch">خدمة الونش</h4>
-                            <p style="font-size:0.8rem; color:#aaa">مجاناً لـ جلاكسي (مرة واحدة)</p>
-                            <a href="https://wa.me/962790782004?text=SOS Winch" class="btn-action" style="background:var(--danger); color:#fff" data-i18n="call">طلب فوري</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="invest-section">
-        <div class="invest-header">
-            <h2 class="section-title" data-i18n="inv_title">باقات الاستثمار</h2>
-            <p data-i18n="inv_sub" style="color:#ccc">اختر حصتك في رأس المال</p>
-        </div>
-
-        <div class="mem-grid">
-            <div class="mem-card mem-shihab">
-                <div class="mem-title" style="color:var(--shihab)" data-i18n="shihab_t">شهاب</div>
-                <div class="mem-price">250 <span>JD</span></div>
-                <ul class="mem-features">
-                    <li><i class="fas fa-check"></i> <span data-i18n="sh_1">سيارة واحدة</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="sh_2">خصم 15% خدمات</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="sh_3">خصم 10% ماركت</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="sh_4">4 غسلات (ربع سنوي)</span></li>
-                </ul>
-                <a href="https://wa.me/962790782004?text=اشتراك شهاب" class="mem-btn" data-i18n="sub_btn">اشتراك</a>
-            </div>
-
-            <div class="mem-card mem-star">
-                <div class="mem-title" style="color:var(--star)" data-i18n="star_t">نجم (Star)</div>
-                <div class="mem-price">650 <span>JD</span></div>
-                <ul class="mem-features">
-                    <li><i class="fas fa-check"></i> <span data-i18n="st_1">سيارة واحدة</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="st_2">خصم 30% خدمات</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="st_3">خصم 12% ماركت</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="st_4">8 غسلات + 2 تلميع</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="st_5">صيانة (زيت وفحص)</span></li>
-                </ul>
-                <a href="https://wa.me/962790782004?text=اشتراك نجم" class="mem-btn" data-i18n="sub_btn">اشتراك</a>
-            </div>
-
-            <div class="mem-card mem-galaxy">
-                <div class="mem-title" style="color:var(--galaxy)" data-i18n="galaxy_t">جلاكسي</div>
-                <div class="mem-price">2000 <span>JD</span></div>
-                <ul class="mem-features">
-                    <li><i class="fas fa-crown"></i> <span data-i18n="ga_1">سيارتين (التوأم)</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="ga_2">أعلى حصة أرباح (40%)</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="ga_3">خصم 15% ماركت (سقف 100د)</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="ga_4">30 غسلة شاملة</span></li>
-                    <li><i class="fas fa-check"></i> <span data-i18n="ga_5">فاليت + ونش + سيارة بديلة</span></li>
-                </ul>
-                <a href="https://wa.me/962790782004?text=استثمار جلاكسي" class="mem-btn" data-i18n="invest_btn">استثمر الآن</a>
+            <p class="text-gray-600 text-xs mb-4 max-w-2xl mx-auto">
+                ⚠️ إخلاء مسؤولية: النظام تجاري ربحي يخضع لقاعدة "الغنم بالغرم". الشركة لا تضمن عوائد ثابتة. المرجع القانوني هو العقد الموقع في محاكم إربد - المملكة الأردنية الهاشمية.
+            </p>
+            <div class="text-gray-700 text-[10px]">
+                © 2026 FALAK GROUP. All Rights Reserved.
             </div>
         </div>
-    </div>
-
-    <div class="container" style="margin-top:50px;">
-        <h3 class="section-title" style="font-size:1.5rem" data-i18n="future">مشاريع المستقبل</h3>
-        <div class="grid-container">
-            <div class="card locked-card">
-                <div class="card-header" style="cursor:default">
-                    <div class="card-info">
-                        <div class="icon-box" style="border-color:#555; color:#666"><i class="fas fa-store"></i></div>
-                        <div class="card-texts"><h3 style="color:#888" data-i18n="market">فلك ماركت</h3><p data-i18n="coming">قريباً..</p></div>
-                    </div>
-                    <i class="fas fa-lock" style="color:#555"></i>
-                </div>
-            </div>
-            <div class="card locked-card">
-                <div class="card-header" style="cursor:default">
-                    <div class="card-info">
-                        <div class="icon-box" style="border-color:#555; color:#666"><i class="fas fa-city"></i></div>
-                        <div class="card-texts"><h3 style="color:#888" data-i18n="real_estate">فلك العقارية</h3><p data-i18n="coming">قريباً..</p></div>
-                    </div>
-                    <i class="fas fa-lock" style="color:#555"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="faq-section">
-        <h3 style="text-align:center; color:var(--primary-gold); margin-bottom:20px;" data-i18n="faq_t">أسئلة شائعة</h3>
-        <div class="faq-item">
-            <div class="faq-head" onclick="this.nextElementSibling.style.display=(this.nextElementSibling.style.display=='block'?'none':'block')">
-                <span data-i18n="faq_1_q">كيف يتم توزيع الأرباح؟</span> <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-body" data-i18n="faq_1_a">يتم تخصيص 40% من صافي أرباح السوبر ماركت سنوياً وتوزيعها على الأعضاء.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-head" onclick="this.nextElementSibling.style.display=(this.nextElementSibling.style.display=='block'?'none':'block')">
-                <span data-i18n="faq_2_q">ما هي سياسة الانسحاب؟</span> <i class="fas fa-chevron-down"></i>
-            </div>
-            <div class="faq-body" data-i18n="faq_2_a">إخطار قبل 60 يوم. خصم 15% عند توفر بديل، أو 35% للاسترداد الفوري.</div>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <h2 style="color:var(--primary-gold)">FALAK <span>GROUP</span></h2>
-        <div class="about-text" data-i18n="about_footer">
-            منصة فلك هي الأولى من نوعها في الأردن، تهدف لدمج الخدمات التشغيلية مع الاستثمار التعاوني، لبناء مجتمع اقتصادي متكامل.
-        </div>
-        <div class="visit-counter">
-            <i class="fas fa-eye"></i> <span data-i18n="visitors">الزوار:</span> <span id="visitorCount">5240</span>
-        </div>
-        <p style="font-size: 0.8rem; margin-top: 20px; opacity: 0.5;">© 2026 Falak Group.</p>
     </footer>
 
-    <div id="legalModal" class="modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeLegalModal()">&times;</span>
-            <div id="modalBody"></div>
+    <!-- MODALS (Popups) -->
+
+    <!-- 1. Signup Modal (Fixed Colors) -->
+    <div id="signupModal" class="fixed inset-0 bg-black/95 hidden z-[100] flex items-center justify-center p-4 backdrop-blur-md overflow-y-auto modal-overlay">
+        <div class="bg-navy-card w-full max-w-lg rounded-2xl border border-gold-primary/50 shadow-2xl relative my-10 animate-fade-in-up">
+            <button onclick="closeModal('signupModal')" class="absolute top-4 left-4 text-gray-400 hover:text-red-500 text-2xl">&times;</button>
+            
+            <div class="p-8">
+                <div class="text-center mb-6">
+                    <i class="fas fa-user-shield text-5xl text-gold-primary mb-3"></i>
+                    <h2 class="text-2xl font-bold text-white">بوابة التسجيل الآمن</h2>
+                    <p class="text-sm text-gray-400">بياناتك مشفرة ومحمية 100%</p>
+                </div>
+
+                <form class="space-y-4 text-right">
+                    <div>
+                        <label class="text-xs text-gold-primary block mb-1 font-bold">الاسم الرباعي</label>
+                        <input type="text" class="input-royal" placeholder="الاسم كما في الهوية">
+                    </div>
+                    <div>
+                        <label class="text-xs text-gold-primary block mb-1 font-bold">رقم الهاتف</label>
+                        <input type="tel" value="00962" class="input-royal text-left" dir="ltr">
+                    </div>
+                    <div>
+                        <label class="text-xs text-gold-primary block mb-1 font-bold">السكن</label>
+                        <input type="text" class="input-royal" placeholder="المحافظة - المنطقة">
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="file-upload-box">
+                            <i class="fas fa-id-card text-gold-primary text-xl mb-1"></i>
+                            <span class="block text-[10px] text-gray-300">الهوية (وجه)</span>
+                            <input type="file" class="hidden">
+                        </div>
+                        <div class="file-upload-box">
+                            <i class="fas fa-id-card text-gold-primary text-xl mb-1"></i>
+                            <span class="block text-[10px] text-gray-300">الهوية (خلف)</span>
+                            <input type="file" class="hidden">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="text-xs text-gold-primary block mb-1 font-bold">الإيميل</label>
+                        <input type="email" class="input-royal" placeholder="email@example.com">
+                    </div>
+                    <div>
+                        <label class="text-xs text-gold-primary block mb-1 font-bold">كلمة المرور</label>
+                        <input type="password" class="input-royal" placeholder="******">
+                    </div>
+
+                    <button type="button" onclick="alert('تم استلام البيانات للتدقيق')" class="w-full bg-gold text-navy-dark font-bold py-3 rounded hover:brightness-110 shadow-lg mt-4">تسجيل وارسال</button>
+                </form>
+            </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- 2. Full Constitution & Terms Modal (The Master Document) -->
+    <div id="bookletModal" class="fixed inset-0 bg-black/95 hidden z-[90] flex items-center justify-center p-4 modal-overlay">
+        <div class="w-full max-w-5xl h-[90vh] bg-white rounded-xl border border-gold-primary flex flex-col overflow-hidden shadow-2xl relative">
+            
+            <!-- Header -->
+            <div class="bg-navy-dark p-4 border-b border-gold-primary flex justify-between items-center text-white">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-book text-gold-primary"></i>
+                    <h3 class="font-bold text-lg">الميثاق الدستوري والشروط الموحدة</h3>
+                </div>
+                <button onclick="closeModal('bookletModal')" class="text-gray-400 hover:text-red-500 text-2xl font-bold">&times;</button>
+            </div>
+
+            <!-- Content (Scrollable) -->
+            <div class="flex-grow overflow-y-auto p-8 text-right bg-gray-50 text-navy-dark leading-relaxed modal-content">
+                
+                <!-- Intro -->
+                <div class="text-center mb-10 border-b pb-10 border-gray-300">
+                    <h1 class="text-4xl text-navy-dark font-black mb-4">مجموعة فلك</h1>
+                    <p class="text-xl text-gold-primary font-bold">The Unified Constitution</p>
+                    <p class="text-gray-600 mt-2">مرجع قانوني ملزم وشامل</p>
+                </div>
+
+                <!-- Sections (Generated from Master Archive) -->
+                <div class="space-y-8 max-w-4xl mx-auto">
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <h2 class="text-2xl font-bold text-navy-dark mb-4 border-r-4 border-gold-primary pr-3">أولاً: العقيدة والهوية</h2>
+                        <p class="mb-2"><strong>1. فلسفة النظام:</strong> نحن نظام بيئي مغلق يهدف للسيادة الاقتصادية. العلاقة قائمة على "الغنم بالغرم".</p>
+                        <p><strong>2. طبيعة المال:</strong> الأموال المدفوعة هي "أجر مقابل منافع" وليست ودائع استثمارية، ولا تُرد إلا وفق شروط التخارج.</p>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <h2 class="text-2xl font-bold text-navy-dark mb-4 border-r-4 border-gold-primary pr-3">ثانياً: الضوابط المالية (40-40-20)</h2>
+                        <ul class="list-disc list-inside space-y-2 text-sm">
+                            <li><strong>40% وعاء الولاء:</strong> يوزع من صافي الربح التشغيلي على الأعضاء.</li>
+                            <li><strong>40% التشغيل:</strong> حق الإدارة والملكية الفكرية.</li>
+                            <li><strong>20% الأصول:</strong> ملك خالص للشركة (عقارات/تكنولوجيا) ولا يملك العضو فيها حق رقبة.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                        <h2 class="text-2xl font-bold text-navy-dark mb-4 border-r-4 border-gold-primary pr-3">ثالثاً: نظام النقاط (الذهب الأسود)</h2>
+                        <p class="mb-2 font-bold text-red-600">تحذير: يمنع تجزئة الفواتير في السوبرماركت.</p>
+                        <ul class="list-disc list-inside space-y-2 text-sm">
+                            <li><strong>الخدمات:</strong> 1 دينار (أجرة يد) = 1 نقطة.</li>
+                            <li><strong>السوبرماركت:</strong> نظام شرائح (حد أقصى 5 نقاط للفاتورة).</li>
+                            <li><strong>السقف:</strong> الحد الأقصى لتحويل النقاط لحصص هو 20,000 نقطة سنوياً.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 border-l-4 border-l-red-500">
+                        <h2 class="text-2xl font-bold text-red-700 mb-4 pr-3">رابعاً: سياسة التخارج (الجدار الناري)</h2>
+                        <div class="space-y-3 text-sm">
+                            <p><strong>السنة الأولى:</strong> خصم 20% + إعادة تسعير الخدمات بسعر الزائر (مقاصة عكسية).</p>
+                            <p><strong>السنة الثانية:</strong> خصم 15% + خصم التكلفة.</p>
+                            <p><strong>السنة الثالثة+:</strong> خصم 10% إداري ثابت.</p>
+                            <p class="bg-red-50 p-2 rounded text-red-800 font-bold border border-red-200">
+                                ⚠️ عمولة الارتفاع: يحق للشركة خصم 25% من إجمالي القيمة السوقية عند التخارج في حال ارتفاع سعر الحصة.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="text-center mt-12 text-xs text-gray-400">
+                    نسخة نهائية معتمدة 2026 - تخضع للقوانين الأردنية
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Chat -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button onclick="toggleAI()" class="w-16 h-16 rounded-full bg-gradient-to-r from-yellow-600 to-yellow-400 shadow-[0_0_20px_rgba(212,175,55,0.4)] flex items-center justify-center text-3xl hover:scale-110 transition-transform border-2 border-white/20">
+            ✨
+        </button>
+    </div>
+
+    <div id="aiModal" class="fixed inset-0 bg-black/80 hidden z-[60] flex items-end sm:items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-navy-card w-full max-w-md h-[600px] rounded-2xl border border-gold-primary/50 flex flex-col shadow-2xl overflow-hidden relative">
+            <div class="p-4 bg-navy-dark border-b border-gold-primary/30 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-gold-primary flex items-center justify-center text-xl text-navy-dark">🤖</div>
+                    <div>
+                        <h3 class="font-bold text-white">مستشار فلك</h3>
+                        <p class="text-xs text-green-400">متصل الآن</p>
+                    </div>
+                </div>
+                <button onclick="toggleAI()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+            </div>
+            <div id="chatBox" class="flex-grow p-4 overflow-y-auto space-y-4 text-sm scrollbar-thin">
+                <div class="flex gap-2">
+                    <div class="chat-ai p-3 rounded-lg rounded-tr-none max-w-[85%] text-sm leading-relaxed">
+                        أهلاً بك! أنا مستشارك الذكي من فلك. 🌌<br>
+                        يمكنك سؤالي عن: الباقات، الدستور، أو كيفية حساب النقاط.
+                    </div>
+                </div>
+            </div>
+            <div class="p-4 bg-navy-dark border-t border-white/10">
+                <div class="flex gap-2 relative">
+                    <input type="text" id="userInput" class="flex-grow bg-white text-navy-dark border border-white/20 rounded-lg px-4 py-3 text-sm focus:border-gold-primary outline-none" placeholder="اكتب سؤالك..." onkeypress="if(event.key === 'Enter') sendMsg()">
+                    <button onclick="sendMsg()" class="bg-gold-primary text-navy-dark px-4 py-2 rounded-lg font-bold">➤</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Init Particles
-        particlesJS("particles-js", {
-            "particles": { "number": { "value": 60 }, "color": { "value": "#d4af37" }, "opacity": { "value": 0.3 }, "size": { "value": 2 }, "line_linked": { "enable": true, "color": "#d4af37", "opacity": 0.1 }, "move": { "enable": true, "speed": 0.4 } }
+        // --- Loader & Initial ---
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('preloader');
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.remove(), 700);
+            }, 2000); 
+            
+            // Start Live Counter
+            initLiveCounter();
         });
 
-        // Toggle Accordion
-        function toggleCard(card) {
-            const allCards = document.querySelectorAll('.card');
-            allCards.forEach(c => { if (c !== card && c.classList.contains('active')) { c.classList.remove('active'); } });
-            card.classList.toggle('active');
-        }
-
-        // AI Chat
-        function toggleChat() {
-            const win = document.getElementById('aiChatWindow');
-            win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
-        }
-
-        // Visitor Counter (Preserved)
-        let count = localStorage.getItem('falak_visits') || 5240;
-        count = parseInt(count) + 1;
-        localStorage.setItem('falak_visits', count);
-        document.getElementById('visitorCount').innerText = count;
-
-        // Legal Modal Logic
-        const legalContent = {
-            privacy: {
-                title: { ar: "سياسة الخصوصية", en: "Privacy Policy" },
-                body: { ar: "<p>نلتزم في فلك بحماية بياناتك...</p>", en: "<p>We are committed to protecting your data...</p>" }
-            },
-            terms: {
-                title: { ar: "الشروط والأحكام", en: "Terms & Conditions" },
-                body: { ar: "<p>فلك هي منصة استثمار وخدمات...</p>", en: "<p>Falak is an investment platform...</p>" }
-            }
-        };
-
-        function openLegalModal(type) {
-            const modal = document.getElementById('legalModal');
-            const body = document.getElementById('modalBody');
-            const lang = document.body.classList.contains('ltr') ? 'en' : 'ar';
-            if (legalContent[type]) {
-                body.innerHTML = `<h3>${legalContent[type].title[lang]}</h3>${legalContent[type].body[lang]}`;
-            }
-            modal.style.display = 'flex';
-            toggleChat();
-        }
-        function closeLegalModal() { document.getElementById('legalModal').style.display = 'none'; }
-        window.onclick = function(e) { if(e.target == document.getElementById('legalModal')) closeLegalModal(); }
-
-        // Translations
-        let currentLang = 'ar';
-        const t = {
-            ar: {
-                login: "دخول", hero_1: "فَلَك", hero_2: "من الأرض.. نبني القمة", hero_desc: "المنظومة الأولى التي تدمج الخدمات بالاستثمار.",
-                how_works: "كيف يعمل نظام فلك؟", step1_t: "1. اختر عضويتك", step1_d: "ابدأ استثمارك برأس مال", step2_t: "2. تسوق ووفر", step2_d: "خصومات حصرية في الماركت", step3_t: "3. احصد العوائد", step3_d: "توزيع أرباح سنوية",
-                wallet_label: "رصيد نقاط فلك", wallet_note: "التحويل متاح عند 1000 نقطة (10 دنانير).",
-                services_t: "خدماتنا التشغيلية", wash_t: "غسيل السيارات", wash_sub: "لعملاء الباقات فقط", wash_1: "غسيل عادي", wash_3: "تلميع (Detailing)", book: "حجز",
-                maint_t: "الصيانة المنزلية", maint_sub: "كهرباء، سباكة، تكييف", maint_1: "زيارة فني", req: "طلب",
-                sos_t: "طوارئ SOS", sos_sub: "ونش، بنشر، كهرباء", winch: "خدمة الونش", call: "طلب فوري",
-                inv_title: "باقات الاستثمار", inv_sub: "اختر حصتك في رأس المال",
-                shihab_t: "شهاب", sh_1: "سيارة واحدة", sh_2: "خصم 15% خدمات", sh_3: "خصم 10% ماركت", sh_4: "4 غسلات (ربع سنوي)", sub_btn: "اشتراك",
-                star_t: "نجم (Star)", st_1: "سيارة واحدة", st_2: "خصم 30% خدمات", st_3: "خصم 12% ماركت", st_4: "8 غسلات + 2 تلميع", st_5: "صيانة (زيت وفحص)",
-                galaxy_t: "جلاكسي", ga_1: "سيارتين (التوأم)", ga_2: "أعلى حصة أرباح (40%)", ga_3: "خصم 15% ماركت (سقف 100د)", ga_4: "30 غسلة شاملة", ga_5: "فاليت + ونش + سيارة بديلة", invest_btn: "استثمر الآن",
-                future: "مشاريع المستقبل", market: "فلك ماركت", real_estate: "فلك العقارية", coming: "قريباً..",
-                faq_t: "أسئلة شائعة", faq_1_q: "كيف يتم توزيع الأرباح؟", faq_1_a: "توزع 40% من أرباح الماركت سنوياً.", faq_2_q: "ما هي سياسة الانسحاب؟", faq_2_a: "إخطار 60 يوم، خصم 15% أو 35%.",
-                about_footer: "منصة فلك هي الأولى من نوعها في الأردن، تهدف لدمج الخدمات التشغيلية مع الاستثمار التعاوني.", visitors: "الزوار:",
-                ai_welcome: "مرحباً بك في فلك! كيف يمكنني مساعدتك؟", start_chat: "محادثة واتساب", privacy_btn: "الخصوصية"
-            },
-            en: {
-                login: "Login", hero_1: "FALAK", hero_2: "From Earth.. We Build Summit", hero_desc: "First platform merging services with investment.",
-                how_works: "How Falak Works?", step1_t: "1. Choose Plan", step1_d: "Start your capital investment", step2_t: "2. Shop & Save", step2_d: "Exclusive Market discounts", step3_t: "3. Earn Profits", step3_d: "Annual profit distribution",
-                wallet_label: "Falak Points", wallet_note: "Transfer at 1000 Points (10 JD).",
-                services_t: "Operational Services", wash_t: "Car Wash", wash_sub: "For Members Only", wash_1: "Basic Wash", wash_3: "Detailing", book: "Book",
-                maint_t: "Home Maintenance", maint_sub: "Elec, Plumbing, HVAC", maint_1: "Technician Visit", req: "Request",
-                sos_t: "SOS Emergency", sos_sub: "Winch, Flat Tire, Elec", winch: "Winch Service", call: "Call Now",
-                inv_title: "Investment Plans", inv_sub: "Choose your capital share",
-                shihab_t: "Shihab", sh_1: "One Car", sh_2: "15% Service OFF", sh_3: "10% Market OFF", sh_4: "4 Washes (Quarterly)", sub_btn: "Subscribe",
-                star_t: "Star", st_1: "One Car", st_2: "30% Service OFF", st_3: "12% Market OFF", st_4: "8 Washes + 2 Polish", st_5: "Maint (Oil & Check)",
-                galaxy_t: "Galaxy", ga_1: "Twin System (2 Cars)", ga_2: "Highest Profit Share (40%)", ga_3: "15% Market OFF (Cap 100JD)", ga_4: "30 Full Washes", ga_5: "Valet + Winch + Replacement Car", invest_btn: "Invest Now",
-                future: "Future Projects", market: "Falak Market", real_estate: "Falak Real Estate", coming: "Coming Soon..",
-                faq_t: "FAQ", faq_1_q: "How are profits distributed?", faq_1_a: "40% of Market profits distributed annually.", faq_2_q: "Withdrawal Policy?", faq_2_a: "60 days notice. 15% or 35% deduction.",
-                about_footer: "Falak is Jordan's first platform merging services with cooperative investment.", visitors: "Visitors:",
-                ai_welcome: "Welcome to Falak! How can I help?", start_chat: "WhatsApp Chat", privacy_btn: "Privacy"
-            }
-        };
-
-        function toggleLang() {
-            currentLang = currentLang === 'ar' ? 'en' : 'ar';
-            const body = document.body;
-            const btn = document.querySelector('.lang-btn');
+        // --- Live Visitor Counter (Smart Logic) ---
+        function initLiveCounter() {
+            let baseCount = 5420; // Starting realistic number
+            let founders = 850;
             
-            if (currentLang === 'en') {
-                body.classList.add('ltr');
-                body.dir = "ltr";
-                btn.textContent = "AR";
-            } else {
-                body.classList.remove('ltr');
-                body.dir = "rtl";
-                btn.textContent = "EN";
+            // Load from storage if exists
+            if(localStorage.getItem('falak_live_v')) {
+                baseCount = parseInt(localStorage.getItem('falak_live_v'));
             }
 
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (t[currentLang][key]) el.textContent = t[currentLang][key];
+            const liveEl = document.getElementById('liveVisitors');
+            const foundersEl = document.getElementById('foundersCount');
+
+            // Initial Set
+            liveEl.innerText = baseCount.toLocaleString();
+
+            // Random Increment Logic (Simulate traffic)
+            setInterval(() => {
+                // Add 1-3 visitors every 3-7 seconds
+                const increment = Math.floor(Math.random() * 3) + 1;
+                baseCount += increment;
+                liveEl.innerText = baseCount.toLocaleString();
+                
+                // Add Flash Effect
+                liveEl.classList.add('text-green-400');
+                setTimeout(() => liveEl.classList.remove('text-green-400'), 500);
+
+                // Save
+                localStorage.setItem('falak_live_v', baseCount);
+            }, 5000); // Update every 5 seconds
+        }
+
+        // --- WhatsApp Logic ---
+        function whatsapp(msg) {
+            const phone = "962790782004";
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
+
+        // --- Modals Logic ---
+        function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+        function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+
+        // --- Accordion Logic (Single Open) ---
+        function toggleCard(cardId, event) {
+            const wrapper = document.getElementById(cardId);
+            
+            // Close all others first
+            document.querySelectorAll('.card-wrapper').forEach(card => {
+                if(card.id !== cardId) {
+                    card.classList.remove('card-active');
+                }
             });
+
+            // Toggle current
+            wrapper.classList.toggle('card-active');
+        }
+
+        function handleBodyClick(event) {
+            if (!event.target.closest('.card-wrapper')) {
+                document.querySelectorAll('.card-wrapper').forEach(card => {
+                    card.classList.remove('card-active');
+                });
+            }
+        }
+
+        // --- AI Logic ---
+        const apiKey = ""; 
+        function toggleAI() { const m = document.getElementById('aiModal'); m.classList.toggle('hidden'); if(!m.classList.contains('hidden')) document.getElementById('userInput').focus(); }
+        
+        async function sendMsg() { 
+            const i = document.getElementById('userInput'), b = document.getElementById('chatBox'), t = i.value.trim(); if(!t) return;
+            b.innerHTML += `<div class="flex gap-2 justify-end mb-4 animate-fade-in"><div class="chat-user p-3 rounded-lg rounded-tl-none max-w-[85%] text-sm shadow-lg">${t}</div></div>`; 
+            i.value=''; b.scrollTop=b.scrollHeight;
+            
+            const ctx = `You are Falak AI. Answer in Arabic. Rules: 40% Pool, 40% Ops, 20% Asset. Exit: 20% Year 1.`;
+            try { 
+                const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({contents:[{parts:[{text:ctx+"\nUser: "+t}]}]}) }); 
+                const d=await r.json(); const txt=d.candidates[0].content.parts[0].text;
+                b.innerHTML += `<div class="flex gap-2 mb-4 animate-fade-in"><div class="w-8 h-8 rounded-full bg-gold-primary flex-shrink-0 flex items-center justify-center text-sm text-navy-dark font-bold">AI</div><div class="chat-ai p-3 rounded-lg rounded-tr-none max-w-[90%] text-sm leading-relaxed shadow-lg">${marked.parse(txt)}</div></div>`; 
+            } catch(e){ 
+                b.innerHTML += `<div class="flex gap-2 mb-4"><div class="text-red-400 text-xs">Error: API Key Required</div></div>`; 
+            } 
+            b.scrollTop=b.scrollHeight; 
+        }
+
+        // --- Particles ---
+        {
+            const cvs = document.getElementById('particles-container');
+            const ctx = cvs.getContext('2d');
+            let pts = [];
+            function rs() { cvs.width = window.innerWidth; cvs.height = window.innerHeight; } window.addEventListener('resize', rs); rs();
+            class P { constructor(){this.x=Math.random()*cvs.width;this.y=Math.random()*cvs.height;this.vx=(Math.random()-.5)*.5;this.vy=(Math.random()-.5)*.5;this.s=Math.random()*2;} u(){this.x+=this.vx;this.y+=this.vy;if(this.x<0||this.x>cvs.width)this.vx*=-1;if(this.y<0||this.y>cvs.height)this.vy*=-1;} d(){ctx.fillStyle='#d4af37';ctx.globalAlpha=0.3;ctx.beginPath();ctx.arc(this.x,this.y,this.s,0,Math.PI*2);ctx.fill();} }
+            for(let i=0;i<50;i++) pts.push(new P());
+            function anim() { ctx.clearRect(0,0,cvs.width,cvs.height); pts.forEach((p,i)=>{ p.u(); p.d(); for(let j=i;j<pts.length;j++){ const dx=p.x-pts[j].x, dy=p.y-pts[j].y, dist=Math.sqrt(dx*dx+dy*dy); if(dist<100){ ctx.strokeStyle='#d4af37'; ctx.lineWidth=0.1; ctx.globalAlpha=1-dist/100; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(pts[j].x,pts[j].y); ctx.stroke(); } } }); requestAnimationFrame(anim); } anim();
         }
     </script>
 </body>
