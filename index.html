@@ -8,10 +8,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #38bdf8;
+            --primary: #00f2ff; /* الأزرق السيبراني للحواف */
             --gold: #d4af37;
             --bg-dark: #020617;
-            --glass-bg: rgba(15, 23, 42, 0.75); 
+            /* السر هنا: خلفية زجاجية داكنة بنسبة 45% فقط */
+            --glass-bg: rgba(4, 9, 20, 0.45); 
+            --booking-blue: #2563eb;
         }
         
         body { 
@@ -19,393 +21,497 @@
             margin: 0; 
             overflow-x: hidden;
             background-color: var(--bg-dark);
-            color: white;
+            color: #ffffff; 
+            scroll-behavior: smooth;
         }
 
         .orbitron { font-family: 'Orbitron', sans-serif; }
         
+        /* صورة المدينة - نهارية وواضحة */
         .fixed-background {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100vh;
-            background-image: linear-gradient(rgba(2, 6, 23, 0.6), rgba(2, 6, 23, 0.85)), url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=2070&auto=format&fit=crop');
+            /* استخدمت اسم صورتك، مع رابط احتياطي من النت لضمان عملها فوراً للمعاينة */
+            background-image: linear-gradient(rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.6)), url('17702496255877824225374649840343.jpg'), url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1920&q=80');
             background-size: cover; 
             background-position: center;
             z-index: -1; 
         }
 
+        /* 👑 هندسة البطاقات الزجاجية الشفافة (Glassmorphism) */
         .glass-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(212, 175, 55, 0.2); 
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
-            margin-bottom: 3rem;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            backdrop-filter: blur(16px); /* ضبابية الزجاج */
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 242, 255, 0.3); /* الحواف السيبرانية بقيت كما هي */
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            color: white;
+            transition: all 0.3s ease;
         }
-        
-        .glass-card:hover { border-color: var(--gold); }
 
-        .glass-input { 
-            background: rgba(0, 0, 0, 0.6); 
-            border: 1px solid rgba(255, 255, 255, 0.2); 
-            color: white; 
-            transition: all 0.3s;
+        /* توهج الحواف عند تمرير الماوس */
+        .glass-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.4);
         }
-        .glass-input:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 15px rgba(212,175,55,0.4); }
 
-        .modal-overlay {
+        /* 👑 السر الهندسي لضمان وضوح الخط داخل الزجاج الشفاف */
+        .glass-card h1, .glass-card h2, .glass-card h3, .glass-card p, .glass-card span {
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9); /* ظل أسود خلف الكلمات لتبقى ساطعة */
+        }
+        /* استثناء الأيقونات من الظل */
+        .glass-card .text-3xl, .glass-card .text-5xl { text-shadow: none; }
+
+        /* حقول الإدخال */
+        .input-dark { 
+            background: rgba(0,0,0,0.7) !important; 
+            border: 1px solid rgba(255, 255, 255, 0.3) !important; 
+            color: #ffffff !important; 
+            font-weight: bold;
+            text-shadow: none;
+        }
+        .input-dark:focus { border-color: var(--primary) !important; outline: none; box-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }
+
+        /* شريط الحالة بتأثير الزجاج */
+        nav { 
+            background: rgba(2, 6, 23, 0.4); 
+            backdrop-filter: blur(20px); 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+        }
+
+        /* بوابة الميثاق الدستوري */
+        .charter-portal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px);
-            z-index: 9999; display: none; justify-content: center; align-items: center;
-            opacity: 0; transition: opacity 0.4s;
+            background: rgba(2, 6, 23, 0.85); z-index: 99999; 
+            display: none; flex-direction: column;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
         }
-        .modal-overlay.active { display: flex; opacity: 1; }
-        .modal-content {
-            background: linear-gradient(145deg, #0f172a, #020617);
+        .charter-portal.active { display: flex; }
+        
+        .charter-box {
+            background: rgba(15, 23, 42, 0.95);
             border: 2px solid var(--gold);
-            width: 90%; max-width: 800px; max-height: 85vh;
-            border-radius: 20px; overflow-y: auto; padding: 2rem;
-            box-shadow: 0 0 50px rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            margin: 2rem auto;
+            max-width: 900px;
+            padding: 2rem;
+            box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
         }
 
+        /* نافذة المستشار الذكي */
         .ai-window {
-            position: fixed; bottom: 90px; left: 30px; width: 360px; height: 500px;
-            background: #0f172a; border: 1px solid var(--primary);
+            position: fixed; bottom: 90px; left: 20px; width: 350px; height: 500px;
+            background: rgba(10, 15, 30, 0.95); 
+            border: 2px solid var(--primary);
             border-radius: 20px; z-index: 1000; display: none; flex-direction: column;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.9);
+            box-shadow: 0 0 40px rgba(0, 242, 255, 0.5);
+            overflow: hidden; 
         }
-        .chat-msg { margin-bottom: 12px; padding: 10px 14px; border-radius: 12px; font-size: 13px; max-width: 85%; line-height: 1.6; }
-        .msg-ai { background: rgba(56, 189, 248, 0.1); color: #fff; align-self: flex-start; border-right: 3px solid var(--primary); }
-        .msg-user { background: var(--gold); color: #000; align-self: flex-end; font-weight: bold; }
+        .chat-msg { margin-bottom: 12px; padding: 12px 16px; border-radius: 12px; font-size: 13px; line-height: 1.6; max-width: 85%; text-shadow: none; }
+        .msg-ai { background: rgba(0, 242, 255, 0.15); color: #ffffff; align-self: flex-start; border-right: 4px solid var(--primary); }
+        .msg-user { background: var(--gold); color: #000000; align-self: flex-end; font-weight: bold; }
 
-        .text-gold { color: var(--gold); }
-        .bg-gold { background-color: var(--gold); }
+        /* الأكورديون للخدمات (زجاجي أيضاً) */
+        .service-details {
+            max-height: 0; overflow: hidden; transition: all 0.4s ease-in-out;
+            background: rgba(0,0,0,0.5); border-radius: 12px;
+        }
+        .service-details.open { max-height: 600px; padding: 15px; margin-top: 15px; border: 1px solid rgba(0,242,255,0.3); }
+
+        /* زر الحجز الأزرق */
+        .btn-reserve {
+            background-color: var(--booking-blue) !important;
+            color: #ffffff !important;
+            padding: 8px 24px;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 12px;
+            transition: 0.3s;
+            border: 1px solid #60a5fa;
+            text-decoration: none;
+            display: inline-block;
+            text-shadow: none !important; /* إزالة الظل من نص الزر ليبقى نقياً */
+        }
+        .btn-reserve:hover { background-color: #1d4ed8 !important; transform: scale(1.05); }
+
+        .countdown-box {
+            display: inline-flex; flex-direction: column; align-items: center;
+            background: rgba(0,0,0,0.6); border: 1px solid var(--gold);
+            border-radius: 8px; padding: 8px 12px; min-width: 65px;
+        }
+
+        .text-gold { color: var(--gold) !important; }
+        .text-primary { color: var(--primary) !important; }
         
         .uploaded-img { width: 100%; height: 100%; object-fit: contain; border-radius: 12px; }
     </style>
 </head>
 <body>
 
+    <!-- الخلفية الثابتة -->
     <div class="fixed-background"></div>
 
-    <nav class="fixed top-0 w-full pt-4 pb-4 px-6 flex justify-between items-center z-50 bg-gradient-to-b from-black to-transparent">
+    <!-- شريط الحالة -->
+    <nav class="fixed top-0 w-full p-4 px-6 flex justify-between items-center z-50">
         <div class="container mx-auto flex justify-between items-center w-full">
             <div class="flex items-center gap-4">
-                <!-- الشعار تم تعديل اسمه ليكون متوافقاً مع الاستضافة -->
-                <div class="w-16 h-16 rounded-full overflow-hidden border-2 border-gold shadow-[0_0_15px_rgba(212,175,55,0.5)] bg-black">
-                    <img src="logo-main.jpg" alt="Falak Logo" class="w-full h-full object-cover">
+                <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-gold shadow-[0_0_15px_rgba(212,175,55,0.5)] bg-black">
+                    <img src="logo-main.jpg" alt="Falak" onerror="this.style.display='none'" class="w-full h-full object-cover">
                 </div>
-                <div class="text-2xl font-black text-gold text-shadow-lg">فلك <span class="text-white text-[10px] font-light tracking-widest orbitron">GROUP</span></div>
+                <div class="text-xl font-black text-gold" style="text-shadow: 0 2px 5px black;">فلك <span class="text-white text-[10px] orbitron">GROUP</span></div>
             </div>
-            <div class="hidden md:flex space-x-6 space-x-reverse text-sm uppercase tracking-widest font-bold">
-                <a href="#gates" class="hover:text-gold transition">بوابات الاستثمار</a>
-                <a href="#calculator" class="hover:text-gold transition">الخوارزمية</a>
-                <a href="#cards" class="hover:text-gold transition">المراتب والبطاقات</a>
-                <button onclick="toggleCharter()" class="text-sky-400 hover:text-white transition">الميثاق والدستور</button>
+            <div class="hidden md:flex space-x-6 space-x-reverse text-xs font-black uppercase tracking-tighter items-center">
+                <button onclick="toggleCharterPortal()" class="bg-gold text-black px-5 py-2 rounded-full hover:scale-105 transition shadow-[0_0_15px_rgba(212,175,55,0.6)] font-bold">بوابة الميثاق</button>
+                <a href="#services" class="text-white hover:text-primary transition" style="text-shadow: 0 2px 4px black;">خدماتنا</a>
+                <a href="#calculator" class="text-white hover:text-primary transition" style="text-shadow: 0 2px 4px black;">وعاء الولاء</a>
+                <a href="#investment-gates" class="text-white hover:text-primary transition" style="text-shadow: 0 2px 4px black;">بوابات الاستثمار</a>
             </div>
         </div>
     </nav>
 
-    <main class="relative z-10 pt-40 pb-20">
+    <main class="relative z-10 pt-32 pb-20">
         
-        <div class="container mx-auto px-6 max-w-5xl mb-24 text-center">
-            <div class="glass-card p-10 md:p-16 border-t-4 border-t-gold">
-                <p class="orbitron text-gold tracking-[10px] text-xs font-bold uppercase mb-4 drop-shadow-lg">Sovereign Economic System</p>
-                <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight text-white drop-shadow-lg">
-                    السيادة الاقتصادية تبدأ من <span class="text-gold">فلك</span>
+        <!-- الواجهة الرئيسية -->
+        <div class="container mx-auto px-6 max-w-5xl mb-20 text-center">
+            <div class="glass-card border-t-4 border-t-gold">
+                <p class="orbitron text-primary tracking-[10px] text-xs font-bold mb-4 uppercase">Sovereign Economic System</p>
+                <h1 class="text-5xl md:text-7xl font-black mb-6 text-white">
+                    السيادة الاقتصادية تبدأ من <span class="text-gold italic">فلك</span>
                 </h1>
-                <p class="text-gray-200 font-bold text-xl mb-8 tracking-wide">
-                    بقيادة المهندس <span class="text-white orbitron bg-black/40 px-3 py-1 rounded">AUDAI TITI</span>
+                <p class="text-xl mb-8 text-gray-200 font-bold">
+                    بقيادة <span class="text-white orbitron bg-black/60 px-4 py-1 rounded border border-white/20">هندسة فلك</span>
                 </p>
-                <p class="text-gray-300 max-w-3xl mx-auto text-base leading-relaxed font-bold">
+                
+                <p class="text-white max-w-3xl mx-auto text-lg leading-relaxed font-bold mb-10 bg-black/40 p-5 rounded-xl border border-white/10">
                     نحن لا نبيع الوهم. المبالغ المدفوعة هي "بدل منفعة"، والأرباح هي "هبة ثواب" قائمة على الإنتاج الحقيقي وفق قاعدة (40-40-20).
                 </p>
-                <button onclick="toggleCharter()" class="mt-8 px-8 py-3 bg-gold text-black font-black rounded-full hover:scale-105 transition shadow-[0_0_20px_rgba(212,175,55,0.4)]">
-                    اقرأ الدستور والميثاق
-                </button>
-            </div>
-        </div>
 
-        <div class="container mx-auto px-6 max-w-6xl mb-24" id="gates">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-black text-white mb-2 orbitron">أوردة التدفق النقدي</h2>
-                <p class="text-sky-300 text-sm font-bold">المحركات التشغيلية لمجموعة فلك</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass-card p-8 text-center border-b-4 border-b-sky-400 group">
-                    <div class="text-5xl mb-4">🛒</div>
-                    <h3 class="text-xl font-bold text-white mb-3">السوبر ماركت السيادي</h3>
-                    <p class="text-sm text-gray-300 leading-relaxed">
-                        نظام تجزئة متكامل يعتمد على "الذهب الأسود" (النقاط). دورة رأس مال سريعة تضمن تدفق السيولة لوعاء الولاء والتشغيل.
-                    </p>
-                </div>
-                <div class="glass-card p-8 text-center border-b-4 border-b-gold group">
-                    <div class="text-5xl mb-4">🏢</div>
-                    <h3 class="text-xl font-bold text-gold mb-3">العقارات والأصول</h3>
-                    <p class="text-sm text-gray-300 leading-relaxed">
-                        شريان الاستقرار. توجيه الـ 20% لتملك أصول ملموسة ترفع القيمة السوقية للمجموعة وتضمن ديمومتها القانونية.
-                    </p>
-                </div>
-                <div class="glass-card p-8 text-center border-b-4 border-b-purple-500 group">
-                    <div class="text-5xl mb-4">💼</div>
-                    <h3 class="text-xl font-bold text-white mb-3">المحافظ الاستثمارية</h3>
-                    <p class="text-sm text-gray-300 leading-relaxed">
-                        إدارة سيولة ذكية تعتمد على تمويل المشاريع التقنية والخدمية المغلقة، لتحقيق عوائد استثنائية توزع كـ "هبة ثواب".
-                    </p>
+                <!-- العداد التنازلي -->
+                <div class="bg-red-950/60 border border-red-500 rounded-2xl p-6 max-w-xl mx-auto shadow-[0_0_20px_rgba(239,68,68,0.3)]">
+                    <p class="text-red-400 font-bold mb-4 uppercase tracking-widest text-sm">⚠️ ينتهي عرض التسعير التأسيسي خلال:</p>
+                    <div class="flex justify-center gap-4 dir-ltr">
+                        <div class="countdown-box"><span class="text-2xl font-black text-white orbitron" id="cd-days">00</span><span class="text-[8px] text-gray-400 uppercase">Days</span></div>
+                        <div class="countdown-box"><span class="text-2xl font-black text-white orbitron" id="cd-hours">00</span><span class="text-[8px] text-gray-400 uppercase">Hrs</span></div>
+                        <div class="countdown-box"><span class="text-2xl font-black text-white orbitron" id="cd-mins">00</span><span class="text-[8px] text-gray-400 uppercase">Mins</span></div>
+                        <div class="countdown-box"><span class="text-2xl font-black text-white orbitron" id="cd-secs">00</span><span class="text-[8px] text-gray-400 uppercase">Secs</span></div>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!-- قسم الخدمات المباشرة -->
+        <div class="container mx-auto px-6 mb-24" id="services">
+            <h2 class="text-center text-3xl font-black text-white mb-12 orbitron tracking-widest uppercase" style="text-shadow: 0 4px 10px black;">Operational Hub / خدماتنا</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                
+                <!-- الصيانة -->
+                <div class="glass-card cursor-pointer border-r-4 border-r-primary" onclick="toggleSrv('srv-h')">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-4"><span class="text-3xl">🏠</span><h3 class="font-black text-xl text-white">بطاقة الصيانة المنزلية</h3></div>
+                        <span class="text-primary font-bold" id="arr-srv-h">▼</span>
+                    </div>
+                    <div id="srv-h" class="service-details">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-2 border-b border-white/10">
+                                <span class="font-bold text-white">سباك منزلي</span>
+                                <a href="https://wa.me/962790782004?text=حجز%20موعد%20سباك%20منزلي" class="btn-reserve">الحجز</a>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-white/10">
+                                <span class="font-bold text-white">كهربائي منزلي</span>
+                                <a href="https://wa.me/962790782004?text=حجز%20موعد%20كهربائي%20منزلي" class="btn-reserve">الحجز</a>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="font-bold text-white">فني تكييف وتدفئة</span>
+                                <a href="https://wa.me/962790782004?text=حجز%20موعد%20فني%20تكييف" class="btn-reserve">الحجز</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- السيارات -->
+                <div class="glass-card cursor-pointer border-r-4 border-r-gold" onclick="toggleSrv('srv-c')">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-4"><span class="text-3xl">🚗</span><h3 class="font-black text-xl text-gold">بطاقة العناية بالسيارة</h3></div>
+                        <span class="text-gold font-bold" id="arr-srv-c">▼</span>
+                    </div>
+                    <div id="srv-c" class="service-details">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-2 border-b border-white/10">
+                                <span class="font-bold text-white">درايكلين للسيارة <span class="text-gold ml-2 orbitron font-black">25 JOD</span></span>
+                                <a href="https://wa.me/962790782004?text=حجز%20درايكلين%20للسيارة" class="btn-reserve">الحجز</a>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-white/10">
+                                <span class="font-bold text-white">غسلة بريميوم <span class="text-gold ml-2 orbitron font-black">12 JOD</span></span>
+                                <a href="https://wa.me/962790782004?text=حجز%20غسلة%20بريميوم" class="btn-reserve">الحجز</a>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="font-bold text-white">غسلة عادية <span class="text-gold ml-2 orbitron font-black">7 JOD</span></span>
+                                <a href="https://wa.me/962790782004?text=حجز%20غسلة%20عادية" class="btn-reserve">الحجز</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- نقل الأثاث -->
+                <div class="glass-card cursor-pointer border-r-4 border-r-purple-500" onclick="toggleSrv('srv-f')">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-4"><span class="text-3xl">🚚</span><h3 class="font-black text-xl text-white">خدمة نقل الأثاث</h3></div>
+                        <span class="text-purple-400 font-bold" id="arr-srv-f">▼</span>
+                    </div>
+                    <div id="srv-f" class="service-details">
+                        <div class="flex justify-between items-center py-4">
+                            <span class="font-bold text-sm text-white">نقل أثاث احترافي ومضمون</span>
+                            <div class="flex gap-2">
+                                <a href="https://wa.me/962790782004?text=استفسار%20عن%20نقل%20أثاث" class="bg-gray-800 text-white px-3 py-1.5 rounded-full text-xs font-bold border border-white/20" style="text-shadow: none;">استفسار</a>
+                                <a href="https://wa.me/962790782004?text=حجز%20موعد%20نقل%20أثاث" class="btn-reserve">الحجز</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- الطوارئ -->
+                <div class="glass-card cursor-pointer border-r-4 border-r-red-500" onclick="toggleSrv('srv-e')">
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center gap-4"><span class="text-3xl animate-pulse">🚨</span><h3 class="font-black text-xl text-red-400">بطاقة الطوارئ</h3></div>
+                        <span class="text-red-500 font-bold" id="arr-srv-e">▼</span>
+                    </div>
+                    <div id="srv-e" class="service-details border-t border-red-500/30">
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center py-3 border-b border-red-500/20">
+                                <span class="font-bold text-white">طوارئ الأعطال المنزلية</span>
+                                <a href="https://wa.me/962790782004?text=حالة%20طارئة%20منزلية" class="bg-red-600 text-white px-4 py-1.5 rounded-full font-black text-xs hover:bg-red-500 transition" style="text-shadow: none;">حالة طارئة</a>
+                            </div>
+                            <div class="flex justify-between items-center py-3">
+                                <span class="font-bold text-white">المساعدة على الطريق</span>
+                                <a href="https://wa.me/962790782004?text=حالة%20طارئة%20للسيارة" class="bg-red-600 text-white px-4 py-1.5 rounded-full font-black text-xs hover:bg-red-500 transition" style="text-shadow: none;">حالة طارئة</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- وعاء الولاء (الحاسبة السيادية) -->
         <div class="container mx-auto px-6 max-w-5xl mb-24" id="calculator">
-            <div class="glass-card p-8 md:p-12 border-t-4 border-primary">
-                <div class="text-center mb-10">
-                    <h2 class="text-3xl font-black text-white mb-2 orbitron">FALAK ENGINE (40-40-20)</h2>
-                    <p class="text-gray-300 text-sm font-bold">خوارزمية النصاب وتوزيع هبة الثواب</p>
-                </div>
-                
-                <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="glass-card border-t-4 border-t-primary">
+                <h2 class="text-center text-3xl font-black text-white mb-10 orbitron">LOYALTY POOL / وعاء الولاء</h2>
+                <div class="grid md:grid-cols-2 gap-10 items-center">
                     <div class="space-y-6">
-                        <div>
-                            <label class="block text-sm font-bold text-gold mb-4 uppercase">الميزانية التشغيلية المستهدفة (JOD)</label>
-                            <input type="number" id="capital" value="200000" oninput="runFalakAlgorithm()" class="glass-input w-full py-4 px-4 rounded-xl text-3xl font-black text-center orbitron text-white">
-                        </div>
+                        <label class="block text-sm font-black text-gold mb-2 uppercase">رأس مال المدار المستهدف (JOD)</label>
+                        <input type="number" id="capital" value="200000" oninput="runLogic()" class="input-dark w-full py-4 px-4 rounded-xl text-3xl text-center font-black">
                         
-                        <div class="bg-black/80 p-6 rounded-xl border border-white/10 text-base space-y-3">
-                            <div class="font-bold text-sky-400 mb-2 border-b border-white/20 pb-2 flex justify-between">
-                                <span>توازن النصاب:</span>
-                                <span class="text-xs text-gray-400">(1 مجرة : 2 نجم : 4 شهاب)</span>
-                            </div>
-                            <div class="flex justify-between items-center"><span class="text-gray-300">مجرة (2000 د.أ):</span> <span id="out-g" class="font-black text-white text-xl orbitron">0</span></div>
-                            <div class="flex justify-between items-center"><span class="text-gray-300">نجم (750 د.أ):</span> <span id="out-s" class="font-black text-white text-xl orbitron">0</span></div>
-                            <div class="flex justify-between items-center"><span class="text-gray-300">شهاب (250 د.أ):</span> <span id="out-sh" class="font-black text-white text-xl orbitron">0</span></div>
+                        <div class="bg-black/50 p-6 rounded-2xl border border-white/20 space-y-3">
+                            <div class="flex justify-between border-b border-white/10 pb-2"><span class="text-xs text-primary font-bold">توازن النصاب للمؤسسين:</span> <span class="text-xs text-gray-300">(1 : 2 : 4)</span></div>
+                            <div class="flex justify-between items-center font-bold"><span>مجرة (2000 د.أ):</span> <span id="out-g" class="text-gold orbitron text-xl">0</span></div>
+                            <div class="flex justify-between items-center font-bold"><span>نجم (750 د.أ):</span> <span id="out-s" class="text-white orbitron text-xl">0</span></div>
+                            <div class="flex justify-between items-center font-bold"><span>شهاب (250 د.أ):</span> <span id="out-sh" class="text-primary orbitron text-xl">0</span></div>
                         </div>
                     </div>
-
-                    <div>
-                        <div class="space-y-4 mb-6 font-medium">
-                            <div class="flex justify-between items-center bg-black/60 p-4 rounded-xl border border-white/10">
-                                <span class="text-gray-300">الأرباح التشغيلية المتوقعة (20%):</span>
-                                <span id="out-profit" class="font-bold text-green-400 orbitron text-lg">0</span>
-                            </div>
-                            <div class="flex justify-between items-center bg-sky-900/40 p-4 rounded-xl border border-sky-500/40">
-                                <span class="text-sky-100">وعاء هبة الولاء (40% من الربح):</span>
-                                <span id="out-loyalty" class="font-bold text-sky-400 orbitron text-xl">0</span>
-                            </div>
-                            <div class="flex justify-between items-center bg-gold/20 border-2 border-gold p-6 rounded-xl">
-                                <span class="font-bold text-gold">العائد المقدر لكل حصة (Share):</span>
-                                <span id="out-per-share" class="text-2xl font-black text-gold orbitron">0</span>
-                            </div>
+                    <div class="space-y-4">
+                        <div class="bg-black/50 p-5 rounded-xl flex justify-between border border-white/20">
+                            <span class="text-white font-bold">الأرباح المتوقعة (20%):</span>
+                            <span id="out-profit" class="font-black text-green-400 orbitron text-lg">0</span>
+                        </div>
+                        <div class="bg-black/50 p-5 rounded-xl flex justify-between border border-primary/50">
+                            <span class="text-white font-bold">وعاء الولاء (40%):</span>
+                            <span id="out-loy" class="font-black text-primary orbitron text-xl">0</span>
+                        </div>
+                        <div class="bg-black/50 p-6 rounded-xl border-2 border-gold flex justify-between items-center shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                            <span class="font-black text-gold">هبة الحصة (Hiba):</span>
+                            <span id="out-share" class="font-black text-white text-3xl orbitron drop-shadow-[0_0_10px_rgba(212,175,55,0.8)]">0</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="container mx-auto px-6 mb-24" id="cards">
-            <h2 class="text-center text-3xl font-black text-white mb-12 orbitron">المراتب السيادية</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-                
-                <div class="glass-card p-6 text-center border-t-4 border-gray-400">
-                    <h3 class="text-xl font-bold mb-2 text-gray-200">مدار</h3>
-                    <p class="text-sky-400 font-black orbitron mb-4">99 JOD</p>
-                    <p class="text-xs text-gray-400">بوابة المستفيد الذكي، خصومات فلك وتجميع نقاط الذهب الأسود.</p>
-                </div>
-
-                <div class="glass-card p-6 text-center border-t-4 border-sky-400">
-                    <h3 class="text-xl font-bold mb-2 text-sky-200">شهاب</h3>
-                    <p class="text-sky-400 font-black orbitron mb-4">250 JOD</p>
-                    <p class="text-xs text-gray-400">حصة مؤسس (1 Share)، مشاركة في وعاء الولاء وحصانة قانونية.</p>
-                </div>
-
-                <!-- تم تصحيح اسم الصورة الفضية -->
-                <div class="glass-card p-4 text-center border-t-4 border-gray-300">
-                    <div class="h-40 w-full mb-4 rounded-lg overflow-hidden bg-black/50">
-                        <img src="card-star.jpg" alt="Star Card" class="uploaded-img">
+        <!-- المراتب السيادية -->
+        <div class="container mx-auto px-6 mb-24" id="tiers">
+            <h2 class="text-center text-3xl font-black text-white mb-10 orbitron" style="text-shadow: 0 4px 10px black;">SOVEREIGN TIERS</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+                <div class="glass-card text-center flex flex-col justify-between border-t-4 border-t-gray-400">
+                    <div>
+                        <h3 class="font-black text-xl mb-2 text-white">مدار</h3>
+                        <p class="text-primary font-black text-2xl orbitron">99 JOD</p>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-gray-100">نجم</h3>
-                    <p class="text-gray-300 font-black orbitron mb-2">750 JOD</p>
-                    <p class="text-xs text-gray-400">حصتان (2 Shares)، أولوية في هبة الثواب ودعم مخصص.</p>
+                    <p class="text-xs text-white mt-4 font-bold border-t border-white/20 pt-2">بوابة المستفيد الذكي للتوفير.</p>
                 </div>
-
-                <!-- تم تصحيح اسم الصورة الذهبية -->
-                <div class="glass-card p-4 text-center border-t-4 border-gold">
-                    <div class="h-40 w-full mb-4 rounded-lg overflow-hidden bg-black/50">
-                        <img src="card-galaxy.jpg" alt="Galaxy Card" class="uploaded-img">
+                <div class="glass-card text-center flex flex-col justify-between border-t-4 border-t-primary">
+                    <div>
+                        <h3 class="font-black text-xl mb-2 text-white">شهاب</h3>
+                        <span class="text-gray-300 line-through text-sm orbitron block">500 JOD</span>
+                        <p class="text-primary font-black text-2xl orbitron drop-shadow-[0_0_10px_rgba(0,242,255,0.5)]">250 JOD</p>
                     </div>
-                    <h3 class="text-xl font-bold mb-2 text-gold">مجرة</h3>
-                    <p class="text-gold font-black orbitron mb-2">2000 JOD</p>
-                    <p class="text-xs text-gray-400">4 حصص سيادية، حصة في أصول (السيارات)، ومقعد استشاري.</p>
+                    <p class="text-xs text-white mt-4 font-bold border-t border-white/20 pt-2">حصة مؤسس واحدة.</p>
                 </div>
+                <div class="glass-card text-center p-4 border-t-4 border-t-white">
+                    <img src="card-star.jpg" onerror="this.style.display='none'" class="h-32 w-full object-contain mb-4 rounded-lg bg-black/50">
+                    <h3 class="font-black text-xl mb-1 text-white">نجم</h3>
+                    <span class="text-gray-300 line-through text-sm orbitron block">1500 JOD</span>
+                    <p class="text-white font-black text-2xl orbitron">750 JOD</p>
+                </div>
+                <div class="glass-card text-center p-4 border-t-4 border-t-gold shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+                    <img src="card-galaxy.jpg" onerror="this.style.display='none'" class="h-32 w-full object-contain mb-4 rounded-lg bg-black/50">
+                    <h3 class="font-black text-xl mb-1 text-gold">مجرة</h3>
+                    <span class="text-gray-300 line-through text-sm orbitron block">5000 JOD</span>
+                    <p class="text-gold font-black text-2xl orbitron drop-shadow-[0_0_10px_rgba(212,175,55,0.5)]">2000 JOD</p>
+                </div>
+            </div>
+        </div>
 
+        <!-- بوابات الاستثمار في النهاية -->
+        <div class="container mx-auto px-6 mb-10" id="investment-gates">
+            <h2 class="text-center text-3xl font-black text-white mb-10 orbitron tracking-[5px] uppercase drop-shadow-md">Investment Gates</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto text-center">
+                <div class="glass-card p-10 border-b-4 border-b-primary relative">
+                    <span class="absolute top-4 left-4 bg-primary text-black text-xs px-3 py-1 rounded font-black" style="text-shadow: none;">قريباً</span>
+                    <div class="text-5xl mb-4" style="text-shadow: none;">🛒</div>
+                    <h3 class="font-black text-xl text-white">السوبر ماركت السيادي</h3>
+                </div>
+                <div class="glass-card p-10 border-b-4 border-b-gold relative">
+                    <span class="absolute top-4 left-4 bg-gold text-black text-xs px-3 py-1 rounded font-black" style="text-shadow: none;">قريباً</span>
+                    <div class="text-5xl mb-4" style="text-shadow: none;">🏢</div>
+                    <h3 class="font-black text-xl text-gold">العقارات والإنشاءات</h3>
+                </div>
+                <div class="glass-card p-10 border-b-4 border-b-purple-500 relative">
+                    <span class="absolute top-4 left-4 bg-purple-500 text-white text-xs px-3 py-1 rounded font-black" style="text-shadow: none;">قريباً</span>
+                    <div class="text-5xl mb-4" style="text-shadow: none;">💼</div>
+                    <h3 class="font-black text-xl text-white">المحفظة الاستثمارية</h3>
+                </div>
             </div>
         </div>
 
     </main>
 
-    <footer class="pb-12 pt-12 text-center text-xs text-gray-400 uppercase tracking-widest relative z-20 bg-black/90 border-t border-white/10">
-        <div class="max-w-4xl mx-auto space-y-4 flex flex-col items-center">
-            <!-- تم تصحيح اسم الشعار السفلي -->
-            <div class="w-24 h-24 mb-4">
-                <img src="logo-footer.jpg" alt="Falak Typography" class="w-full h-full object-contain">
-            </div>
-            <p class="font-bold text-gray-300">جميع الحقوق، الأفكار، النظم السيادية (40-40-20)، وبراءات الاختراع محفوظة لمجموعة فلك © 2026.</p>
-            <p>السياسة والخصوصية | الشروط والأحكام | حقوق الملكية الفكرية</p>
-            <div class="mt-8 mb-2 opacity-40 text-[10px] tracking-[15px] font-black uppercase orbitron">Architect & Founder</div>
-            <p class="text-gold font-black orbitron text-lg">ENGR. AUDAI TITI</p>
+    <footer class="p-10 text-center border-t border-gold/40 relative z-20">
+        <div class="flex flex-col items-center gap-4">
+            <img src="logo-footer.jpg" onerror="this.style.display='none'" class="w-20 opacity-80 rounded-lg">
+            <p class="font-bold text-white text-sm" style="text-shadow: 0 2px 4px black;">جميع الحقوق، الأنظمة السيادية، وبراءات الاختراع محفوظة لمجموعة فلك © 2026.</p>
         </div>
     </footer>
 
-    <!-- نافذة الميثاق المنبثقة -->
-    <div id="charter-modal" class="modal-overlay">
-        <div class="modal-content">
+    <!-- بوابة الميثاق -->
+    <div id="charter-portal" class="charter-portal">
+        <div class="charter-box">
             <div class="flex justify-between items-center mb-6 border-b border-gold pb-4">
-                <h2 class="text-3xl font-black text-gold">الميثاق السيادي لمجموعة فلك</h2>
-                <button onclick="toggleCharter()" class="text-white hover:text-red-500 text-2xl font-bold">✕</button>
+                <h2 class="text-2xl font-black text-gold">الميثاق الدستوري الموحد</h2>
+                <button onclick="toggleCharterPortal()" class="bg-red-600 text-white px-6 py-2 rounded-full font-black hover:bg-red-700 border-none cursor-pointer">إغلاق ✕</button>
             </div>
-            <div class="space-y-6 text-gray-200 text-sm leading-relaxed">
-                <div>
-                    <h3 class="text-lg font-bold text-sky-400 mb-2">1. العقيدة المؤسسية</h3>
-                    <p>نحن في "فلك" لا نبني مجرد شركة، بل نؤسس نظاماً بيئياً مغلقاً (Closed-Loop Ecosystem) يهدف إلى تحقيق السيادة الاقتصادية لأعضائه. فلسفتنا تقوم على مبدأ "الغُنم بالغُرم": نحن نحول "المستهلك" من مجرد دافع للمال، إلى "شريك" في العوائد.</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold text-sky-400 mb-2">2. التكييف القانوني والشرعي</h3>
-                    <p>المبالغ المدفوعة هي <strong>رسوم خدمات وبدل منفعة</strong> غير مستردة إلا وفق شروط التخارج. النظام خالٍ من الربا والغرر؛ حيث لا توجد نسبة ثابتة من رأس المال، بل هي <strong>"هبة ثواب"</strong> توزع من الفائض التشغيلي للأصول. المرجعية القانونية هي قوانين المملكة الأردنية الهاشمية (محاكم إربد).</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold text-sky-400 mb-2">3. النظام المالي (40-40-20)</h3>
-                    <ul class="list-disc pl-5 space-y-2 dir-rtl">
-                        <li><strong>40% وعاء الولاء:</strong> توزع من صافي الربح التشغيلي كـ "هبة ثواب" لأصحاب الحصص.</li>
-                        <li><strong>40% وعاء التشغيل:</strong> لضمان استمرارية الخدمات وإدارة الكيان.</li>
-                        <li><strong>20% الأصول السيادية:</strong> ملك خالص للشركة لضمان ديمومتها وقوتها السوقية.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-bold text-sky-400 mb-2">4. سياسة التخارج العادلة</h3>
-                    <p>يحق للشركة خصم 25% من إجمالي القيمة السوقية عند التخارج كبدل إدارة وتطوير. يتم التنفيذ بفترة إشعار 30 يوماً، وسداد خلال 60 يوماً.</p>
-                </div>
-            </div>
-            <div class="mt-8 text-center">
-                <button onclick="toggleCharter()" class="px-8 py-2 bg-white/10 border border-white/20 rounded-full hover:bg-white/20">إغلاق وتأكيد القراءة</button>
+            <div class="text-white leading-loose font-bold">
+                <h3 class="text-primary font-black text-xl mb-4 underline">البند الأول: طبيعة الكيان</h3>
+                <p class="mb-8 text-gray-200">مشروع فلك هو بيئة اقتصادية سيادية مغلقة، تهدف لتحويل الاستهلاك إلى استثمار عبر قاعدة 40-40-20. المال هو "بدل منفعة" والأرباح "هبة ثواب" لضمان الشرعية المطلقة ونفي الغرر (مرجعية محاكم إربد).</p>
+                
+                <h3 class="text-primary font-black text-xl mb-4 underline">البند الثاني: التخارج</h3>
+                <p class="text-gray-200">يتم خصم 25% من القيمة السوقية عند التخارج لصالح الإدارة كبدل تطوير.</p>
             </div>
         </div>
     </div>
 
-    <!-- مستشار فلك الذكي -->
-    <div class="fixed bottom-8 left-8 z-50 flex flex-col items-center gap-2">
-        <span class="text-[10px] bg-black/80 px-2 py-1 rounded text-primary orbitron border border-primary/30">AI ADVISOR</span>
-        <button onclick="toggleAI()" class="w-16 h-16 bg-primary backdrop-blur-md rounded-full flex items-center justify-center shadow-[0_0_25px_rgba(56,189,248,0.8)] border-2 border-white hover:scale-110 transition duration-300">
-            <svg class="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-        </button>
-    </div>
-
+    <!-- زر المستشار الذكي -->
+    <button onclick="toggleAI()" class="fixed bottom-6 right-6 w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-[0_0_30px_#2563eb] border-2 border-white z-[1000] hover:scale-110 transition">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+    </button>
+    
+    <!-- نافذة المستشار الذكي -->
     <div id="ai-window" class="ai-window">
-        <div class="bg-primary p-4 rounded-t-20 flex justify-between items-center text-black font-black border-b-2 border-gold">
-            <span>مستشار فلك السيادي ✨</span>
-            <button onclick="toggleAI()" class="text-black hover:text-red-600 text-lg">✕</button>
+        <div class="bg-blue-700 p-4 flex justify-between items-center text-white font-black border-b border-primary">
+            <span style="text-shadow: none;">مستشار فلك السيادي ✨</span>
+            <button onclick="toggleAI()" class="text-white hover:text-red-400 font-bold text-lg border-none bg-transparent cursor-pointer" style="text-shadow: none;">✕</button>
         </div>
-        <div id="chat-history" class="flex-1 p-4 overflow-y-auto flex flex-col">
-            <div class="chat-msg msg-ai">المهندس عدي الطيطي يرحب بك. أنا النظام الذكي لفلك. اسألني عن بوابات الاستثمار، الميثاق، أو قاعدة 40-40-20.</div>
+        <div id="chat-hist" class="flex-1 p-4 overflow-y-auto flex flex-col bg-slate-900">
+            <div class="chat-msg msg-ai font-bold">أهلاً بك. أنا النظام الذكي لهندسة فلك. اطرح مشكلة الصيانة أو استفسارك هنا وسأقوم بتوجيهك فوراً للحجز المباشر.</div>
         </div>
-        <div class="p-3 border-t border-white/20 flex gap-2 bg-black/50 rounded-b-20">
-            <input type="text" id="ai-input" placeholder="اكتب سؤالك هنا..." class="flex-1 glass-input p-2 rounded-lg text-xs">
-            <button onclick="sendAIQuery()" class="bg-gold text-black px-4 rounded-lg text-xs font-bold">إرسال</button>
+        <div class="p-3 border-t border-primary/50 flex gap-2 bg-black">
+            <input type="text" id="ai-in" placeholder="اكتب هنا..." class="flex-1 input-dark p-3 rounded-lg text-sm">
+            <button onclick="askAI()" class="bg-gold text-black px-6 rounded-lg font-black text-sm border-none cursor-pointer">إرسال</button>
         </div>
     </div>
 
     <script>
-        function toggleCharter() {
-            const modal = document.getElementById('charter-modal');
-            if(modal.classList.contains('active')) {
-                modal.style.opacity = '0';
-                setTimeout(() => modal.classList.remove('active'), 400);
-            } else {
-                modal.classList.add('active');
-                setTimeout(() => modal.style.opacity = '1', 10);
-            }
+        // العداد التنازلي
+        const endDate = new Date("Dec 31, 2026 23:59:59").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const d = endDate - now;
+            document.getElementById("cd-days").innerText = Math.floor(d / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById("cd-hours").innerText = Math.floor((d % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById("cd-mins").innerText = Math.floor((d % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById("cd-secs").innerText = Math.floor((d % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }, 1000);
+
+        // أكورديون الخدمات
+        function toggleSrv(id) {
+            const el = document.getElementById(id);
+            const arr = document.getElementById('arr-' + id);
+            el.classList.toggle('open');
+            if(arr) arr.innerText = el.classList.contains('open') ? '▲' : '▼';
         }
 
-        function formatMoney(num) {
-            return new Intl.NumberFormat('ar-JO', { style: 'currency', currency: 'JOD', maximumFractionDigits: 0 }).format(num);
+        // بوابة الميثاق
+        function toggleCharterPortal() {
+            const p = document.getElementById('charter-portal');
+            p.style.display = (p.style.display === 'flex') ? 'none' : 'flex';
+            document.body.style.overflow = (p.style.display === 'flex') ? 'hidden' : 'auto';
         }
 
-        function runFalakAlgorithm() {
-            const capital = parseFloat(document.getElementById('capital').value) || 0;
-            const unit = Math.floor(capital / 4500);
-            const galaxies = unit, stars = unit * 2, shihabs = unit * 4;
-            const totalShares = (galaxies * 4) + (stars * 2) + (shihabs * 1);
-
-            const profit = capital * 0.20; 
-            const loyaltyHiba = profit * 0.40; 
-            const perShare = totalShares > 0 ? (loyaltyHiba / totalShares) : 0;
-
-            document.getElementById('out-g').innerText = galaxies;
-            document.getElementById('out-s').innerText = stars;
-            document.getElementById('out-sh').innerText = shihabs;
-            document.getElementById('out-profit').innerText = formatMoney(profit);
-            document.getElementById('out-loyalty').innerText = formatMoney(loyaltyHiba);
-            document.getElementById('out-per-share').innerText = formatMoney(perShare);
+        // نافذة الذكاء الاصطناعي
+        function toggleAI() {
+            const w = document.getElementById('ai-window');
+            w.style.display = (w.style.display === 'flex') ? 'none' : 'flex';
         }
 
+        // خوارزمية فلك 
+        function runLogic() {
+            const cap = parseFloat(document.getElementById('capital').value) || 0;
+            const unit = Math.floor(cap / 4500); 
+            const totalS = (unit * 4) + (unit * 2 * 2) + (unit * 4 * 1);
+            const prof = cap * 0.20;
+            const loy = prof * 0.40;
+            const perS = totalS > 0 ? (loy / totalS) : 0;
+
+            document.getElementById('out-g').innerText = unit;
+            document.getElementById('out-s').innerText = unit * 2;
+            document.getElementById('out-sh').innerText = unit * 4;
+            document.getElementById('out-profit').innerText = prof.toLocaleString() + " JOD";
+            document.getElementById('out-loy').innerText = loy.toLocaleString() + " JOD";
+            document.getElementById('out-share').innerText = perS.toFixed(2) + " JOD";
+        }
+
+        // المستشار الذكي Gemini
         const apiKey = ""; 
         const model = "gemini-2.5-flash-preview-09-2025";
         
-        function toggleAI() {
-            const win = document.getElementById('ai-window');
-            win.style.display = (win.style.display === 'flex') ? 'none' : 'flex';
+        async function askAI() {
+            const inp = document.getElementById('ai-in');
+            const hist = document.getElementById('chat-hist');
+            const q = inp.value.trim();
+            if(!q) return;
+
+            hist.innerHTML += `<div class="chat-msg msg-user" style="text-shadow: none;">${q}</div>`;
+            inp.value = '';
+            hist.scrollTop = hist.scrollHeight;
+
+            const sys = `أنت مساعد هندسة فلك. الميثاق: 40-40-20. 
+            إذا سأل عن صيانة، شخص المشكلة هندسياً ثم قل: "لضمان الجودة، أنصحك بالاستعانة بفنيي فلك الموثوقين." وأعطه هذا الرابط حصراً: [اضغط هنا لحجز فني عبر الواتساب: https://wa.me/962790782004?text=أحتاج%20مساعدة%20بخصوص%20${encodeURIComponent(q)}]`;
+
+            try {
+                const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ contents: [{parts: [{text: q}]}], systemInstruction: {parts: [{text: sys}]} })
+                });
+                const d = await res.json();
+                hist.innerHTML += `<div class="chat-msg msg-ai font-bold" style="text-shadow: none;">${d.candidates[0].content.parts[0].text.replace(/\n/g, '<br>')}</div>`;
+            } catch(e) { hist.innerHTML += `<div class="chat-msg msg-ai text-red-400" style="text-shadow: none;">عذراً، حدث خطأ في الاتصال.</div>`; }
+            hist.scrollTop = hist.scrollHeight;
         }
 
-        async function fetchGemini(promptText) {
-            const systemContext = `أنت مستشار فلك الذكي، ممثل للمهندس عدي الطيطي (Audai Titi).
-            مهمتك شرح "ميثاق فلك": 1. بوابات الاستثمار: سوبر ماركت، عقارات، محافظ. 2. القاعدة: 40% ولاء، 40% تشغيل، 20% أصول. 3. الشرعية: الربح "هبة ثواب"، المال "بدل منفعة". 4. التخارج: خصم 25% من القيمة السوقية.
-            أجب بدقة، واقعية، وبدون تزيين مبالغ فيه (شخصية خبير 40 سنة). لغة عربية رصينة.`;
-
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-            const payload = {
-                contents: [{parts: [{text: promptText}]}],
-                systemInstruction: {parts: [{text: systemContext}]}
-            };
-
-            for (let i = 0; i < 5; i++) {
-                try {
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(payload)
-                    });
-                    const data = await response.json();
-                    if(data.candidates) return data.candidates[0].content.parts[0].text.replace(/\n/g, '<br>');
-                    throw new Error("Invalid response");
-                } catch (e) {
-                    await new Promise(resolve => setTimeout(resolve, Math.pow(2, i) * 1000));
-                }
-            }
-            return "عذراً، المستشار في حالة تحديث للبيانات السيادية. حاول مجدداً.";
-        }
-
-        async function sendAIQuery() {
-            const input = document.getElementById('ai-input');
-            const history = document.getElementById('chat-history');
-            const msg = input.value.trim();
-            if(!msg) return;
-
-            history.innerHTML += `<div class="chat-msg msg-user">${msg}</div>`;
-            input.value = '';
-            history.scrollTop = history.scrollHeight;
-
-            const tempId = 'loading-' + Date.now();
-            history.innerHTML += `<div id="${tempId}" class="chat-msg msg-ai text-sky-300">يتم تحليل الميثاق...</div>`;
-            history.scrollTop = history.scrollHeight;
-
-            const aiResponse = await fetchGemini(msg);
-            
-            document.getElementById(tempId).remove();
-            history.innerHTML += `<div class="chat-msg msg-ai">${aiResponse}</div>`;
-            history.scrollTop = history.scrollHeight;
-        }
-
-        document.getElementById('ai-input').addEventListener('keypress', (e) => { if(e.key === 'Enter') sendAIQuery(); });
-        window.onload = runFalakAlgorithm;
+        document.getElementById('ai-in').addEventListener('keypress', (e) => { if(e.key === 'Enter') askAI(); });
+        window.onload = runLogic;
     </script>
 </body>
-                        </html>
+</html>
